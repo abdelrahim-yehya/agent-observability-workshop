@@ -1,0 +1,174 @@
+date,channel,query,rank,url,source_type,vendor_of,tools_named
+2026-10-22,google,"""LLM observability"" tools",1,https://www.confident-ai.com/knowledge-base/compare/10-llm-observability-tools-to-evaluate-and-monitor-ai-2026,vendor,Confident AI,Confident AI
+2026-10-22,google,"""LLM observability"" tools",2,https://voltagent.dev/blog/llm-observability-tools/,vendor,VoltAgent,
+2026-10-22,google,"""LLM observability"" tools",3,https://langfuse.com/docs/observability/overview,vendor,Langfuse,Langfuse
+2026-10-22,google,"""LLM observability"" tools",4,https://www.reddit.com/r/LangChain/comments/1neh5sw/what_are_the_best_open_source_llm_observability/,forum,,Langfuse
+2026-10-22,google,"""LLM observability"" tools",5,https://openobserve.ai/blog/llm-observability-tools/,vendor,OpenObserve,OpenObserve;Langfuse;Confident AI;Arize Phoenix
+2026-10-22,google,"""LLM observability"" tools",6,https://mlflow.org/ai-observability,vendor,MLflow,MLflow
+2026-10-22,google,"""LLM observability"" tools",7,https://www.datadoghq.com/products/ai/agent-observability/,vendor,Datadog,Datadog LLM Observability
+2026-10-22,google,"""LLM observability"" tools",8,https://www.langchain.com/resources/llm-observability-tools,vendor,LangSmith,LangSmith;Helicone
+2026-10-22,google,"""LLM observability"" tools",9,https://www.comet.com/site/blog/llm-observability/,vendor,Opik,Opik
+2026-10-22,google,"""LLM observability"" tools",10,https://www.ibm.com/think/topics/llm-observability,other,,
+2026-10-22,google,"""LLM observability"" tools",11,https://mirascope.com/blog/llm-observability,vendor,Lilypad,Lilypad;Langfuse
+2026-10-22,google,"""LLM observability"" tools",12,https://www.firecrawl.dev/blog/best-llm-observability-tools,vendor,Firecrawl,
+2026-10-22,google,"""LLM observability"" tools",13,https://langfuse.com/faq/all/llm-observability,vendor,Langfuse,Langfuse
+2026-10-22,google,"""LLM observability"" tools",14,https://posthog.com/blog/best-open-source-llm-observability-tools,vendor,PostHog,PostHog;Langfuse;Opik;OpenLLMetry;Arize Phoenix;Helicone
+2026-10-22,google,"""LLM observability"" tools",15,https://github.com/langfuse/langfuse,repo,Langfuse,Langfuse
+2026-10-22,google,"""LLM observability"" tools",16,https://machinelearningmastery.com/llm-observability-tools-for-reliable-ai-applications/,blog,,
+2026-10-22,google,"""LLM observability"" tools",17,https://medium.com/data-science-collective/top-llm-observability-platforms-in-2026-2c1c37619766,blog,,Opik;Braintrust;LangSmith;Langfuse;Arize;Galileo
+2026-10-22,google,"""LLM observability"" tools",18,https://www.elastic.co/observability/llm-monitoring,vendor,Elastic,Elastic
+2026-10-22,google,"""LLM observability"" tools",19,https://mlflow.org/articles/top-llm-observability-tools-in-2026-a-pro-guide/,vendor,MLflow,MLflow;LangSmith;Arize Phoenix;Langfuse;Helicone
+2026-10-22,google,"""LLM observability"" tools",20,https://logz.io/blog/top-llm-observability-tools/,vendor,Logz.io,Logz.io
+2026-10-22,google,"""LLM observability"" tools",21,https://www.honeycomb.io/,vendor,Honeycomb,Honeycomb
+2026-10-22,google,"""LLM observability"" tools",22,https://www.linkedin.com/posts/mehdizare_from-blackbox-to-crystalclear-my-handson-activity-7320103265818337280-X9aw,other,,
+2026-10-22,google,"""LLM observability"" tools",23,https://dev.to/thedailyagent/top-7-llm-observability-tools-in-2026-which-one-actually-fits-your-stack-2d0g,blog,,
+2026-10-22,google,"""LLM observability"" tools",24,https://signoz.io/llm-observability/,vendor,SigNoz,SigNoz
+2026-10-22,google,"""LLM observability"" tools",25,https://deepeval.com/guides/guides-llm-observability,vendor,DeepEval,DeepEval
+2026-10-22,google,"""LLM observability"" tools",26,https://lakefs.io/blog/llm-observability-tools/,vendor,lakeFS,
+2026-10-22,google,"""LLM observability"" tools",27,https://langwatch.ai/blog/top-10-llm-observability-tools-complete-guide-for-2026,vendor,LangWatch,LangWatch;Confident AI;Arize Phoenix;Langfuse;Helicone
+2026-10-22,google,"""LLM observability"" tools",28,https://aimultiple.com/llm-observability,blog,,Weights & Biases;LangSmith
+2026-10-22,google,"""LLM observability"" tools",29,https://sentry.io/solutions/ai-observability/,vendor,Sentry,Sentry
+2026-10-22,google,"""agent observability"" platform",1,https://laminar.sh/article/top-6-agent-observability-platforms,vendor,Laminar,Laminar;Langfuse;LangSmith;Braintrust;Arize Phoenix
+2026-10-22,google,"""agent observability"" platform",2,https://www.confident-ai.com/knowledge-base/compare/best-ai-agent-observability-tools-2026,vendor,Confident AI,Confident AI;Monte Carlo;Langfuse;Arize Phoenix;LangWatch;LangSmith
+2026-10-22,google,"""agent observability"" platform",3,https://www.splunk.com/en_us/products/agent-observability.html,vendor,Splunk,Splunk Agent Observability
+2026-10-22,google,"""agent observability"" platform",4,https://www.langchain.com/langsmith/observability,vendor,LangSmith,LangSmith
+2026-10-22,google,"""agent observability"" platform",5,https://langfuse.com/blog/2024-07-ai-agent-observability-with-langfuse,vendor,Langfuse,Langfuse
+2026-10-22,google,"""agent observability"" platform",6,https://www.datadoghq.com/products/ai/agent-observability/,vendor,Datadog,Datadog Agent Observability
+2026-10-22,google,"""agent observability"" platform",7,https://www.reddit.com/r/AI_Agents/comments/1rfrvcw/whats_your_honest_tier_list_for_agent/,forum,,
+2026-10-22,google,"""agent observability"" platform",8,https://latitude.so/blog/best-ai-agent-observability-tools-2026-comparison,vendor,Latitude,Latitude;Confident AI;Langfuse;LangSmith;Arize
+2026-10-22,google,"""agent observability"" platform",9,https://grafana.com/docs/grafana-cloud/observe-and-act/agent-observability/introduction/,docs,Grafana Cloud,Grafana Cloud Agent Observability
+2026-10-22,google,"""agent observability"" platform",10,https://mlflow.org/genai/observability,vendor,MLflow,MLflow
+2026-10-22,google,"""agent observability"" platform",11,https://www.braintrust.dev/,vendor,Braintrust,Braintrust
+2026-10-22,google,"""agent observability"" platform",12,https://www.honeycomb.io/resources/getting-started/agent-observability,vendor,Honeycomb,Honeycomb
+2026-10-22,google,"""agent observability"" platform",13,https://www.telerik.com/agent-observability-early-access,vendor,Telerik,Telerik Agent Observability
+2026-10-22,google,"""agent observability"" platform",14,https://newrelic.com/blog/observability/ai-agent-observability,vendor,New Relic,New Relic
+2026-10-22,google,"""agent observability"" platform",15,https://github.com/topics/agent-observability,list,,
+2026-10-22,google,"""agent observability"" platform",16,https://withwillow.ai/blog/ai-agent-observability-platforms,vendor,Willow,Willow
+2026-10-22,google,"""agent observability"" platform",17,https://montecarlo.ai/blog-agent-observability,vendor,Monte Carlo,Monte Carlo
+2026-10-22,google,"""agent observability"" platform",18,https://www.dynatrace.com/knowledge-base/ai-agent-observability/,vendor,Dynatrace,Dynatrace
+2026-10-22,google,"""agent observability"" platform",19,https://arize.com/blog/best-ai-observability-tools-for-autonomous-agents-in-2026/,vendor,Arize,Arize AX
+2026-10-22,google,"""agent observability"" platform",20,https://www.augmentcode.com/tools/best-ai-agent-observability-tools,vendor,Augment Code,Braintrust;LangSmith;Arize Phoenix;Helicone;Galileo
+2026-10-22,google,"""agent observability"" platform",21,https://galileo.ai/blog/ai-agent-observability,vendor,Galileo,Galileo
+2026-10-22,google,"""agent observability"" platform",22,https://opentelemetry.io/blog/2025/ai-agent-observability/,docs,OpenTelemetry,OpenTelemetry
+2026-10-22,google,"""agent observability"" platform",23,https://docs.cloud.google.com/stackdriver/docs/observability/agent-observability,docs,Google Cloud,Google Cloud Agent Observability
+2026-10-22,google,"""agent observability"" platform",24,https://logz.io/glossary/ai-agent-observability/,vendor,Logz.io,Logz.io
+2026-10-22,google,"""agent observability"" platform",25,https://aimultiple.com/agentic-monitoring,blog,,AgentOps;Langfuse
+2026-10-22,google,"""agent observability"" platform",26,https://blog.sentry.io/ai-agent-observability-developers-guide-to-agent-monitoring/,vendor,Sentry,Sentry
+2026-10-22,google,"""agent observability"" platform",27,https://www.getmaxim.ai/evals/products/agent-observability,vendor,Maxim AI,Maxim AI
+2026-10-22,google,"""agent observability"" platform",28,https://medium.com/@kamyashah2018/top-6-ai-agent-observability-platforms-a42cc3479b2f,blog,,
+2026-10-22,google,"""agent observability"" platform",29,https://montecarlo.ai/blog-agent-observability-tools,vendor,Monte Carlo,Monte Carlo
+2026-10-22,google,"""LLM evaluation"" framework",1,https://github.com/confident-ai/deepeval,repo,DeepEval,DeepEval
+2026-10-22,google,"""LLM evaluation"" framework",2,https://arxiv.org/html/2506.13023v2,paper,,
+2026-10-22,google,"""LLM evaluation"" framework",3,https://deepeval.com/blog/top-5-llm-evaluation-frameworks,vendor,DeepEval,DeepEval
+2026-10-22,google,"""LLM evaluation"" framework",4,https://www.langchain.com/resources/llm-evaluation-framework,vendor,LangSmith,LangSmith
+2026-10-22,google,"""LLM evaluation"" framework",5,https://www.superannotate.com/blog/llm-evaluation-guide,vendor,SuperAnnotate,SuperAnnotate
+2026-10-22,google,"""LLM evaluation"" framework",6,https://www.datadoghq.com/blog/llm-evaluation-framework-best-practices/,vendor,Datadog,Datadog
+2026-10-22,google,"""LLM evaluation"" framework",7,https://nhsengland.github.io/llm-eval-monitor-framework/,docs,NHS England,
+2026-10-22,google,"""LLM evaluation"" framework",8,https://www.evidentlyai.com/blog/llm-evaluation-framework,vendor,Evidently,Evidently
+2026-10-22,google,"""LLM evaluation"" framework",9,https://deepeval.com/docs/introduction,vendor,DeepEval,DeepEval
+2026-10-22,google,"""LLM evaluation"" framework",10,https://www.confident-ai.com/knowledge-base/compare/best-llm-evaluation-tools,vendor,Confident AI,Confident AI
+2026-10-22,google,"""LLM evaluation"" framework",11,https://www.ibm.com/think/insights/llm-evaluation,other,,
+2026-10-22,google,"""LLM evaluation"" framework",12,https://mlflow.org/llm-evaluation,vendor,MLflow,MLflow
+2026-10-22,google,"""LLM evaluation"" framework",13,https://www.databricks.com/blog/best-practices-and-methods-llm-evaluation,vendor,Databricks,Databricks
+2026-10-22,google,"""LLM evaluation"" framework",14,https://medium.com/@rajesh.sgr/llm-evaluation-principles-frameworks-and-best-practices-2e569469f447,blog,,
+2026-10-22,google,"""LLM evaluation"" framework",15,https://www.reddit.com/r/LLMDevs/comments/1i6r1h9/top_6_open_source_llm_evaluation_frameworks/,forum,,DeepEval
+2026-10-22,google,"""LLM evaluation"" framework",16,https://blog.stackademic.com/llm-evaluation-framework-ii-136aa3dadc4f,blog,,Deepchecks
+2026-10-22,google,"""LLM evaluation"" framework",17,https://deepchecks.com/llm-evaluation/framework/,vendor,Deepchecks,Deepchecks
+2026-10-22,google,"""LLM evaluation"" framework",18,https://www.codecademy.com/article/build-an-llm-evaluation-framework,blog,,
+2026-10-22,google,"""LLM evaluation"" framework",19,https://atlan.com/know/llm-evaluation-frameworks-compared/,vendor,Atlan,Ragas;TruLens;DeepEval
+2026-10-22,google,"""LLM evaluation"" framework",20,https://deepeval.com/,vendor,DeepEval,DeepEval
+2026-10-22,google,"""LLM evaluation"" framework",21,https://dev.to/guybuildingai/-top-5-open-source-llm-evaluation-frameworks-in-2024-98m,blog,,DeepEval
+2026-10-22,google,"""LLM evaluation"" framework",22,https://medium.com/@zilliz_learn/top-10-rag-llm-evaluation-tools-you-dont-want-to-miss-a0bfabe9ae19,blog,,DeepEval
+2026-10-22,google,"""LLM evaluation"" framework",23,https://www.datadoghq.com/knowledge-center/llm-evaluation-frameworks/,vendor,Datadog,Datadog
+2026-10-22,google,"""LLM evaluation"" framework",24,https://galileo.ai/blog/building-an-effective-llm-evaluation-framework-from-scratch,vendor,Galileo,Galileo
+2026-10-22,google,"""LLM evaluation"" framework",25,https://mlflow.org/top-5-agent-evaluation-frameworks/,vendor,MLflow,MLflow;DeepEval
+2026-10-22,google,"""LLM evaluation"" framework",26,https://cameronrwolfe.substack.com/p/subjective-evals,blog,,
+2026-10-22,google,"""LLM evaluation"" framework",27,https://wandb.ai/onlineinference/genai-research/reports/LLM-evaluation-Metrics-frameworks-and-best-practices--VmlldzoxMTMxNjQ4NA,vendor,Weights & Biases,Weights & Biases
+2026-10-22,google,"""LLM evaluation"" framework",28,https://www.confident-ai.com/blog/how-to-build-an-llm-evaluation-framework-from-scratch,vendor,Confident AI,Confident AI
+2026-10-22,google,"""LLM evaluation"" framework",29,https://blog.n8n.io/llm-evaluation-framework/,vendor,n8n,n8n
+2026-10-22,google,"""agent evaluation"" tools",1,https://www.cognee.ai/llm-agent-evaluation-tools,vendor,Cognee,DeepEval;Ragas;promptfoo;Inspect AI;Opik
+2026-10-22,google,"""agent evaluation"" tools",2,https://www.augmentcode.com/tools/best-ai-agent-evaluation-tools,vendor,Augment Code,Braintrust;Arize Phoenix;promptfoo;Galileo;Cosmos
+2026-10-22,google,"""agent evaluation"" tools",3,https://www.confident-ai.com/blog/llm-agent-evaluation-complete-guide,vendor,Confident AI,Confident AI
+2026-10-22,google,"""agent evaluation"" tools",4,https://mlflow.org/top-5-agent-evaluation-frameworks/,vendor,MLflow,MLflow;DeepEval;Ragas;Arize Phoenix;LangSmith
+2026-10-22,google,"""agent evaluation"" tools",5,https://github.com/danielrosehill/Awesome-AI-Evaluations-Tools,list,,WebShop
+2026-10-22,google,"""agent evaluation"" tools",6,https://langfuse.com/resources/engineering/ai-agent-evaluation,vendor,Langfuse,Langfuse
+2026-10-22,google,"""agent evaluation"" tools",7,https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/agent-evaluators,docs,Microsoft Foundry,Microsoft Foundry
+2026-10-22,google,"""agent evaluation"" tools",8,https://www.anthropic.com/research/demystifying-evals-for-ai-agents,blog,Anthropic,
+2026-10-22,google,"""agent evaluation"" tools",9,https://www.langchain.com/langsmith/evaluation,vendor,LangSmith,LangSmith
+2026-10-22,google,"""agent evaluation"" tools",10,https://originshq.com/feeds/ai-agent-evaluation-tools/,blog,,LangSmith;Braintrust;Langfuse;Arize Phoenix;DeepEval;Ragas
+2026-10-22,google,"""agent evaluation"" tools",11,https://deepeval.com/docs/getting-started-agents,vendor,DeepEval,DeepEval
+2026-10-22,google,"""agent evaluation"" tools",12,https://medium.com/@kamyashah2018/top-5-ai-agent-evaluation-tools-in-2026-a-comprehensive-guide-b9a9cbb5cdc7,blog,,Maxim AI
+2026-10-22,google,"""agent evaluation"" tools",13,https://adk.dev/evaluate/,docs,Google ADK,Google ADK
+2026-10-22,google,"""agent evaluation"" tools",14,https://qaskills.sh/blog/ai-agent-eval-testing-guide,blog,,
+2026-10-22,google,"""agent evaluation"" tools",15,https://www.reddit.com/r/AI_Agents/comments/1pa02zc/top_llm_evaluation_platforms_in_depth_comparison/,forum,,Arize AX
+2026-10-22,google,"""agent evaluation"" tools",16,https://www.algolia.com/blog/ai/ai-agent-evaluation-frameworks-metrics-testing-strategies,vendor,Algolia,
+2026-10-22,google,"""agent evaluation"" tools",17,https://datatalks.club/blog/open-source-free-ai-agent-evaluation-tools.html,blog,,Arize Phoenix;LangSmith;DeepEval;Ragas;promptfoo
+2026-10-22,google,"""agent evaluation"" tools",18,https://arize.com/,vendor,Arize,Arize AX
+2026-10-22,google,"""agent evaluation"" tools",19,https://www.lyzr.ai/blog/ai-agent-evaluation-tools/,vendor,Lyzr,DeepEval;Langfuse;Arize Phoenix;promptfoo
+2026-10-22,google,"""agent evaluation"" tools",20,https://www.truefoundry.com/glossary/what-is-agent-evaluation,vendor,TrueFoundry,
+2026-10-22,google,"""agent evaluation"" tools",21,https://latitude.so/blog/top-5-ai-agent-evaluation-tools-2026,vendor,Latitude,Latitude
+2026-10-22,google,"""agent evaluation"" tools",22,https://sage.cs.princeton.edu/trends/emerging-trends-paper.pdf,paper,,
+2026-10-22,google,"""agent evaluation"" tools",23,https://www.databricks.com/blog/what-is-agent-evaluation,vendor,Databricks,
+2026-10-22,google,"""agent evaluation"" tools",24,https://www.normaltech.ai/p/new-paper-emerging-trends-in-ai-agent,blog,,
+2026-10-22,google,"""agent evaluation"" tools",25,https://cameronrwolfe.substack.com/p/agent-evals,blog,,GAIA
+2026-10-22,google,"""agent evaluation"" tools",26,https://developer.nvidia.com/blog/mastering-agentic-techniques-ai-agent-evaluation/,vendor,NVIDIA,
+2026-10-22,google,"""agent evaluation"" tools",27,https://www.braintrust.dev/articles/agent-evaluation,vendor,Braintrust,Braintrust
+2026-10-22,google,"""agent evaluation"" tools",28,https://arxiv.org/html/2610.27777,paper,,
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",1,https://www.braintrust.dev/articles/opentelemetry-llm-tracing-guide,vendor,Braintrust,Braintrust;OpenTelemetry
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",2,https://inference.net/content/openinference-opentelemetry-llm-tracing/,vendor,Inference.net,OpenInference;OpenTelemetry
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",3,https://dev.to/vola-trebla/opentelemetry-just-standardized-llm-tracing-heres-what-it-actually-looks-like-in-code-2e5f,blog,,OpenTelemetry
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",4,https://laminar.sh/docs/tracing/otel,docs,Laminar,Laminar;OpenLLMetry;OpenTelemetry
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",5,https://www.youtube.com/watch?v=GRuItd_7raY,video,,Arize;OpenTelemetry
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",6,https://mlflow.org/docs/latest/genai/tracing/,vendor,MLflow,MLflow;OpenTelemetry
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",7,https://signoz.io/blog/opentelemetry-ai-agent-observability/,vendor,SigNoz,SigNoz;OpenTelemetry
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",8,https://selfship.ai/blog/llm-observability-opentelemetry-span-cant-prove-fix/,blog,,
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",9,https://ai-tldr.dev/learn/production-llmops/observability-monitoring/llm-tracing-explained/,blog,,Langfuse;LangSmith;OpenTelemetry
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",10,https://itsourcecode.com/web-dev/openllmetry-opentelemetry-llm-tracing/,blog,,OpenLLMetry;OpenInference;Datadog;Grafana;Honeycomb;Arize Phoenix
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",11,https://onegen.ai/project/integrating-opentelemetry-with-aws-bedrock-a-comprehensive-guide-to-openllmetry/,blog,,OpenLLMetry;LangSmith
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",12,https://www.linkedin.com/pulse/edition-62-traceai-open-source-opentelemetry-llm-tracing-35-qtfic,vendor,traceAI,traceAI
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",13,https://www.tmls.nyc/research/llm-observability-tracing,other,,
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",14,https://www.comet.com/site/blog/llm-observability-tools/,vendor,Opik,Opik
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",15,https://deepeval.com/docs/evaluation-llm-tracing,vendor,DeepEval,DeepEval;Confident AI
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",16,https://www.reddit.com/r/OpenTelemetry/comments/1rk9c82/how_do_you_approach_observability_for_llm_systems/,forum,,
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",17,https://www.ombulabs.ai/blog/why-llm-applications-need-tracing.html,blog,,
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",18,https://arize.com/blog-course/llm-tracing-from-automatically-collecting-traces-to-troubleshooting-your-llm-app/,vendor,Arize,Arize
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",19,https://www.elastic.co/observability/llm-monitoring,vendor,Elastic,Elastic
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",20,https://openlit.io/,vendor,OpenLIT,OpenLIT
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",21,https://www.testmuai.com/blog/ai-observability-tools/,vendor,TestMu AI,
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",22,https://www.iguazio.com/glossary/llm-tracing/,vendor,Iguazio,
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",23,https://openobserve.ai/blog/llm-observability-tools/,vendor,OpenObserve,OpenObserve
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",24,https://www.confident-ai.com/docs/integrations/opentelemetry,vendor,Confident AI,Confident AI;OpenTelemetry
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",25,https://mlflow.org/genai/observability,vendor,MLflow,MLflow;OpenTelemetry
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",26,https://docs.langflow.org/observability-opentelemetry,docs,Langflow,Langflow
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",27,https://medium.com/@2nick2patel2/llm-tracing-in-production-token-accounting-meets-apm-b44defccb738,blog,,OpenTelemetry
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",28,https://pydantic.dev/articles/vercel-ai-sdk-logfire-otel,vendor,Pydantic Logfire,Pydantic Logfire
+2026-10-22,google,"""LLM tracing"" OpenTelemetry",29,https://docs.base14.io/guides/ai-observability/rust-llm-observability/,docs,base14,base14
+2026-10-22,google,"""AI agent monitoring"" platform",1,https://nodeloom.io/compare/ai-agent-monitoring-tools,vendor,NodeLoom,NodeLoom;LangSmith;Arize;Weights & Biases;Helicone;Datadog;New Relic;Grafana
+2026-10-22,google,"""AI agent monitoring"" platform",2,https://www.respan.ai/articles/ai-agent-monitoring-tools-and-software,vendor,Respan,Respan
+2026-10-22,google,"""AI agent monitoring"" platform",3,https://withwillow.ai/blog/ai-agent-observability-platforms,vendor,Willow,Willow
+2026-10-22,google,"""AI agent monitoring"" platform",4,https://fin.ai/learn/ai-agent-monitoring,vendor,Fin,
+2026-10-22,google,"""AI agent monitoring"" platform",5,https://www.easyagentforyou.com/use-cases/best-ai-agent-monitoring-tools-2026,vendor,EasyAgent,EasyAgent
+2026-10-22,google,"""AI agent monitoring"" platform",6,https://newrelic.com/,vendor,New Relic,New Relic
+2026-10-22,google,"""AI agent monitoring"" platform",7,https://help.splunk.com/en/splunk-observability-cloud/observability-for-ai/splunk-ai-agent-monitoring/set-up-ai-agent-monitoring,docs,Splunk,Splunk AI Agent Monitoring
+2026-10-22,google,"""AI agent monitoring"" platform",8,https://www.braintrust.dev/articles/best-ai-observability-tools-2026,vendor,Braintrust,Braintrust
+2026-10-22,google,"""AI agent monitoring"" platform",9,https://www.manageengine.com/secure-ai/ai-agent-monitoring/,vendor,ManageEngine,ManageEngine SecureAI
+2026-10-22,google,"""AI agent monitoring"" platform",10,https://www.bluetweak.com/blog/ai-agent-monitoring-tools,vendor,BlueTweak,
+2026-10-22,google,"""AI agent monitoring"" platform",11,https://medium.com/@michael.hannecke/why-your-ai-agent-needs-different-monitoring-and-how-to-build-it-1702b48ee605,blog,,Langfuse;Opik;Arize Phoenix
+2026-10-22,google,"""AI agent monitoring"" platform",12,https://www.reddit.com/r/AI_Agents/comments/1rfrvcw/whats_your_honest_tier_list_for_agent/,forum,,
+2026-10-22,google,"""AI agent monitoring"" platform",13,https://www.lyzr.ai/blog/best-tools-for-real-time-ai-agent-monitoring/,vendor,Lyzr,Lyzr;LangSmith;Braintrust;Arize Phoenix;Langfuse
+2026-10-22,google,"""AI agent monitoring"" platform",14,https://middleware.io/blog/ai-agent-monitoring/,vendor,Middleware,Middleware
+2026-10-22,google,"""AI agent monitoring"" platform",15,https://www.datarobot.com/blog/best-ai-agent-monitoring-tools/,vendor,DataRobot,DataRobot
+2026-10-22,google,"""AI agent monitoring"" platform",16,https://github.com/topics/ai-agent-monitoring,list,,
+2026-10-22,google,"""AI agent monitoring"" platform",17,https://www.morphllm.com/ai-agent-observability-tools,vendor,Morph,Galileo;Splunk
+2026-10-22,google,"""AI agent monitoring"" platform",18,https://www.prismor.dev/ai-agent-observability,vendor,Prismor,Prismor
+2026-10-22,google,"""AI agent monitoring"" platform",19,https://www.mintmcp.com/blog/ai-agent-monitoring,vendor,MintMCP,MintMCP
+2026-10-22,google,"""AI agent monitoring"" platform",20,https://openobserve.ai/blog/ai-agent-monitoring/,vendor,OpenObserve,OpenObserve
+2026-10-22,google,"""AI agent monitoring"" platform",21,https://montecarlo.ai/blog-agent-observability,vendor,Monte Carlo,Monte Carlo
+2026-10-22,google,"""AI agent monitoring"" platform",22,https://dust.tt/blog/ai-agent-monitoring,vendor,Dust,Dust
+2026-10-22,google,"""AI agent monitoring"" platform",23,https://www.exabeam.com/explainers/ai-cyber-security/best-enterprise-platforms-for-ai-agent-security-monitoring-top-8-this-year/,vendor,Exabeam,Exabeam Agent Behavior Analytics
+2026-10-22,google,"""AI agent monitoring"" platform",24,https://noveum.ai/en/solutions/ai-agent-monitoring,vendor,Noveum.ai,Noveum.ai
+2026-10-22,google,"""AI agent monitoring"" platform",25,https://www.originhq.com/,vendor,Origin,Origin
+2026-10-22,google,"""AI agent monitoring"" platform",26,https://www.beri.net/article/best-ai-agent-monitoring-tools-production-reliability-2026,blog,,Langfuse
+2026-10-22,google,"""AI agent monitoring"" platform",27,https://www.disseqt.ai/platform,vendor,Disseqt AI,Disseqt AI
+2026-10-22,google,"""AI agent monitoring"" platform",28,https://www.facebook.com/groups/1127798762760972/posts/1295384356002411/,other,,
+2026-10-22,google,"""AI agent monitoring"" platform",29,https://pnpai.co/knowledge/how_can_ai_agent_monitoring_tools_plug-and-play_into_enterprise_operations.php,vendor,PnPAI,

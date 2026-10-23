@@ -1,0 +1,6 @@
+tool_key,tool,source_url
+langsmith,LangSmith,https://docs.langchain.com/langsmith/evaluation-types
+opentelemetry,OpenTelemetry,https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/
+braintrust,Braintrust,https://www.braintrust.dev/docs/reference/api/Logs
+galileo,Galileo,https://galileo.ai/blog/how-do-you-choose-the-right-metrics-for-your-ai-evaluations
+weightsbiases,Weights & Biases,https://docs.wandb.ai/weave/reference/python-sdk
