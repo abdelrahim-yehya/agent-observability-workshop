@@ -1,0 +1,69 @@
+tool,independent_sources,queries,decision,rule,reason
+Arize Phoenix,16,5,include,"I1,I2","open source (GitHub 11.9k stars, active)"
+Langfuse,15,5,include,"I1,I2","open source (GitHub 36k stars, active)"
+LangSmith,13,6,include,"I1,I3",closed source; 13 independent sources in all 6 queries; not returned by GitHub queries
+DeepEval,12,5,include,"I1,I2","open source; Confident AI is its commercial platform, merged as one tool (E5)"
+OpenTelemetry,10,2,include,Channel 5,"standard, not a product; the vendor-neutral telemetry reference; not returned by GitHub queries"
+Helicone,6,3,include,"I1,I2","open source (6.2k stars); presents itself as an observability platform, so primary purpose decides, not its proxy architecture"
+Braintrust,5,5,include,"I1,I3",closed source; 5 independent sources in 5 of 6 queries
+OpenLLMetry,4,2,include,"I1,I2","open source (7.5k stars), OpenTelemetry-based instrumentation"
+promptfoo,4,1,include,"I1,I2","open source (26k stars), evaluation and red-teaming"
+Galileo,3,5,include,"I1,I3","closed source; 3 independent sources in 5 queries; one vendor blog reports an acquisition by Cisco, unverified"
+Opik,3,4,include,"I1,I2","open source (22.8k stars), Comet"
+Weights & Biases,2,3,include,"I1,I3","include the Weave toolkit only (LLM tracing and evaluation), not the general W&B platform; 2 independent sources"
+OpenInference,2,1,include,"I1,I2","open source (1.3k stars), instrumentation conventions"
+GAIA,1,1,pending,I4,benchmark: enters only through the literature channel
+Inspect AI,1,1,pending,literature,"open source, not returned by GitHub queries, 1 Google source; check the literature channel"
+WebShop,1,1,pending,I4,benchmark: enters only through the literature channel
+MLflow,0,5,pending,"I1,I2",passes I1 and I2 (28k stars) but 0 independent Google sources in titles and snippets; decide after the closed-source and literature channels
+Ragas,5,2,exclude,I2,"open source and widely named (5 sources) but last push 2026-02-24, outside the six-month activity window"
+Datadog,2,5,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Grafana,2,3,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Honeycomb,1,3,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+LangWatch,1,2,exclude,C1,fewer than 2 independent sources
+Maxim AI,1,2,exclude,C1,fewer than 2 independent sources
+Monte Carlo,1,2,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+New Relic,1,2,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Splunk,1,2,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+AgentOps,1,1,exclude,C1,fewer than 2 independent sources
+Cosmos,1,1,exclude,C1,fewer than 2 independent sources
+Deepchecks,1,1,exclude,C1,fewer than 2 independent sources
+Exabeam Agent Behavior Analytics,1,1,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+ManageEngine SecureAI,1,1,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+TruLens,1,1,exclude,C1,fewer than 2 independent sources
+OpenObserve,0,3,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Elastic,0,2,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Laminar,0,2,exclude,C1,fewer than 2 independent sources
+Latitude,0,2,exclude,C1,fewer than 2 independent sources
+Logz.io,0,2,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Sentry,0,2,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+SigNoz,0,2,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Willow,0,2,exclude,C1,fewer than 2 independent sources
+base14,0,1,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Databricks,0,1,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+DataRobot,0,1,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Disseqt AI,0,1,exclude,C1,fewer than 2 independent sources
+Dust,0,1,exclude,E2,"agent product or building framework, not a measurement tool"
+Dynatrace,0,1,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+EasyAgent,0,1,exclude,C1,fewer than 2 independent sources
+Evidently,0,1,exclude,C1,fewer than 2 independent sources
+Google ADK,0,1,exclude,E2,"agent product or building framework, not a measurement tool"
+Google Cloud,0,1,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Langflow,0,1,exclude,E2,"agent product or building framework, not a measurement tool"
+Lilypad,0,1,exclude,C1,fewer than 2 independent sources
+Lyzr,0,1,exclude,E2,"agent product or building framework, not a measurement tool"
+Microsoft Foundry,0,1,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Middleware,0,1,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+MintMCP,0,1,exclude,E1,MCP gateway
+n8n,0,1,exclude,E2,"agent product or building framework, not a measurement tool"
+NodeLoom,0,1,exclude,C1,fewer than 2 independent sources
+Noveum.ai,0,1,exclude,C1,fewer than 2 independent sources
+OpenLIT,0,1,exclude,C1,fewer than 2 independent sources
+Origin,0,1,exclude,C1,fewer than 2 independent sources
+PostHog,0,1,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Prismor,0,1,exclude,C1,fewer than 2 independent sources
+Pydantic Logfire,0,1,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Respan,0,1,exclude,C1,fewer than 2 independent sources
+SuperAnnotate,0,1,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+Telerik,0,1,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
+traceAI,0,1,exclude,C1,fewer than 2 independent sources
