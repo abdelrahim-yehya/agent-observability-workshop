@@ -34,6 +34,10 @@ Every rule ID used in this repo, defined once. The full text is in the file name
 |---|---|---|
 | M1 | Metric scope: keep only built-in metrics that describe how an agent run executes or how good its output is (execution aspects plus answer quality, grounding, safety and conversation). Text-match and format checks, retrieval scores, audio/voice/image and task-specific metrics are out; a new metric needs at least two tools and must not restate an existing one. Removed rows, with reasons, are in `data/interim/metrics_out_of_scope.csv`. An amendment to the protocol; the paper must report it. Unrelated to tool screening | `README.md` (Scope) |
 
+## Matrix statuses
+
+The cell statuses of `results/tool_metric_matrix.csv` are defined in `README.md` (How to read the matrix) and in the header of `src/build_matrix.py`.
+
 ## Known overlaps
 
 - I4 admits benchmarks through the literature channel, while S1 removes benchmarks. In practice S1 applied: benchmarks are out of scope (see `README.md`, Limitations).

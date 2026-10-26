@@ -1,0 +1,12 @@
+tool,metric_name,status,taxonomy_metric
+Langfuse,Faithfulness,integration,Faithfulness to context
+Langfuse,ResponseRelevancy,integration,Answer relevance
+Langfuse,Trajectory Evaluation (guide example),template,Trajectory accuracy
+DeepEval,Citation Faithfulness,community,Faithfulness to context
+DeepEval,RAGASAnswerRelevancyMetric,integration,Answer relevance
+DeepEval,RAGASFaithfulnessMetric,integration,Faithfulness to context
+DeepEval,RagasMetric,integration,Answer relevance
+DeepEval,RagasMetric,integration,Faithfulness to context
+promptfoo,moderation,integration,Policy and moderation violations
+promptfoo,guardrails,integration,Policy and moderation violations
+Opik,"RagasMetricWrapper (Ragas metrics, e.g. AnswerRelevancy)",integration,Answer relevance

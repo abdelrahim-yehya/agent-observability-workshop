@@ -8,6 +8,7 @@ Goal: (1) identify the most important tools for observability and evaluation of 
 |---|---|---|
 | `best_tools.csv` | The 13 selected tools, ranked, with the evidence for each selection criterion | done |
 | `metric_taxonomy.csv` | The 46 unique metrics, split into Observability (19, measurements captured from a run) and Evaluation (27, judgements of agent behaviour and output) and grouped in 11 categories, with a definition and the list of tools that support each | draft for review |
+| `tool_metric_matrix.csv` | The 46 metrics against the 13 tools, one status per cell (built-in, integration, community, template, generic custom, records scores, not documented). `tool_metric_matrix_long.csv` has the same cells one per row, with the tool's own metric names, delivery and the doc URL | draft for review |
 | `built_in_metrics.csv` | 241 built-in metrics from the 13 tools (rule M1). Each row has the doc URL, a verbatim quote, the saved page it was copied from, and the access date | first pass done, being reviewed |
 
 ## How the tools were selected
@@ -35,6 +36,22 @@ Rules are in [`docs/screening_rules.md`](docs/screening_rules.md) (S1–S4) and 
 ## How the taxonomy was built
 
 Two tool-specific metrics are merged into one unique metric when they measure the same property of the same object (a tool call, an agent run, an LLM call, a token type), whatever the tools call them. A row that lists several measures (for example a dashboard showing input and output tokens) maps to each of them. The mapping is hand-made and kept in `data/inputs/taxonomy_mapping.csv`, the definitions (written by the author, not quoted from the docs) in `data/inputs/taxonomy_definitions.csv`. `python3 src/build_taxonomy.py` rebuilds `results/metric_taxonomy.csv` and fails if any metric is left unmapped.
+
+## How to read the matrix
+
+`python3 src/build_matrix.py` builds it from the evidence tables. Each cell takes the strongest status found:
+
+| Status | Meaning |
+|---|---|
+| built-in | a documented built-in row maps to the metric (see `built_in_metrics.csv`) |
+| integration | only through a third-party library the tool wraps (for example Ragas) |
+| community | a community-contributed metric in the tool's own docs |
+| template | a copy-and-run example in the docs, not shipped as a metric |
+| generic custom | Evaluation metrics only. No specific metric, but the tool documents a way to write your own evaluator |
+| records scores | Evaluation metrics only. The tool defines or stores fields for scores produced elsewhere and has no evaluator mechanism of its own (OpenTelemetry, OpenInference, Helicone) |
+| not documented | nothing found in the pages read. This is not proof that the tool lacks the capability |
+
+Every one of the 13 tools has a custom-evaluator or score-recording row in `metrics_out_of_scope.csv`, and the script stops if one is missing, so "generic custom" and "records scores" always rest on a quoted page. They say the metric could be built, not that it exists. The integration, community and template cells come from `data/inputs/taxonomy_mapping_not_built_in.csv`, a hand-made mapping of those rows, and cover only the metrics that were in scope when the rows were collected. Counts of built-in cells per tool are not capability scores: documentation lists metrics at different granularity.
 
 ## How the metrics were collected
 
