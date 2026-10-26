@@ -7,8 +7,8 @@ Goal: (1) identify the most important tools for observability and evaluation of 
 | File | Content | Status |
 |---|---|---|
 | `best_tools.csv` | The 13 selected tools, ranked, with the evidence for each selection criterion | done |
-| `metric_taxonomy.csv` | The 31 unique metrics, split into Observability (19, measurements captured from a run) and Evaluation (12, judgements of agent behaviour) and grouped in 7 categories, with a definition and the list of tools that support each | draft for review |
-| `built_in_metrics.csv` | 122 built-in agent-execution metrics from 12 of the 13 tools (rule M1). OpenInference has no rows: see Limitations. Each row has the doc URL, a verbatim quote, the saved page it was copied from, and the access date | first pass done, being reviewed |
+| `metric_taxonomy.csv` | The 46 unique metrics, split into Observability (19, measurements captured from a run) and Evaluation (27, judgements of agent behaviour and output) and grouped in 11 categories, with a definition and the list of tools that support each | draft for review |
+| `built_in_metrics.csv` | 215 built-in metrics from 12 of the 13 tools (rule M1). OpenInference has no rows: see Limitations. Each row has the doc URL, a verbatim quote, the saved page it was copied from, and the access date | first pass done, being reviewed |
 
 ## How the tools were selected
 
@@ -27,7 +27,7 @@ Rules are in [`docs/screening_rules.md`](docs/screening_rules.md) (S1–S4) and 
 |---|---|
 | `inputs/` | `google_search_log.csv`, `tool_screening_google.csv` (manual Google channel) |
 | `raw/` | `github_raw_results.csv` (GitHub search snapshot), `doc_snapshots/` (plain-text copy of the documentation pages read, including every page quoted in `built_in_metrics.csv` (2026-10-25) and the A1 page of each selected tool, `a1__*.txt` (2026-10-26)) |
-| `interim/` | `github_filtered_results.csv`, `github_excluded_results.csv` (first-pass GitHub screening), `metrics_out_of_scope.csv` (metrics removed by M1, with reason) |
+| `interim/` | `github_filtered_results.csv`, `github_excluded_results.csv` (first-pass GitHub screening), `metrics_out_of_scope.csv` (rows removed by M1 or for another stated reason) |
 | `outputs/` | `combined_tools_no_duplicates.csv` (42 tools), `tools_scope_screening.csv` (S1/S2), `a1_agent_relevance.csv` (A1 evidence) |
 
 `src/github_tool_search.py` reproduces the GitHub search and `src/merge_tool_sources.py` builds the combined list. Stars and activity dates change over time, so the committed snapshot is the reference.
@@ -38,7 +38,7 @@ Two tool-specific metrics are merged into one unique metric when they measure th
 
 ## How the metrics were collected
 
-**Scope (M1):** only built-in metrics that describe how an agent run executes are kept: `tool_use` (selection, invocation, arguments, errors, efficiency), `task_goal`, `plan_trajectory`, and run telemetry (`tokens`, `cost`, `latency`, `errors`, `counts`). Output-text checks (is-json, regex, contains, BLEU), generic answer quality, RAG retrieval, safety, tone, voice and image metrics are out of scope. The 345 removed rows, with the reason, are in `data/interim/metrics_out_of_scope.csv`.
+**Scope (M1):** only built-in metrics that describe how an agent run executes or how good its output is are kept. Execution: `tool_use` (selection, invocation, arguments, errors, efficiency), `task_goal`, `plan_trajectory`, and run telemetry (`tokens`, `cost`, `latency`, `errors`, `counts`). Output quality: `answer_quality` (correctness, relevance, helpfulness, conciseness, tone), `grounding` (faithfulness to context), `safety` (toxicity, bias, data leakage, injection, refusal, policy violations) and `conversation` (knowledge retention, user satisfaction, conversation coherence). Out of scope: text-match, format and reference-overlap checks (contains, regex, is-json, BLEU, ROUGE, embedding similarity), text statistics, retrieval scores (context precision and recall), audio, voice and image metrics, task-specific output metrics (summarisation, translation, SQL, code), instruction, role and topic adherence (they overlap plan adherence), and custom judges. A new metric needs at least two tools that provide it, and a metric that restates one already in the taxonomy is merged into it (for example conversation completeness and answer completeness count as Task / goal completion, and per-turn relevancy as Answer relevance). The 252 removed rows, with the reason, are in `data/interim/metrics_out_of_scope.csv`.
 
 The collection used `built_in` values: `built-in` (ships with the tool, no user code), `custom-only` (generic mechanism where the user supplies the criteria), `via-integration` (provided by a third-party library the tool wraps), `community` (tagged community in the docs). `kind` is `evaluator` or `telemetry` (measure captured automatically, such as latency, tokens, cost).
 Every quote in `built_in_metrics.csv` was checked by script to appear word for word in its saved page.
@@ -48,7 +48,7 @@ Every quote in `built_in_metrics.csv` was checked by script to appear word for w
 - OpenInference contributes no built-in metric rows: it defines a span attribute for evaluation results, but only as a user-supplied field (custom-only). It is reported with zero rows, not dropped.
 - C1 reduced the list to 13 tools. MLflow and Evidently were first in the top 15, then removed under C1 (0 independent Google sources; MLflow's 8 hits are all its own site). Other widely used tools with no third-party mention in the first 30 results of the 8 Google queries are also absent (for example Harbor, Giskard, TruLens, AgentOps). The Google counts reflect what ranks in those queries, not usage.
 - Benchmarks and eval harnesses (SWE-bench, τ-bench, Inspect AI) are out of scope: S1 removes benchmarks, although I4 in the protocol would admit them through the literature channel. Metrics such as pass^k that come from them are therefore not in the tables.
-- Grounding, safety and conversation-level metrics were removed by M1. The study covers how an agent run executes, not how good its output is.
+- Five metrics are provided by a single tool (Step count, Plan quality, Action progress toward goal, Tool response handling, Tool call efficiency). They come from the first collection and were not held to the two-tool rule used for the output-quality metrics.
 - The tool is called "Weights & Biases" in the screening files and "Weights & Biases Weave" in `results/`; only the Weave toolkit is studied.
 
 - Google counts come from result titles and snippets only; pages were not opened.

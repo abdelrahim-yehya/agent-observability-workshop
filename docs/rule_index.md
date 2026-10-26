@@ -32,7 +32,7 @@ Every rule ID used in this repo, defined once. The full text is in the file name
 
 | ID | Rule | Defined in |
 |---|---|---|
-| M1 | Metric scope: keep only built-in metrics that describe how an agent run executes (tool use, task/goal, plan/trajectory, tokens, cost, latency, errors, counts). Removed rows, with reasons, are in `data/interim/metrics_out_of_scope.csv`. An amendment to the protocol; the paper must report it. Unrelated to tool screening | `README.md` (Scope) |
+| M1 | Metric scope: keep only built-in metrics that describe how an agent run executes or how good its output is (execution aspects plus answer quality, grounding, safety and conversation). Text-match and format checks, retrieval scores, audio/voice/image and task-specific metrics are out; a new metric needs at least two tools and must not restate an existing one. Removed rows, with reasons, are in `data/interim/metrics_out_of_scope.csv`. An amendment to the protocol; the paper must report it. Unrelated to tool screening | `README.md` (Scope) |
 
 ## Known overlaps
 

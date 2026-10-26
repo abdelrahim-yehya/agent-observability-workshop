@@ -152,3 +152,98 @@ Weights & Biases Weave,Latency (Call timing),Span duration
 Weights & Biases Weave,Token usage and cost (automatic),Total tokens
 Weights & Biases Weave,Token usage and cost (automatic),Estimated cost
 Langfuse,completion_start_time (time to first token),Time to first token
+Arize Phoenix,Completeness,Task / goal completion
+Arize Phoenix,Conciseness,Conciseness
+Arize Phoenix,Correctness,Answer correctness
+Arize Phoenix,Faithfulness,Faithfulness to context
+Arize Phoenix,Hallucination,Faithfulness to context
+Arize Phoenix,PII Detection,Sensitive data leakage
+Arize Phoenix,Refusal,Refusal detection
+Arize Phoenix,Toxicity,Toxicity
+Arize Phoenix,User Friction,User satisfaction or frustration
+LangSmith,Answer Relevance,Answer relevance
+LangSmith,Bias & Fairness,Bias and fairness
+LangSmith,Code Injection,Injection detection
+LangSmith,Conciseness,Conciseness
+LangSmith,Correctness,Answer correctness
+LangSmith,Hallucination,Faithfulness to context
+LangSmith,Knowledge Retention,Knowledge retention
+LangSmith,PII Leakage,Sensitive data leakage
+LangSmith,Perceived Error,User satisfaction or frustration
+LangSmith,Perceived Error (Tuned),User satisfaction or frustration
+LangSmith,Prompt Injection,Injection detection
+LangSmith,Tone,Tone appropriateness
+LangSmith,Toxicity,Toxicity
+LangSmith,User Satisfaction,User satisfaction or frustration
+LangSmith,openevals EXPLICIT_CONTENT_PROMPT,Policy and moderation violations
+LangSmith,openevals Helpfulness (RAG),Helpfulness
+DeepEval,Answer Relevancy,Answer relevance
+DeepEval,Bias,Bias and fairness
+DeepEval,Conversation Completeness,Task / goal completion
+DeepEval,Faithfulness,Faithfulness to context
+DeepEval,Hallucination,Faithfulness to context
+DeepEval,Knowledge Retention,Knowledge retention
+DeepEval,Misuse,Policy and moderation violations
+DeepEval,Non-Advice,Policy and moderation violations
+DeepEval,PII Leakage,Sensitive data leakage
+DeepEval,Toxicity,Toxicity
+DeepEval,Turn Faithfulness,Faithfulness to context
+DeepEval,Turn Relevancy,Answer relevance
+Braintrust,AnswerCorrectness,Answer correctness
+Braintrust,AnswerRelevancy,Answer relevance
+Braintrust,ClosedQA,Answer correctness
+Braintrust,Factuality,Answer correctness
+Braintrust,Faithfulness,Faithfulness to context
+Braintrust,Moderation,Policy and moderation violations
+Braintrust,Security,Policy and moderation violations
+promptfoo,answer-relevance,Answer relevance
+promptfoo,context-faithfulness,Faithfulness to context
+promptfoo,conversation-relevance,Answer relevance
+promptfoo,factuality,Answer correctness
+promptfoo,is-refusal,Refusal detection
+OpenLLMetry,Answer Completeness,Task / goal completion
+OpenLLMetry,Answer Correctness,Answer correctness
+OpenLLMetry,Answer Relevancy,Answer relevance
+OpenLLMetry,Conversation Quality,Conversation coherence
+OpenLLMetry,Faithfulness,Faithfulness to context
+OpenLLMetry,PII Detection,Sensitive data leakage
+OpenLLMetry,Profanity Detection,Toxicity
+OpenLLMetry,Prompt Injection Detection,Injection detection
+OpenLLMetry,Secrets Detection,Sensitive data leakage
+OpenLLMetry,Sexism Detection,Bias and fairness
+OpenLLMetry,Tone Detection,Tone appropriateness
+OpenLLMetry,Toxicity Detection,Toxicity
+Opik,Answer Relevance,Answer relevance
+Opik,Compliance Risk Judge,Policy and moderation violations
+Opik,ConversationComplianceRiskMetric,Policy and moderation violations
+Opik,ConversationDegenerationMetric,Conversation coherence
+Opik,ConversationDialogueHelpfulnessMetric,Helpfulness
+Opik,ConversationQARelevanceMetric,Answer relevance
+Opik,ConversationalCoherenceMetric,Conversation coherence
+Opik,Dialogue Helpfulness Judge,Helpfulness
+Opik,Hallucination,Faithfulness to context
+Opik,KnowledgeRetentionMetric,Knowledge retention
+Opik,Meaning Match,Answer correctness
+Opik,Moderation,Policy and moderation violations
+Opik,QA Relevance Judge,Answer relevance
+Opik,SessionCompletenessQuality,Task / goal completion
+Opik,Tone,Tone appropriateness
+Opik,Usefulness,Helpfulness
+Opik,UserFrustrationMetric,User satisfaction or frustration
+Galileo,Completeness,Task / goal completion
+Galileo,Context Adherence,Faithfulness to context
+Galileo,Conversation Quality,Conversation coherence
+Galileo,Correctness (factuality),Answer correctness
+Galileo,Ground Truth Adherence,Answer correctness
+Galileo,PII / CPNI / PHI,Sensitive data leakage
+Galileo,Prompt Injection,Injection detection
+Galileo,SQL Injection,Injection detection
+Galileo,Sexism / Bias,Bias and fairness
+Galileo,Tone,Tone appropriateness
+Galileo,Toxicity,Toxicity
+Galileo,Unsafe Output,Policy and moderation violations
+Weights & Biases Weave,HallucinationFreeScorer,Faithfulness to context
+Weights & Biases Weave,OpenAIModerationScorer,Policy and moderation violations
+Langfuse,Managed evaluator catalog,Faithfulness to context
+Langfuse,Managed evaluator catalog,Toxicity
+Langfuse,Managed evaluator catalog,Helpfulness

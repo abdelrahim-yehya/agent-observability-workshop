@@ -7,7 +7,7 @@ Evaluation,Tool use,Tool response handling,"Whether the agent correctly processe
 Observability,Tool use,Tool execution errors,"Count, rate or detection of failed tool executions."
 Observability,Tool use,Tool call count,Number of tool calls made by an agent run.
 Observability,Tool use,Tool execution latency,Time taken by tool executions.
-Evaluation,Task and goal,Task / goal completion,Whether the agent completed the task or achieved the goal it was given.
+Evaluation,Task and goal,Task / goal completion,"Whether the agent completed the task or achieved the goal it was given, judged on a run, a conversation or a response."
 Evaluation,Plan and trajectory,Plan quality,Quality of the plan the agent produced.
 Evaluation,Plan and trajectory,Plan adherence,Whether the agent's actions followed its own plan.
 Evaluation,Plan and trajectory,Trajectory accuracy,Whether the sequence of agent steps and tool calls was logical or matches a reference trajectory.
@@ -30,3 +30,18 @@ Observability,Latency,Time per output token / generation time,Time spent generat
 Observability,Errors and volume,Error count / rate,"Count or rate of failed runs, traces, spans or model calls."
 Observability,Errors and volume,Trace / span count,Number of traces or spans recorded.
 Observability,Errors and volume,LLM call count,Number of model (inference) calls.
+Evaluation,Answer quality,Answer correctness,"Whether the agent's answer is factually correct, judged by a model or against a reference answer."
+Evaluation,Answer quality,Answer relevance,"Whether a response addresses the user's input, per answer or per turn, without off-topic content."
+Evaluation,Answer quality,Helpfulness,How useful or helpful the answer is to the user.
+Evaluation,Answer quality,Conciseness,Whether the answer gives the requested information without unnecessary or padded content.
+Evaluation,Answer quality,Tone appropriateness,Whether the tone of the response is appropriate for the context.
+Evaluation,Grounding,Faithfulness to context,Whether the claims in the answer are supported by the provided context. Unsupported or contradicted claims count as hallucination.
+Evaluation,Safety and policy,Toxicity,"Whether the output contains toxic, abusive, hateful or profane language."
+Evaluation,Safety and policy,Bias and fairness,"Whether the output contains bias, stereotyping or discrimination against a person or group."
+Evaluation,Safety and policy,Sensitive data leakage,"Whether the input or output exposes personal data or secrets (for example PII, credentials)."
+Evaluation,Safety and policy,Injection detection,"Whether an input contains an injection attempt (prompt, code or SQL injection) aimed at the agent."
+Evaluation,Safety and policy,Refusal detection,"Whether the model refuses, declines or avoids answering a request."
+Evaluation,Safety and policy,Policy and moderation violations,"Whether the output breaks a safety, moderation, compliance or content policy."
+Evaluation,Conversation,Knowledge retention,Whether the agent remembers and uses facts the user gave earlier in the conversation.
+Evaluation,Conversation,User satisfaction or frustration,"Whether the user's messages show satisfaction, or frustration, corrections and repeated attempts."
+Evaluation,Conversation,Conversation coherence,"Coherence and quality of the messages in a conversation, including repetition or degeneration. It scores the dialogue, not the agent's sequence of actions."
