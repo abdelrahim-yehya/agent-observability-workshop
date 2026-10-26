@@ -18,6 +18,7 @@ Rules are in [`docs/screening_rules.md`](docs/screening_rules.md) (S1–S4) and 
 2. **S1 scope**: primary purpose is observability or evaluation of LLM apps or agents → 31 tools. iFixAi fails S1.
 3. **A1 agent relevance** (amendment to the protocol): official docs explicitly cover agents, tool calls or multi-step traces. Quotes were checked against the raw page text.
 4. **Rank** by independent Google sources, then GitHub stars. Take the top 15.
+5. **Corroborate** with last-month PyPI and npm downloads (`pypi_downloads_last_month`, `npm_downloads_last_month` in `best_tools.csv`, from the pypistats.org and npm download APIs on 2026-10-26). Downloads are reported next to the ranking but do not change it: the ranking rule was fixed before they were collected, and changing it afterwards would be unjustified. Each package was matched to its tool through the repository or author listed in its PyPI metadata.
 
 ## Data (`data/`)
 
@@ -48,3 +49,4 @@ Every quote in `built_in_metrics.csv` was checked by script to appear word for w
 - Evidently's A1 pass is weak (its docs mention intermediate steps and function calls, not agents), and it took the 15th slot ahead of Harbor.
 - Metrics come from official documentation pages. Metrics that exist only in a tool's source code, and not in its docs, are not listed (checked for OpenLLMetry only).
 - Row counts are not comparable across tools: some docs list individual prompt templates or assertion types, others list fewer, broader metrics.
+- Download counts are only corroboration. They include installs triggered as dependencies of other packages (for example `langsmith`, `mlflow`) and CI downloads. They are blank for tools without a representative package: Helicone is used through an API proxy, and the only `helicone` package on PyPI is an old OpenAI wrapper. The OpenTelemetry figure is the general semantic-conventions library, not AI-specific.
