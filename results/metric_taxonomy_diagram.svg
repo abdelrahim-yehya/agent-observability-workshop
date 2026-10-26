@@ -1,0 +1,788 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1118 1313" width="1118" height="1313" role="img" aria-label="Taxonomy of agent observability and evaluation metrics">
+<style>
+:root{--bg:#fbfaf8;--fg:#1d2328;--muted:#5d666d;--line:#c9c5bc;--panel:#ffffff;--obs:#1f6f8b;--ev:#b4582a;--empty:#d9d6cf}
+@media (prefers-color-scheme:dark){:root{--bg:#14181b;--fg:#e8ebec;--muted:#98a1a7;--line:#3a444b;--panel:#1a1f23;--obs:#5cb3d1;--ev:#e08a58;--empty:#343c42}}
+text{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;fill:var(--fg)}
+.bg{fill:var(--bg)}.mut{fill:var(--muted)}.ln{fill:none;stroke:var(--line);stroke-width:1.4}
+.box{fill:var(--panel);stroke-width:1.6}.t-Observability .box,.t-Observability .fillc{stroke:var(--obs)}.t-Evaluation .box,.t-Evaluation .fillc{stroke:var(--ev)}
+.t-Observability .on{fill:var(--obs)}.t-Evaluation .on{fill:var(--ev)}.off{fill:var(--empty)}
+.typebox{stroke-width:0}.t-Observability .typebox{fill:var(--obs)}.t-Evaluation .typebox{fill:var(--ev)}
+.white{fill:#fff}.cap{font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+</style>
+<rect class="bg" width="1118" height="1313"/>
+<text x="24" y="30" font-size="20" font-family="Georgia,serif">Taxonomy of agent metrics</text>
+<text class="mut" x="24" y="50" font-size="12.5">46 metrics in 13 categories, built from the documentation of 13 tools. Only metrics the tools document as built-in are included.</text>
+<text class="mut cap" x="24" y="64" font-size="11">Agent metrics</text>
+<text class="mut cap" x="176" y="64" font-size="11">Type</text>
+<text class="mut cap" x="372" y="64" font-size="11">Category</text>
+<text class="mut cap" x="640" y="64" font-size="11">Metric</text>
+<text class="mut cap" x="928" y="64" font-size="11">Built-in in (of 13 tools)</text>
+<path class="ln" d="M128,617.0 C152.0,617.0 152.0,317.0 176,317.0"/>
+<path class="ln" d="M128,617.0 C152.0,617.0 152.0,917.0 176,917.0"/>
+<path class="ln" d="M324,317.0 C348.0,317.0 348.0,109.5 372,109.5"/>
+<path class="ln" d="M564,109.5 C600.0,109.5 600.0,88.5 636,88.5"/>
+<path class="ln" d="M564,109.5 C600.0,109.5 600.0,109.5 636,109.5"/>
+<path class="ln" d="M564,109.5 C600.0,109.5 600.0,130.5 636,130.5"/>
+<path class="ln" d="M324,317.0 C348.0,317.0 348.0,173.0 372,173.0"/>
+<path class="ln" d="M564,173.0 C600.0,173.0 600.0,173.0 636,173.0"/>
+<path class="ln" d="M324,317.0 C348.0,317.0 348.0,257.5 372,257.5"/>
+<path class="ln" d="M564,257.5 C600.0,257.5 600.0,215.5 636,215.5"/>
+<path class="ln" d="M564,257.5 C600.0,257.5 600.0,236.5 636,236.5"/>
+<path class="ln" d="M564,257.5 C600.0,257.5 600.0,257.5 636,257.5"/>
+<path class="ln" d="M564,257.5 C600.0,257.5 600.0,278.5 636,278.5"/>
+<path class="ln" d="M564,257.5 C600.0,257.5 600.0,299.5 636,299.5"/>
+<path class="ln" d="M324,317.0 C348.0,317.0 348.0,343.0 372,343.0"/>
+<path class="ln" d="M564,343.0 C600.0,343.0 600.0,332.5 636,332.5"/>
+<path class="ln" d="M564,343.0 C600.0,343.0 600.0,353.5 636,353.5"/>
+<path class="ln" d="M324,317.0 C348.0,317.0 348.0,428.5 372,428.5"/>
+<path class="ln" d="M564,428.5 C600.0,428.5 600.0,386.5 636,386.5"/>
+<path class="ln" d="M564,428.5 C600.0,428.5 600.0,407.5 636,407.5"/>
+<path class="ln" d="M564,428.5 C600.0,428.5 600.0,428.5 636,428.5"/>
+<path class="ln" d="M564,428.5 C600.0,428.5 600.0,449.5 636,449.5"/>
+<path class="ln" d="M564,428.5 C600.0,428.5 600.0,470.5 636,470.5"/>
+<path class="ln" d="M324,317.0 C348.0,317.0 348.0,524.5 372,524.5"/>
+<path class="ln" d="M564,524.5 C600.0,524.5 600.0,503.5 636,503.5"/>
+<path class="ln" d="M564,524.5 C600.0,524.5 600.0,524.5 636,524.5"/>
+<path class="ln" d="M564,524.5 C600.0,524.5 600.0,545.5 636,545.5"/>
+<path class="ln" d="M324,917.0 C348.0,917.0 348.0,620.5 372,620.5"/>
+<path class="ln" d="M564,620.5 C600.0,620.5 600.0,578.5 636,578.5"/>
+<path class="ln" d="M564,620.5 C600.0,620.5 600.0,599.5 636,599.5"/>
+<path class="ln" d="M564,620.5 C600.0,620.5 600.0,620.5 636,620.5"/>
+<path class="ln" d="M564,620.5 C600.0,620.5 600.0,641.5 636,641.5"/>
+<path class="ln" d="M564,620.5 C600.0,620.5 600.0,662.5 636,662.5"/>
+<path class="ln" d="M324,917.0 C348.0,917.0 348.0,705.0 372,705.0"/>
+<path class="ln" d="M564,705.0 C600.0,705.0 600.0,705.0 636,705.0"/>
+<path class="ln" d="M324,917.0 C348.0,917.0 348.0,800.0 372,800.0"/>
+<path class="ln" d="M564,800.0 C600.0,800.0 600.0,747.5 636,747.5"/>
+<path class="ln" d="M564,800.0 C600.0,800.0 600.0,768.5 636,768.5"/>
+<path class="ln" d="M564,800.0 C600.0,800.0 600.0,789.5 636,789.5"/>
+<path class="ln" d="M564,800.0 C600.0,800.0 600.0,810.5 636,810.5"/>
+<path class="ln" d="M564,800.0 C600.0,800.0 600.0,831.5 636,831.5"/>
+<path class="ln" d="M564,800.0 C600.0,800.0 600.0,852.5 636,852.5"/>
+<path class="ln" d="M324,917.0 C348.0,917.0 348.0,927.5 372,927.5"/>
+<path class="ln" d="M564,927.5 C600.0,927.5 600.0,885.5 636,885.5"/>
+<path class="ln" d="M564,927.5 C600.0,927.5 600.0,906.5 636,906.5"/>
+<path class="ln" d="M564,927.5 C600.0,927.5 600.0,927.5 636,927.5"/>
+<path class="ln" d="M564,927.5 C600.0,927.5 600.0,948.5 636,948.5"/>
+<path class="ln" d="M564,927.5 C600.0,927.5 600.0,969.5 636,969.5"/>
+<path class="ln" d="M324,917.0 C348.0,917.0 348.0,1012.0 372,1012.0"/>
+<path class="ln" d="M564,1012.0 C600.0,1012.0 600.0,1012.0 636,1012.0"/>
+<path class="ln" d="M324,917.0 C348.0,917.0 348.0,1107.0 372,1107.0"/>
+<path class="ln" d="M564,1107.0 C600.0,1107.0 600.0,1054.5 636,1054.5"/>
+<path class="ln" d="M564,1107.0 C600.0,1107.0 600.0,1075.5 636,1075.5"/>
+<path class="ln" d="M564,1107.0 C600.0,1107.0 600.0,1096.5 636,1096.5"/>
+<path class="ln" d="M564,1107.0 C600.0,1107.0 600.0,1117.5 636,1117.5"/>
+<path class="ln" d="M564,1107.0 C600.0,1107.0 600.0,1138.5 636,1138.5"/>
+<path class="ln" d="M564,1107.0 C600.0,1107.0 600.0,1159.5 636,1159.5"/>
+<path class="ln" d="M324,917.0 C348.0,917.0 348.0,1213.5 372,1213.5"/>
+<path class="ln" d="M564,1213.5 C600.0,1213.5 600.0,1192.5 636,1192.5"/>
+<path class="ln" d="M564,1213.5 C600.0,1213.5 600.0,1213.5 636,1213.5"/>
+<path class="ln" d="M564,1213.5 C600.0,1213.5 600.0,1234.5 636,1234.5"/>
+<g><rect class="box" x="24" y="585.0" width="104" height="64" rx="8" style="stroke:var(--fg)"/><text x="76.0" y="614.0" text-anchor="middle" font-size="14" font-weight="600">Agent</text><text x="76.0" y="631.0" text-anchor="middle" font-size="14" font-weight="600">metrics</text></g>
+<g class="t-Observability"><rect class="typebox" x="176" y="285.0" width="148" height="64" rx="8"/><text class="white" x="250.0" y="309.0" text-anchor="middle" font-size="14" font-weight="600">Observability</text><text class="white" x="250.0" y="325.0" text-anchor="middle" font-size="11">what happened, measured</text><text class="white" x="250.0" y="339.0" text-anchor="middle" font-size="11">19 metrics</text></g>
+<g class="t-Evaluation"><rect class="typebox" x="176" y="885.0" width="148" height="64" rx="8"/><text class="white" x="250.0" y="909.0" text-anchor="middle" font-size="14" font-weight="600">Evaluation</text><text class="white" x="250.0" y="925.0" text-anchor="middle" font-size="11">how good, judged</text><text class="white" x="250.0" y="939.0" text-anchor="middle" font-size="11">27 metrics</text></g>
+<g class="t-Observability"><rect class="box" x="372" y="89.5" width="192" height="40" rx="7"/><text x="384" y="106.5" font-size="13" font-weight="600">Tool use</text><text class="mut" x="384" y="122.5" font-size="11">3 metrics</text></g>
+<g class="t-Observability"><title>Tool execution errors: Count, rate or detection of failed tool executions. Built-in in: Arize Phoenix; LangSmith; Braintrust; OpenLLMetry; Galileo.</title><circle class="on" cx="640" cy="88.5" r="3.5"/><text x="652" y="92.5" font-size="12.5">Tool execution errors</text>
+<circle class="on" cx="933.0" cy="88.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="88.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="88.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="88.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="88.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="88.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="88.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="88.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="88.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="88.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="88.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="88.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="88.5" r="3.4"/>
+<text class="mut" x="1066" y="92.5" font-size="11.5">5</text></g>
+<g class="t-Observability"><title>Tool call count: Number of tool calls made by an agent run. Built-in in: Arize Phoenix; LangSmith; OpenTelemetry; Braintrust.</title><circle class="on" cx="640" cy="109.5" r="3.5"/><text x="652" y="113.5" font-size="12.5">Tool call count</text>
+<circle class="on" cx="933.0" cy="109.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="109.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="109.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="109.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="109.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="109.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="109.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="109.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="109.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="109.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="109.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="109.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="109.5" r="3.4"/>
+<text class="mut" x="1066" y="113.5" font-size="11.5">4</text></g>
+<g class="t-Observability"><title>Tool execution latency: Time taken by tool executions. Built-in in: LangSmith; OpenTelemetry.</title><circle class="on" cx="640" cy="130.5" r="3.5"/><text x="652" y="134.5" font-size="12.5">Tool execution latency</text>
+<circle class="on" cx="933.0" cy="130.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="130.5" r="3.4"/>
+<circle class="off" cx="953.0" cy="130.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="130.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="130.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="130.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="130.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="130.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="130.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="130.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="130.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="130.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="130.5" r="3.4"/>
+<text class="mut" x="1066" y="134.5" font-size="11.5">2</text></g>
+<g class="t-Observability"><rect class="box" x="372" y="153.0" width="192" height="40" rx="7"/><text x="384" y="170.0" font-size="13" font-weight="600">Plan and trajectory</text><text class="mut" x="384" y="186.0" font-size="11">1 metric</text></g>
+<g class="t-Observability"><title>Step count: Number of steps in an agent run. Built-in in: promptfoo.</title><circle class="on" cx="640" cy="173.0" r="3.5"/><text x="652" y="177.0" font-size="12.5">Step count†</text>
+<circle class="on" cx="933.0" cy="173.0" r="3.4"/>
+<circle class="off" cx="943.0" cy="173.0" r="3.4"/>
+<circle class="off" cx="953.0" cy="173.0" r="3.4"/>
+<circle class="off" cx="963.0" cy="173.0" r="3.4"/>
+<circle class="off" cx="973.0" cy="173.0" r="3.4"/>
+<circle class="off" cx="983.0" cy="173.0" r="3.4"/>
+<circle class="off" cx="993.0" cy="173.0" r="3.4"/>
+<circle class="off" cx="1003.0" cy="173.0" r="3.4"/>
+<circle class="off" cx="1013.0" cy="173.0" r="3.4"/>
+<circle class="off" cx="1023.0" cy="173.0" r="3.4"/>
+<circle class="off" cx="1033.0" cy="173.0" r="3.4"/>
+<circle class="off" cx="1043.0" cy="173.0" r="3.4"/>
+<circle class="off" cx="1053.0" cy="173.0" r="3.4"/>
+<text class="mut" x="1066" y="177.0" font-size="11.5">1</text></g>
+<g class="t-Observability"><rect class="box" x="372" y="237.5" width="192" height="40" rx="7"/><text x="384" y="254.5" font-size="13" font-weight="600">Token usage</text><text class="mut" x="384" y="270.5" font-size="11">5 metrics</text></g>
+<g class="t-Observability"><title>Input tokens: Number of tokens sent to the model (prompt). Built-in in: Arize Phoenix; Langfuse; LangSmith; OpenTelemetry; Helicone; Braintrust; promptfoo; OpenLLMetry; Opik; OpenInference.</title><circle class="on" cx="640" cy="215.5" r="3.5"/><text x="652" y="219.5" font-size="12.5">Input tokens</text>
+<circle class="on" cx="933.0" cy="215.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="215.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="215.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="215.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="215.5" r="3.4"/>
+<circle class="on" cx="983.0" cy="215.5" r="3.4"/>
+<circle class="on" cx="993.0" cy="215.5" r="3.4"/>
+<circle class="on" cx="1003.0" cy="215.5" r="3.4"/>
+<circle class="on" cx="1013.0" cy="215.5" r="3.4"/>
+<circle class="on" cx="1023.0" cy="215.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="215.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="215.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="215.5" r="3.4"/>
+<text class="mut" x="1066" y="219.5" font-size="11.5">10</text></g>
+<g class="t-Observability"><title>Output tokens: Number of tokens generated by the model (completion). Built-in in: Arize Phoenix; Langfuse; LangSmith; OpenTelemetry; Helicone; Braintrust; promptfoo; OpenLLMetry; Opik; OpenInference.</title><circle class="on" cx="640" cy="236.5" r="3.5"/><text x="652" y="240.5" font-size="12.5">Output tokens</text>
+<circle class="on" cx="933.0" cy="236.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="236.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="236.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="236.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="236.5" r="3.4"/>
+<circle class="on" cx="983.0" cy="236.5" r="3.4"/>
+<circle class="on" cx="993.0" cy="236.5" r="3.4"/>
+<circle class="on" cx="1003.0" cy="236.5" r="3.4"/>
+<circle class="on" cx="1013.0" cy="236.5" r="3.4"/>
+<circle class="on" cx="1023.0" cy="236.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="236.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="236.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="236.5" r="3.4"/>
+<text class="mut" x="1066" y="240.5" font-size="11.5">10</text></g>
+<g class="t-Observability"><title>Total tokens: Total number of tokens (input plus output) for a call, trace or model. Built-in in: Arize Phoenix; LangSmith; Helicone; Braintrust; promptfoo; OpenLLMetry; Opik; OpenInference; Weights &amp; Biases Weave.</title><circle class="on" cx="640" cy="257.5" r="3.5"/><text x="652" y="261.5" font-size="12.5">Total tokens</text>
+<circle class="on" cx="933.0" cy="257.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="257.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="257.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="257.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="257.5" r="3.4"/>
+<circle class="on" cx="983.0" cy="257.5" r="3.4"/>
+<circle class="on" cx="993.0" cy="257.5" r="3.4"/>
+<circle class="on" cx="1003.0" cy="257.5" r="3.4"/>
+<circle class="on" cx="1013.0" cy="257.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="257.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="257.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="257.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="257.5" r="3.4"/>
+<text class="mut" x="1066" y="261.5" font-size="11.5">9</text></g>
+<g class="t-Observability"><title>Cached tokens: Input tokens read from or written to a provider-side cache. Built-in in: Arize Phoenix; OpenTelemetry; Helicone; Braintrust; promptfoo; OpenInference.</title><circle class="on" cx="640" cy="278.5" r="3.5"/><text x="652" y="282.5" font-size="12.5">Cached tokens</text>
+<circle class="on" cx="933.0" cy="278.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="278.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="278.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="278.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="278.5" r="3.4"/>
+<circle class="on" cx="983.0" cy="278.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="278.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="278.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="278.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="278.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="278.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="278.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="278.5" r="3.4"/>
+<text class="mut" x="1066" y="282.5" font-size="11.5">6</text></g>
+<g class="t-Observability"><title>Reasoning tokens: Output tokens spent on model reasoning. Built-in in: Arize Phoenix; OpenTelemetry; OpenInference.</title><circle class="on" cx="640" cy="299.5" r="3.5"/><text x="652" y="303.5" font-size="12.5">Reasoning tokens</text>
+<circle class="on" cx="933.0" cy="299.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="299.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="299.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="299.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="299.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="299.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="299.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="299.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="299.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="299.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="299.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="299.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="299.5" r="3.4"/>
+<text class="mut" x="1066" y="303.5" font-size="11.5">3</text></g>
+<g class="t-Observability"><rect class="box" x="372" y="323.0" width="192" height="40" rx="7"/><text x="384" y="340.0" font-size="13" font-weight="600">Cost</text><text class="mut" x="384" y="356.0" font-size="11">2 metrics</text></g>
+<g class="t-Observability"><title>Estimated cost: Monetary cost of model usage, computed from token counts and model prices. Built-in in: Arize Phoenix; Langfuse; LangSmith; Helicone; Braintrust; promptfoo; Opik; OpenInference; Weights &amp; Biases Weave.</title><circle class="on" cx="640" cy="332.5" r="3.5"/><text x="652" y="336.5" font-size="12.5">Estimated cost</text>
+<circle class="on" cx="933.0" cy="332.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="332.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="332.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="332.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="332.5" r="3.4"/>
+<circle class="on" cx="983.0" cy="332.5" r="3.4"/>
+<circle class="on" cx="993.0" cy="332.5" r="3.4"/>
+<circle class="on" cx="1003.0" cy="332.5" r="3.4"/>
+<circle class="on" cx="1013.0" cy="332.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="332.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="332.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="332.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="332.5" r="3.4"/>
+<text class="mut" x="1066" y="336.5" font-size="11.5">9</text></g>
+<g class="t-Observability"><title>Cost breakdown by token type: Cost split by input, output, cached or other token type. Built-in in: Langfuse; LangSmith; Braintrust; OpenInference.</title><circle class="on" cx="640" cy="353.5" r="3.5"/><text x="652" y="357.5" font-size="12.5">Cost breakdown by token type</text>
+<circle class="on" cx="933.0" cy="353.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="353.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="353.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="353.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="353.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="353.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="353.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="353.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="353.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="353.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="353.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="353.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="353.5" r="3.4"/>
+<text class="mut" x="1066" y="357.5" font-size="11.5">4</text></g>
+<g class="t-Observability"><rect class="box" x="372" y="408.5" width="192" height="40" rx="7"/><text x="384" y="425.5" font-size="13" font-weight="600">Latency</text><text class="mut" x="384" y="441.5" font-size="11">5 metrics</text></g>
+<g class="t-Observability"><title>Trace / run latency: End-to-end duration of an agent run, workflow or trace. Built-in in: Arize Phoenix; Langfuse; LangSmith; OpenTelemetry; Braintrust; Opik.</title><circle class="on" cx="640" cy="386.5" r="3.5"/><text x="652" y="390.5" font-size="12.5">Trace / run latency</text>
+<circle class="on" cx="933.0" cy="386.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="386.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="386.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="386.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="386.5" r="3.4"/>
+<circle class="on" cx="983.0" cy="386.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="386.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="386.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="386.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="386.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="386.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="386.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="386.5" r="3.4"/>
+<text class="mut" x="1066" y="390.5" font-size="11.5">6</text></g>
+<g class="t-Observability"><title>LLM call latency: Duration of a single model call. Built-in in: LangSmith; OpenTelemetry; Helicone; Braintrust; promptfoo; OpenLLMetry.</title><circle class="on" cx="640" cy="407.5" r="3.5"/><text x="652" y="411.5" font-size="12.5">LLM call latency</text>
+<circle class="on" cx="933.0" cy="407.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="407.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="407.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="407.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="407.5" r="3.4"/>
+<circle class="on" cx="983.0" cy="407.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="407.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="407.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="407.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="407.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="407.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="407.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="407.5" r="3.4"/>
+<text class="mut" x="1066" y="411.5" font-size="11.5">6</text></g>
+<g class="t-Observability"><title>Span duration: Duration of an individual span or step of a trace (generic, not specific to LLM or tool spans). Built-in in: Braintrust; promptfoo; Opik; Weights &amp; Biases Weave.</title><circle class="on" cx="640" cy="428.5" r="3.5"/><text x="652" y="432.5" font-size="12.5">Span duration</text>
+<circle class="on" cx="933.0" cy="428.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="428.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="428.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="428.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="428.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="428.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="428.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="428.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="428.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="428.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="428.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="428.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="428.5" r="3.4"/>
+<text class="mut" x="1066" y="432.5" font-size="11.5">4</text></g>
+<g class="t-Observability"><title>Time to first token: Time from request to the first generated token. Built-in in: Langfuse; LangSmith; OpenTelemetry; Braintrust.</title><circle class="on" cx="640" cy="449.5" r="3.5"/><text x="652" y="453.5" font-size="12.5">Time to first token</text>
+<circle class="on" cx="933.0" cy="449.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="449.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="449.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="449.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="449.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="449.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="449.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="449.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="449.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="449.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="449.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="449.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="449.5" r="3.4"/>
+<text class="mut" x="1066" y="453.5" font-size="11.5">4</text></g>
+<g class="t-Observability"><title>Time per output token / generation time: Time spent generating tokens after the first one. Built-in in: OpenTelemetry; OpenLLMetry.</title><circle class="on" cx="640" cy="470.5" r="3.5"/><text x="652" y="474.5" font-size="12.5">Time per output token / generation time</text>
+<circle class="on" cx="933.0" cy="470.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="470.5" r="3.4"/>
+<circle class="off" cx="953.0" cy="470.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="470.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="470.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="470.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="470.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="470.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="470.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="470.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="470.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="470.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="470.5" r="3.4"/>
+<text class="mut" x="1066" y="474.5" font-size="11.5">2</text></g>
+<g class="t-Observability"><rect class="box" x="372" y="504.5" width="192" height="40" rx="7"/><text x="384" y="521.5" font-size="13" font-weight="600">Errors and volume</text><text class="mut" x="384" y="537.5" font-size="11">3 metrics</text></g>
+<g class="t-Observability"><title>Error count / rate: Count or rate of failed runs, traces, spans or model calls. Built-in in: Arize Phoenix; LangSmith; Helicone; Braintrust; promptfoo; OpenLLMetry; Opik; Weights &amp; Biases Weave.</title><circle class="on" cx="640" cy="503.5" r="3.5"/><text x="652" y="507.5" font-size="12.5">Error count / rate</text>
+<circle class="on" cx="933.0" cy="503.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="503.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="503.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="503.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="503.5" r="3.4"/>
+<circle class="on" cx="983.0" cy="503.5" r="3.4"/>
+<circle class="on" cx="993.0" cy="503.5" r="3.4"/>
+<circle class="on" cx="1003.0" cy="503.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="503.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="503.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="503.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="503.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="503.5" r="3.4"/>
+<text class="mut" x="1066" y="507.5" font-size="11.5">8</text></g>
+<g class="t-Observability"><title>Trace / span count: Number of traces or spans recorded. Built-in in: Arize Phoenix; LangSmith; promptfoo; Opik.</title><circle class="on" cx="640" cy="524.5" r="3.5"/><text x="652" y="528.5" font-size="12.5">Trace / span count</text>
+<circle class="on" cx="933.0" cy="524.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="524.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="524.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="524.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="524.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="524.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="524.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="524.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="524.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="524.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="524.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="524.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="524.5" r="3.4"/>
+<text class="mut" x="1066" y="528.5" font-size="11.5">4</text></g>
+<g class="t-Observability"><title>LLM call count: Number of model (inference) calls. Built-in in: Arize Phoenix; LangSmith; OpenTelemetry; Helicone; Braintrust.</title><circle class="on" cx="640" cy="545.5" r="3.5"/><text x="652" y="549.5" font-size="12.5">LLM call count</text>
+<circle class="on" cx="933.0" cy="545.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="545.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="545.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="545.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="545.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="545.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="545.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="545.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="545.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="545.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="545.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="545.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="545.5" r="3.4"/>
+<text class="mut" x="1066" y="549.5" font-size="11.5">5</text></g>
+<g class="t-Evaluation"><rect class="box" x="372" y="600.5" width="192" height="40" rx="7"/><text x="384" y="617.5" font-size="13" font-weight="600">Tool use</text><text class="mut" x="384" y="633.5" font-size="11">5 metrics</text></g>
+<g class="t-Evaluation"><title>Tool selection: Whether the agent chose the appropriate tool for the task. Built-in in: Arize Phoenix; LangSmith; DeepEval; Galileo.</title><circle class="on" cx="640" cy="578.5" r="3.5"/><text x="652" y="582.5" font-size="12.5">Tool selection</text>
+<circle class="on" cx="933.0" cy="578.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="578.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="578.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="578.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="578.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="578.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="578.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="578.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="578.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="578.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="578.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="578.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="578.5" r="3.4"/>
+<text class="mut" x="1066" y="582.5" font-size="11.5">4</text></g>
+<g class="t-Evaluation"><title>Tool argument validity: Whether the arguments of a tool call are correct and well-formed (for example against the tool&#x27;s schema or expected values). Built-in in: Arize Phoenix; DeepEval; promptfoo.</title><circle class="on" cx="640" cy="599.5" r="3.5"/><text x="652" y="603.5" font-size="12.5">Tool argument validity</text>
+<circle class="on" cx="933.0" cy="599.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="599.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="599.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="599.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="599.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="599.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="599.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="599.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="599.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="599.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="599.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="599.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="599.5" r="3.4"/>
+<text class="mut" x="1066" y="603.5" font-size="11.5">3</text></g>
+<g class="t-Evaluation"><title>Tool call correctness: Whether the tool calls the agent made match the calls expected or appropriate for the task. Built-in in: DeepEval; promptfoo; Opik.</title><circle class="on" cx="640" cy="620.5" r="3.5"/><text x="652" y="624.5" font-size="12.5">Tool call correctness</text>
+<circle class="on" cx="933.0" cy="620.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="620.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="620.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="620.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="620.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="620.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="620.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="620.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="620.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="620.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="620.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="620.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="620.5" r="3.4"/>
+<text class="mut" x="1066" y="624.5" font-size="11.5">3</text></g>
+<g class="t-Evaluation"><title>Tool call efficiency: Whether the agent called tools without redundant or unnecessary calls. Built-in in: LangSmith.</title><circle class="on" cx="640" cy="641.5" r="3.5"/><text x="652" y="645.5" font-size="12.5">Tool call efficiency†</text>
+<circle class="on" cx="933.0" cy="641.5" r="3.4"/>
+<circle class="off" cx="943.0" cy="641.5" r="3.4"/>
+<circle class="off" cx="953.0" cy="641.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="641.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="641.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="641.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="641.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="641.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="641.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="641.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="641.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="641.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="641.5" r="3.4"/>
+<text class="mut" x="1066" y="645.5" font-size="11.5">1</text></g>
+<g class="t-Evaluation"><title>Tool response handling: Whether the agent correctly processed what a tool returned, including errors. Built-in in: Arize Phoenix.</title><circle class="on" cx="640" cy="662.5" r="3.5"/><text x="652" y="666.5" font-size="12.5">Tool response handling†</text>
+<circle class="on" cx="933.0" cy="662.5" r="3.4"/>
+<circle class="off" cx="943.0" cy="662.5" r="3.4"/>
+<circle class="off" cx="953.0" cy="662.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="662.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="662.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="662.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="662.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="662.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="662.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="662.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="662.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="662.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="662.5" r="3.4"/>
+<text class="mut" x="1066" y="666.5" font-size="11.5">1</text></g>
+<g class="t-Evaluation"><rect class="box" x="372" y="685.0" width="192" height="40" rx="7"/><text x="384" y="702.0" font-size="13" font-weight="600">Task and goal</text><text class="mut" x="384" y="718.0" font-size="11">1 metric</text></g>
+<g class="t-Evaluation"><title>Task / goal completion: Whether the agent completed the task or achieved the goal it was given, judged on a run, a conversation or a response. Built-in in: Arize Phoenix; LangSmith; DeepEval; promptfoo; OpenLLMetry; Opik; Galileo.</title><circle class="on" cx="640" cy="705.0" r="3.5"/><text x="652" y="709.0" font-size="12.5">Task / goal completion</text>
+<circle class="on" cx="933.0" cy="705.0" r="3.4"/>
+<circle class="on" cx="943.0" cy="705.0" r="3.4"/>
+<circle class="on" cx="953.0" cy="705.0" r="3.4"/>
+<circle class="on" cx="963.0" cy="705.0" r="3.4"/>
+<circle class="on" cx="973.0" cy="705.0" r="3.4"/>
+<circle class="on" cx="983.0" cy="705.0" r="3.4"/>
+<circle class="on" cx="993.0" cy="705.0" r="3.4"/>
+<circle class="off" cx="1003.0" cy="705.0" r="3.4"/>
+<circle class="off" cx="1013.0" cy="705.0" r="3.4"/>
+<circle class="off" cx="1023.0" cy="705.0" r="3.4"/>
+<circle class="off" cx="1033.0" cy="705.0" r="3.4"/>
+<circle class="off" cx="1043.0" cy="705.0" r="3.4"/>
+<circle class="off" cx="1053.0" cy="705.0" r="3.4"/>
+<text class="mut" x="1066" y="709.0" font-size="11.5">7</text></g>
+<g class="t-Evaluation"><rect class="box" x="372" y="780.0" width="192" height="40" rx="7"/><text x="384" y="797.0" font-size="13" font-weight="600">Plan and trajectory</text><text class="mut" x="384" y="813.0" font-size="11">6 metrics</text></g>
+<g class="t-Evaluation"><title>Plan quality: Quality of the plan the agent produced. Built-in in: DeepEval.</title><circle class="on" cx="640" cy="747.5" r="3.5"/><text x="652" y="751.5" font-size="12.5">Plan quality†</text>
+<circle class="on" cx="933.0" cy="747.5" r="3.4"/>
+<circle class="off" cx="943.0" cy="747.5" r="3.4"/>
+<circle class="off" cx="953.0" cy="747.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="747.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="747.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="747.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="747.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="747.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="747.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="747.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="747.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="747.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="747.5" r="3.4"/>
+<text class="mut" x="1066" y="751.5" font-size="11.5">1</text></g>
+<g class="t-Evaluation"><title>Plan adherence: Whether the agent&#x27;s actions followed its own plan. Built-in in: LangSmith; DeepEval.</title><circle class="on" cx="640" cy="768.5" r="3.5"/><text x="652" y="772.5" font-size="12.5">Plan adherence</text>
+<circle class="on" cx="933.0" cy="768.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="768.5" r="3.4"/>
+<circle class="off" cx="953.0" cy="768.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="768.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="768.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="768.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="768.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="768.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="768.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="768.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="768.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="768.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="768.5" r="3.4"/>
+<text class="mut" x="1066" y="772.5" font-size="11.5">2</text></g>
+<g class="t-Evaluation"><title>Trajectory accuracy: Whether the sequence of agent steps and tool calls was logical or matches a reference trajectory. Built-in in: LangSmith; promptfoo; OpenLLMetry; Opik.</title><circle class="on" cx="640" cy="789.5" r="3.5"/><text x="652" y="793.5" font-size="12.5">Trajectory accuracy</text>
+<circle class="on" cx="933.0" cy="789.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="789.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="789.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="789.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="789.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="789.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="789.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="789.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="789.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="789.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="789.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="789.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="789.5" r="3.4"/>
+<text class="mut" x="1066" y="793.5" font-size="11.5">4</text></g>
+<g class="t-Evaluation"><title>Step / action efficiency: Whether the agent reached the goal with a minimal number of steps. Built-in in: DeepEval; OpenLLMetry; Galileo.</title><circle class="on" cx="640" cy="810.5" r="3.5"/><text x="652" y="814.5" font-size="12.5">Step / action efficiency</text>
+<circle class="on" cx="933.0" cy="810.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="810.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="810.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="810.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="810.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="810.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="810.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="810.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="810.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="810.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="810.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="810.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="810.5" r="3.4"/>
+<text class="mut" x="1066" y="814.5" font-size="11.5">3</text></g>
+<g class="t-Evaluation"><title>Action progress toward goal: Whether each action moved the agent closer to its goal. Built-in in: Galileo.</title><circle class="on" cx="640" cy="831.5" r="3.5"/><text x="652" y="835.5" font-size="12.5">Action progress toward goal†</text>
+<circle class="on" cx="933.0" cy="831.5" r="3.4"/>
+<circle class="off" cx="943.0" cy="831.5" r="3.4"/>
+<circle class="off" cx="953.0" cy="831.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="831.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="831.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="831.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="831.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="831.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="831.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="831.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="831.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="831.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="831.5" r="3.4"/>
+<text class="mut" x="1066" y="835.5" font-size="11.5">1</text></g>
+<g class="t-Evaluation"><title>Flow and reasoning coherence: Whether the agent&#x27;s sequence of actions and reasoning steps is logically consistent. Built-in in: OpenLLMetry; Galileo.</title><circle class="on" cx="640" cy="852.5" r="3.5"/><text x="652" y="856.5" font-size="12.5">Flow and reasoning coherence</text>
+<circle class="on" cx="933.0" cy="852.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="852.5" r="3.4"/>
+<circle class="off" cx="953.0" cy="852.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="852.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="852.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="852.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="852.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="852.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="852.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="852.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="852.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="852.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="852.5" r="3.4"/>
+<text class="mut" x="1066" y="856.5" font-size="11.5">2</text></g>
+<g class="t-Evaluation"><rect class="box" x="372" y="907.5" width="192" height="40" rx="7"/><text x="384" y="924.5" font-size="13" font-weight="600">Answer quality</text><text class="mut" x="384" y="940.5" font-size="11">5 metrics</text></g>
+<g class="t-Evaluation"><title>Answer correctness: Whether the agent&#x27;s answer is factually correct, judged by a model or against a reference answer. Built-in in: Arize Phoenix; LangSmith; Braintrust; promptfoo; OpenLLMetry; Opik; Galileo.</title><circle class="on" cx="640" cy="885.5" r="3.5"/><text x="652" y="889.5" font-size="12.5">Answer correctness</text>
+<circle class="on" cx="933.0" cy="885.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="885.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="885.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="885.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="885.5" r="3.4"/>
+<circle class="on" cx="983.0" cy="885.5" r="3.4"/>
+<circle class="on" cx="993.0" cy="885.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="885.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="885.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="885.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="885.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="885.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="885.5" r="3.4"/>
+<text class="mut" x="1066" y="889.5" font-size="11.5">7</text></g>
+<g class="t-Evaluation"><title>Answer relevance: Whether a response addresses the user&#x27;s input, per answer or per turn, without off-topic content. Built-in in: LangSmith; DeepEval; Braintrust; promptfoo; OpenLLMetry; Opik.</title><circle class="on" cx="640" cy="906.5" r="3.5"/><text x="652" y="910.5" font-size="12.5">Answer relevance</text>
+<circle class="on" cx="933.0" cy="906.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="906.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="906.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="906.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="906.5" r="3.4"/>
+<circle class="on" cx="983.0" cy="906.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="906.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="906.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="906.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="906.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="906.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="906.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="906.5" r="3.4"/>
+<text class="mut" x="1066" y="910.5" font-size="11.5">6</text></g>
+<g class="t-Evaluation"><title>Helpfulness: How useful or helpful the answer is to the user. Built-in in: Langfuse; LangSmith; Opik.</title><circle class="on" cx="640" cy="927.5" r="3.5"/><text x="652" y="931.5" font-size="12.5">Helpfulness</text>
+<circle class="on" cx="933.0" cy="927.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="927.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="927.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="927.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="927.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="927.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="927.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="927.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="927.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="927.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="927.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="927.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="927.5" r="3.4"/>
+<text class="mut" x="1066" y="931.5" font-size="11.5">3</text></g>
+<g class="t-Evaluation"><title>Conciseness: Whether the answer gives the requested information without unnecessary or padded content. Built-in in: Arize Phoenix; LangSmith.</title><circle class="on" cx="640" cy="948.5" r="3.5"/><text x="652" y="952.5" font-size="12.5">Conciseness</text>
+<circle class="on" cx="933.0" cy="948.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="948.5" r="3.4"/>
+<circle class="off" cx="953.0" cy="948.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="948.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="948.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="948.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="948.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="948.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="948.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="948.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="948.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="948.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="948.5" r="3.4"/>
+<text class="mut" x="1066" y="952.5" font-size="11.5">2</text></g>
+<g class="t-Evaluation"><title>Tone appropriateness: Whether the tone of the response is appropriate for the context. Built-in in: LangSmith; OpenLLMetry; Opik; Galileo.</title><circle class="on" cx="640" cy="969.5" r="3.5"/><text x="652" y="973.5" font-size="12.5">Tone appropriateness</text>
+<circle class="on" cx="933.0" cy="969.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="969.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="969.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="969.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="969.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="969.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="969.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="969.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="969.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="969.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="969.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="969.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="969.5" r="3.4"/>
+<text class="mut" x="1066" y="973.5" font-size="11.5">4</text></g>
+<g class="t-Evaluation"><rect class="box" x="372" y="992.0" width="192" height="40" rx="7"/><text x="384" y="1009.0" font-size="13" font-weight="600">Grounding</text><text class="mut" x="384" y="1025.0" font-size="11">1 metric</text></g>
+<g class="t-Evaluation"><title>Faithfulness to context: Whether the claims in the answer are supported by the provided context. Unsupported or contradicted claims count as hallucination. Built-in in: Arize Phoenix; Langfuse; LangSmith; DeepEval; Braintrust; promptfoo; OpenLLMetry; Opik; Galileo; Weights &amp; Biases Weave.</title><circle class="on" cx="640" cy="1012.0" r="3.5"/><text x="652" y="1016.0" font-size="12.5">Faithfulness to context</text>
+<circle class="on" cx="933.0" cy="1012.0" r="3.4"/>
+<circle class="on" cx="943.0" cy="1012.0" r="3.4"/>
+<circle class="on" cx="953.0" cy="1012.0" r="3.4"/>
+<circle class="on" cx="963.0" cy="1012.0" r="3.4"/>
+<circle class="on" cx="973.0" cy="1012.0" r="3.4"/>
+<circle class="on" cx="983.0" cy="1012.0" r="3.4"/>
+<circle class="on" cx="993.0" cy="1012.0" r="3.4"/>
+<circle class="on" cx="1003.0" cy="1012.0" r="3.4"/>
+<circle class="on" cx="1013.0" cy="1012.0" r="3.4"/>
+<circle class="on" cx="1023.0" cy="1012.0" r="3.4"/>
+<circle class="off" cx="1033.0" cy="1012.0" r="3.4"/>
+<circle class="off" cx="1043.0" cy="1012.0" r="3.4"/>
+<circle class="off" cx="1053.0" cy="1012.0" r="3.4"/>
+<text class="mut" x="1066" y="1016.0" font-size="11.5">10</text></g>
+<g class="t-Evaluation"><rect class="box" x="372" y="1087.0" width="192" height="40" rx="7"/><text x="384" y="1104.0" font-size="13" font-weight="600">Safety and policy</text><text class="mut" x="384" y="1120.0" font-size="11">6 metrics</text></g>
+<g class="t-Evaluation"><title>Toxicity: Whether the output contains toxic, abusive, hateful or profane language. Built-in in: Arize Phoenix; Langfuse; LangSmith; DeepEval; OpenLLMetry; Galileo.</title><circle class="on" cx="640" cy="1054.5" r="3.5"/><text x="652" y="1058.5" font-size="12.5">Toxicity</text>
+<circle class="on" cx="933.0" cy="1054.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="1054.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="1054.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="1054.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="1054.5" r="3.4"/>
+<circle class="on" cx="983.0" cy="1054.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="1054.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="1054.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="1054.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="1054.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="1054.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="1054.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="1054.5" r="3.4"/>
+<text class="mut" x="1066" y="1058.5" font-size="11.5">6</text></g>
+<g class="t-Evaluation"><title>Bias and fairness: Whether the output contains bias, stereotyping or discrimination against a person or group. Built-in in: LangSmith; DeepEval; OpenLLMetry; Galileo.</title><circle class="on" cx="640" cy="1075.5" r="3.5"/><text x="652" y="1079.5" font-size="12.5">Bias and fairness</text>
+<circle class="on" cx="933.0" cy="1075.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="1075.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="1075.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="1075.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="1075.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="1075.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="1075.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="1075.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="1075.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="1075.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="1075.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="1075.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="1075.5" r="3.4"/>
+<text class="mut" x="1066" y="1079.5" font-size="11.5">4</text></g>
+<g class="t-Evaluation"><title>Sensitive data leakage: Whether the input or output exposes personal data or secrets (for example PII, credentials). Built-in in: Arize Phoenix; LangSmith; DeepEval; OpenLLMetry; Galileo.</title><circle class="on" cx="640" cy="1096.5" r="3.5"/><text x="652" y="1100.5" font-size="12.5">Sensitive data leakage</text>
+<circle class="on" cx="933.0" cy="1096.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="1096.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="1096.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="1096.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="1096.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="1096.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="1096.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="1096.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="1096.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="1096.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="1096.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="1096.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="1096.5" r="3.4"/>
+<text class="mut" x="1066" y="1100.5" font-size="11.5">5</text></g>
+<g class="t-Evaluation"><title>Injection detection: Whether an input contains an injection attempt (prompt, code or SQL injection) aimed at the agent. Built-in in: LangSmith; OpenLLMetry; Galileo.</title><circle class="on" cx="640" cy="1117.5" r="3.5"/><text x="652" y="1121.5" font-size="12.5">Injection detection</text>
+<circle class="on" cx="933.0" cy="1117.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="1117.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="1117.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="1117.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="1117.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="1117.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="1117.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="1117.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="1117.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="1117.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="1117.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="1117.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="1117.5" r="3.4"/>
+<text class="mut" x="1066" y="1121.5" font-size="11.5">3</text></g>
+<g class="t-Evaluation"><title>Refusal detection: Whether the model refuses, declines or avoids answering a request. Built-in in: Arize Phoenix; promptfoo.</title><circle class="on" cx="640" cy="1138.5" r="3.5"/><text x="652" y="1142.5" font-size="12.5">Refusal detection</text>
+<circle class="on" cx="933.0" cy="1138.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="1138.5" r="3.4"/>
+<circle class="off" cx="953.0" cy="1138.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="1138.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="1138.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="1138.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="1138.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="1138.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="1138.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="1138.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="1138.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="1138.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="1138.5" r="3.4"/>
+<text class="mut" x="1066" y="1142.5" font-size="11.5">2</text></g>
+<g class="t-Evaluation"><title>Policy and moderation violations: Whether the output breaks a safety, moderation, compliance or content policy. Built-in in: LangSmith; DeepEval; Braintrust; Opik; Galileo; Weights &amp; Biases Weave.</title><circle class="on" cx="640" cy="1159.5" r="3.5"/><text x="652" y="1163.5" font-size="12.5">Policy and moderation violations</text>
+<circle class="on" cx="933.0" cy="1159.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="1159.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="1159.5" r="3.4"/>
+<circle class="on" cx="963.0" cy="1159.5" r="3.4"/>
+<circle class="on" cx="973.0" cy="1159.5" r="3.4"/>
+<circle class="on" cx="983.0" cy="1159.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="1159.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="1159.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="1159.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="1159.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="1159.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="1159.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="1159.5" r="3.4"/>
+<text class="mut" x="1066" y="1163.5" font-size="11.5">6</text></g>
+<g class="t-Evaluation"><rect class="box" x="372" y="1193.5" width="192" height="40" rx="7"/><text x="384" y="1210.5" font-size="13" font-weight="600">Conversation</text><text class="mut" x="384" y="1226.5" font-size="11">3 metrics</text></g>
+<g class="t-Evaluation"><title>Knowledge retention: Whether the agent remembers and uses facts the user gave earlier in the conversation. Built-in in: LangSmith; DeepEval; Opik.</title><circle class="on" cx="640" cy="1192.5" r="3.5"/><text x="652" y="1196.5" font-size="12.5">Knowledge retention</text>
+<circle class="on" cx="933.0" cy="1192.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="1192.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="1192.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="1192.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="1192.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="1192.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="1192.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="1192.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="1192.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="1192.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="1192.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="1192.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="1192.5" r="3.4"/>
+<text class="mut" x="1066" y="1196.5" font-size="11.5">3</text></g>
+<g class="t-Evaluation"><title>User satisfaction or frustration: Whether the user&#x27;s messages show satisfaction, or frustration, corrections and repeated attempts. Built-in in: Arize Phoenix; LangSmith; Opik.</title><circle class="on" cx="640" cy="1213.5" r="3.5"/><text x="652" y="1217.5" font-size="12.5">User satisfaction or frustration</text>
+<circle class="on" cx="933.0" cy="1213.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="1213.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="1213.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="1213.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="1213.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="1213.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="1213.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="1213.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="1213.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="1213.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="1213.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="1213.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="1213.5" r="3.4"/>
+<text class="mut" x="1066" y="1217.5" font-size="11.5">3</text></g>
+<g class="t-Evaluation"><title>Conversation coherence: Coherence and quality of the messages in a conversation, including repetition or degeneration. It scores the dialogue, not the agent&#x27;s sequence of actions. Built-in in: OpenLLMetry; Opik; Galileo.</title><circle class="on" cx="640" cy="1234.5" r="3.5"/><text x="652" y="1238.5" font-size="12.5">Conversation coherence</text>
+<circle class="on" cx="933.0" cy="1234.5" r="3.4"/>
+<circle class="on" cx="943.0" cy="1234.5" r="3.4"/>
+<circle class="on" cx="953.0" cy="1234.5" r="3.4"/>
+<circle class="off" cx="963.0" cy="1234.5" r="3.4"/>
+<circle class="off" cx="973.0" cy="1234.5" r="3.4"/>
+<circle class="off" cx="983.0" cy="1234.5" r="3.4"/>
+<circle class="off" cx="993.0" cy="1234.5" r="3.4"/>
+<circle class="off" cx="1003.0" cy="1234.5" r="3.4"/>
+<circle class="off" cx="1013.0" cy="1234.5" r="3.4"/>
+<circle class="off" cx="1023.0" cy="1234.5" r="3.4"/>
+<circle class="off" cx="1033.0" cy="1234.5" r="3.4"/>
+<circle class="off" cx="1043.0" cy="1234.5" r="3.4"/>
+<circle class="off" cx="1053.0" cy="1234.5" r="3.4"/>
+<text class="mut" x="1066" y="1238.5" font-size="11.5">3</text></g>
+<text class="mut" x="24" y="1291" font-size="11.5">† Documented as built-in by one tool only.   Source: results/metric_taxonomy.csv, built from official documentation (quotes in results/built_in_metrics.csv).</text>
+</svg>

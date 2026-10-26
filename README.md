@@ -7,7 +7,7 @@ Goal: (1) identify the most important tools for observability and evaluation of 
 | File | Content | Status |
 |---|---|---|
 | `best_tools.csv` | The 13 selected tools, ranked, with the evidence for each selection criterion | done |
-| `metric_taxonomy.csv` | The 46 unique metrics, split into Observability (19, measurements captured from a run) and Evaluation (27, judgements of agent behaviour and output) and grouped in 11 categories, with a definition and the list of tools that support each | draft for review |
+| `metric_taxonomy.csv` | The 46 unique metrics, split into Observability (19, measurements captured from a run) and Evaluation (27, judgements of agent behaviour and output) and grouped in 13 categories (6 under Observability, 7 under Evaluation; "Tool use" and "Plan and trajectory" appear under both), with a definition and the list of tools that support each. `metric_taxonomy_diagram.svg` and `.png` draw it as a tree, one dot per tool that documents each metric (built by `src/plot_taxonomy.py`) | draft for review |
 | `tool_metric_matrix.csv` | The 46 metrics against the 13 tools, one status per cell (built-in, integration, community, template, generic custom, records scores, not documented). `tool_metric_matrix_long.csv` has the same cells one per row, with the tool's own metric names, delivery and the doc URL. `tool_metric_matrix.html` is the same matrix drawn as a heatmap with the status legend (open it in a browser; built by `src/plot_matrix.py`) | draft for review |
 | `built_in_metrics.csv` | 241 built-in metrics from the 13 tools (rule M1). Each row has the doc URL, a verbatim quote, the saved page it was copied from, and the access date | first pass done, being reviewed |
 
