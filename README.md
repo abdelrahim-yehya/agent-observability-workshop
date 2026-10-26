@@ -8,7 +8,7 @@ Goal: (1) identify the most important tools for observability and evaluation of 
 |---|---|---|
 | `best_tools.csv` | The 13 selected tools, ranked, with the evidence for each selection criterion | done |
 | `metric_taxonomy.csv` | The 46 unique metrics, split into Observability (19, measurements captured from a run) and Evaluation (27, judgements of agent behaviour and output) and grouped in 11 categories, with a definition and the list of tools that support each | draft for review |
-| `tool_metric_matrix.csv` | The 46 metrics against the 13 tools, one status per cell (built-in, integration, community, template, generic custom, records scores, not documented). `tool_metric_matrix_long.csv` has the same cells one per row, with the tool's own metric names, delivery and the doc URL | draft for review |
+| `tool_metric_matrix.csv` | The 46 metrics against the 13 tools, one status per cell (built-in, integration, community, template, generic custom, records scores, not documented). `tool_metric_matrix_long.csv` has the same cells one per row, with the tool's own metric names, delivery and the doc URL. `tool_metric_matrix.html` is the same matrix drawn as a heatmap with the status legend (open it in a browser; built by `src/plot_matrix.py`) | draft for review |
 | `built_in_metrics.csv` | 241 built-in metrics from the 13 tools (rule M1). Each row has the doc URL, a verbatim quote, the saved page it was copied from, and the access date | first pass done, being reviewed |
 
 ## How the tools were selected
@@ -39,7 +39,7 @@ Two tool-specific metrics are merged into one unique metric when they measure th
 
 ## How to read the matrix
 
-`python3 src/build_matrix.py` builds it from the evidence tables. Each cell takes the strongest status found:
+`python3 src/build_matrix.py` builds it from the evidence tables, and `python3 src/plot_matrix.py` draws the heatmap from the long file. Each cell takes the strongest status found:
 
 | Status | Meaning |
 |---|---|
