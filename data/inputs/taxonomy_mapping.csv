@@ -247,3 +247,19 @@ Weights & Biases Weave,OpenAIModerationScorer,Policy and moderation violations
 Langfuse,Managed evaluator catalog,Faithfulness to context
 Langfuse,Managed evaluator catalog,Toxicity
 Langfuse,Managed evaluator catalog,Helpfulness
+OpenInference,llm.token_count.prompt,Input tokens
+OpenInference,llm.token_count.completion,Output tokens
+OpenInference,llm.token_count.total,Total tokens
+OpenInference,llm.token_count.prompt_details.cache_read,Cached tokens
+OpenInference,llm.token_count.prompt_details.cache_write,Cached tokens
+OpenInference,llm.token_count.completion_details.reasoning,Reasoning tokens
+OpenInference,llm.cost.total,Estimated cost
+OpenInference,llm.cost.prompt,Cost breakdown by token type
+OpenInference,llm.cost.completion,Cost breakdown by token type
+OpenInference,llm.cost.completion_details.reasoning,Cost breakdown by token type
+OpenInference,llm.cost.prompt_details.cache_read,Cost breakdown by token type
+OpenInference,llm.cost.prompt_details.cache_write,Cost breakdown by token type
+Helicone,Alert metric: Error Rate,Error count / rate
+Helicone,Alert metric: Latency,LLM call latency
+Helicone,Alert metrics: Prompt Cache Read / Write,Cached tokens
+Helicone,Alert metric: Count,LLM call count

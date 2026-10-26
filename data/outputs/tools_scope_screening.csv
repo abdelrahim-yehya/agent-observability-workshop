@@ -1,7 +1,7 @@
 tool_key,tool,github_repo,stars,google_independent_sources,s1_decision,s1_reason,s2_role,s3_builtin_metric_count,s3_decision,s4_decision,final_status
 langfuse,Langfuse,langfuse/langfuse,36193.0,15.0,in,"🪢 Open source agent evals & observability: Trace, evaluate, and improve LLM applications w",platform,7,pass,"selected (C1 passed, ranked)",selected (rank 2)
 opik,Opik,comet-ml/opik,22833.0,3.0,in,"Debug, evaluate, and monitor your LLM applications, RAG systems, and agentic workflows wit",platform,24,pass,"selected (C1 passed, ranked)",selected (rank 10)
-helicone,Helicone,Helicone/helicone,6232.0,6.0,in,"🧊 Open source LLM observability platform. One line of code to monitor, evaluate, and exper",platform,2,pass,"selected (C1 passed, ranked)",selected (rank 6)
+helicone,Helicone,Helicone/helicone,6232.0,6.0,in,"🧊 Open source LLM observability platform. One line of code to monitor, evaluate, and exper",platform,6,pass,"selected (C1 passed, ranked)",selected (rank 6)
 failproofai,FailproofAI,FailproofAI/failproofai,6004.0,,in,Observability and enforcement for AI agent harnesses. Capture every run and runtime reliab,platform,,not run,not ranked (fails C1),not selected (fails C1)
 cozeloop,Coze Loop,coze-dev/coze-loop,5784.0,,in,Next-generation AI Agent Optimization Platform: Cozeloop addresses challenges in AI agent ,platform,,not run,not ranked (fails C1),not selected (fails C1)
 latitude,Latitude,latitude-dev/latitude-llm,4734.0,,in,"Open-source observability for AI agents. Find where your agents fail, dispatch your coding",platform,,not run,not ranked (fails C1),not selected (fails C1)
@@ -35,7 +35,7 @@ mcpinspector,MCP Inspector,MCPJam/inspector,2274.0,,out,testing of MCP servers (
 evalite,Evalite,mattpocock/evalite,1724.0,,in,Evaluate your LLM-powered apps with TypeScript,framework,,not run,not ranked (fails C1),not selected (fails C1)
 signoz,SigNoz,SigNoz/signoz,32427.0,,out,general-purpose observability platform; LLM support is a feature,,,,,screened out (S1)
 openobserve,OpenObserve,openobserve/openobserve,22457.0,,out,general-purpose observability platform; LLM support is a feature,,,,,screened out (S1)
-openinference,OpenInference,Arize-ai/openinference,1278.0,2.0,in,OpenTelemetry Instrumentation for AI Observability,standard,0,zero built-in rows,"selected (C1 passed, ranked)",selected (rank 12)
+openinference,OpenInference,Arize-ai/openinference,1278.0,2.0,in,OpenTelemetry Instrumentation for AI Observability,standard,12,pass,"selected (C1 passed, ranked)",selected (rank 12)
 langsmith,LangSmith,,,13.0,in,description from Google screening (no GitHub description),platform,30,pass,"selected (C1 passed, ranked)",selected (rank 3)
 opentelemetry,OpenTelemetry,,,10.0,in,description from Google screening (no GitHub description),standard,16,pass,"selected (C1 passed, ranked)",selected (rank 5)
 braintrust,Braintrust,,,5.0,in,description from Google screening (no GitHub description),platform,14,pass,"selected (C1 passed, ranked)",selected (rank 7)

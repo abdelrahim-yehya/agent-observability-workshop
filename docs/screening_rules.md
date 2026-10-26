@@ -67,7 +67,7 @@ and it is not:
 applied to the 13 selected tools while collecting `results/built_in_metrics.csv`,
 with the evidence rule in `CLAUDE.md` (URL, saved page, verbatim quote, access
 date). A tool with no built-in agent-execution metric is still reported, with
-zero rows (OpenInference).
+zero rows.
 
 An early keyword scan of the repositories (columns `s3_candidate_rows` and
 `s3_note`, now removed from `tools_scope_screening.csv`) is not part of this

@@ -8,7 +8,7 @@ Goal: (1) identify the most important tools for observability and evaluation of 
 |---|---|---|
 | `best_tools.csv` | The 13 selected tools, ranked, with the evidence for each selection criterion | done |
 | `metric_taxonomy.csv` | The 46 unique metrics, split into Observability (19, measurements captured from a run) and Evaluation (27, judgements of agent behaviour and output) and grouped in 11 categories, with a definition and the list of tools that support each | draft for review |
-| `built_in_metrics.csv` | 215 built-in metrics from 12 of the 13 tools (rule M1). OpenInference has no rows: see Limitations. Each row has the doc URL, a verbatim quote, the saved page it was copied from, and the access date | first pass done, being reviewed |
+| `built_in_metrics.csv` | 231 built-in metrics from the 13 tools (rule M1). Each row has the doc URL, a verbatim quote, the saved page it was copied from, and the access date | first pass done, being reviewed |
 
 ## How the tools were selected
 
@@ -45,7 +45,7 @@ Every quote in `built_in_metrics.csv` was checked by script to appear word for w
 
 ## Limitations
 
-- OpenInference contributes no built-in metric rows: it defines a span attribute for evaluation results, but only as a user-supplied field (custom-only). It is reported with zero rows, not dropped.
+- OpenInference's evaluation field is custom-only (the producer supplies the criterion and score), so its rows are token and cost attributes only.
 - C1 reduced the list to 13 tools. MLflow and Evidently were first in the top 15, then removed under C1 (0 independent Google sources; MLflow's 8 hits are all its own site). Other widely used tools with no third-party mention in the first 30 results of the 8 Google queries are also absent (for example Harbor, Giskard, TruLens, AgentOps). The Google counts reflect what ranks in those queries, not usage.
 - Benchmarks and eval harnesses (SWE-bench, τ-bench, Inspect AI) are out of scope: S1 removes benchmarks, although I4 in the protocol would admit them through the literature channel. Metrics such as pass^k that come from them are therefore not in the tables.
 - Five metrics are provided by a single tool (Step count, Plan quality, Action progress toward goal, Tool response handling, Tool call efficiency). They come from the first collection and were not held to the two-tool rule used for the output-quality metrics.
@@ -53,7 +53,7 @@ Every quote in `built_in_metrics.csv` was checked by script to appear word for w
 
 - Google counts come from result titles and snippets only; pages were not opened.
 - Ranking by stars favours open-source tools: closed-source tools can only rank on Google sources.
-- Metrics come from official documentation pages. Metrics that exist only in a tool's source code, and not in its docs, are not listed (checked for OpenLLMetry only).
+- Metrics come from official documentation pages. Metrics that exist only in a tool's source code, and not in its docs, are not listed (checked for OpenLLMetry only). On 2026-10-26 the three tools with the fewest rows were re-read: OpenInference (token and cost attributes were missing and were added), Helicone (four alert metrics were added from its alerts page) and Weave (its Call schema page confirms the latency, error, token and cost rows already present; nothing was added). Other tools were not re-read in the same way.
 - Row counts are not comparable across tools: some docs list individual prompt templates or assertion types, others list fewer, broader metrics.
 - Download counts are only corroboration. They include installs triggered as dependencies of other packages (for example `langsmith`, `mlflow`) and CI downloads. They are blank for tools without a representative package: Helicone is used through an API proxy, and the only `helicone` package on PyPI is an old OpenAI wrapper. The OpenTelemetry figure is the general semantic-conventions library, not AI-specific.
 
