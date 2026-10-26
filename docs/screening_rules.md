@@ -3,7 +3,9 @@
 Applies to the 42 tools in `combined_tools_no_duplicates.csv`.
 Result per tool: `tools_scope_screening.csv`.
 
-These rules replace T1, M1, E6 and C1 from earlier drafts. S1 and S2 use only
+These rules supersede the tool-screening rules of earlier drafts. E6 and C1
+stay in force as defined in `search_protocol.md`. M1 is the metric scope rule
+and is unrelated to tool screening. S1 and S2 use only
 the tool's own description. S3 and S4 use the metric inventory
 (`metric_inventory_candidates.csv`, then `real_metrics.csv`). The rules are
 fixed before the S3/S4 results are read. Any later change goes in the change
@@ -88,4 +90,6 @@ Output: `s4_decision`, `final_status` (studied, screened out, pending).
 | S4 | pending: needs the taxonomy mapping |
 
 ## Change log
-- 2026-10-23: rules written. They replace T1, M1, E6, C1.
+- 2026-10-23: rules written. They supersede the tool-screening rules of earlier drafts.
+- 2026-10-26: removed the reference to T1 (never defined in the repo) and clarified
+  that E6 and C1 remain in force and M1 is the metric scope rule.
