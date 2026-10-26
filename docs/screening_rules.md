@@ -64,42 +64,43 @@ and it is not:
   `gen_ai.request.temperature`).
 
 **As applied:** S3 was not run as a separate filter over all 31 tools. It was
-applied to the 15 selected tools while collecting `results/built_in_metrics.csv`,
+applied to the 13 selected tools while collecting `results/built_in_metrics.csv`,
 with the evidence rule in `CLAUDE.md` (URL, saved page, verbatim quote, access
 date). A tool with no built-in agent-execution metric is still reported, with
-zero rows (OpenInference and Evidently).
+zero rows (OpenInference).
 
-The columns `s3_candidate_rows` and `s3_note` in `tools_scope_screening.csv` are
-notes from an early keyword scan of the repositories. That scan's scripts and
-outputs are not part of this repository and its results are not used.
+An early keyword scan of the repositories (columns `s3_candidate_rows` and
+`s3_note`, now removed from `tools_scope_screening.csv`) is not part of this
+repository and its results were not used.
 
-## S4 Selection: rank and take the top 15
+## S4 Selection: C1, then rank
 **As applied:** the 31 S1 tools were checked for A1 (agent relevance, in
-`data/outputs/a1_agent_relevance.csv`), ranked by `google_independent_sources`
-(empty counts as 0), then by GitHub stars, and the top 15 were taken
+`data/outputs/a1_agent_relevance.csv`; each A1 page is saved as
+`data/raw/doc_snapshots/a1__<tool>.txt`). C1 (at least two independent sources,
+from `google_independent_sources`; empty counts as 0) was then applied. 13 tools
+pass; the other 18 have no independent source, so the list is 13 tools. The 13
+are ranked by `google_independent_sources`, then GitHub stars
 (`results/best_tools.csv`). The order was fixed before metric coverage and
 download counts were looked at.
+
+The first selection took the top 15 and let MLflow and Evidently in with 0
+independent sources. C1 was applied on 2026-10-26 and both were removed (their
+rows are in `data/interim/c1_removed/`).
 
 The original S4 plan was a coverage rule (keep a tool only if it adds a
 built-in metric that no earlier tool provides). It was not applied, because the
 study reports every selected tool's metrics, including overlaps.
 
-Known tension with C1: Evidently (rank 15) had fewer than two independent
-Google sources and was marked `exclude` under C1 in
-`data/inputs/tool_screening_google.csv`; MLflow (rank 14) was left `pending`.
-Both entered through the ranking rule, which takes the top 15 whatever their
-source count. This is reported as a limitation in `README.md`.
-
-Columns `s3_decision`, `s4_decision` and `final_status` in
-`tools_scope_screening.csv` record this outcome.
+Columns `s3_builtin_metric_count`, `s3_decision`, `s4_decision` and
+`final_status` in `tools_scope_screening.csv` record this outcome.
 
 ## Status
 | Rule | Status |
 |---|---|
 | S1 | applied to all 42 (descriptions only): 31 in, 10 out, 1 verify (treated as out) |
 | S2 | applied to the 31 S1 tools |
-| S3 | applied to the 15 selected tools through the metric collection (see above) |
-| S4 | applied as ranking, top 15 (see above); the original coverage rule was not used |
+| S3 | applied to the 13 selected tools through the metric collection (see above) |
+| S4 | applied as C1 then ranking, 13 tools (see above); the original coverage rule was not used |
 
 ## Change log
 - 2026-10-23: rules written. They supersede the tool-screening rules of earlier drafts.
@@ -109,3 +110,5 @@ Columns `s3_decision`, `s4_decision` and `final_status` in
   files they named (`github_metric_inventory.py`, `filter_real_metrics.py`,
   `metric_inventory_candidates.csv`, `real_metrics.csv`) were never part of this
   repository and are no longer referenced.
+- 2026-10-26: C1 applied to the selection. MLflow and Evidently removed, list is 13 tools. A1 snapshots added.
+  Stale scanner columns removed from `tools_scope_screening.csv`.

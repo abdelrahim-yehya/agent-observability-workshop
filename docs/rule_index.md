@@ -24,8 +24,8 @@ Every rule ID used in this repo, defined once. The full text is in the file name
 |---|---|---|
 | S1 | Scope: keep a tool whose own description gives observability or evaluation of LLM applications or agents as its primary purpose; benchmarks and datasets are removed | `screening_rules.md` |
 | S2 | Role: label each S1 tool as standard, platform or framework; no removal | `screening_rules.md` |
-| S3 | Built-in metrics: a tool is useful for the metrics table only if its official documentation shows at least one built-in metric. Applied to the 15 selected tools during metric collection | `screening_rules.md` |
-| S4 | Selection: order by independent Google sources, then stars; take the top 15 (the original coverage rule was not applied) | `screening_rules.md` |
+| S3 | Built-in metrics: a tool is useful for the metrics table only if its official documentation shows at least one built-in metric. Applied to the 13 selected tools during metric collection | `screening_rules.md` |
+| S4 | Selection: order by independent Google sources, then stars; after C1, rank and take the tools that pass: 13 (the original coverage rule was not applied) | `screening_rules.md` |
 | A1 | Agent relevance: official documentation explicitly covers agents, tool calls or multi-step traces. An amendment to the protocol; the paper must report it | `README.md`, evidence in `data/outputs/a1_agent_relevance.csv` |
 
 ## Metrics

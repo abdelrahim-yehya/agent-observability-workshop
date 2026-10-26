@@ -15,7 +15,7 @@ OpenInference,2,1,include,"I1,I2","open source (1.3k stars), instrumentation con
 GAIA,1,1,pending,I4,benchmark: enters only through the literature channel
 Inspect AI,1,1,pending,literature,"open source, not returned by GitHub queries, 1 Google source; check the literature channel"
 WebShop,1,1,pending,I4,benchmark: enters only through the literature channel
-MLflow,0,5,pending,"I1,I2",passes I1 and I2 (28k stars) but 0 independent Google sources in titles and snippets; decide after the closed-source and literature channels
+MLflow,0,5,exclude,C1,"fewer than 2 independent sources (all 8 Google results naming it are on mlflow.org, its own site)"
 Ragas,5,2,exclude,I2,"open source and widely named (5 sources) but last push 2026-02-24, outside the six-month activity window"
 Datadog,2,5,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"
 Grafana,2,3,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"

@@ -151,13 +151,4 @@ Weights & Biases Weave,Errors (Call errors),Error count / rate
 Weights & Biases Weave,Latency (Call timing),Span duration
 Weights & Biases Weave,Token usage and cost (automatic),Total tokens
 Weights & Biases Weave,Token usage and cost (automatic),Estimated cost
-MLflow,ConversationalToolCallEfficiency,Tool call efficiency
-MLflow,ToolCallCorrectness,Tool call correctness
-MLflow,ToolCallCorrectness,Tool argument validity
-MLflow,ToolCallEfficiency,Tool call efficiency
-MLflow,Cost,Estimated cost
-MLflow,Latency,Span duration
-MLflow,Token usage,Input tokens
-MLflow,Token usage,Output tokens
-MLflow,Token usage,Total tokens
 Langfuse,completion_start_time (time to first token),Time to first token

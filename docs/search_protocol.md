@@ -84,5 +84,6 @@ date, channel, query, rank, url, source_type (vendor / blog / docs / news / list
       distributed on its own with its own repository (for example W&B Weave).
 - C1  Corroboration: a tool enters the matrix only if at least two independent sources name it (a tool's own
       website is not independent for that tool). Titles and snippets only were read; result pages were not opened.
-- Deferred: benchmarks and Inspect AI wait for the literature channel; MLflow waits for the closed-source and
-  literature channels (0 independent Google sources so far).
+- Deferred: benchmarks and Inspect AI wait for the literature channel (not run; benchmarks are out of scope, see README).
+- MLflow had 0 independent Google sources (all 8 hits are mlflow.org). The literature channel was not run, so C1 was applied and
+  MLflow was removed on 2026-10-26.

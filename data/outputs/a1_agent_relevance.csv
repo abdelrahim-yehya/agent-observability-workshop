@@ -4,7 +4,7 @@ Any Agent,framework,PASS,https://mozilla-ai.github.io/any-agent/evaluation/,The 
 Arize Phoenix,platform,PASS,https://arize.com/docs/phoenix,"A trace captures model calls, retrieval, tool use, and custom logic",2026-10-25,
 Braintrust,platform,PASS,https://www.braintrust.dev/docs,"Braintrust is the active observability platform for instrumenting, understanding, and improving agents.",2026-10-25,
 Coze Loop,platform,PASS,https://github.com/coze-dev/coze-loop,"including key stages such as prompt parsing, model invocation, and tool execution.",2026-10-25,
-DeepEval,framework,PASS,https://deepeval.com/docs/getting-started-agents,"Learn how to evaluate AI Agents using `deepeval`, including multi-agent systems and tool-using agents.",2026-10-25,
+DeepEval,framework,PASS,https://deepeval.com/docs/getting-started-agents,"Learn how to evaluate AI Agents using deepeval, including multi-agent systems and tool-using agents.",2026-10-25,
 Evalite,framework,FAIL,https://www.evalite.dev/,Evals are hard. Evalite makes them simple. Test your AI-powered apps with a local dev server.,2026-10-25,"only the GitHub README and evalite.dev were read; other docs pages not checked (ranks 29th, outside the cut either way)"
 Evidently,framework,PASS (weak),https://docs.evidentlyai.com/docs/platform/tracing_overview,"including inputs, outputs and any intermediate steps and events (e.g., function calls).",2026-10-25,"docs say tracing captures 'intermediate steps and events (e.g., function calls)'; no explicit mention of agents"
 FailproofAI,platform,PASS,https://github.com/FailproofAI/failproofai,capturing every run and blocking dangerous tool calls before they execute.,2026-10-25,
