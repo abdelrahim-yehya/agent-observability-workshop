@@ -38,6 +38,6 @@ openobserve,OpenObserve,openobserve/openobserve,22457.0,,out,general-purpose obs
 openinference,OpenInference,Arize-ai/openinference,1278.0,2.0,in,OpenTelemetry Instrumentation for AI Observability,standard,12,pass,"selected (C1 passed, ranked)",selected (rank 12)
 langsmith,LangSmith,,,13.0,in,description from Google screening (no GitHub description),platform,30,pass,"selected (C1 passed, ranked)",selected (rank 3)
 opentelemetry,OpenTelemetry,,,10.0,in,description from Google screening (no GitHub description),standard,16,pass,"selected (C1 passed, ranked)",selected (rank 5)
-braintrust,Braintrust,,,5.0,in,description from Google screening (no GitHub description),platform,14,pass,"selected (C1 passed, ranked)",selected (rank 7)
+braintrust,Braintrust,,,5.0,in,description from Google screening (no GitHub description),platform,23,pass,"selected (C1 passed, ranked)",selected (rank 7)
 galileo,Galileo,,,3.0,in,description from Google screening (no GitHub description),platform,19,pass,"selected (C1 passed, ranked)",selected (rank 11)
 weightsbiases,Weights & Biases,,,2.0,in,description from Google screening (no GitHub description),platform,5,pass,"selected (C1 passed, ranked)",selected (rank 13)

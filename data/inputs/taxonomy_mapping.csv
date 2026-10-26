@@ -263,3 +263,12 @@ Helicone,Alert metric: Error Rate,Error count / rate
 Helicone,Alert metric: Latency,LLM call latency
 Helicone,Alert metrics: Prompt Cache Read / Write,Cached tokens
 Helicone,Alert metric: Count,LLM call count
+Braintrust,metrics.prompt_cached_tokens,Cached tokens
+Braintrust,metrics.prompt_cache_creation_tokens,Cached tokens
+Braintrust,metrics.llm_calls,LLM call count
+Braintrust,metrics.tool_calls,Tool call count
+Braintrust,metrics.errors,Error count / rate
+Braintrust,metrics.llm_errors,Error count / rate
+Braintrust,metrics.tool_errors,Tool execution errors
+Braintrust,metrics.duration,Trace / run latency
+Braintrust,metrics.llm_duration,LLM call latency
