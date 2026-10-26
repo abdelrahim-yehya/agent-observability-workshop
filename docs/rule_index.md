@@ -24,8 +24,8 @@ Every rule ID used in this repo, defined once. The full text is in the file name
 |---|---|---|
 | S1 | Scope: keep a tool whose own description gives observability or evaluation of LLM applications or agents as its primary purpose; benchmarks and datasets are removed | `screening_rules.md` |
 | S2 | Role: label each S1 tool as standard, platform or framework; no removal | `screening_rules.md` |
-| S3 | Built-in metrics: keep a tool only if its code or official documentation shows at least one built-in metric | `screening_rules.md` |
-| S4 | Coverage: order by independent Google sources, then stars; keep a tool only if it adds a built-in metric no earlier kept tool provides | `screening_rules.md` |
+| S3 | Built-in metrics: a tool is useful for the metrics table only if its official documentation shows at least one built-in metric. Applied to the 15 selected tools during metric collection | `screening_rules.md` |
+| S4 | Selection: order by independent Google sources, then stars; take the top 15 (the original coverage rule was not applied) | `screening_rules.md` |
 | A1 | Agent relevance: official documentation explicitly covers agents, tool calls or multi-step traces. An amendment to the protocol; the paper must report it | `README.md`, evidence in `data/outputs/a1_agent_relevance.csv` |
 
 ## Metrics
@@ -36,5 +36,5 @@ Every rule ID used in this repo, defined once. The full text is in the file name
 
 ## Known overlaps
 
-- I4 admits benchmarks through the literature channel, while S1 removes benchmarks. Not yet resolved.
+- I4 admits benchmarks through the literature channel, while S1 removes benchmarks. In practice S1 applied: benchmarks are out of scope (see `README.md`, Limitations).
 - Earlier drafts had a rule called T1. It was never defined in the repo and has been dropped.
