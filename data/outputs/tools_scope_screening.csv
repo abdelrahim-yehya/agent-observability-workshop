@@ -15,7 +15,7 @@ ifixai,iFixAi,ifixai-ai/iFixAi,33046.0,,verify (treated as out until verified),"
 mlflow,MLflow,mlflow/mlflow,28494.0,,in,"The open source AI engineering platform for agents, LLMs, and ML models. MLflow enables te",platform,,not run,not ranked (fails C1),not selected (fails C1)
 promptfoo,promptfoo,promptfoo/promptfoo,26286.0,4.0,in,"Test your prompts, agents, and RAGs. Red teaming/pentesting/vulnerability scanning for AI.",framework,22,pass,"selected (C1 passed, ranked)",selected (rank 8)
 deepeval,DeepEval,confident-ai/deepeval,19039.0,12.0,in,The LLM Evaluation Framework,framework,23,pass,"selected (C1 passed, ranked)",selected (rank 4)
-arizephoenix,Arize Phoenix,Arize-ai/phoenix,11951.0,16.0,in,AI Observability & Evaluation,platform,25,pass,"selected (C1 passed, ranked)",selected (rank 1)
+arizephoenix,Arize Phoenix,Arize-ai/phoenix,11951.0,16.0,in,AI Observability & Evaluation,platform,26,pass,"selected (C1 passed, ranked)",selected (rank 1)
 garak,garak,NVIDIA/garak,9653.0,,out,"security scanner (vulnerability scanning), not observability or evaluation of agent behaviour",,,,,screened out (S1)
 aiinfraguard,AI Infra Guard,Tencent/AI-Infra-Guard,6936.0,,out,security / red-teaming platform,,,,,screened out (S1)
 giskard,Giskard,Giskard-AI/giskard-oss,5916.0,,in,🐢 Open-Source Evaluation & Testing library for LLM Agents,framework,,not run,not ranked (fails C1),not selected (fails C1)

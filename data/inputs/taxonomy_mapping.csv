@@ -272,3 +272,4 @@ Braintrust,metrics.llm_errors,Error count / rate
 Braintrust,metrics.tool_errors,Tool execution errors
 Braintrust,metrics.duration,Trace / run latency
 Braintrust,metrics.llm_duration,LLM call latency
+Arize Phoenix,Traces over time,Trace / span count
