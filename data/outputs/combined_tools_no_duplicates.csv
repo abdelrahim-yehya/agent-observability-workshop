@@ -1,0 +1,43 @@
+tool_key,tool,sources,github_repo,stars,last_push,license,description,google_independent_sources,google_query_count,google_rule,google_reason
+langfuse,Langfuse,github;google,langfuse/langfuse,36193,2026-10-22,NOASSERTION,"🪢 Open source agent evals & observability: Trace, evaluate, and improve LLM applications with one open platform.",15,5,"I1,I2","open source (GitHub 36k stars, active)"
+opik,Opik,github;google,comet-ml/opik,22833,2026-10-22,Apache-2.0,"Debug, evaluate, and monitor your LLM applications, RAG systems, and agentic workflows with comprehensive tracing, automated evaluations, and producti",3,4,"I1,I2","open source (22.8k stars), Comet"
+helicone,Helicone,github;google,Helicone/helicone,6232,2026-10-20,Apache-2.0,"🧊 Open source LLM observability platform. One line of code to monitor, evaluate, and experiment. YC W23 🍓",6,3,"I1,I2","open source (6.2k stars); presents itself as an observability platform, so primary purpose decides, not its proxy architecture"
+failproofai,FailproofAI,github,FailproofAI/failproofai,6004,2026-10-22,NOASSERTION,Observability and enforcement for AI agent harnesses. Capture every run and runtime reliability with policy enforcement.  ,,,,
+cozeloop,Coze Loop,github,coze-dev/coze-loop,5784,2026-10-22,Apache-2.0,Next-generation AI Agent Optimization Platform: Cozeloop addresses challenges in AI agent development by providing full-lifecycle management capabilit,,,,
+latitude,Latitude,github,latitude-dev/latitude-llm,4734,2026-10-22,MIT,"Open-source observability for AI agents. Find where your agents fail, dispatch your coding agent to fix it, and verify the fix against real traces.",,,,
+pydanticlogfire,Pydantic Logfire,github,pydantic/logfire,4520,2026-10-22,MIT,AI observability platform for production LLM and agent systems.,,,,
+laminar,Laminar,github,lmnr-ai/lmnr,3429,2026-10-22,Apache-2.0,Laminar - open-source observability platform purpose-built for AI agents. YC S24.,,,,
+openlit,OpenLIT,github,openlit/openlit,2870,2026-10-22,Apache-2.0,"OpenLIT is the open-source agent harness engineering platform: trace, evaluate, guard, and improve everything around the model in your AI agents, on O",,,,
+futureagi,Future AGI,github,future-agi/future-agi,2192,2026-10-22,Apache-2.0,"Open-source, end-to-end platform for evaluating, observing, and improving LLM and AI agent applications. Tracing · Evals · Simulations · Datasets · Ga",,,,
+tracelyai,Tracely AI,github,jwuthri-cloud/Tracely-ai,1146,2026-10-19,MIT,"Trace-native CI/CD for AI agents: grade production traces, cluster failures, freeze them into replayable regression tests, and block PRs that regress.",,,,
+judgeval,Judgeval,github,JudgmentLabs/judgeval,1069,2026-10-22,Apache-2.0,The Continuous-Improvement Stack for Agents. Our environment data and evals power agent improvement and monitoring.,,,,
+ifixai,iFixAi,github,ifixai-ai/iFixAi,33046,2026-10-22,Apache-2.0,"Independent Auditing of AI Agents. Run by human or the agent itself, to answer the most crucial question in the AI Agent Economy. Is the agent doing w",,,,
+mlflow,MLflow,github,mlflow/mlflow,28494,2026-10-22,Apache-2.0,"The open source AI engineering platform for agents, LLMs, and ML models. MLflow enables teams of all sizes to debug, evaluate, monitor, and optimize p",,,,
+promptfoo,promptfoo,github;google,promptfoo/promptfoo,26286,2026-10-22,MIT,"Test your prompts, agents, and RAGs. Red teaming/pentesting/vulnerability scanning for AI. Compare performance of GPT, Claude, Gemini, DeepSeek, and m",4,1,"I1,I2","open source (26k stars), evaluation and red-teaming"
+deepeval,DeepEval,github;google,confident-ai/deepeval,19039,2026-10-19,Apache-2.0,The LLM Evaluation Framework,12,5,"I1,I2","open source; Confident AI is its commercial platform, merged as one tool (E5)"
+arizephoenix,Arize Phoenix,github;google,Arize-ai/phoenix,11951,2026-10-22,NOASSERTION,AI Observability & Evaluation,16,5,"I1,I2","open source (GitHub 11.9k stars, active)"
+garak,garak,github,NVIDIA/garak,9653,2026-10-21,Apache-2.0,the LLM vulnerability scanner,,,,
+aiinfraguard,AI Infra Guard,github,Tencent/AI-Infra-Guard,6936,2026-10-22,Apache-2.0,"A full-stack AI Red Teaming platform securing AI ecosystems via Agent Scan, Skills Scan, MCP scan, AI Infra scan and LLM jailbreak evaluation.",,,,
+giskard,Giskard,github,Giskard-AI/giskard-oss,5916,2026-10-20,Apache-2.0,🐢 Open-Source Evaluation & Testing library for LLM Agents,,,,
+trulens,TruLens,github,truera/trulens,3608,2026-10-19,MIT,Evaluation and Tracking for LLM Experiments and AI Agents,,,,
+agenticsecurity,Agentic Security,github,msoedov/agentic_security,2025,2026-10-19,Apache-2.0,Agentic LLM Vulnerability Scanner / AI red teaming kit 🧪,,,,
+prompty,Prompty,github,microsoft/prompty,1285,2026-10-21,MIT,"Prompty makes it easy to create, manage, debug, and evaluate LLM prompts for your AI applications.  Prompty is an asset class and format for LLM promp",,,,
+clawbench,ClawBench,github,TIGER-AI-Lab/ClawBench,1076,2026-10-17,Apache-2.0,Open-source benchmark for browser AI agents on daily tasks.,,,,
+evidently,Evidently,github,evidentlyai/evidently,8000,2026-09-29,Apache-2.0,"Evidently is ​​an open-source ML and LLM observability framework. Evaluate, test, and monitor any AI-powered system or data pipeline. From tabular dat",,,,
+openllmetry,OpenLLMetry,github;google,traceloop/openllmetry,7501,2026-10-19,Apache-2.0,"Open-source observability for your GenAI or LLM application, based on OpenTelemetry",4,2,"I1,I2","open source (7.5k stars), OpenTelemetry-based instrumentation"
+langwatch,LangWatch,github,langwatch/langwatch,4987,2026-10-22,Apache-2.0,"Open-Source Agent Observability & Evals for AI Platform teams. Trace, test, route and govern every agent & coding assistant in the company.",,,,
+anyagent,Any Agent,github,mozilla-ai/any-agent,1251,2026-10-01,Apache-2.0,A single interface to use and evaluate different agent frameworks ,,,,
+intelligentauditsystem,Intelligent Audit System,github,Ricky-7-Yan/intelligent-audit-system,1175,2026-08-12,,"AuditPilot: auditable enterprise AI agents for evidence-grounded workflows, governed tools, evaluation harnesses, human review, and remediation delive",,,,
+harbor,Harbor,github,harbor-framework/harbor,6376,2026-10-22,Apache-2.0,Framework for evaluating and improving agents ,,,,
+agentops,AgentOps,github,AgentOps-AI/agentops,5908,2026-06-25,MIT,"Python SDK for AI agent monitoring, LLM cost tracking, benchmarking, and more. Integrates with most LLMs and agent frameworks including CrewAI, Agno, ",,,,
+kiln,Kiln,github,Kiln-AI/Kiln,5223,2026-10-22,NOASSERTION,"Build, Evaluate, and Optimize AI Systems. Includes evals, RAG, agents, fine-tuning, synthetic data generation, dataset management, MCP, and more.",,,,
+mcpinspector,MCP Inspector,github,MCPJam/inspector,2274,2026-10-22,NOASSERTION,"Testing and evaluation platform to chat, inspect, and debug MCP servers, MCP apps, and ChatGPT apps.",,,,
+evalite,Evalite,github,mattpocock/evalite,1724,2026-04-28,MIT,Evaluate your LLM-powered apps with TypeScript,,,,
+signoz,SigNoz,github,SigNoz/signoz,32427,2026-10-22,NOASSERTION,"SigNoz is an open-source, OpenTelemetry-native observability platform for your team and their AI agents. Get logs, metrics, and traces in one tool wit",,,,
+openobserve,OpenObserve,github,openobserve/openobserve,22457,2026-10-22,AGPL-3.0,"Open source observability platform for logs, metrics, traces, RUM (web, android, ios), Session replay, pipelines, SLO and LLM observability. A sophist",,,,
+openinference,OpenInference,github;google,Arize-ai/openinference,1278,2026-10-22,Apache-2.0,OpenTelemetry Instrumentation for AI Observability,2,1,"I1,I2","open source (1.3k stars), instrumentation conventions"
+langsmith,LangSmith,google,,,,,,13,6,"I1,I3",closed source; 13 independent sources in all 6 queries; not returned by GitHub queries
+opentelemetry,OpenTelemetry,google,,,,,,10,2,Channel 5,"standard, not a product; the vendor-neutral telemetry reference; not returned by GitHub queries"
+braintrust,Braintrust,google,,,,,,5,5,"I1,I3",closed source; 5 independent sources in 5 of 6 queries
+galileo,Galileo,google,,,,,,3,5,"I1,I3","closed source; 3 independent sources in 5 queries; one vendor blog reports an acquisition by Cisco, unverified"
+weightsbiases,Weights & Biases,google,,,,,,2,3,"I1,I3","include the Weave toolkit only (LLM tracing and evaluation), not the general W&B platform; 2 independent sources"

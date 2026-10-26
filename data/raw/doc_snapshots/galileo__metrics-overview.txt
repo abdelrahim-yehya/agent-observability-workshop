@@ -1,0 +1,124 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.galileo.ai/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Metrics Overview
+
+> Explore Galileo's comprehensive metrics framework for evaluating and improving AI system performance across multiple dimensions
+
+Galileo comes with a set of ready to use [Out-of-the-Box metrics](https://docs.galileo.ai/concepts/metrics/metric-comparison.md) that allow you to see how your AI is performing. With these metrics, you can quickly spot problems, track improvements, and make your AI work better for your users. These metrics apply to different node types (such as session, trace, or different span types), depending on the metric.
+
+You can then expand these metrics with custom metrics, using [LLM-as-a-judge](https://docs.galileo.ai/concepts/metrics/custom-metrics/custom-metrics-ui-llm.md), or [custom code-based metrics](https://docs.galileo.ai/concepts/metrics/custom-metrics/custom-metrics-ui-code.md).
+
+To calculate Out-of-the-Box metrics, or LLM-as-a-judge metrics, you first need to configure an integration with an LLM, or [Luna-2](https://docs.galileo.ai/concepts/luna/luna.md). [Connect Galileo to your language model](https://docs.galileo.ai/concepts/metrics/overview.md#configure-galileo-for-out-of-the-box-and-llm-as-a-judge-metrics) by adding your API key on the [integrations page](https://app.galileo.ai/settings/integrations) from within the Galileo application.
+
+You can improve the metric calculation based on your requirements using [Autotune](https://docs.galileo.ai/concepts/metrics/autotune-llm-as-a-judge-metrics.md). This allows you to continuously provide feedback in natural language that automatically improves the metrics to align better with your domain, or expected inputs and outputs.
+
+Metrics can be used with [experiments](https://docs.galileo.ai/concepts/experiments/running-experiments-in-console.md#step-5-add-metrics), and [Log Streams](https://docs.galileo.ai/concepts/logging/configure-metrics/configure-metrics.md).
+
+## Configure Galileo for Out-of-the-Box and LLM-as-a-judge metrics
+
+Most Out-of-the-Box metrics and all LLM-as-a-judge metrics are LLM-based metrics.
+LLM-based metrics use an LLM to evaluate inputs and outputs.
+To use these metrics from Log Streams or Experiments, you first need to configure an integration with an LLM platform.
+
+**1. Navigate to the Integrations page**
+
+In the Galileo console UI, navigate to the [LLM integrations page](https://app.galileo.ai/settings/integrations) by opening the user menu on the bottom-left corner, and then selecting **Integrations**.
+
+![Integrations user menu](https://mintcdn.com/v2galileo/L1-piB8ckkwMmjO7/images/console-ui/integrations-user-menu.png?fit=max\&auto=format\&n=L1-piB8ckkwMmjO7\&q=85\&s=4ba1694ec13769ae154c95f956b99a7e)
+
+**2. Add an integration**
+
+Locate the LLM provider you are using (or specify a [custom integration](https://docs.galileo.ai/sdk-api/third-party-integrations/model-integrations/custom-model-integrations/custom-model-integrations.md)), then select the **+Add Integration** button.
+
+![LLM provider options](https://mintcdn.com/v2galileo/KBLAN_yGEhFXQswj/images/console-ui/integrations-options.png?fit=max\&auto=format\&n=KBLAN_yGEhFXQswj\&q=85\&s=2fd6b8f97aa9d09fcde4f29928e455ff)
+
+**3. Add settings**
+
+Specify settings for your integration (such as an API key), then select **Save changes**.
+
+![OpenAI integration input modal](https://mintcdn.com/v2galileo/L1-piB8ckkwMmjO7/images/console-ui/integrations-openai-modal.png?fit=max\&auto=format\&n=L1-piB8ckkwMmjO7\&q=85\&s=76441ca64e237871a3f7aa1351df60c0)
+
+## Using metrics effectively
+
+To get the most value from Galileo's metrics:
+
+1. **Start with key metrics** - Focus on metrics most relevant to your use case
+2. **Establish baselines** - Understand your current performance before making changes
+3. **Track trends over time** - Monitor how metrics change as you iterate on your system
+4. **Combine multiple metrics** - Look at related metrics together for a more complete picture
+5. **Set thresholds** - Define acceptable ranges for critical metrics
+6. **Improve the metrics** - Use CLHF to continuously improve the metrics
+
+## Out-of-the-Box metric categories
+
+Our metrics can be broken down into seven key categories, each addressing a specific aspect of AI system performance. You may benefit from using metrics from more than one category. Galileo also supports [custom metrics](https://docs.galileo.ai/concepts/metrics/custom-metrics/custom-metrics-ui-llm.md) that are able to be implemented alongside the Out-of-the-Box metric options.
+
+The [Metrics Comparison](https://docs.galileo.ai/concepts/metrics/metric-comparison.md) provides a full list of the Out-of-the-Box metrics for each category.
+
+### 1. Agentic performance metrics
+
+[Agentic Performance Metrics](https://docs.galileo.ai/concepts/metrics/agentic/agentic-overview.md) evaluate how effectively AI agents perform tasks, use tools, and progress toward goals.
+
+| When to Use | Example Use Cases |
+| :- | :- |
+| When building and optimizing AI systems that take actions, make decisions, or use tools to accomplish tasks. | <ul><li>Evaluating a travel planning agent's ability to book complete itineraries</li><li>Assessing a coding assistant's appropriate use of APIs and libraries</li><li>Measuring a data analysis agent's tool selection effectiveness</li></ul> |
+
+### 2. Expression and readability metrics
+
+[Expression And Readability Metrics](https://docs.galileo.ai/concepts/metrics/expression-and-readability/expression-and-readability-overview.md) assess the style, tone, clarity, and overall presentation of AI-generated content.
+
+| When to Use | Example Use Cases |
+| :- | :- |
+| When the format, tone, and presentation of AI outputs are important for user experience or brand consistency. | <ul><li>Ensuring a luxury brand chatbot maintains a sophisticated tone</li><li>Verifying educational content is presented at the appropriate reading level</li><li>Measuring clarity and conciseness in technical documentation generation</li></ul> |
+
+### 3. Multimodal quality metrics
+
+[Multimodal Quality Metrics](https://docs.galileo.ai/concepts/metrics/multimodal-quality/multimodal-quality-overview.md) evaluate whether multimodal inputs and outputs (such as images and audio conversations) are usable and compliant for the task at hand.
+
+| When to Use | Example Use Cases |
+| :- | :- |
+| When your AI workflow includes images or audio conversations and you need quality/compliance signals. | <ul><li>Gating blurry document photos before extraction</li><li>Enforcing brand rules on generated marketing images</li><li>Detecting turn-taking issues in voice agents (overlap/barge-in)</li></ul> |
+
+### 4. Response quality metrics
+
+[Response Quality Metrics](https://docs.galileo.ai/concepts/metrics/response-quality/response-quality-overview.md) help you evaluate how correctly, consistently, and in line with ground truth your AI follows instructions and answers user queries in any setting — with or without RAG (correctness, instruction adherence, ground truth adherence).
+
+### 5. RAG metrics
+
+[RAG Metrics](https://docs.galileo.ai/concepts/metrics/rag/rag-overview.md) help you evaluate retrieval and generation quality in RAG pipelines, including retrieval quality (chunk relevance, context relevance, context precision, Precision @ K) and generation quality (context adherence, completeness).
+
+| When to Use | Example Use Cases |
+| :- | :- |
+| When evaluating how well retrieval systems find relevant context and how well models use that context to produce accurate, complete, and well-grounded responses. | <ul><li>Measuring factual accuracy in a medical information system</li><li>Evaluating how well a RAG system uses retrieved information</li><li>Assessing if customer service responses address all parts of a query</li></ul> |
+
+### 6. Safety and compliance metrics
+
+[Safety And Compliance Metrics](https://docs.galileo.ai/concepts/metrics/safety-and-compliance/safety-and-compliance-overview.md) identify potential risks, harmful content, bias, or privacy concerns in AI interactions.
+
+| When to Use | Example Use Cases |
+| :- | :- |
+| When ensuring AI systems meet regulatory requirements, protect user privacy, and avoid generating harmful or biased content. | <ul><li>Checking model output against application-specific safety and format rules</li><li>Detecting PII in healthcare chatbot conversations</li><li>Identifying potential prompt injection attacks in public-facing systems</li><li>Measuring bias in hiring or loan approval recommendation systems</li></ul> |
+
+### 7. Text-to-SQL metrics
+
+[Text-to-SQL metrics](https://docs.galileo.ai/concepts/metrics/text2sql/text2sql-overview.md) evaluate the accuracy and effectiveness of SQL queries generated by AI models from natural language inputs.
+
+| When to Use | Example Use Cases |
+| :- | :- |
+| Use these metrics to evaluate the quality of SQL queries generated from natural language inputs. They're essential when building Text-to-SQL systems that need to produce syntactically correct queries grounded in your database schema. | <ul><li>A data analytics assistant where users ask questions in natural language and expect accurate query results</li><li>A customer-facing data analytics chatbot that must prevent injection attacks from user inputs</li><li>A business intelligence platform where ad-hoc queries must not impact database availability</li></ul> |
+
+## Next steps
+
+> **[Custom LLM-as-a-judge metrics](https://docs.galileo.ai/concepts/metrics/custom-metrics/custom-metrics-ui-llm.md)**
+>
+> Learn how to create evaluation metrics using LLMs to judge the quality of responses
+
+> **[Custom code-based metrics](https://docs.galileo.ai/concepts/metrics/custom-metrics/custom-metrics-ui-code.md)**
+>
+> Learn how to create, register, and use custom metrics to evaluate your LLM applications
+
+> **[Improve LLM-as-a-Judge Metrics with Autotune](https://docs.galileo.ai/concepts/metrics/autotune-llm-as-a-judge-metrics.md)**
+>
+> Learn how to improve your LLM-as-a-judge metrics using expert feedback with Autotune

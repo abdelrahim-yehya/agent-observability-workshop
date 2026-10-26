@@ -1,0 +1,33 @@
+tool,s2_role,a1_decision,a1_url,a1_quote,access_date,note
+AgentOps,platform,PASS,https://docs.agentops.ai/v2/introduction,"On the left, a time visualization of all your LLM calls, Action events, Tool calls, and Errors.",2026-10-25,
+Any Agent,framework,PASS,https://mozilla-ai.github.io/any-agent/evaluation/,The any-agent evaluation module encourages three approaches for evaluating agent traces:,2026-10-25,
+Arize Phoenix,platform,PASS,https://arize.com/docs/phoenix,"A trace captures model calls, retrieval, tool use, and custom logic",2026-10-25,
+Braintrust,platform,PASS,https://www.braintrust.dev/docs,"Braintrust is the active observability platform for instrumenting, understanding, and improving agents.",2026-10-25,
+Coze Loop,platform,PASS,https://github.com/coze-dev/coze-loop,"including key stages such as prompt parsing, model invocation, and tool execution.",2026-10-25,
+DeepEval,framework,PASS,https://deepeval.com/docs/getting-started-agents,"Learn how to evaluate AI Agents using `deepeval`, including multi-agent systems and tool-using agents.",2026-10-25,
+Evalite,framework,FAIL,https://www.evalite.dev/,Evals are hard. Evalite makes them simple. Test your AI-powered apps with a local dev server.,2026-10-25,"only the GitHub README and evalite.dev were read; other docs pages not checked (ranks 29th, outside the cut either way)"
+Evidently,framework,PASS (weak),https://docs.evidentlyai.com/docs/platform/tracing_overview,"including inputs, outputs and any intermediate steps and events (e.g., function calls).",2026-10-25,"docs say tracing captures 'intermediate steps and events (e.g., function calls)'; no explicit mention of agents"
+FailproofAI,platform,PASS,https://github.com/FailproofAI/failproofai,capturing every run and blocking dangerous tool calls before they execute.,2026-10-25,
+Future AGI,platform,PASS,https://github.com/future-agi/future-agi,Multi-step agents you can actually trust in production.,2026-10-25,
+Galileo,platform,PASS,https://docs.galileo.ai/,"Galileo is the leading observability, evaluation, and guardrail platform for GenAI and agentic applications.",2026-10-25,quote says 'agentic applications' only
+Giskard,framework,PASS,https://github.com/Giskard-AI/giskard-oss,"Giskard v3 is a fresh rewrite designed for dynamic, multi-turn testing of AI agents.",2026-10-25,
+Harbor,framework,PASS,https://docs.harborframework.com/,Harbor is a framework for running any agent with any model on any task in any sandbox in parallel.,2026-10-25,
+Helicone,platform,PASS,https://docs.helicone.ai/features/sessions,"This gives you a complete view of your AI agent's behavior, not just the LLM interactions.",2026-10-25,
+Judgeval,platform,PASS,https://github.com/JudgmentLabs/judgeval,Judgeval is an open-source Python SDK for agent improvement.,2026-10-25,
+Laminar,platform,PASS,https://laminar.sh/docs/,flow-1 reads every trace your agent produces.,2026-10-25,
+LangSmith,platform,PASS,https://docs.langchain.com/langsmith/observability-concepts,"LangSmith Observability lets you record, inspect, and analyze every step your AI agent takes.",2026-10-25,
+LangWatch,platform,PASS,https://langwatch.ai/docs/,"every LLM call, tool call and user interaction as a trace.",2026-10-25,
+Langfuse,platform,PASS,https://langfuse.com/docs/observability/features/agent-graphs,"It's the fastest way to answer ""what does this agent do, and how complex is it?""",2026-10-25,
+Latitude,platform,PASS,https://docs.latitude.so,"Each interaction becomes a trace made of spans for LLM calls, tool calls, retrieval steps, and other instrumented work.",2026-10-25,
+MLflow,platform,PASS,https://mlflow.org/docs/latest/genai/tracing/,"MLflow Tracing gives you complete visibility into your agents and LLM applications,",2026-10-25,
+OpenInference,standard,PASS,https://arize-ai.github.io/openinference/spec/semantic_conventions.html,An agent describes a reasoning block that acts on tools using the guidance of an LLM.,2026-10-25,
+OpenLIT,platform,PASS,https://docs.openlit.io/,"so every agent failure can be traced, scored, and turned into a harness fix.",2026-10-25,
+OpenLLMetry,standard,PASS,https://www.traceloop.com/docs/openllmetry/tracing/annotations,"Similarily, if you use autonomous agents, you can use the `@agent` decorator to trace them as a single unit.",2026-10-25,
+OpenTelemetry,standard,PASS,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-agent-spans.md,Semantic Conventions for GenAI agent and framework spans,2026-10-25,live spec moved to semantic-conventions-genai; title of the agent-spans spec used as the quote
+Opik,platform,PASS,https://www.comet.com/docs/opik/tracing/overview,Opik gives you full visibility into every request your agent handles.,2026-10-25,
+Pydantic Logfire,platform,PASS,https://pydantic.dev/docs/logfire/,"See how one trace connects an agent's model calls, tools, and the services behind them.",2026-10-25,
+Tracely AI,platform,PASS,https://github.com/jwuthri-cloud/Tracely-ai,"The waterfall shows agent → thinking → skill → generation → hand-off, with the failing span in red and its I/O beside it.",2026-10-25,
+TruLens,framework,PASS,https://github.com/truera/trulens,TruLens finds where your agent fails and where you can cut cost without losing quality.,2026-10-25,
+Weights & Biases,platform,PASS,https://docs.coreweave.com/weave,Quickly configure your OTel-instrumented agent to send traces to Weave's OTLP endpoint.,2026-10-25,docs now live under CoreWeave Weave (W&B Weave)
+iFixAi,,n/a (fails S1),https://github.com/ifixai-ai/iFixAi,Independent Auditing of AI Agents.,2026-10-25,"S1 fails: independent auditor that runs simulated scenarios, not tracing or evaluation tooling"
+promptfoo,framework,PASS,https://www.promptfoo.dev/docs/providers/openai-agents/,Use mocked tool outputs for deterministic evals without executing function tools:,2026-10-25,

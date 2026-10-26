@@ -1,0 +1,72 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://www.traceloop.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Evaluator Slugs
+
+> Reference list of all built-in evaluator slugs for use with the API
+
+Use these slugs when referencing evaluators in the API (e.g. the `evaluators` field in [Create an Auto Monitor Setup](https://www.traceloop.com/docs/api-reference/auto-monitor-setups/create-an-auto-monitor-setup.md)).
+
+## Quality & Correctness
+
+| Slug | Label |
+| - | - |
+| `answer-relevancy` | [Answer Relevancy](https://www.traceloop.com/docs/api-reference/evaluators/execute-answer-relevancy-evaluator.md) |
+| `answer-correctness` | [Answer Correctness](https://www.traceloop.com/docs/api-reference/evaluators/execute-answer-correctness-evaluator.md) |
+| `answer-completeness` | [Answer Completeness](https://www.traceloop.com/docs/api-reference/evaluators/execute-answer-completeness-evaluator.md) |
+| `faithfulness` | [Faithfulness](https://www.traceloop.com/docs/api-reference/evaluators/execute-faithfulness-evaluator.md) |
+| `semantic-similarity` | [Semantic Similarity](https://www.traceloop.com/docs/api-reference/evaluators/execute-semantic-similarity-evaluator.md) |
+| `topic-adherence` | [Topic Adherence](https://www.traceloop.com/docs/api-reference/evaluators/execute-topic-adherence-evaluator.md) |
+| `uncertainty-detector` | [Uncertainty Detection](https://www.traceloop.com/docs/api-reference/evaluators/execute-uncertainty-detector-evaluator.md) |
+| `instruction-adherence` | [Instruction Adherence](https://www.traceloop.com/docs/api-reference/evaluators/execute-instruction-adherence-evaluator.md) |
+| `context-relevance` | [Context Relevance](https://www.traceloop.com/docs/api-reference/evaluators/execute-context-relevance-evaluator.md) |
+| `perplexity` | [Perplexity](https://www.traceloop.com/docs/api-reference/evaluators/execute-perplexity-evaluator.md) |
+| `prompt-perplexity` | [Prompt Perplexity](https://www.traceloop.com/docs/api-reference/evaluators/execute-prompt-perplexity-evaluator.md) |
+
+## Style
+
+| Slug | Label |
+| - | - |
+| `char-count` | [Character Count](https://www.traceloop.com/docs/api-reference/evaluators/execute-char-count-evaluator.md) |
+| `char-count-ratio` | [Character Count Ratio](https://www.traceloop.com/docs/api-reference/evaluators/execute-char-count-ratio-evaluator.md) |
+| `word-count` | [Word Count](https://www.traceloop.com/docs/api-reference/evaluators/execute-word-count-evaluator.md) |
+| `word-count-ratio` | [Word Count Ratio](https://www.traceloop.com/docs/api-reference/evaluators/execute-word-count-ratio-evaluator.md) |
+| `tone-detection` | [Tone Detection](https://www.traceloop.com/docs/api-reference/evaluators/execute-tone-detection-evaluator.md) *(SaaS only)* |
+
+## Security & Compliance
+
+| Slug | Label |
+| - | - |
+| `pii-detector` | [PII Detection](https://www.traceloop.com/docs/api-reference/evaluators/execute-pii-detector-evaluator.md) |
+| `profanity-detector` | [Profanity Detection](https://www.traceloop.com/docs/api-reference/evaluators/execute-profanity-detector-evaluator.md) |
+| `secrets-detector` | [Secrets Detection](https://www.traceloop.com/docs/api-reference/evaluators/execute-secrets-detector-evaluator.md) |
+| `prompt-injection` | [Prompt Injection Detection](https://www.traceloop.com/docs/api-reference/evaluators/execute-prompt-injection-evaluator.md) *(SaaS only)* |
+| `sexism-detector` | [Sexism Detection](https://www.traceloop.com/docs/api-reference/evaluators/execute-sexism-detector-evaluator.md) *(SaaS only)* |
+| `toxicity-detector` | [Toxicity Detection](https://www.traceloop.com/docs/api-reference/evaluators/execute-toxicity-detector-evaluator.md) *(SaaS only)* |
+
+## Formatting
+
+| Slug | Label |
+| - | - |
+| `json-validator` | [JSON Validation](https://www.traceloop.com/docs/api-reference/evaluators/execute-json-validator-evaluator.md) |
+| `regex-validator` | [Regex Validation](https://www.traceloop.com/docs/api-reference/evaluators/execute-regex-validator-evaluator.md) |
+| `placeholder-regex` | [Placeholder Regex](https://www.traceloop.com/docs/api-reference/evaluators/execute-placeholder-regex-evaluator.md) |
+| `sql-validator` | [SQL Validation](https://www.traceloop.com/docs/api-reference/evaluators/execute-sql-validator-evaluator.md) |
+| `html-comparison` | [HTML Comparison](https://www.traceloop.com/docs/api-reference/evaluators/execute-html-comparison-evaluator.md) |
+
+## Agents
+
+| Slug | Label |
+| - | - |
+| `agent-goal-accuracy` | [Agent Goal Accuracy](https://www.traceloop.com/docs/api-reference/evaluators/execute-agent-goal-accuracy-evaluator.md) |
+| `agent-goal-completeness` | [Agent Goal Completeness](https://www.traceloop.com/docs/api-reference/evaluators/execute-agent-goal-completeness-evaluator.md) |
+| `agent-flow-quality` | [Agent Flow Quality](https://www.traceloop.com/docs/api-reference/evaluators/execute-agent-flow-quality-evaluator.md) *(Beta)* |
+| `agent-efficiency` | [Agent Efficiency](https://www.traceloop.com/docs/api-reference/evaluators/execute-agent-efficiency-evaluator.md) *(Beta)* |
+| `agent-tool-error-detector` | [Tool Error](https://www.traceloop.com/docs/api-reference/evaluators/execute-agent-tool-error-detector-evaluator.md) *(Beta)* |
+| `agent-tool-trajectory` | [Agent Tool Trajectory](https://www.traceloop.com/docs/api-reference/evaluators/execute-agent-tool-trajectory-evaluator.md) *(Beta)* |
+| `intent-change` | [Intent Change](https://www.traceloop.com/docs/api-reference/evaluators/execute-intent-change-evaluator.md) |
+| `conversation-quality` | [Conversation Quality](https://www.traceloop.com/docs/api-reference/evaluators/execute-conversation-quality-evaluator.md) |
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

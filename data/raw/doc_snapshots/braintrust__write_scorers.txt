@@ -1,0 +1,211 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://www.braintrust.dev/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Evaluate output quality with scorers and classifiers
+
+> Build scorers and classifiers to evaluate AI outputs with numeric scores or categorical labels, in experiments and in production.
+
+Evaluators help you understand how your AI application performs and where it needs improvement. Braintrust supports two kinds: **scorers**, which assign a numeric score between 0 and 1 based on criteria you define, and **classifiers**, which assign a categorical label along a dimension you define, like intent, sentiment, or topic.
+
+Run evaluators on [experiment](https://www.braintrust.dev/docs/evaluate/run-evaluations.md) test cases, or apply them continuously with [online scoring](https://www.braintrust.dev/docs/evaluate/score-online.md) on production traces. Results show up alongside your experiments and logs, so you can monitor quality over time, filter by category, and add the most useful examples back into your datasets.
+
+## Scorers
+
+Scorers return a numeric score between 0 and 1, measuring qualities like factual accuracy, helpfulness, or correct formatting. Use a scorer to:
+
+* Track quality over time.
+* Compute average quality scores.
+* Set pass/fail thresholds.
+* Rank and compare outputs.
+
+A scorer receives the `input`, `output`, `expected`, `metadata`, and `trace` for each result, and returns a number between 0 and 1 (optionally with a `name` and `metadata`).
+
+There are three types of scorers:
+
+* [**Autoevals**](https://www.braintrust.dev/docs/evaluate/autoevals.md): Pre-built, battle-tested scorers for common evaluation tasks like factuality checking, semantic similarity, and format validation. Best for standard evaluation needs where reliable scorers already exist.
+* [**LLM-as-a-judge**](https://www.braintrust.dev/docs/evaluate/llm-as-a-judge.md): Use language models to evaluate outputs based on natural language criteria and instructions. Best for subjective judgments like tone, helpfulness, or creativity that are difficult to encode in deterministic code.
+* [**Custom code**](https://www.braintrust.dev/docs/evaluate/custom-code.md): Write custom evaluation logic with full control over the scoring algorithm. Best for specific business rules, pattern matching, or calculations unique to your use case.
+
+## Classifiers
+
+Classifiers receive the same arguments as a scorer, but they return a classification (a categorical label) instead of a numeric score. A label groups outputs into categories without ranking them, so unlike a score it implies no relative quality. Use a classifier to:
+
+* Categorize outputs by a dimension like sentiment, intent, or issue type.
+* Filter results by category.
+* Build evaluation datasets from the outputs in a category.
+
+A classification has a `name` (the group it belongs to, such as `intent`), an `id` (the value within that group, such as `password_reset`), an optional `label` for display (such as `Password reset`), and optional `metadata`.
+
+In the experiments and logs tables and in playground results, each classifier appears as its own column under a `classifications.` prefix that you can sort and filter. In experiments and playgrounds, you can also group rows by a classifier column. See [Interpret evaluation results](https://www.braintrust.dev/docs/evaluate/interpret-results.md#show-and-hide-columns) for details.
+
+There are two types of classifiers:
+
+* [**LLM-as-a-judge**](https://www.braintrust.dev/docs/evaluate/llm-as-a-judge.md#apply-classification-labels): Use a language model to choose a label from a fixed set based on natural language criteria. Best for subjective or semantic categories like intent, sentiment, or topic, where the right label depends on understanding the content.
+* [**Custom code**](https://www.braintrust.dev/docs/evaluate/custom-code.md#apply-classification-labels): Write logic that returns a label directly. Best for deterministic categories you can derive from explicit rules, patterns, or computed values.
+
+> [!NOTE]
+>
+> Classifiers require TypeScript SDK v3.9.0+, Python SDK v0.16.0+, Go SDK v0.8.0+, Java SDK v0.3.12+, Ruby SDK v0.4.0+, or C# SDK v0.2.8+. On self-hosted deployments, classifiers require data plane v2.0 or later.
+
+> [!TIP]
+>
+> To classify logs automatically instead of defining your own classifier, use [Topics](https://www.braintrust.dev/docs/observe/topics.md), which generates classifications from your production traffic.
+
+## Where to define scorers and classifiers
+
+You can define scorers in three places, and classifiers in two of them (inline in your eval or in the UI):
+
+* **Inline in SDK code**: Define scorers directly in your evaluation scripts. Best for local development, access to complex dependencies, or application-specific logic tightly coupled to your codebase. An inline scorer can also send its requests through a provider's batch API with a [Python](https://www.braintrust.dev/docs/sdks/python/workflow-evaluations.md), [TypeScript](https://www.braintrust.dev/docs/sdks/typescript/workflow-evaluations.md), or [Go](https://www.braintrust.dev/docs/sdks/go/workflow-evaluations.md) workflow evaluation.
+* **Pushed via CLI**: Define TypeScript or Python scorers in code files and push them to Braintrust. Best for version control in Git, team-wide sharing across projects, and automatic evaluation of production logs.
+* **Created in UI**: Build TypeScript or Python scorers in the Braintrust web interface. Best for rapid prototyping and simple [LLM-as-a-judge](https://www.braintrust.dev/docs/evaluate/llm-as-a-judge.md) scorers and classifiers.
+
+Most teams prototype in the UI, develop complex scorers inline, then push production-ready scorers to Braintrust for team-wide use.
+
+> [!NOTE]
+>
+> In the SDKs, scorers and classifiers are distinct function types, with a dedicated parameter for classifiers separate from scorers. In the UI, you create a classifier by setting a scorer's **Output type** to **Classification**.
+
+## Inputs to scorers and classifiers
+
+Scorers and classifiers are built for one of two input shapes:
+
+* **Span**: Runs on an individual span, such as a single LLM response or tool call. Each matching span is evaluated independently.
+* **Trace**: Runs once on an entire trace after it completes, with access to all of its spans.
+
+A trace-level scorer can evaluate more than one span. To do this, [LLM-as-a-judge](https://www.braintrust.dev/docs/evaluate/llm-as-a-judge.md#score-traces) scorers use thread variables such as `{{thread}}`, and [custom code](https://www.braintrust.dev/docs/evaluate/custom-code.md#score-traces) scorers read the `trace` argument.
+
+When setting up an [online scoring](https://www.braintrust.dev/docs/evaluate/score-online.md#create-scoring-automation-rules) automation, set the rule's **Scope** field to match what you want the scorer to evaluate: **Span** for individual spans, **Trace** for one full trace, and **Group** for related traces that should be scored together. In trace scope, scorers can access the full trace. In group scope, scorers can access spans from all traces included in the group for a specific scoring run.
+
+[Autoevals](https://www.braintrust.dev/docs/evaluate/autoevals.md) evaluate individual spans, so a rule that runs them needs its **Scope** set to **Span**.
+
+## Test scorers and classifiers
+
+Scorers and classifiers need to be developed iteratively against real data. When creating or editing one in the UI, use the  **Run** section to test it with data from different sources. Each source populates the scorer's input parameters (like `input`, `output`, `expected`, `metadata`) from a different location.
+
+### Test with manual input
+
+Best for initial development when you have a specific example in mind. Use this to quickly prototype and verify basic scorer or classifier logic before testing on larger datasets.
+
+1. Click **Test with \[current source]** in the  **Run** section toolbar and choose **Editor**.
+2. Enter values for `input`, `output`, `expected`, and `metadata` fields.
+3. Click **Test** to see how your scorer evaluates the example.
+4. Iterate on your scorer logic based on the results.
+
+### Test with a dataset
+
+Best for testing specific scenarios, edge cases, or regression testing. Use this when you want controlled, repeatable test cases or need to ensure your scorer handles specific situations correctly.
+
+1. Click **Test with \[current source]** in the  **Run** section toolbar and choose **Dataset**.
+2. Choose a dataset from your project.
+3. Select a record to test with.
+4. Click **Test** to see how your scorer evaluates the example.
+5. Review results to identify patterns and edge cases.
+
+You can test with a standard dataset row (`{input, expected, metadata}`) directly. Braintrust transforms the row into the `{input, output, expected, metadata}` shape a scorer receives when it runs against data from logs, experiments, and playgrounds. When the transformed row differs from the raw row, the panel shows a side-by-side **Raw dataset row** and **What the scorer receives** view.
+
+Datasets don't have a top-level `output` field. In this UI, `input.output` is accessible in your scorer as `output`. Other dataset keywords are also hoisted, meaning `input.expected` (if defined) overwrites the top-level `expected` field.
+
+### Test with logs
+
+Best for testing against actual usage patterns and debugging real-world edge cases. Use this when you want to see how your scorer or classifier performs on data your system is actually generating.
+
+1. Click **Test with \[current source]** in the  **Run** section toolbar and choose **Logs**.
+2. Select the project containing the logs you want to test against.
+3. Filter logs to find relevant examples:
+   * Filter for root spans, specific span names, or conditions on input, output, metadata, or other values.
+   * Select a timeframe.
+4. The matching trace appears in the panel. Click into spans to inspect inputs, outputs, and metadata, and use the prev and next controls in the toolbar to step through matching root spans. What the scorer receives depends on its shape:
+   * For span scorers, the selected span is the one passed to the scorer.
+   * For trace scorers, the entire trace is passed regardless of which span you select, and `input`, `output`, `expected`, and `metadata` are populated from the root span.
+5. Click **Test** to see how your scorer evaluates real production data.
+6. Identify cases where the scorer needs adjustment for real-world scenarios.
+
+> [!TIP]
+>
+> To create a new online scoring rule with the filters automatically prepopulated from your current log filters, click  **Automations**. This enables rapid iteration from logs to scoring rules. See [Create scoring rules](https://www.braintrust.dev/docs/evaluate/score-online.md#create-scoring-automation-rules) for more details.
+
+## Scorer and classifier permissions
+
+Both [LLM-as-a-judge](https://www.braintrust.dev/docs/evaluate/llm-as-a-judge.md) and [custom code](https://www.braintrust.dev/docs/evaluate/custom-code.md) scorers and classifiers automatically receive a `BRAINTRUST_API_KEY` environment variable that allows them to:
+
+* Make LLM calls using organization and project AI secrets
+* Access attachments from the current project
+* Read and write logs to the current project
+* Read prompts from the organization
+
+For custom code scorers and classifiers that need expanded permissions beyond the current project (such as logging to other projects, reading datasets, or accessing other organization data), you can provide your own API key using the [`PUT /v1/env_var`](https://www.braintrust.dev/docs/api-reference/envvars/create-or-replace-env_var#create-or-replace-env_var) endpoint.
+
+## Optimize with Loop
+
+Generate and improve scorers and classifiers using [** Loop**](https://www.braintrust.dev/docs/loop.md):
+
+Example queries:
+
+* "Write an LLM-as-a-judge scorer for a chatbot that answers product questions"
+* "Generate a code-based scorer based on project logs"
+* "Optimize the Helpfulness scorer"
+* "Adjust the scorer to be more lenient"
+
+## Best practices
+
+**Start with [autoevals](https://www.braintrust.dev/docs/evaluate/autoevals.md)**: Use pre-built scorers when they fit your needs. They're well-tested and reliable.
+
+**Be specific**: Define clear evaluation criteria in your scorer and classifier prompts or code.
+
+**Use multiple scorers or classifiers**: Measure different aspects (factuality, helpfulness, tone) with separate scorers and classifiers.
+
+**Choose the right scope**: Use trace scorers and classifiers for multi-step workflows and agents. Use span scorers and classifiers for simple quality checks.
+
+**Test scorers**: Run scorers and classifiers on known examples to verify they behave as expected.
+
+**Version scorers**: Like prompts, scorers and classifiers are versioned automatically. Track what works.
+
+**Balance cost and quality**: [LLM-as-a-judge](https://www.braintrust.dev/docs/evaluate/llm-as-a-judge.md) scorers are more flexible but cost more and take longer than [custom code](https://www.braintrust.dev/docs/evaluate/custom-code.md) scorers.
+
+## Create custom table views
+
+The **Scorers** page supports custom table views to save your preferred filters, column order, and display settings.
+
+To create or update a custom table view:
+
+1. Apply the filters and display settings you want.
+2. Open the  menu and select **Save view\...** or **Save view as...**.
+
+> [!NOTE]
+>
+> Custom table views are visible to all project members. Creating or editing a table view requires the **Update** project permission.
+
+## Set default table views
+
+You can set default views at three levels:
+
+* **Organization default**: Visible to all members when they open the page. This applies per page. For example, you can set separate organization defaults for Logs, Experiments, and Review. To set an organization default, you need the **Manage settings** organization permission (included by default in the **Owner** role). See [Access control](https://www.braintrust.dev/docs/admin/access-control.md) for details.
+* **Project default**: Overrides the organization default for everyone viewing this project. To set a project default, you need the project-level **Update** permission. Project admins can set project defaults even without organization-level permissions. See [Access control](https://www.braintrust.dev/docs/admin/access-control.md) for details.
+* **Personal default**: Overrides the project and organization defaults for you only. Personal defaults are stored in your browser, so they do not carry over across devices or browsers.
+
+To set a default view:
+
+1. Switch to the view you want by selecting it from the  menu.
+2. Open the menu again and hover over the currently selected view to reveal its submenu.
+3. Choose  **Set as personal default view**,  **Set as project default view**, or  **Set as organization default view**.
+
+To clear a default view:
+
+1. Open the  menu and hover over the currently selected view to reveal its submenu.
+2. Choose  **Clear personal default view**,  **Clear project default view**, or  **Clear organization default view**.
+
+Default view settings are mutually exclusive on a given view. Setting one type of default on a view automatically clears any other default that was previously set on the same view.
+
+When you open a page, Braintrust loads the first match in this order: personal default, project default, organization default, then the standard "All ..." view (for example, **All traces view**).
+
+## Next steps
+
+* [Autoevals](https://www.braintrust.dev/docs/evaluate/autoevals.md): Drop-in pre-built scorers
+* [LLM-as-a-judge](https://www.braintrust.dev/docs/evaluate/llm-as-a-judge.md): Natural language evaluation criteria
+* [Custom code](https://www.braintrust.dev/docs/evaluate/custom-code.md): Full control over scoring logic
+* [Run evaluations](https://www.braintrust.dev/docs/evaluate/run-evaluations.md) using your scorers
+* [Score production logs](https://www.braintrust.dev/docs/evaluate/score-online.md) with online scoring rules
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

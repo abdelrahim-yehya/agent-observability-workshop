@@ -1,0 +1,268 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://www.braintrust.dev/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# SQL functions and operators
+
+> Look up Braintrust SQL functions and operators for comparison, text, date/time, JSON, cost, and aggregation, with definitions and examples.
+
+This page catalogs the operators and functions available in Braintrust SQL queries. For clauses, data sources, and field access, see [SQL query structure](https://www.braintrust.dev/docs/reference/sql/query-structure.md). For copy-and-run patterns, see [Example queries](https://www.braintrust.dev/docs/reference/sql/examples.md).
+
+## SQL operators
+
+Use these operators in `WHERE`, `HAVING`, `SELECT`, and other clauses.
+
+### Comparison operators
+
+| Operator | Description | Example |
+| - | - | - |
+| `=` | Equal to (alias `eq`). | `metadata.model = 'gpt-4'` |
+| `!=` | Not equal to (alias `ne`; `<>` also works). | `status != 'error'` |
+| `>` | Greater than (alias `gt`). | `scores.Factuality > 0.8` |
+| `<` | Less than (alias `lt`). | `metrics.tokens < 1000` |
+| `>=` | Greater than or equal (alias `ge`). | `created >= now() - interval 1 day` |
+| `<=` | Less than or equal (alias `le`). | `scores.Factuality <= 0.5` |
+| `<=>` | Null-safe equal: true if both sides are equal, or both are null. | `metadata.env <=> null` |
+| `<!=>` | Null-safe not-equal: true if values differ, treating null as a distinct value. | `metadata.env <!=> 'prod'` |
+| `IN` | Value exists in a list of values. | `metadata.model IN ('gpt-4', 'gpt-4-turbo')` |
+| `NOT IN` | Value does not exist in a list of values. | `error.type NOT IN ('timeout')` |
+
+### Null operators
+
+| Operator | Description | Example |
+| - | - | - |
+| `IS NULL` | Value is null. | `error IS NULL` |
+| `IS NOT NULL` | Value is not null. | `scores.Factuality IS NOT NULL` |
+
+### Text-matching operators
+
+| Operator | Description | Example |
+| - | - | - |
+| `LIKE` | Case-sensitive pattern match with the `%` wildcard (strings under 65KB). | `input LIKE 'How%'` |
+| `NOT LIKE` | Negated case-sensitive pattern match. | `input NOT LIKE 'How%'` |
+| `ILIKE` | Case-insensitive pattern match with the `%` wildcard (strings under 65KB). | `input ILIKE '%question%'` |
+| `NOT ILIKE` | Negated case-insensitive pattern match. | `input NOT ILIKE '%spam%'` |
+| `MATCH` | Full-word search. Indexed and fast, but matches whole terms only (`'app'` does not match `'apple'`). | `output MATCH 'timeout'` |
+| `NOT MATCH` | Negated full-word search. | `output NOT MATCH 'timeout'` |
+
+For wildcard behavior and the 65KB limit, see [Pattern matching](https://www.braintrust.dev/docs/reference/sql/query-structure.md#pattern-matching). For `MATCH` and `search()`, see [Full-text search](https://www.braintrust.dev/docs/reference/sql/query-structure.md#full-text-search).
+
+### Logical operators
+
+| Operator | Description | Example |
+| - | - | - |
+| `AND` | Both conditions must be true. | `error IS NULL AND scores.Factuality > 0.8` |
+| `OR` | Either condition must be true. | `status = 'error' OR metrics.latency > 5000` |
+| `NOT` | Unary operator that negates a condition. | `NOT metadata.is_production` |
+
+### Arithmetic operators
+
+| Operator | Description | Example |
+| - | - | - |
+| `+` | Addition (alias `add`). | `metrics.prompt_tokens + metrics.completion_tokens` |
+| `-` | Subtraction (alias `sub`). | `now() - interval 7 day` |
+| `*` | Multiplication (alias `mul`). | `metrics.tokens * 2` |
+| `/` | Division (alias `div`). | `count(error) / count(1)` |
+| `%` | Modulo (alias `mod`). | `hour(created) % 2` |
+| `-x` | Unary negation (alias `neg`). | `-metrics.latency` |
+
+> [!NOTE]
+>
+> `INCLUDES`, `NOT INCLUDES`, and `CONTAINS` are BTQL-only operators and raise a syntax error in SQL mode. For exact array membership in SQL mode, use `IN` and `NOT IN` (e.g., `tags IN ('value')`). `MATCH` is a fuzzy approximation that tokenizes text, so `tags MATCH 'value'` also matches values containing the term as a token, such as `value-added`.
+
+## SQL functions
+
+Use these functions in `SELECT`, `WHERE`, and `GROUP BY` clauses, and in aggregate measures.
+
+### Date and time functions
+
+| Function | Description | Example |
+| - | - | - |
+| `second(timestamp)` | Extract the second from a timestamp. | `second(created)` |
+| `minute(timestamp)` | Extract the minute from a timestamp. | `minute(created)` |
+| `hour(timestamp)` | Extract the hour from a timestamp. | `hour(created)` |
+| `day(timestamp)` | Extract the day from a timestamp. | `day(created)` |
+| `week(timestamp)` | Extract the week from a timestamp. | `week(created)` |
+| `month(timestamp)` | Extract the month from a timestamp. | `month(created)` |
+| `year(timestamp)` | Extract the year from a timestamp. | `year(created)` |
+| `date_trunc(interval, timestamp)` | Truncate a timestamp to a specified interval bucket. | `date_trunc('day', created)` |
+| `current_timestamp()` | Current timestamp (alias `now()`). | `now() - interval 7 day` |
+| `current_date()` | Current date. | `current_date()` |
+
+> [!NOTE]
+>
+> `date_trunc` accepts `'second'`, `'minute'`, `'hour'`, `'day'`, `'week'`, `'month'`, or `'year'`, or a positive integer multiple of `second(s)`, `minute(s)`, `hour(s)`, or `day(s)` (for example, `'15 minutes'` or `'2 hours'`). The `'week'`, `'month'`, and `'year'` intervals don't accept multiples because they have variable durations.
+
+### String functions
+
+| Function | Description | Example |
+| - | - | - |
+| `lower(text)` | Convert text to lowercase. | `lower(metadata.model)` |
+| `upper(text)` | Convert text to uppercase. | `upper(status)` |
+| `substring(text, start, length)` | Extract a substring. Positions are 1-based; `start` may be ≤ 0 (the window is clipped to existing characters); zero length returns an empty string; returns NULL if any argument is NULL. | `substring(input, 1, 100)` |
+| `concat(text1, text2, ...)` | Concatenate strings. | `concat(metadata.model, '-', status)` |
+| `is_uuid(text)` | Return true if the text parses as a UUID, false otherwise. Accepts hyphenated, unhyphenated, braced (`{...}`), and URN (`urn:uuid:...`) forms of any UUID version. Return NULL if the argument is NULL, so `NOT is_uuid(field)` doesn't match rows where the field is NULL or missing. | `is_uuid(metadata.user_id)` |
+
+### Array functions
+
+| Function | Description | Example |
+| - | - | - |
+| `len(expr)` | Length of an array. Returns `1` for scalar values (string, number, or boolean), and `0` for null and objects. | `len(tags)` |
+
+### JSON functions
+
+| Function | Description | Example |
+| - | - | - |
+| `json_extract(json_str, path)` | Extract a value from a JSON-encoded string field using a JSONPath expression. | `json_extract(output, 'choices[0].message.content')` |
+
+Use `json_extract` when a field's *value* is a JSON-encoded string rather than a native object. For native object and array access, use [field access](https://www.braintrust.dev/docs/reference/sql/query-structure.md#field-access) instead. See [Extract data from JSON strings](https://www.braintrust.dev/docs/reference/sql/examples.md#extract-data-from-json-strings) for worked examples.
+
+### Null-handling functions
+
+| Function | Description | Example |
+| - | - | - |
+| `coalesce(val1, val2, ...)` | Return the first non-null value. | `coalesce(metadata.env, 'unknown')` |
+| `nullif(val1, val2)` | Return null if `val1` equals `val2`. | `nullif(status, '')` |
+| `least(val1, val2, ...)` | Return the smallest non-null value. | `least(metrics.latency, 60)` |
+| `greatest(val1, val2, ...)` | Return the largest non-null value. | `greatest(scores.a, scores.b)` |
+
+> [!NOTE]
+>
+> `coalesce(field, 'x') != 'y'` is automatically rewritten to `field <!=> 'y'` for better index performance.
+
+### Type conversion and cast functions
+
+| Function | Description | Example |
+| - | - | - |
+| `round(number, precision)` | Round a number to a specified precision. | `round(scores.Factuality, 2)` |
+| `to_string(value)` | Cast a value to string. | `to_string(metrics.tokens)` |
+| `to_boolean(value)` | Cast a value to boolean. | `to_boolean(metadata.flag)` |
+| `to_integer(value)` | Cast a value to integer. | `to_integer(metadata.count)` |
+| `to_number(value)` | Cast a value to number. | `to_number(metadata.score)` |
+| `to_date(value)` | Cast a value to date. | `to_date(metadata.day)` |
+| `to_datetime(value)` | Cast a value to datetime. | `to_datetime(metadata.ts)` |
+| `to_interval(value)` | Cast a value to interval. | `to_interval('7 day')` |
+
+### Search functions
+
+| Function | Description | Example |
+| - | - | - |
+| `search(query)` | Full-text search across all text fields (`input`, `output`, `expected`, `metadata`, `span_attributes`). | `search('timeout')` |
+
+`search(query)` is equivalent to writing `input MATCH query OR output MATCH query OR ...` for each text field. When [log search optimization](https://www.braintrust.dev/docs/admin/projects.md#speed-up-log-filtering) is enabled on the project, `search()` uses bloom filters to skip irrelevant segments automatically. Shingled search optimization extends this to multi-word and phrase queries. See [Full-text search](https://www.braintrust.dev/docs/reference/sql/query-structure.md#full-text-search).
+
+Queries with a very large number of `MATCH` or `search()` terms can exceed the [query limits](https://www.braintrust.dev/docs/reference/sql/best-practices.md#query-limits) and be blocked.
+
+### Cost functions
+
+| Function | Description | Example |
+| - | - | - |
+| `estimated_cost()` | Estimated cost of a span in USD. Uses `metrics.estimated_cost` when available; otherwise computes from token metrics and model-registry pricing. Works in the `spans`, `traces`, and `summary` shapes, and inside aggregates. | `sum(estimated_cost())` |
+| `estimated_cost_breakdown()` | Per-component costs for a span as a serialized JSON string (not a structured object). Returns NULL when cost cannot be computed. | `estimated_cost_breakdown()` |
+| `estimated_cost_component(name)` | Numeric cost for a single component of the breakdown. Returns NULL when cost cannot be computed or `name` is unrecognized. | `estimated_cost_component('completionTokensCost')` |
+
+> [!NOTE]
+>
+> On the `spans` and `traces` shapes, `estimated_cost()` and `metrics.estimated_cost` are populated on LLM spans, not the root/task span. Filtering to `is_root = true` returns null cost. To get a trace's total cost, sum across its spans with `sum(estimated_cost())`. The `summary` shape rolls this up per trace automatically.
+>
+> Valid component names for `estimated_cost_breakdown()` and `estimated_cost_component()`: `promptUncachedTokensCost`, `promptCachedTokensCost`, `promptCacheCreationTokensCost` (single-tier cache creation), `promptCacheCreation5mTokensCost` and `promptCacheCreation1hTokensCost` (two-tier cache creation, e.g., Anthropic), `completionTokensCost`, and `totalCost`.
+
+### Aggregate functions
+
+Aggregate functions are available only in measures or with [`GROUP BY`](https://www.braintrust.dev/docs/reference/sql/query-structure#group-by-for-aggregations).
+
+| Function | Description | Example |
+| - | - | - |
+| `count(expr)` | Number of rows. | `count(1)` |
+| `count_distinct(expr)` | Number of distinct values. | `count_distinct(root_span_id)` |
+| `count_if(expr)` | Number of rows where `expr` is true. Equivalent to `count(CASE WHEN expr THEN 1 ELSE NULL END)`. | `count_if(error IS NOT NULL)` |
+| `sum(expr)` | Sum of numeric values. | `sum(metrics.total_tokens)` |
+| `avg(expr)` | Mean (average) of numeric values. | `avg(scores.Factuality)` |
+| `min(expr)` | Minimum value. | `min(metrics.latency)` |
+| `max(expr)` | Maximum value. | `max(metrics.latency)` |
+| `any_value(expr)` | An arbitrary non-null value from the group. | `any_value(metadata.tenant_id)` |
+| `percentile(expr, p)` | A percentile where `p` is between 0 and 1. | `percentile(metrics.latency, 0.95)` |
+| `GROUPING(expr)` | Returns `1` if `expr` is a rolled-up (subtotal or grand-total) dimension in the current `ROLLUP`/`GROUPING SETS` row, `0` if it is a real value. | `GROUPING(metadata.model)` |
+
+## Conditional expressions
+
+SQL supports conditional logic through `CASE WHEN` for multi-branch conditions, `IF` for two-branch conditions, and `COUNT_IF` for conditional aggregation.
+
+### `CASE WHEN`
+
+Use `CASE WHEN ... THEN ... ELSE ... END` for one or more branches:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Basic conditions
+SELECT
+  CASE WHEN scores.Factuality > 0.8 THEN 'high' ELSE 'low' END AS quality,
+  CASE WHEN error IS NOT NULL THEN -1 ELSE metrics.tokens END AS valid_tokens
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+```
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Nested conditions
+SELECT
+  CASE
+    WHEN scores.Factuality > 0.9 THEN 'excellent'
+    WHEN scores.Factuality > 0.7 THEN 'good'
+    WHEN scores.Factuality > 0.5 THEN 'fair'
+    ELSE 'poor'
+  END AS rating
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+```
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Use in calculations
+SELECT
+  CASE WHEN metadata.model = 'gpt-4' THEN metrics.tokens * 2 ELSE metrics.tokens END AS adjusted_tokens,
+  CASE WHEN error IS NULL THEN metrics.latency ELSE 0 END AS valid_latency
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+```
+
+### `IF` and `COUNT_IF`
+
+For two-branch conditions, `IF(condition, then_value, else_value)` is a shorter alternative to `CASE WHEN`. Use `CASE WHEN` when you need more than two branches.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- IF as a shorter alternative to a two-branch CASE WHEN
+SELECT
+  IF(scores.Factuality > 0.8, 'high', 'low') AS quality,
+  IF(error IS NOT NULL, -1, metrics.tokens) AS valid_tokens
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+```
+
+`COUNT_IF(condition)` counts rows where the condition is true. It is equivalent to `count(CASE WHEN condition THEN 1 ELSE NULL END)`.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Count high-quality and errored spans per model
+SELECT
+  metadata.model AS model,
+  count(1) AS total,
+  COUNT_IF(scores.Factuality > 0.8) AS high_quality,
+  COUNT_IF(error IS NOT NULL) AS errored
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+GROUP BY metadata.model
+```
+
+`IF` composes with other aggregates. For example, count distinct users who hit a condition:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT count(DISTINCT IF(error IS NOT NULL, metadata.user_id, NULL)) AS users_with_errors
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+```
+
+## Next steps
+
+* Learn how to structure queries in the [SQL reference](https://www.braintrust.dev/docs/reference/sql.md).
+* Browse copy-and-run patterns in [Example queries](https://www.braintrust.dev/docs/reference/sql/examples.md).
+* Optimize slow or incorrect queries with [SQL best practices](https://www.braintrust.dev/docs/reference/sql/best-practices.md).
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

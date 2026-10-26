@@ -1,0 +1,1078 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://www.braintrust.dev/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# SQL query structure
+
+> Reference for SQL query structure in Braintrust. Clauses, data sources, data shapes, aggregations, and field access.
+
+This page documents the clauses that make up a SQL query in Braintrust. For the full function and operator catalog, see [Functions and operators](https://www.braintrust.dev/docs/reference/sql/functions.md). For copy-and-run patterns, see [Example queries](https://www.braintrust.dev/docs/reference/sql/examples.md).
+
+```sql Filter, sort, and limit logs theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT *
+FROM project_logs('<PROJECT_ID>', shape => 'spans')
+WHERE scores.Factuality > 0.8
+  AND created > now() - interval 7 day
+ORDER BY created DESC
+LIMIT 100
+```
+
+Each clause has its own section below:
+
+* [`SELECT`](#select): Choose which fields to retrieve.
+* [`FROM`](#from): Specify the data source: a table function or a subquery.
+* [`WHERE`](#where): Define conditions to filter the data.
+* [`GROUP BY`](#group-by-for-aggregations): Group rows for aggregation.
+* [`HAVING`](#having-for-filtering-aggregations): Filter aggregated results.
+* [`TABLESAMPLE`](#sample): Randomly sample a subset of the filtered data (rate or count-based).
+* [`ORDER BY`](#order-by): Set the order of results (`ASC` or `DESC`, with optional `NULLS FIRST` or `NULLS LAST`).
+* [`LIMIT`](#limit): Control result size.
+* [`OFFSET '<CURSOR_TOKEN>'`](#cursors-for-pagination): Pagination token from the previous query response. It must be a string literal cursor token, used with cursor-compatible sorts such as `_pagination_key` or `_xact_id`.
+* [`SETTINGS`](#settings): Pass per-query hints to the execution engine.
+
+> [!WARNING]
+>
+> Always include a range filter (`created`, `_xact_id`, or `_pagination_key`) or scope to a specific `root_span_id`/`id` in every `project_logs()` query. Without one, queries scan your entire project history and will be slow or time out on large datasets.
+
+## `SELECT`
+
+`SELECT` lets you choose specific fields, compute values, or use `*` to retrieve every field. Use `SELECT` alone to retrieve individual records, or combine it with `GROUP BY` to aggregate results. Both work with all data shapes (`spans`, `traces`, and `summary`).
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Get specific fields
+SELECT
+  metadata.model AS model,
+  scores.Factuality AS score,
+  created AS timestamp
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+```
+
+> [!NOTE]
+>
+> **Implicit aliasing**: Multi-part identifiers like `metadata.model` automatically create implicit aliases using their last component (e.g., `model`), which you can use in `WHERE`, `ORDER BY`, and `GROUP BY` clauses when unambiguous. See [Field access](#implicit-aliasing) for details.
+
+SQL allows you to transform data directly in the `SELECT` clause. This query returns `metadata.model`, whether `metrics.tokens` is greater than 1000, and a quality indicator of either "high" or "low" depending on whether or not the Factuality score is greater than 0.8.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT
+  -- Simple field access
+  metadata.model,
+
+  -- Computed values
+  metrics.tokens > 1000 AS is_long_response,
+
+  -- Conditional logic
+  (CASE WHEN scores.Factuality > 0.8 THEN 'high' ELSE 'low' END) AS quality
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+```
+
+You can also use functions in the `SELECT` clause to transform values and create meaningful aliases for your results. This query extracts the day the log was created, the hour, and a Factuality score rounded to 2 decimal places.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT
+  -- Date/time functions
+  day(created) AS date,
+  hour(created) AS hour,
+
+  -- Numeric calculations
+  round(scores.Factuality, 2) AS rounded_score
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+```
+
+### `SELECT DISTINCT`
+
+`SELECT DISTINCT` returns one row for each unique combination of scalar values in the projection. It works with `WHERE`, `ORDER BY`, and `LIMIT`.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Unique models used in the last 7 days
+SELECT DISTINCT metadata.model
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+ORDER BY metadata.model
+
+-- Unique model and environment combinations
+SELECT DISTINCT metadata.model, metadata.environment
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+```
+
+You can alias projected values and use expressions such as date truncations:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Distinct days with activity in the last 7 days
+SELECT DISTINCT day(created) AS date
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+ORDER BY date
+```
+
+Because `SELECT DISTINCT` groups by the projected values, the projection follows the same rules as [`GROUP BY`](#group-by-for-aggregations). Under strict lint mode, which the Query page and Loop use, grouping on a computed expression such as `lower(metadata.model)` is rejected, so project the underlying column instead.
+
+`SELECT DISTINCT` with only aggregate functions (for example, `SELECT DISTINCT COUNT(*)`) is accepted and behaves the same as without `DISTINCT`.
+
+> [!WARNING]
+>
+> `SELECT DISTINCT` supports scalar projections. Selecting an array- or object-valued field (for example, `SELECT DISTINCT metadata.tags`) is unsupported and may return an error or an incorrect value, such as the first element of an array instead of the whole array.
+
+**Restrictions:**
+
+* `SELECT DISTINCT *` is not supported. List the columns explicitly.
+* `DISTINCT ON (expr)` is not supported.
+* `SELECT DISTINCT` cannot be combined with `GROUP BY` or `PIVOT`.
+
+Requires data plane v2.15.0+ (Self-hosted customers must upgrade to use this feature.)
+
+### `GROUP BY` for aggregations
+
+Instead of a simple `SELECT`, you can use `SELECT ... GROUP BY` to group and aggregate data. This query returns a row for each distinct model with the day it was created, the total number of calls, the average Factuality score, and the latency percentile.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Analyze model performance over time
+SELECT
+  metadata.model AS model,
+  day(created) AS date,
+  count(1) AS total_calls,
+  avg(scores.Factuality) AS avg_score,
+  percentile(latency, 0.95) AS p95_latency
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+GROUP BY metadata.model, day(created)
+```
+
+The available aggregate functions are:
+
+* `count(expr)`: number of rows
+* `count_distinct(expr)`: number of distinct values
+* `count_if(expr)`: number of rows where `expr` is true
+* `sum(expr)`: sum of numeric values
+* `avg(expr)`: mean (average) of numeric values
+* `min(expr)`: minimum value
+* `max(expr)`: maximum value
+* `any_value(expr)`: an arbitrary non-null value from the group for the given expression
+* `percentile(expr, p)`: a percentile where `p` is between 0 and 1
+* `GROUPING(expr)`: returns `1` if `expr` is a rolled-up dimension in the current `ROLLUP`/`GROUPING SETS` row, `0` if it is a real value
+
+> [!NOTE]
+>
+> `LIMIT` works with `GROUP BY` queries to restrict the number of grouped results returned. When combined with `ORDER BY`, rows are sorted before limiting. See [LIMIT](#limit) for examples.
+
+#### `ROLLUP` and `GROUPING SETS`
+
+`ROLLUP` and `GROUPING SETS` extend `GROUP BY` to produce multiple levels of aggregation in a single query, eliminating the need for several `GROUP BY` queries.
+
+**`ROLLUP`** produces a row for each grouping level: individual groups, subtotals for each prefix of the column list, and a grand total. `GROUP BY ROLLUP(model, date)` generates groups for `(model, date)`, `(model)`, and `()` (the grand total). Rolled-up dimensions appear as `NULL` in the output.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Per-model-per-day counts, per-model totals, and a grand total — one query
+SELECT
+  metadata.model AS model,
+  day(created) AS date,
+  count(1) AS total_calls
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+GROUP BY ROLLUP(metadata.model, day(created))
+ORDER BY model, date
+```
+
+**`GROUPING SETS`** lets you specify exactly which grouping combinations to compute. Each set is one aggregation level. The example below is equivalent to the `ROLLUP` query above, but makes the groupings explicit.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT
+  metadata.model AS model,
+  day(created) AS date,
+  count(1) AS total_calls
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+GROUP BY GROUPING SETS (
+  (metadata.model, day(created)),
+  (metadata.model),
+  ()
+)
+```
+
+**`GROUPING(expr)`** returns `1` when `expr` is a rolled-up dimension in the current row (meaning this row is a subtotal or grand total that aggregated over that dimension), and `0` when it holds a real group key value. Use it to label or filter subtotal rows.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT
+  metadata.model AS model,
+  day(created) AS date,
+  count(1) AS total_calls,
+  CASE
+    WHEN GROUPING(metadata.model) = 1 THEN 'Grand total'
+    WHEN GROUPING(day(created)) = 1 THEN 'Model subtotal'
+    ELSE 'Day detail'
+  END AS row_type
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+GROUP BY ROLLUP(metadata.model, day(created))
+```
+
+### `HAVING` for filtering aggregations
+
+`HAVING` filters the results after aggregation, letting you narrow down grouped data based on aggregate values. Use `HAVING` with `GROUP BY` when you need to filter by aggregated metrics like counts, averages, or sums.
+
+This query returns models with high average scores:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Find models with strong performance
+SELECT
+  metadata.model AS model,
+  avg(scores.Factuality) AS avg_score,
+  count(1) AS total_calls
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+GROUP BY metadata.model
+HAVING avg(scores.Factuality) > 0.8
+  AND count(1) > 100
+ORDER BY avg_score DESC
+```
+
+You can combine `WHERE` and `HAVING` to filter both before and after aggregation. This query filters individual logs before grouping, then filters the aggregated results:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Track high-performing production models
+SELECT
+  metadata.model AS model,
+  day(created) AS date,
+  avg(scores.Factuality) AS avg_score,
+  count(1) AS call_count
+FROM project_logs('my-project-id')
+WHERE metadata.is_production = true
+  AND created > now() - interval 7 day
+GROUP BY metadata.model, day(created)
+HAVING avg(scores.Factuality) > 0.7
+  AND count(1) >= 10
+ORDER BY date DESC, avg_score DESC
+```
+
+`HAVING` supports the same [operators](https://www.braintrust.dev/docs/reference/sql/functions.md#sql-operators) and [aggregate functions](#group-by-for-aggregations) as other clauses. You can reference aggregated values by their alias or by repeating the aggregate expression.
+
+## `FROM`
+
+The `FROM` clause identifies where the records are coming from.
+
+### Data sources
+
+The `FROM` clause accepts these table functions. Each accepts one or more IDs. Most also accept one or more object names, which Braintrust resolves to IDs before running the query.
+
+| Data source | Query by ID | Query by name |
+| - | - | - |
+| `experiment` | `experiment('<id1>', '<id2>')` | `experiment('<name1>', '<name2>')` |
+| `dataset` | `dataset('<id1>', '<id2>')` | `dataset('<name1>', '<name2>')` |
+| `prompt` | `prompt('<id1>', '<id2>')` | Not supported |
+| `function` | `function('<id1>', '<id2>')` | Not supported |
+| `view` | `view('<id1>', '<id2>')` | Not supported |
+| `project_logs` | `project_logs('<id1>', '<id2>')` | `project_logs('<name1>', '<name2>')` |
+| `project_prompts` | `project_prompts('<id1>', '<id2>')` | `project_prompts('<name1>', '<name2>')` |
+| `project_functions` | `project_functions('<id1>', '<id2>')` | `project_functions('<name1>', '<name2>')` |
+| `org_prompts` | `org_prompts('<id1>', '<id2>')` | `org_prompts('<name1>', '<name2>')` |
+| `org_functions` | `org_functions('<id1>', '<id2>')` | `org_functions('<name1>', '<name2>')` |
+| `audit_logs` | `audit_logs('<org_id>')` | Not supported |
+
+The `project_*` and `org_*` functions return all objects of that type for a project or organization. `audit_logs` returns all audit logs for an organization. See [Audit logging](https://www.braintrust.dev/docs/admin/audit-logs.md#what-gets-logged) for the available fields and events.
+
+#### Querying by name
+
+When you pass a name instead of a UUID, Braintrust looks up the matching object and substitutes its ID before running the query. The **Query by name** column above shows which functions support this.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Query an experiment by name
+SELECT * FROM experiment('my-experiment-name') LIMIT 10
+
+-- Query project logs by project name
+SELECT * FROM project_logs('my-project') WHERE created > now() - interval 7 day
+```
+
+If the same name matches more than one object across different projects, the query returns an error listing the candidates with their IDs. Use a two-element array to disambiguate by including the parent object name:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Disambiguate by passing ['project-name', 'experiment-name']
+SELECT * FROM experiment(['my-project', 'my-experiment-name']) LIMIT 10
+
+-- Disambiguate project logs by passing ['org-name', 'project-name']
+SELECT * FROM project_logs(['my-org', 'my-project']) WHERE created > now() - interval 7 day
+```
+
+To query several objects at once, pass multiple names separated by commas, the same way you pass multiple IDs.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Multiple names
+SELECT * FROM experiment('experiment-a', 'experiment-b') LIMIT 10
+
+-- Multiple qualified names
+SELECT * FROM experiment(['project-a', 'shared-name'], ['project-b', 'shared-name']) LIMIT 10
+```
+
+If you pass an ID, Braintrust skips name lookup and uses the ID directly. You can mix names, qualified names, and IDs in a single call.
+
+### Subqueries
+
+A subquery uses the result of an inner query as the data source for an outer query:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+FROM (<inner query>) AS <alias>
+```
+
+The alias is required. Subqueries can be nested to multiple levels.
+
+**Constraints:**
+
+Outer queries use standard SQL only. Custom Braintrust syntax (`span_filter`, `trace_filter`, `ANY_SPAN()`, `FILTER_SPANS()`) is only supported in the innermost query, where it runs against raw data.
+
+* `span_filter` and `trace_filter` are not supported on subquery sources.
+* `ANY_SPAN()` and `FILTER_SPANS()` are not supported in the outer `WHERE` clause when the source is a subquery.
+* `HAVING` (`final_filter`) is supported.
+
+**Example:**
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Aggregate per model in the inner query,
+-- then filter on the aggregated result in the outer query
+SELECT model, avg_score
+FROM (
+  SELECT
+    metadata.model AS model,
+    AVG(scores.Factuality) AS avg_score
+  FROM project_logs('my-project-id')
+  WHERE created > now() - interval 7 day
+  GROUP BY metadata.model
+) AS model_scores
+WHERE avg_score > 0.8
+ORDER BY avg_score DESC
+```
+
+### Data shapes
+
+You can add an optional parameter to the `FROM` clause that defines how the data is returned. The options are `spans` (default), `traces`, and `summary`.
+
+#### `spans`
+
+`spans` returns individual spans that match the filter criteria. This example returns 10 LLM call spans that took more than 0.2 seconds to use the first token.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT *
+FROM project_logs('my-project-id', shape => 'spans')
+WHERE span_attributes.type = 'llm' AND metrics.time_to_first_token > 0.1
+  AND created > now() - interval 7 day
+LIMIT 10
+```
+
+The response is an array of spans. Check out the [Extend traces](https://www.braintrust.dev/docs/instrument/advanced-tracing.md#underlying-format) page for more details on span structure.
+
+#### `traces`
+
+`traces` returns all spans from traces that contain at least one matching span. This is useful when you want to see the full context of a specific event or behavior, for example if you want to see all spans in traces where an error occurred.
+
+This example returns all spans for a specific trace where one span in the trace had an error.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT *
+FROM project_logs('my-project-id', shape => 'traces')
+WHERE root_span_id = 'trace-id' AND error IS NOT NULL
+```
+
+The response is an array of spans. Check out the [Extend traces](https://www.braintrust.dev/docs/instrument/advanced-tracing.md#underlying-format) page for more details on span structure.
+
+#### `summary`
+
+`summary` provides trace-level views of your data by aggregating metrics across all spans in a trace. This shape is useful for analyzing overall performance and comparing results across experiments.
+
+The `summary` shape can be used in two ways:
+
+* **Individual trace summaries** (using `SELECT`): Returns one row per trace with aggregated span metrics. Use this to see trace-level details. Example: "What are the details of traces with errors?"
+* **Aggregated trace analytics** (using `GROUP BY`): Groups multiple traces and computes statistics. Use this to analyze patterns across many traces. Example: "What's the average cost per model per day?"
+
+**Individual trace summaries**
+
+Use `SELECT` with the `summary` shape to retrieve individual traces with aggregated metrics. This is useful for inspecting specific trace details, debugging issues, or exporting trace-level data.
+
+This example returns 10 summary rows from the project logs for 'my-project-id':
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT *
+FROM project_logs('my-project-id', shape => 'summary')
+WHERE created > now() - interval 7 day
+LIMIT 10
+```
+
+Summary rows include some aggregated metrics and some preview fields that show data from the root span of the trace.
+
+The following fields are aggregated metrics across all spans in the trace. Nested fields are accessed using dot notation (for example, `metrics.prompt_tokens`, not `prompt_tokens`).
+
+* `scores`: object of all scores averaged across all spans. Access individual scores as `scores.<score_name>` (for example, `scores.Factuality`).
+* `metrics`: object of aggregated metrics across all spans. Fields below are accessed as `metrics.<field_name>`.
+  * `metrics.prompt_tokens`: total number of prompt tokens used.
+  * `metrics.completion_tokens`: total number of completion tokens used.
+  * `metrics.prompt_cached_tokens`: total number of cached prompt tokens used.
+  * `metrics.prompt_cache_creation_tokens`: total number of tokens used to create cache entries.
+  * `metrics.prompt_cache_creation_5m_tokens`: total number of tokens used to create cache entries with a 5-minute time to live.
+  * `metrics.prompt_cache_creation_1h_tokens`: total number of tokens used to create cache entries with a 1-hour time to live.
+  * `metrics.total_tokens`: total number of tokens used (prompt + completion).
+  * `metrics.estimated_cost`: total estimated cost of the trace in US dollars (prompt + completion costs).
+  * `metrics.llm_calls`: total number of LLM calls.
+  * `metrics.tool_calls`: total number of tool calls.
+  * `metrics.errors`: total number of errors (LLM + tool errors).
+  * `metrics.llm_errors`: total number of LLM errors.
+  * `metrics.tool_errors`: total number of tool errors.
+  * `metrics.start`: Unix timestamp of the first span start time.
+  * `metrics.end`: Unix timestamp of the last span end time.
+  * `metrics.duration`: wall-clock elapsed time of the trace in seconds, from the earliest span start to the latest span end.
+  * `metrics.llm_duration`: sum of all durations across LLM spans in seconds.
+  * `metrics.time_to_first_token`: the average time to first token across LLM spans in seconds.
+* `span_type_info`: object with span type info. Some fields are aggregated across all spans, others reflect attributes from the root span. Fields below are accessed as `span_type_info.<field_name>`.
+  * `span_type_info.cached`: true only if all LLM spans were cached.
+  * `span_type_info.has_error`: true if any span had an error.
+
+Root span preview fields are top-level (not nested under another object): `input`, `output`, `expected`, `error`, and `metadata`.
+
+For example, to select nested metric fields alongside top-level preview fields:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT
+  input,
+  metrics.prompt_tokens,
+  metrics.estimated_cost,
+  span_type_info.has_error
+FROM project_logs('my-project-id', shape => 'summary')
+WHERE created > now() - interval 7 day
+LIMIT 10
+```
+
+**Aggregated trace analytics**
+
+To compute statistics across many traces (average cost per trace, trace counts over time), use a `GROUP BY` on the default `spans` shape with `count_distinct(root_span_id)` as the per-trace denominator. Do not add `GROUP BY` on top of the `summary` shape: the `summary` shape already pre-aggregates each trace server-side, so stacking another `GROUP BY` is rejected under strict lint mode.
+
+This example groups by day to track average cost per trace and trace volume over time:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT
+  day(created) AS date,
+  count_distinct(root_span_id) AS trace_count,
+  sum(estimated_cost()) / count_distinct(root_span_id) AS avg_cost_per_trace
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+GROUP BY 1
+ORDER BY date DESC
+```
+
+> [!WARNING]
+>
+> `GROUP BY` over the `summary` shape (for example, `FROM project_logs('id', shape => 'summary') ... GROUP BY ...`) fails under strict lint mode with "Group by over summary queries is inefficient; consider using a 'traces' or 'spans' shaped query." The Query page and Loop run in strict mode. Use the `spans`-shape pattern above instead. See [Aggregate span data across a trace](https://www.braintrust.dev/docs/reference/sql/best-practices.md#aggregate-span-data-across-a-trace) for the two-step form when you need to combine fields that live on different spans.
+
+> [!NOTE]
+>
+> In the `summary` shape, `WHERE scores.foo` evaluates at the span level, returning traces where at least one span matches the condition. This is usually correct, since scorers typically run once per span. To filter by the averaged score across all spans in a trace, use `HAVING avg(scores.foo)`. For example, `HAVING avg(scores.Factuality) > 0.8` returns traces where the average Factuality score exceeds 0.8.
+
+## `WHERE`
+
+The `WHERE` clause lets you specify conditions to narrow down results. It supports a wide range of [operators](https://www.braintrust.dev/docs/reference/sql/functions.md#sql-operators) and [functions](https://www.braintrust.dev/docs/reference/sql/functions.md#sql-functions), including complex conditions.
+
+This example `WHERE` clause only retrieves data where:
+
+* Factuality score is greater than 0.8
+* model is "gpt-4"
+* tag list contains "triage" (exact array membership with `IN`)
+* input contains the word "question" (case-insensitive)
+* created date is later than January 1, 2024
+* more than 1000 tokens were used or the data being traced was made in production
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT *
+FROM project_logs('my-project-id')
+WHERE
+  -- Simple comparisons
+  scores.Factuality > 0.8 AND
+  metadata.model = 'gpt-4' AND
+
+  -- Array membership (exact)
+  tags IN ('triage') AND
+
+  -- Text search (case-insensitive)
+  input ILIKE '%question%' AND
+
+  -- Date ranges
+  created > '2024-01-01' AND
+
+  -- Complex conditions
+  (
+    metrics.tokens > 1000 OR
+    metadata.is_production = true
+  )
+```
+
+### Single span filters
+
+Use `ANY_SPAN()` to wrap filter expressions and find traces where at least one span matches the specified condition. Separate `ANY_SPAN()` clauses are evaluated independently, so different spans in the same trace can satisfy different conditions. For guidance on when to reach for `ANY_SPAN()`, see [How filtering works](https://www.braintrust.dev/docs/reference/sql/filtering.md#match-conditions-across-spans).
+
+Single span filters work with the `traces` and `summary` data shapes. `ANY_SPAN()` is only valid in `WHERE` clauses (SQL) or in `filter` and `span_filter` clauses (BTQL). Using it in a `SELECT` list, an aggregate function, an `ORDER BY` expression, or any other non-filter position returns an error. To select or aggregate a value across a trace's spans, use [`any_value()`](#group-by-for-aggregations) with `GROUP BY`, which returns an arbitrary non-null value from each group.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Traces where one span has an error and another is an LLM call
+WHERE
+  ANY_SPAN(error IS NOT NULL) AND
+  ANY_SPAN(span_attributes.type = 'llm')
+```
+
+When a single `ANY_SPAN()` that isn't wrapped in `NOT` is combined with bare filter conditions, all of those conditions apply to the same span:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Both conditions must match the same span
+WHERE
+  ANY_SPAN(error IS NOT NULL) AND
+  span_attributes.type = 'llm'
+-- Equivalent to: ANY_SPAN(error IS NOT NULL AND span_attributes.type = 'llm')
+```
+
+To match conditions against different spans in the same trace, wrap each condition in its own `ANY_SPAN()` call. This matters when a field exists on only some spans. For example, `metadata` set on the root span never matches an LLM span, so use `ANY_SPAN(span_attributes.type = 'llm') AND ANY_SPAN(metadata.is_employee = false)`.
+
+Bare conditions are still evaluated independently when the query contains more than one `ANY_SPAN()` clause, or when the `ANY_SPAN()` is negated with `NOT`.
+
+`ANY_SPAN()` can be combined with `GROUP BY` to aggregate traces based on span-level conditions. This is useful for analyzing patterns across traces that contain specific types of spans. See [Analyze based on tags and scores](https://www.braintrust.dev/docs/reference/sql/examples.md#analyze-based-on-tags-and-scores), [Analyze based on tags](https://www.braintrust.dev/docs/reference/sql/examples.md#analyze-based-on-tags), and [Analyze traces with span filters](https://www.braintrust.dev/docs/reference/sql/examples.md#analyze-traces-with-span-filters) for examples.
+
+> [!NOTE]
+>
+> By default, `ANY_SPAN()` matches against all spans in a trace. To restrict matching to only root spans, add `is_root` to the condition: `ANY_SPAN(is_root AND error IS NOT NULL)`.
+
+`ANY_SPAN()` supports one level of nesting. Nested calls are flattened, which allows query builders and the Braintrust UI to compose filters by wrapping conditions in `ANY_SPAN()`. For example:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Exclude traces that contain a score span named "null_score"
+WHERE NOT ANY_SPAN(span_attributes.type = 'score' AND ANY_SPAN(span_attributes.name = 'null_score'))
+```
+
+Triple or deeper nesting (`ANY_SPAN(ANY_SPAN(ANY_SPAN(...)))`) is not supported. `NOT ANY_SPAN()` does not support multiple span filter clauses. For example, `NOT ANY_SPAN(ANY_SPAN(a) AND ANY_SPAN(b))` is not supported.
+
+A bare condition alongside a nested `ANY_SPAN()` is also evaluated independently, so `c` in `ANY_SPAN(a AND ANY_SPAN(b)) AND c` can match any span in the trace.
+
+### Matching spans filters
+
+While `ANY_SPAN()` helps you find traces you care about, matching spans filters let you filter spans within the traces you've already found. Use `FILTER_SPANS()` to return only the matching spans from those traces, rather than entire traces. This is analogous to `trace_filter` in BTQL.
+
+Matching spans filters work with the `traces` and `summary` data shapes. On the `spans` shape, `FILTER_SPANS()` acts as a no-op wrapper.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Return only score spans from traces
+WHERE FILTER_SPANS(span_attributes.type = 'score')
+
+-- Return only spans where Factuality equals 1
+WHERE FILTER_SPANS(scores.Factuality = 1)
+```
+
+You can combine `FILTER_SPANS()` with other filter conditions:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Return score spans from traces with duration over 1 second
+WHERE
+  FILTER_SPANS(span_attributes.type = 'score') AND
+  metrics.duration > 1
+```
+
+### Full-text search
+
+Use `MATCH` to search a specific field for exact word matches, or `search()` to search across all text fields at once.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Search a specific field for exact word matches
+WHERE output MATCH 'timeout'
+
+-- Exclude rows whose output contains the word
+WHERE output NOT MATCH 'timeout'
+
+-- Search across all text fields (input, output, expected, metadata, span_attributes)
+WHERE search('timeout')
+
+-- Combine with other filters
+WHERE search('error') AND metadata.environment = 'production'
+```
+
+`search()` is equivalent to writing `input MATCH query OR output MATCH query OR ...` for each text field. When [log search optimization](https://www.braintrust.dev/docs/admin/projects.md#speed-up-log-filtering) is enabled, `search()` also benefits from bloom filter acceleration to skip irrelevant segments. Enabling shingled search optimization extends this acceleration to multi-word and phrase queries.
+
+`NOT MATCH` returns rows whose field doesn't contain the word. It excludes rows where the field is null or missing. To include them, use `output NOT MATCH 'timeout' OR output IS NULL`.
+
+Queries with a very large number of `MATCH` or `search()` terms can exceed the [query limits](https://www.braintrust.dev/docs/reference/sql/best-practices.md#query-limits) and be blocked.
+
+> [!NOTE]
+>
+> `MATCH` and `search()` match whole terms up to a length of 255 bytes each. To keep the index from bloating with large binary blobs, Braintrust doesn't index terms longer than 255 bytes, so neither operator matches them.
+>
+> Requires data plane v2.15.0+ (Self-hosted customers must upgrade to use this feature.)
+
+### Pattern matching
+
+SQL supports the `%` wildcard for pattern matching with `LIKE` (case-sensitive) and `ILIKE` (case-insensitive).
+
+The `%` wildcard matches any sequence of zero or more characters.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Match any input containing "question"
+WHERE input ILIKE '%question%'
+
+-- Match inputs starting with "How"
+WHERE input LIKE 'How%'
+
+-- Match emails ending with specific domains
+WHERE metadata.email ILIKE '%@braintrust.com'
+
+-- Escape literal wildcards with backslash
+WHERE metadata.description LIKE '%50\% off%'  -- Matches "50% off"
+```
+
+> [!WARNING]
+>
+> `LIKE` and `ILIKE` perform substring matching and can be slow. They only work for string values under 65KB. When possible, use the `MATCH` operator instead. `MATCH` is indexed and more efficient, but it matches whole terms rather than substrings. For example, `output MATCH 'time'` does not match `timeout`.
+
+### Time intervals
+
+SQL supports intervals for time-based operations.
+
+This query returns all project logs from 'my-project-id' that were created in the last day.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT *
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 1 day
+```
+
+This query returns all project logs from 'my-project-id' that were created up to an hour ago.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT *
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 1 hour
+  AND created < now()
+```
+
+This query returns all project logs from 'my-project-id' that were created within the last month but not within the last week.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Examples with different units
+SELECT *
+FROM project_logs('my-project-id')
+WHERE created < now() - interval 7 day    -- Last week
+  AND created > now() - interval 1 month  -- Last month
+```
+
+## `ORDER BY`
+
+The `ORDER BY` clause determines the order of results. The options are `DESC` (descending) and `ASC` (ascending) on a numerical field. You can sort by a single field, multiple fields, or computed values.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Sort by single field
+ORDER BY created DESC
+
+-- Sort by multiple fields
+ORDER BY scores.Factuality DESC, created ASC
+
+-- Sort by computed values
+ORDER BY len(tags) DESC
+```
+
+Add `NULLS FIRST` or `NULLS LAST` after the direction to control where null values appear, regardless of direction. For example, a top-N cost query can list groups with an unknown cost after the priced groups:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT metadata.model AS model, sum(estimated_cost()) AS total_cost
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+GROUP BY 1
+ORDER BY total_cost DESC NULLS LAST
+LIMIT 10
+```
+
+Requires data plane v2.19.0+ (not yet released for self-hosting) (Self-hosted customers must upgrade to use this feature.)
+
+## `SAMPLE`
+
+`TABLESAMPLE` (or the shorter `SAMPLE` alias) randomly samples a subset of the filtered data. Use it to work with a representative slice of a large dataset without scanning every row.
+
+Two forms are supported:
+
+* **Percent-based**: `TABLESAMPLE n PERCENT` — samples approximately `n`% of rows (0–100).
+* **Row-based**: `TABLESAMPLE n ROWS` or `TABLESAMPLE n` — samples approximately `n` rows.
+
+An optional `SEED (seed)` clause makes sampling deterministic. Without a seed, each query returns a different random sample.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Sample ~10% of rows (non-deterministic)
+SELECT *
+FROM project_logs('my-project-id') TABLESAMPLE 10 PERCENT
+WHERE created > now() - interval 7 day
+
+-- Sample ~10% of rows (deterministic, same result every run)
+SELECT *
+FROM project_logs('my-project-id') TABLESAMPLE 10 PERCENT SEED (42)
+WHERE created > now() - interval 7 day
+
+-- Sample approximately 500 rows
+SELECT *
+FROM project_logs('my-project-id') TABLESAMPLE 500 ROWS
+WHERE created > now() - interval 7 day
+
+-- Short SAMPLE alias works the same way
+SELECT *
+FROM project_logs('my-project-id') SAMPLE 10 PERCENT SEED (42)
+WHERE created > now() - interval 7 day
+```
+
+> [!NOTE]
+>
+> `SAMPLE` is part of the table reference in the `FROM` clause, not a post-filter clause. The percentage or row count applies to the full table before `WHERE` filtering. `TABLESAMPLE BERNOULLI`, `TABLESAMPLE SYSTEM`, and other named sampling methods are not supported.
+
+## `PIVOT` and `UNPIVOT`
+
+`PIVOT` and `UNPIVOT` are advanced operations that transform your results for easier analysis and comparison. Both SQL and BTQL syntax support these operations.
+
+### `PIVOT`
+
+`PIVOT` transforms rows into columns, which makes comparisons easier by creating a column for each distinct value. This is useful when comparing metrics across different categories, models, or time periods.
+
+**Structure:**
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT <non-pivoted columns>, <pivoted columns>
+FROM <table>
+PIVOT(
+  <AggregateFunction>(<ColumnToBeAggregated>)
+  FOR <PivotColumn>
+  IN (ANY)
+)
+```
+
+**Requirements:**
+
+* The pivot column must be a single identifier (e.g., `metadata.model`)
+* Must include at least one aggregate measure (e.g., `SUM(value)`, `AVG(score)`)
+* Only `IN (ANY)` is supported (explicit value lists, subqueries, `ORDER BY`, and `DEFAULT ON NULL` are not supported)
+* `SELECT` list must include the pivot column, all measures, and all `GROUP BY` columns (or use `SELECT *`)
+
+Pivot columns are automatically named by combining the pivot value and measure name. For example, if you pivot `metadata.model` with a model named "gpt-4" for measure `avg_score`, the column becomes `gpt-4_avg_score`. When using aliases, the alias replaces the measure name in the output column.
+
+**Single aggregate** - pivot one metric across categories:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Compare total score values across all scores
+SELECT score, SUM(value)
+FROM project_logs('my-project-id')
+UNPIVOT (value FOR score IN (scores))
+PIVOT(SUM(value) FOR score IN (ANY))
+WHERE created > now() - interval 7 day
+```
+
+**Multiple aggregates** - pivot multiple metrics at once:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Compare model performance metrics across models
+SELECT day(created) AS date, metadata.model, AVG(scores.Factuality), COUNT(1)
+FROM project_logs('my-project-id')
+WHERE metadata.model IN ('gpt-4', 'gpt-3.5-turbo')
+  AND created > now() - interval 7 day
+GROUP BY day(created), metadata.model
+PIVOT(
+  AVG(scores.Factuality),
+  COUNT(1)
+  FOR metadata.model IN (ANY)
+)
+```
+
+**With aliases** - name your pivoted columns:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Use custom column names
+SELECT score, total
+FROM project_logs('my-project-id')
+UNPIVOT (value FOR score IN (scores))
+PIVOT(SUM(value) AS total FOR score IN (ANY))
+WHERE created > now() - interval 7 day
+```
+
+**With grouping** - combine `PIVOT` with `GROUP BY` for multi-dimensional analysis:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Analyze scores by both model and date
+SELECT day(created) AS date, metadata.model, AVG(scores.Factuality)
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+GROUP BY day(created), metadata.model
+PIVOT(AVG(scores.Factuality) FOR metadata.model IN (ANY))
+```
+
+**Using `SELECT *`** - automatically includes all required columns:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- SELECT * includes pivot column, measures, and GROUP BY columns automatically
+SELECT *
+FROM project_logs('my-project-id')
+UNPIVOT (value FOR score IN (scores))
+PIVOT(SUM(value) FOR score IN (ANY))
+WHERE created > now() - interval 7 day
+```
+
+### `UNPIVOT`
+
+`UNPIVOT` transforms columns into rows, which is useful when you need to analyze arbitrary scores and metrics without specifying each field name in advance. This is helpful when working with dynamic sets of metrics or when you want to normalize data for aggregation.
+
+**Key-value unpivot** - transforms an object into rows with key-value pairs:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Convert scores object into rows with score names and values
+SELECT id, score, value
+FROM project_logs('my-project-id')
+UNPIVOT (value FOR score IN (scores))
+WHERE created > now() - interval 7 day
+```
+
+> [!NOTE]
+>
+> When using key-value unpivot, the source column must be an object (e.g., `scores`). When using array unpivot with `_`, the source column must be an array (e.g., `tags`).
+
+**Array unpivot** - expands arrays by using `_` as the name column:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Expand tags array into individual rows
+SELECT id, tag
+FROM project_logs('my-project-id')
+UNPIVOT (tag FOR _ IN (tags))
+WHERE created > now() - interval 7 day
+```
+
+**Array of objects unpivot** - expands arrays of objects and allows accessing nested fields:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Expand classifications array and group by nested field
+SELECT classification.id, COUNT(1) AS count
+FROM project_logs('my-project-id')
+UNPIVOT (classification FOR _ IN (classifications.Issues))
+WHERE created >= NOW() - INTERVAL 3 DAY
+GROUP BY classification.id
+```
+
+This pattern is useful for analyzing classifications where each log may have multiple topic classifications, and you want to aggregate by specific properties of those classifications.
+
+**Multiple unpivots** - chain multiple `UNPIVOT` operations to expand multiple columns:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Expand both scores and tags
+SELECT score, tag
+FROM project_logs('my-project-id')
+UNPIVOT (value FOR score IN (scores))
+UNPIVOT (tag FOR _ IN (tags))
+WHERE created > now() - interval 7 day
+```
+
+**With aggregations** - use `UNPIVOT` with `GROUP BY` to aggregate across unpivoted rows:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Calculate average value for each score across all logs
+SELECT score, AVG(value) AS avg_value, COUNT(1) AS count
+FROM project_logs('my-project-id')
+UNPIVOT (value FOR score IN (scores))
+WHERE created > now() - interval 7 day
+GROUP BY score
+ORDER BY avg_value DESC
+```
+
+## `LIMIT` and cursors
+
+### `LIMIT`
+
+The `LIMIT` clause controls the size of the result in number of records.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Basic limit
+LIMIT 100
+```
+
+When using `LIMIT` with `GROUP BY`, it restricts the number of grouped results returned. This is useful for getting top-N results after aggregation. When combined with `ORDER BY`, rows are sorted before limiting.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Get top 5 models by usage
+SELECT
+  metadata.model AS model,
+  count(1) AS total_calls
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+GROUP BY metadata.model
+ORDER BY total_calls DESC
+LIMIT 5
+```
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Limit aggregated results without sorting
+SELECT
+  metadata.category AS category,
+  avg(metrics.duration) AS avg_duration
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+GROUP BY metadata.category
+LIMIT 10
+```
+
+### Cursors for pagination
+
+Cursors are supported in both SQL and BTQL queries. Cursors are automatically returned in query responses. After an initial query, pass the returned cursor token in the follow-on query. When a cursor has reached the end of the result set, the `data` array will be empty, and no cursor token will be returned.
+
+In SQL syntax, pass cursor tokens using `OFFSET '<CURSOR_TOKEN>'`. Numeric offsets are not supported. For cursor pagination, use cursor-compatible sorts such as `_pagination_key` (recommended) or `_xact_id`.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Pagination with cursor token
+-- Page 1 (first 100 results)
+SELECT *
+FROM project_logs('<PROJECT_ID>')
+WHERE created > now() - interval 7 day
+ORDER BY _pagination_key DESC
+LIMIT 100
+
+-- Page 2 (next 100 results)
+SELECT *
+FROM project_logs('<PROJECT_ID>')
+WHERE created > now() - interval 7 day
+ORDER BY _pagination_key DESC
+LIMIT 100
+OFFSET '<CURSOR_TOKEN>'  -- From previous query response
+```
+
+## `SETTINGS`
+
+The `SETTINGS` clause passes per-query hints to the Brainstore execution engine. It appears at the end of the query. Multiple options can be set in a single clause, separated by commas.
+
+The following options are supported:
+
+| Option | Type | Description |
+| - | - | - |
+| `max_bloom_terms` | Nonneg integer | Maximum number of disjunctive terms (for example, `OR` branches or `IN` list values) for which Brainstore consults a bloom filter during segment elimination. Above this threshold, the bloom filter is skipped because checking it adds overhead without filtering many segments. Set this option to override the engine default for a specific query. |
+| `preview_length` | Integer | Truncates the preview fields (`input`, `output`, `expected`, `error`, `metadata`) to this many characters, appending `...` when truncated. Use `-1` for no truncation and `0` for maximum truncation. For the `summary` shape, an engine default is applied when this option is not set. In BTQL, `preview_length` is a top-level clause (`preview_length: N`), not a `settings:` option. |
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT id, input
+FROM project_logs('<PROJECT_ID>')
+WHERE created > now() - interval 7 day
+  AND metadata.request_id IN ('req-a', 'req-b', 'req-c')
+SETTINGS max_bloom_terms = 256
+```
+
+Multiple options:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT id
+FROM project_logs('<PROJECT_ID>')
+WHERE created > now() - interval 7 day
+SETTINGS max_bloom_terms = 256, preview_length = -1
+```
+
+## Field access
+
+SQL provides flexible ways to access nested data in arrays and objects:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Object field access
+metadata.model             -- Access nested object field  e.g. {"metadata": {"model": "value"}}
+metadata."field name"      -- Access field with spaces	  e.g. {"metadata": {"field name": "value"}}
+metadata."field-name"      -- Access field with hyphens   e.g. {"metadata": {"field-name": "value"}}
+metadata."field.name"      -- Access field with dots	  e.g. {"metadata": {"field.name": "value"}}
+
+-- Array access (0-based indexing)
+tags[0]                    -- First element
+tags[-1]                   -- Last element
+
+-- Combined array and object access
+metadata.models[0].name    -- Field in first array element
+responses[-1].tokens       -- Field in last array element
+spans[0].children[-1].id   -- Nested array traversal
+
+-- Facets access
+facets.task                -- Task facet value
+facets.sentiment           -- Sentiment facet value
+facets."custom-facet"      -- Custom facet (quotes for hyphens)
+
+-- Classifications access (array of objects)
+classifications.Task[0].label              -- Classification label
+classifications.Task[0].metadata.distance  -- Distance metric
+classifications.Sentiment[0].label         -- Sentiment classification
+```
+
+> [!NOTE]
+>
+> Array indices are 0-based, and negative indices count from the end (-1 is the last element).
+
+When you have JSON data stored as a string field (rather than as native SQL objects), use the [`json_extract` function](https://www.braintrust.dev/docs/reference/sql/examples#extract-data-from-json-strings) to access values within it. The path is a JSONPath expression that supports nested object keys, array indexing, and an optional `$` root prefix:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Extract from JSON string fields
+json_extract(metadata.config, 'api_key')              -- Top-level "api_key" field
+json_extract(metadata.config, 'auth.user_id')         -- Nested: config → auth → user_id
+json_extract(output, 'choices[0].message.content')    -- Array index plus nested keys
+```
+
+### Implicit aliasing
+
+When you reference multi-part identifiers (e.g., `metadata.category`), SQL automatically creates an implicit alias using the last component of the path (e.g., `category`). This allows you to use the short form in your queries when unambiguous.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Use short form in WHERE clause
+SELECT metadata.category, metadata.model
+FROM project_logs('my-project-id')
+WHERE category = 'support' AND model = 'gpt-4'
+  AND created > now() - interval 7 day
+
+-- Use short form in ORDER BY
+SELECT metadata.user.name
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+ORDER BY name
+
+-- Use short form in GROUP BY
+SELECT metadata.model, COUNT(*) as cnt
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+GROUP BY model
+```
+
+**Important notes about implicit aliasing:**
+
+* **Ambiguity prevention**: If multiple fields share the same last component (e.g., `metadata.name` and `user.name`), the short form `name` becomes ambiguous and cannot be used. You must use the full path instead.
+
+* **Top-level field priority**: Top-level fields take precedence over nested fields. If you have both `id` and `metadata.id`, the short form `id` refers to the top-level field.
+
+* **Explicit aliases override**: When you provide an explicit alias (e.g., `metadata.category AS cat`), the implicit alias is disabled and you must use either the explicit alias or the full path.
+
+* **Duplicate alias detection**: SQL will detect and reject queries with duplicate aliases in the SELECT list, whether explicit or implicit. For example, `SELECT id, user.number AS id` will raise an error.
+
+**Examples of ambiguous references:**
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- ERROR: Cannot use 'name' - ambiguous between two fields
+SELECT metadata.name, user.name
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+ORDER BY name  -- Error: ambiguous
+
+-- CORRECT: Use full path when ambiguous
+SELECT metadata.name, user.name
+FROM project_logs('my-project-id')
+WHERE created > now() - interval 7 day
+ORDER BY metadata.name
+```
+
+**Freeing up short forms with explicit aliases:**
+
+When one field uses an explicit alias, its short form becomes available for other fields:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- 'user_name' is the explicit alias, 'name' now refers to metadata.name
+SELECT user.name AS user_name, metadata.name
+FROM project_logs('my-project-id')
+WHERE name = 'configuration'  -- Refers to metadata.name
+  AND created > now() - interval 7 day
+```
+
+## Next steps
+
+* Run queries from the Query page, CLI, or API in the [SQL overview](https://www.braintrust.dev/docs/reference/sql.md).
+* Look up syntax in [Functions and operators](https://www.braintrust.dev/docs/reference/sql/functions.md).
+* Browse copy-and-run patterns in [Example queries](https://www.braintrust.dev/docs/reference/sql/examples.md).
+* Write correct, fast queries with [SQL best practices](https://www.braintrust.dev/docs/reference/sql/best-practices.md).
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

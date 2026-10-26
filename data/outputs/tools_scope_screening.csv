@@ -1,0 +1,43 @@
+tool_key,tool,github_repo,stars,google_independent_sources,s1_decision,s1_reason,s2_role,s3_builtin_metric_count,s3_decision,s4_decision,final_status,s3_candidate_rows,s3_note
+langfuse,Langfuse,langfuse/langfuse,36193.0,15.0,in,"🪢 Open source agent evals & observability: Trace, evaluate, and improve LLM applications w",platform,,pending,pending,pending,2,"evaluators are UI templates, not in repo: docs check needed"
+opik,Opik,comet-ml/opik,22833.0,3.0,in,"Debug, evaluate, and monitor your LLM applications, RAG systems, and agentic workflows wit",platform,,pending,pending,pending,117,candidates found: review pass needed
+helicone,Helicone,Helicone/helicone,6232.0,6.0,in,"🧊 Open source LLM observability platform. One line of code to monitor, evaluate, and exper",platform,,pending,pending,pending,0,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+failproofai,FailproofAI,FailproofAI/failproofai,6004.0,,in,Observability and enforcement for AI agent harnesses. Capture every run and runtime reliab,platform,,pending,pending,pending,5,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+cozeloop,Coze Loop,coze-dev/coze-loop,5784.0,,in,Next-generation AI Agent Optimization Platform: Cozeloop addresses challenges in AI agent ,platform,,pending,pending,pending,0,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+latitude,Latitude,latitude-dev/latitude-llm,4734.0,,in,"Open-source observability for AI agents. Find where your agents fail, dispatch your coding",platform,,pending,pending,pending,4,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+pydanticlogfire,Pydantic Logfire,pydantic/logfire,4520.0,,in,AI observability platform for production LLM and agent systems.,platform,,pending,pending,pending,0,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+laminar,Laminar,lmnr-ai/lmnr,3429.0,,in,Laminar - open-source observability platform purpose-built for AI agents. YC S24.,platform,,pending,pending,pending,0,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+openlit,OpenLIT,openlit/openlit,2870.0,,in,"OpenLIT is the open-source agent harness engineering platform: trace, evaluate, guard, and",platform,,pending,pending,pending,0,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+futureagi,Future AGI,future-agi/future-agi,2192.0,,in,"Open-source, end-to-end platform for evaluating, observing, and improving LLM and AI agent",platform,,pending,pending,pending,115,candidates found: review pass needed
+tracelyai,Tracely AI,jwuthri-cloud/Tracely-ai,1146.0,,in,"Trace-native CI/CD for AI agents: grade production traces, cluster failures, freeze them i",platform,,pending,pending,pending,11,candidates found: review pass needed
+judgeval,Judgeval,JudgmentLabs/judgeval,1069.0,,in,The Continuous-Improvement Stack for Agents. Our environment data and evals power agent im,platform,,pending,pending,pending,11,candidates found: review pass needed
+ifixai,iFixAi,ifixai-ai/iFixAi,33046.0,,verify (treated as out until verified),"auditing of AI agents; unclear if observability/evaluation is the primary purpose (33k stars, verify README)",,,,,verify,,
+mlflow,MLflow,mlflow/mlflow,28494.0,,in,"The open source AI engineering platform for agents, LLMs, and ML models. MLflow enables te",platform,,pending,pending,pending,193,candidates found: review pass needed
+promptfoo,promptfoo,promptfoo/promptfoo,26286.0,4.0,in,"Test your prompts, agents, and RAGs. Red teaming/pentesting/vulnerability scanning for AI.",framework,,pending,pending,pending,82,candidates found: review pass needed
+deepeval,DeepEval,confident-ai/deepeval,19039.0,12.0,in,The LLM Evaluation Framework,framework,,pending,pending,pending,122,candidates found: review pass needed
+arizephoenix,Arize Phoenix,Arize-ai/phoenix,11951.0,16.0,in,AI Observability & Evaluation,platform,,pending,pending,pending,45,candidates found: review pass needed
+garak,garak,NVIDIA/garak,9653.0,,out,"security scanner (vulnerability scanning), not observability or evaluation of agent behaviour",,,,,screened out (S1),,
+aiinfraguard,AI Infra Guard,Tencent/AI-Infra-Guard,6936.0,,out,security / red-teaming platform,,,,,screened out (S1),,
+giskard,Giskard,Giskard-AI/giskard-oss,5916.0,,in,🐢 Open-Source Evaluation & Testing library for LLM Agents,framework,,pending,pending,pending,3,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+trulens,TruLens,truera/trulens,3608.0,,in,Evaluation and Tracking for LLM Experiments and AI Agents,framework,,pending,pending,pending,4,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+agenticsecurity,Agentic Security,msoedov/agentic_security,2025.0,,out,security / red-teaming kit,,,,,screened out (S1),,
+prompty,Prompty,microsoft/prompty,1285.0,,out,prompt file format / asset class,,,,,screened out (S1),,
+clawbench,ClawBench,TIGER-AI-Lab/ClawBench,1076.0,,out,"benchmark for browser agents, not a tool",,,,,screened out (S1),,
+evidently,Evidently,evidentlyai/evidently,8000.0,,in,"Evidently is ​​an open-source ML and LLM observability framework. Evaluate, test, and moni",framework,,pending,pending,pending,134,candidates found: review pass needed
+openllmetry,OpenLLMetry,traceloop/openllmetry,7501.0,4.0,in,"Open-source observability for your GenAI or LLM application, based on OpenTelemetry",standard,,pending,pending,pending,1,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+langwatch,LangWatch,langwatch/langwatch,4987.0,,in,"Open-Source Agent Observability & Evals for AI Platform teams. Trace, test, route and gove",platform,,pending,pending,pending,66,candidates found: review pass needed
+anyagent,Any Agent,mozilla-ai/any-agent,1251.0,,in,A single interface to use and evaluate different agent frameworks ,framework,,pending,pending,pending,2,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+intelligentauditsystem,Intelligent Audit System,Ricky-7-Yan/intelligent-audit-system,1175.0,,out,end-user application (enterprise audit agents),,,,,screened out (S1),,
+harbor,Harbor,harbor-framework/harbor,6376.0,,in,Framework for evaluating and improving agents ,framework,,pending,pending,pending,2,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+agentops,AgentOps,AgentOps-AI/agentops,5908.0,,in,"Python SDK for AI agent monitoring, LLM cost tracking, benchmarking, and more. Integrates ",platform,,pending,pending,pending,0,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+kiln,Kiln,Kiln-AI/Kiln,5223.0,,out,"broader suite (data, fine-tuning, RAG); evals are one module",,,,,screened out (S1),,
+mcpinspector,MCP Inspector,MCPJam/inspector,2274.0,,out,testing of MCP servers (protocol-specific),,,,,screened out (S1),,
+evalite,Evalite,mattpocock/evalite,1724.0,,in,Evaluate your LLM-powered apps with TypeScript,framework,,pending,pending,pending,0,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+signoz,SigNoz,SigNoz/signoz,32427.0,,out,general-purpose observability platform; LLM support is a feature,,,,,screened out (S1),,
+openobserve,OpenObserve,openobserve/openobserve,22457.0,,out,general-purpose observability platform; LLM support is a feature,,,,,screened out (S1),,
+openinference,OpenInference,Arize-ai/openinference,1278.0,2.0,in,OpenTelemetry Instrumentation for AI Observability,standard,,pending,pending,pending,0,scanner found few/no candidates; may be naming/language not covered: check docs before deciding
+langsmith,LangSmith,,,13.0,in,description from Google screening (no GitHub description),platform,,pending,pending,pending,30,candidates found: review pass needed
+opentelemetry,OpenTelemetry,,,10.0,in,description from Google screening (no GitHub description),standard,,pending,pending,pending,80,candidates found: review pass needed
+braintrust,Braintrust,,,5.0,in,description from Google screening (no GitHub description),platform,,pending,pending,pending,16,candidates found: review pass needed
+galileo,Galileo,,,3.0,in,description from Google screening (no GitHub description),platform,,pending,pending,pending,0,no public repo: docs check needed
+weightsbiases,Weights & Biases,,,2.0,in,description from Google screening (no GitHub description),platform,,pending,pending,pending,32,candidates found: review pass needed

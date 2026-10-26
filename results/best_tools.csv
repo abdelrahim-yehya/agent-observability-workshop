@@ -1,0 +1,16 @@
+rank,tool,role,found_via,github_repo,stars_2026-10-22,google_independent_sources,a1_decision,a1_url,a1_quote,quote_checked_against_page
+1,Arize Phoenix,platform,GitHub + Google,Arize-ai/phoenix,11951,16,PASS,https://arize.com/docs/phoenix,"A trace captures model calls, retrieval, tool use, and custom logic",2026-10-25
+2,Langfuse,platform,GitHub + Google,langfuse/langfuse,36193,15,PASS,https://langfuse.com/docs/observability/features/agent-graphs,"It's the fastest way to answer ""what does this agent do, and how complex is it?""",2026-10-25
+3,LangSmith,platform,Google only,,,13,PASS,https://docs.langchain.com/langsmith/observability-concepts,"LangSmith Observability lets you record, inspect, and analyze every step your AI agent takes.",2026-10-25
+4,DeepEval,framework,GitHub + Google,confident-ai/deepeval,19039,12,PASS,https://deepeval.com/docs/getting-started-agents,"Learn how to evaluate AI Agents using `deepeval`, including multi-agent systems and tool-using agents.",2026-10-25
+5,OpenTelemetry,standard,Google only,,,10,PASS,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-agent-spans.md,Semantic Conventions for GenAI agent and framework spans,2026-10-25
+6,Helicone,platform,GitHub + Google,Helicone/helicone,6232,6,PASS,https://docs.helicone.ai/features/sessions,"This gives you a complete view of your AI agent's behavior, not just the LLM interactions.",2026-10-25
+7,Braintrust,platform,Google only,,,5,PASS,https://www.braintrust.dev/docs,"Braintrust is the active observability platform for instrumenting, understanding, and improving agents.",2026-10-25
+8,promptfoo,framework,GitHub + Google,promptfoo/promptfoo,26286,4,PASS,https://www.promptfoo.dev/docs/providers/openai-agents/,Use mocked tool outputs for deterministic evals without executing function tools:,2026-10-25
+9,OpenLLMetry,standard,GitHub + Google,traceloop/openllmetry,7501,4,PASS,https://www.traceloop.com/docs/openllmetry/tracing/annotations,"Similarily, if you use autonomous agents, you can use the `@agent` decorator to trace them as a single unit.",2026-10-25
+10,Opik,platform,GitHub + Google,comet-ml/opik,22833,3,PASS,https://www.comet.com/docs/opik/tracing/overview,Opik gives you full visibility into every request your agent handles.,2026-10-25
+11,Galileo,platform,Google only,,,3,PASS,https://docs.galileo.ai/,"Galileo is the leading observability, evaluation, and guardrail platform for GenAI and agentic applications.",2026-10-25
+12,OpenInference,standard,GitHub + Google,Arize-ai/openinference,1278,2,PASS,https://arize-ai.github.io/openinference/spec/semantic_conventions.html,An agent describes a reasoning block that acts on tools using the guidance of an LLM.,2026-10-25
+13,Weights & Biases Weave,platform,Google only,,,2,PASS,https://docs.coreweave.com/weave,Quickly configure your OTel-instrumented agent to send traces to Weave's OTLP endpoint.,2026-10-25
+14,MLflow,platform,GitHub + Google,mlflow/mlflow,28494,0,PASS,https://mlflow.org/docs/latest/genai/tracing/,"MLflow Tracing gives you complete visibility into your agents and LLM applications,",2026-10-25
+15,Evidently,framework,GitHub + Google,evidentlyai/evidently,8000,0,PASS (weak),https://docs.evidentlyai.com/docs/platform/tracing_overview,"including inputs, outputs and any intermediate steps and events (e.g., function calls).",2026-10-25

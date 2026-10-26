@@ -1,0 +1,174 @@
+---
+title: Concepts
+seoTitle: Observability Data Model
+description: Langfuse (open source) helps you trace and analyze LLM applications. Learn how traces and observations are structured in Langfuse.
+---
+
+# Core Concepts
+
+This page digs into the underlying concepts of how Langfuse structures and captures your data. Understanding these will make debugging and working with traces easier.
+
+Ready to start? Check out the [Get Started guide](/docs/observability/get-started) to ingest your first trace.
+
+## Observations, Traces, and Sessions [#observations-traces-and-sessions]
+
+Langfuse organizes an application's data into three core concepts: observations, traces, and sessions.
+
+### Observations & Traces [#observations-and-traces]
+
+`Observations` are the individual steps of your application: LLM calls, tool calls, retrieval steps, and so on. They can be nested to reflect the structure of your application, and Langfuse supports several LLM-specific [observation types](/docs/observability/features/observation-types) such as _generations_ and _events_. (Langfuse calls spans observations; `span` is also a specific observation type.)
+
+A `trace` represents a single request or operation, for example one chatbot interaction from the user's question to the final response. It is the logical grouping of all observations that share the same `trace_id`.
+
+Trace-level attributes such as `user_id`, `session_id`, `tags`, and `metadata` live on every observation within the trace; the SDKs propagate them automatically. Conceptually, Langfuse stores one observations table, and each row holds the observation-level data plus a copy of the trace-level attributes. This keeps queries and aggregations fast:
+
+For day-to-day work in the observations table (filter recipes, saved views, the root-observations default), see [Working with the observations table](/faq/all/explore-observations-in-v4).
+
+### Sessions [#sessions]
+
+Optionally, traces can be grouped into [sessions](/docs/observability/features/sessions).
+Sessions are used to group traces that are part of the same user interaction.
+A common example is a thread in a chat interface.
+
+Optionally, sessions aggregate traces
+
+```mermaid
+classDiagram
+    Session "1" o-- "n" Trace
+```
+
+Example session in Langfuse UI
+
+![Session view](/images/docs/session.png)
+
+Using sessions is recommended for applications with multi-turn conversations or workflows. Please refer to the [Sessions](/docs/observability/features/sessions) documentation to add sessions to your traces.
+
+## Adding Attributes
+
+Once you've structured your data into traces and observations, you can enrich them with additional attributes. These attributes act as labels that help you filter, segment, and analyze your traces for specific use cases.
+
+There are different types of attributes you can add:
+
+| Attribute                                                                   | Description                                                                                     |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [Environments](/docs/observability/features/environments)                   | Separate data from different deployment contexts like `production`, `staging`, or `development` |
+| [Tags](/docs/observability/features/tags)                                   | Flexible labels to categorize traces by feature, API endpoint, or workflow                      |
+| [User](/docs/observability/features/users)                                  | Track which end-user triggered each trace                                                       |
+| [Metadata](/docs/observability/features/metadata)                           | Flexible key-value store for custom information                                                 |
+| [Releases & Versions](/docs/observability/features/releases-and-versioning) | Track application versions and component changes                                                |
+
+## How Langfuse Captures Data
+
+Now that you understand the data model, let's explore how Langfuse actually captures and processes your traces.
+
+### Built on OpenTelemetry
+
+Langfuse is built on [OpenTelemetry](https://opentelemetry.io/), an open standard for collecting telemetry data from applications.
+
+This means you're not locked into using only Langfuse-specific SDKs. You can also send your traces to multiple destinations at once, like Langfuse for LLM observability and Datadog for infrastructure monitoring.
+
+See the [OpenTelemetry integration guide](/integrations/native/opentelemetry) for detailed documentation on integrating OpenTelemetry with Langfuse.
+
+#### Instrumentation
+
+Instrumentation is the process of adding code to your application to record what it does. Once this recording is turned on, Langfuse (through OpenTelemetry) can automatically capture these events and structure them into traces and observations.
+
+The [Get Started guide](/docs/observability/get-started) walks you through the process of instrumenting a function in your application.
+
+### Background Processing
+
+In order to avoid slowing down your application, Langfuse doesn't send traces synchronously the moment they're created.
+Instead, Langfuse batches traces locally and sends them in the background, keeping your application fast and responsive.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant User as End user
+    participant App as Application
+    participant SDK as Langfuse SDK
+    participant Exporter as Background exporter
+    participant Langfuse as Langfuse backend
+
+    loop Incoming requests over time
+        User->>App: send request
+        App->>SDK: createTrace() / log events
+        SDK->>Exporter: enqueue(trace/events)
+        Note over App,SDK: Tracing is non-blocking<br/>App continues handling request
+        App-->>User: response
+    end
+
+    loop In the background
+        Note over Exporter: Runs on a timer / batch size
+        Exporter->>Langfuse: send(batched traces)
+        Langfuse-->>Exporter: ack
+    end
+```
+
+#### Long-running applications
+
+The approach above works well for long-running applications (like web servers or APIs) because the background exporter continuously runs and has plenty of time to flush batches on its own.
+
+#### Short-lived applications
+
+For applications that start, execute something, and shut down quickly (short-lived applications), there's a risk that the application terminates while there are still unsent traces in the queue.
+
+To avoid losing data, short-lived applications **must explicitly call [`flush()`](/docs/observability/features/queuing-batching#manual-flushing) before exiting**. This forces the exporter to send all buffered traces immediately, so nothing is lost when the process terminates.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant User as End user
+    participant App as Application
+    participant SDK as Langfuse SDK
+    participant Exporter as Background exporter
+    participant Langfuse as Langfuse backend
+
+    User->>App: start script / job
+    App->>SDK: createTrace()
+    SDK->>Exporter: enqueue(trace)
+    Note over Exporter: Trace buffered in memory
+
+    alt No flush() used
+        Note over Exporter: Exporter waits for next<br/>background send
+        App-->>User: job finished
+        App-->>App: process exits
+        Note over App,Exporter: Process terminates before<br/>buffer is sent → traces lost
+    else flush() used
+        App->>SDK: flush() before exit
+        SDK->>Exporter: flush()
+        Exporter->>Langfuse: send(all buffered traces)
+        Langfuse-->>Exporter: ack
+        Note over Exporter: Buffer is now empty
+        App-->>User: job finished
+        App-->>App: process exits
+    end
+```
+
+<!-- agent-instructions -->
+
+---
+
+## Agent Instructions
+
+This page is part of the [Langfuse](https://langfuse.com) documentation, published as plain Markdown for AI agents. Every page is available as Markdown by appending `.md` to its URL, or by sending an `Accept: text/markdown` header. This page: `https://langfuse.com/docs/observability/data-model.md`.
+
+### Querying these docs
+
+If the answer is not on this page, query the documentation instead of guessing:
+
+- **Semantic search** across all Langfuse docs, returning an answer with the relevant pages and excerpts. Ask a specific, self-contained question:
+
+  ```bash
+  curl -sG "https://langfuse.com/api/search-docs" --data-urlencode "query=How do I trace a LangGraph agent?"
+  ```
+
+- **Index of every page**: <https://langfuse.com/llms.txt>, with per-section indexes [llms-docs.txt](https://langfuse.com/llms-docs.txt), [llms-integrations.txt](https://langfuse.com/llms-integrations.txt), and [llms-self-hosting.txt](https://langfuse.com/llms-self-hosting.txt).
+
+### Before writing Langfuse code
+
+- **Install the [Langfuse Agent Skill](https://langfuse.com/docs/api-and-data-platform/features/agent-skill).** It encodes Langfuse's own best practices for instrumentation, prompt management, and evaluation, and materially improves results.
+- **Read [What does a good trace look like?](https://langfuse.com/docs/observability/best-practices.md)** before instrumenting an application.
+- **Verify endpoints, parameters, and response fields** against the [API reference](https://api.reference.langfuse.com) instead of inferring them from code examples.
+- **Use the [Langfuse CLI](https://langfuse.com/docs/api-and-data-platform/features/cli)** (`npx @langfuse/cli api <resource> <action>`) to read or write traces, prompts, datasets, and scores from the terminal.
+
+Found an error in these docs? Please open an issue at <https://github.com/langfuse/langfuse-docs/issues>.

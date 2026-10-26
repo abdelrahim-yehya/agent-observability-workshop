@@ -1,0 +1,47 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://www.traceloop.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Custom Evaluators
+
+> Define an evaluator for your specific needs 
+
+Create your own evaluator to match your specific needs. You can start right away with custom criteria for full flexibility, or use one of our recommended formats as a starting point.
+
+![](https://mintcdn.com/enrolla/-xQ9K52hAYrcQGvz/img/evaluator/eval-custom-light.png?fit=max\&auto=format\&n=-xQ9K52hAYrcQGvz\&q=85\&s=875e3060f650ac2058742288d3b27e6b)
+
+## Do It Yourself
+
+This option lets you write the evaluator prompt from scratch by adding the desired messages (System, Assistant, User, or Developer) and configuring the model along with its settings.
+
+![](https://mintcdn.com/enrolla/-xQ9K52hAYrcQGvz/img/evaluator/eval-do-it-yourself-light.png?fit=max\&auto=format\&n=-xQ9K52hAYrcQGvz\&q=85\&s=61ec66544fab9316edd6f5031a327393)
+
+## Generate Evaluator
+
+The evaluator prompt can be automatically configured by Traceloop by clicking on the **Generate Evaluator** button.
+To enable the button, map the column you want to evaluate (such as an LLM response) and add any additional data columns required for prompt creation.
+Describe the evaluator’s purpose and reference the relevant data columns in the description.
+
+The system generates a prompt template that you can edit and customize as needed.
+
+## Test Evaluator
+
+Before creating an evaluator, you can test it on existing Playground data.
+This allows you to refine and correct the evaluator prompt before saving the final version.
+
+## Execute Evaluator
+
+Evaluators can be executed in [playground columns](https://www.traceloop.com/docs/playgrounds/columns/column-management.md) and in [experiments through the SDK](https://www.traceloop.com/docs/experiments/running-from-code.md).
+
+## Create via API
+
+You can programmatically create custom LLM-as-a-judge evaluators using the API.
+
+```
+POST /v2/evaluators/custom-evaluator
+```
+
+See the full [API reference](https://www.traceloop.com/docs/api-reference/evaluators/create-custom-evaluator) for detailed parameter documentation.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

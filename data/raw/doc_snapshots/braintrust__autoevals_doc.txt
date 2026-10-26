@@ -1,0 +1,102 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://www.braintrust.dev/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Autoevals
+
+> Use pre-built, battle-tested scorers for common evaluation tasks like factuality checking, semantic similarity, and format validation.
+
+The `autoevals` library provides pre-built scorers for common evaluation tasks. They are open-source, deterministic where possible, and optimized for speed and reliability. Autoevals evaluate individual spans. They do not evaluate entire traces.
+
+Available scorers include:
+
+* **Factuality**: Check if output contains factual information
+* **Semantic**: Measure semantic similarity to expected output
+* **Levenshtein**: Calculate edit distance from expected output
+* **JSON**: Validate JSON structure and content
+* **SQL**: Validate SQL query syntax and semantics
+
+See the [TypeScript](https://www.braintrust.dev/docs/sdks/typescript/related/autoevals/latest.md) or [Python](https://www.braintrust.dev/docs/sdks/python/related/autoevals/latest.md) reference for the complete list.
+
+You can use autoevals inline in SDK evaluation code, or select them in the UI when running experiments, testing in playgrounds, or setting up online scoring rules. There is no CLI push step. Autoevals are library imports, not pushed scorers.
+
+## Install
+
+Install the `autoevals` package for your language:
+
+```bash TypeScript theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+# pnpm
+pnpm add autoevals
+# npm
+npm install autoevals
+```
+
+```bash Python theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+pip install autoevals
+```
+
+## Score with the SDK
+
+Use autoevals inline in your evaluation code:
+
+```typescript wrap theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+import { Eval, initDataset } from "braintrust";
+import { Factuality } from "autoevals";
+
+Eval("My Project", {
+  experimentName: "My experiment",
+  data: initDataset("My Project", { dataset: "My Dataset" }),
+  task: async (input) => {
+    // Your LLM call here
+    return await callModel(input);
+  },
+  scores: [Factuality],
+  metadata: {
+    model: "gpt-5-mini",
+  },
+});
+```
+
+```python wrap theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+from braintrust import Eval, init_dataset
+from autoevals import Factuality
+
+Eval(
+    "My project",
+    experiment_name="My experiment",
+    data=init_dataset(project="My project", name="My dataset"),
+    task=lambda input: call_model(input),  # Your LLM call here
+    scores=[Factuality],
+    metadata={
+        "model": "gpt-5-mini",
+    },
+)
+```
+
+Autoevals automatically receive these parameters when used in evaluations:
+
+* `input`: The input to your task
+* `output`: The output from your task
+* `expected`: The expected output (optional)
+* `metadata`: Custom metadata from the test case
+
+## Score in the UI
+
+* **Use in playgrounds**: When testing prompts in [playgrounds](https://www.braintrust.dev/docs/evaluate/playgrounds.md), add autoevals in the scoring section to evaluate results interactively.
+* **Use in experiments**: When creating [experiments](https://www.braintrust.dev/docs/evaluate/run-in-ui.md), select autoevals from the scorer dropdown to measure output quality across your dataset.
+* **Use in online scoring**: Add autoevals to [online scoring rules](https://www.braintrust.dev/docs/evaluate/score-online.md) to automatically evaluate production logs. Set the rule's **Scope** to **Span**, since autoevals evaluate individual spans.
+
+## Set pass thresholds
+
+Define minimum acceptable scores to automatically mark results as passing or failing. When configured, scores that meet or exceed the threshold are marked as **passing** (green highlighting with checkmark), while scores below are marked as **failing** (red highlighting).
+
+In the UI, use the **Pass threshold** slider when selecting a scorer in an experiment, playground, or online scoring rule configuration.
+
+## Next steps
+
+* [LLM-as-a-judge](https://www.braintrust.dev/docs/evaluate/llm-as-a-judge.md) for subjective judgments like tone or helpfulness
+* [Custom code](https://www.braintrust.dev/docs/evaluate/custom-code.md) for business rules, pattern matching, or calculations
+* [Run evaluations](https://www.braintrust.dev/docs/evaluate/run-evaluations.md) using your scorers
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

@@ -1,0 +1,163 @@
+tool,metric_name,taxonomy_metric
+Arize Phoenix,Tool Invocation,Tool argument validity
+Arize Phoenix,Tool Response Handling,Tool response handling
+Arize Phoenix,Tool Selection,Tool selection
+Arize Phoenix,Completion token details,Output tokens
+Arize Phoenix,Completion token details,Reasoning tokens
+Arize Phoenix,Cost,Estimated cost
+Arize Phoenix,LLM span counts,LLM call count
+Arize Phoenix,LLM spans with errors,Error count / rate
+Arize Phoenix,Prompt token details,Input tokens
+Arize Phoenix,Prompt token details,Cached tokens
+Arize Phoenix,Token usage,Input tokens
+Arize Phoenix,Token usage,Output tokens
+Arize Phoenix,Token-based cost tracking,Estimated cost
+Arize Phoenix,Tool span counts,Tool call count
+Arize Phoenix,Tool spans with errors,Tool execution errors
+Arize Phoenix,Tool spans with errors,Error count / rate
+Arize Phoenix,Top models by cost,Estimated cost
+Arize Phoenix,Top models by tokens,Total tokens
+Arize Phoenix,Trace Latency,Trace / run latency
+Arize Phoenix,llm.token_count.total,Total tokens
+Langfuse,Cost details,Estimated cost
+Langfuse,Cost details,Cost breakdown by token type
+Langfuse,Inferred cost,Estimated cost
+Langfuse,Usage details,Input tokens
+Langfuse,Usage details,Output tokens
+Langfuse,latency,Trace / run latency
+Langfuse,totalCost,Estimated cost
+LangSmith,Plan Adherence,Plan adherence
+LangSmith,Task Completion,Task / goal completion
+LangSmith,Tool Selection,Tool selection
+LangSmith,Tool Selection,Tool call efficiency
+LangSmith,Trajectory Accuracy,Trajectory accuracy
+LangSmith,openevals trajectory match,Trajectory accuracy
+LangSmith,Automatic token and cost recording,Total tokens
+LangSmith,Automatic token and cost recording,Estimated cost
+LangSmith,Cost & Tokens (prebuilt dashboard),Input tokens
+LangSmith,Cost & Tokens (prebuilt dashboard),Output tokens
+LangSmith,Cost & Tokens (prebuilt dashboard),Estimated cost
+LangSmith,Cost & Tokens (prebuilt dashboard),Cost breakdown by token type
+LangSmith,Cost (dashboard metric),Estimated cost
+LangSmith,Cost (dashboard metric),Cost breakdown by token type
+LangSmith,LLM call count and latency (prebuilt dashboard),LLM call count
+LangSmith,LLM call count and latency (prebuilt dashboard),LLM call latency
+LangSmith,Latency (dashboard metric),Trace / run latency
+LangSmith,Time to first token (dashboard metric),Time to first token
+LangSmith,Tokens (dashboard metric),Total tokens
+LangSmith,Tokens (dashboard metric),Input tokens
+LangSmith,Tokens (dashboard metric),Output tokens
+LangSmith,"Tool run counts, error rates and latency (prebuilt dashboard)",Tool call count
+LangSmith,"Tool run counts, error rates and latency (prebuilt dashboard)",Tool execution errors
+LangSmith,"Tool run counts, error rates and latency (prebuilt dashboard)",Tool execution latency
+LangSmith,"Trace count, latency and error rates (prebuilt dashboard)",Trace / span count
+LangSmith,"Trace count, latency and error rates (prebuilt dashboard)",Trace / run latency
+LangSmith,"Trace count, latency and error rates (prebuilt dashboard)",Error count / rate
+DeepEval,Argument Correctness,Tool argument validity
+DeepEval,Goal Accuracy,Task / goal completion
+DeepEval,MCP Task Completion,Task / goal completion
+DeepEval,MCP-Use,Tool call correctness
+DeepEval,Multi-Turn MCP-Use,Tool call correctness
+DeepEval,Plan Adherence,Plan adherence
+DeepEval,Plan Quality,Plan quality
+DeepEval,Step Efficiency,Step / action efficiency
+DeepEval,Task Completion,Task / goal completion
+DeepEval,Tool Correctness,Tool call correctness
+DeepEval,Tool Use,Tool selection
+DeepEval,Tool Use,Tool argument validity
+OpenTelemetry,gen_ai.client.inference.operation.input_tokens,Input tokens
+OpenTelemetry,gen_ai.client.inference.operation.output_tokens,Output tokens
+OpenTelemetry,gen_ai.client.inference.usage.cache_read.input_tokens,Cached tokens
+OpenTelemetry,gen_ai.client.inference.usage.cache_write.input_tokens,Cached tokens
+OpenTelemetry,gen_ai.client.inference.usage.input_tokens,Input tokens
+OpenTelemetry,gen_ai.client.inference.usage.output_tokens,Output tokens
+OpenTelemetry,gen_ai.client.inference.usage.reasoning.output_tokens,Reasoning tokens
+OpenTelemetry,gen_ai.client.operation.duration,LLM call latency
+OpenTelemetry,gen_ai.execute_tool.duration,Tool execution latency
+OpenTelemetry,gen_ai.invoke_agent.duration,Trace / run latency
+OpenTelemetry,gen_ai.invoke_agent.inference_calls,LLM call count
+OpenTelemetry,gen_ai.invoke_agent.tool_calls,Tool call count
+OpenTelemetry,gen_ai.invoke_workflow.duration,Trace / run latency
+OpenTelemetry,gen_ai.server.request.duration,LLM call latency
+OpenTelemetry,gen_ai.server.time_per_output_token,Time per output token / generation time
+OpenTelemetry,gen_ai.server.time_to_first_token,Time to first token
+Helicone,cost / provider_total_cost,Estimated cost
+Helicone,"prompt_tokens, completion_tokens, total_tokens",Input tokens
+Helicone,"prompt_tokens, completion_tokens, total_tokens",Output tokens
+Helicone,"prompt_tokens, completion_tokens, total_tokens",Total tokens
+Braintrust,Time to first token,Time to first token
+Braintrust,estimated_cost,Estimated cost
+Braintrust,estimated_cost_breakdown,Cost breakdown by token type
+Braintrust,metrics.completion_tokens,Output tokens
+Braintrust,metrics.latency,Span duration
+Braintrust,metrics.prompt_tokens,Input tokens
+Braintrust,metrics.total_tokens,Total tokens
+promptfoo,is-valid-function-call,Tool argument validity
+promptfoo,is-valid-openai-tools-call,Tool argument validity
+promptfoo,skill-used,Tool call correctness
+promptfoo,tool-call-f1,Tool call correctness
+promptfoo,trace-error-spans,Error count / rate
+promptfoo,trace-span-count,Trace / span count
+promptfoo,trace-span-duration,Span duration
+promptfoo,trajectory:goal-success,Task / goal completion
+promptfoo,trajectory:step-count,Step count
+promptfoo,trajectory:tool-args-match,Tool argument validity
+promptfoo,trajectory:tool-sequence,Trajectory accuracy
+promptfoo,trajectory:tool-used,Tool call correctness
+promptfoo,PromptMetrics.cost,Estimated cost
+promptfoo,PromptMetrics.totalLatencyMs,LLM call latency
+promptfoo,TokenUsage,Input tokens
+promptfoo,TokenUsage,Output tokens
+promptfoo,TokenUsage,Cached tokens
+promptfoo,TokenUsage,Total tokens
+promptfoo,cost,Estimated cost
+promptfoo,latency,LLM call latency
+OpenLLMetry,Agent Efficiency,Step / action efficiency
+OpenLLMetry,Agent Flow Quality,Flow and reasoning coherence
+OpenLLMetry,Agent Goal Accuracy,Task / goal completion
+OpenLLMetry,Agent Goal Completeness,Task / goal completion
+OpenLLMetry,Agent Tool Trajectory,Trajectory accuracy
+OpenLLMetry,Tool Error,Tool execution errors
+OpenLLMetry,gen_ai.client.operation.duration,LLM call latency
+OpenLLMetry,gen_ai.client.token.usage,Input tokens
+OpenLLMetry,gen_ai.client.token.usage,Output tokens
+OpenLLMetry,llm.anthropic.completion.exceptions,Error count / rate
+OpenLLMetry,llm.chat_completions.streaming_time_to_generate,Time per output token / generation time
+OpenLLMetry,llm.openai.chat_completions.exceptions,Error count / rate
+OpenLLMetry,llm.openai.embeddings.exceptions,Error count / rate
+OpenLLMetry,llm.openai.image_generations.exceptions,Error count / rate
+OpenLLMetry,llm.watsonx.completions.duration,LLM call latency
+OpenLLMetry,llm.watsonx.completions.exceptions,Error count / rate
+OpenLLMetry,llm.watsonx.completions.tokens,Total tokens
+Opik,Agent Task Completion Judge,Task / goal completion
+Opik,Agent Tool Correctness Judge,Tool call correctness
+Opik,Trajectory Accuracy,Trajectory accuracy
+Opik,Estimated cost,Estimated cost
+Opik,"Latency (trace duration, span duration, p50/p90/p99)",Trace / run latency
+Opik,"Latency (trace duration, span duration, p50/p90/p99)",Span duration
+Opik,Token usage (input/output/total tokens),Input tokens
+Opik,Token usage (input/output/total tokens),Output tokens
+Opik,Token usage (input/output/total tokens),Total tokens
+Opik,Trace count / error count,Trace / span count
+Opik,Trace count / error count,Error count / rate
+Galileo,Action Advancement,Action progress toward goal
+Galileo,Action Completion,Task / goal completion
+Galileo,Agent Efficiency,Step / action efficiency
+Galileo,Agent Flow,Flow and reasoning coherence
+Galileo,Reasoning Coherence,Flow and reasoning coherence
+Galileo,Tool Errors,Tool execution errors
+Galileo,Tool Selection Quality,Tool selection
+Weights & Biases Weave,Errors (Call errors),Error count / rate
+Weights & Biases Weave,Latency (Call timing),Span duration
+Weights & Biases Weave,Token usage and cost (automatic),Total tokens
+Weights & Biases Weave,Token usage and cost (automatic),Estimated cost
+MLflow,ConversationalToolCallEfficiency,Tool call efficiency
+MLflow,ToolCallCorrectness,Tool call correctness
+MLflow,ToolCallCorrectness,Tool argument validity
+MLflow,ToolCallEfficiency,Tool call efficiency
+MLflow,Cost,Estimated cost
+MLflow,Latency,Span duration
+MLflow,Token usage,Input tokens
+MLflow,Token usage,Output tokens
+MLflow,Token usage,Total tokens
+Langfuse,completion_start_time (time to first token),Time to first token

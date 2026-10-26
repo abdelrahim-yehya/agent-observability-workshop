@@ -1,0 +1,276 @@
+> For clean Markdown of any page, append .md to the page URL.
+> For a complete documentation index, see https://www.comet.com/docs/opik/llms.txt.
+
+# Dashboards
+
+> Build dashboards to monitor the volume, cost, latency, and quality of your agents, and to compare experiment results.
+
+Dashboards chart your traces, threads, spans, and experiment scores so you can see how an agent behaves over time. You can use them in three places:
+
+* **Project dashboards:** open a project and select **Dashboards** under **Observability** in the sidebar. Every project includes the built-in **Project overview** dashboard, and you can add your own views.
+* **Workspace dashboards:** select **Dashboards** in the workspace sidebar to build dashboards that span several projects or compare experiments.
+* **Experiment insights:** the **Insights** tab of the experiment comparison page charts the scores of the selected experiments.
+
+![The built-in Project overview dashboard of a project](/docs/opik/_fern-img/97b762e62ad9b58ae158b2e4d1ee0bcc6e529bd288505b1563d11ff04c523e51.webp)
+
+## Project dashboards
+
+The **Dashboards** page of a project opens on **Project overview**, a read-only dashboard with three sections:
+
+* **At a glance:** trace count, error count, p50 and p99 latency, and total estimated cost.
+* **Volume, latency & cost:** trace volume, trace duration, and estimated cost over time.
+* **Quality & conversations:** trace feedback scores, thread volume, thread duration, and thread feedback scores.
+
+### Custom views
+
+To build your own view of a project:
+
+1. Open the view selector at the top of the page (it shows **Project overview** by default).
+2. Click **Add new**.
+3. Enter a name and click **Create view**.
+
+Widgets in a project view always read data from the current project, so they have no project selector. To start from the built-in charts, hover **Project overview** in the view selector and click **Duplicate**. The copy is fully editable.
+
+![The view selector with the built-in Project overview and two custom views](/docs/opik/_fern-img/9cf8921eb0613bc353740b70cfe36f1396ea1ea15cc1c5a257e13b7a6cb7388c.webp)
+
+Hover a custom view in the selector to **Edit** its name, **Duplicate** it, or **Delete** it.
+
+## Workspace dashboards
+
+Workspace dashboards are not tied to a project. Each widget picks its own data, so one dashboard can follow several agents side by side.
+
+![A workspace dashboard with metrics from three projects](/docs/opik/_fern-img/9b6e675b2941c07559ad8faece6b8cc202d9cc4e088a5f993aba35ece9131a88.webp)
+
+Every workspace dashboard has a type, which sets the widgets you can add:
+
+| Type              | Use it to                                                                   | Widgets                                           |
+| ----------------- | --------------------------------------------------------------------------- | ------------------------------------------------- |
+| **Multi-project** | Track traces, threads, spans, cost, and latency across one or more projects | Time series, Single metric, Markdown, Ollie chart |
+| **Experiments**   | Compare feedback scores across experiment runs                              | Metrics, Leaderboard, Markdown, Ollie chart       |
+
+### Creating a workspace dashboard
+
+1. Select **Dashboards** in the workspace sidebar.
+2. Click **Create dashboard**.
+3. Enter a **Name** and pick a **Type**: **Multi-project dashboard** or **Experiments dashboard**.
+4. Optionally, expand **Description** and add one.
+5. Click **Create dashboard**.
+
+![The Create dashboard dialog](/docs/opik/_fern-img/d84c45d95a1e2b767f54e6bad344ac8344d511fd67cb9b5bd41ae81661d4990a.webp)
+
+The new dashboard opens with an empty **Overview** section, ready for its first widget.
+
+The **Dashboards** page lists every workspace dashboard with its type and when it was last updated. Use the row menu to **Edit** the name and description, **Clone** the dashboard, or **Delete** it, and filter the list by **Type**.
+
+![The list of workspace dashboards](/docs/opik/_fern-img/81b9428b163d9b176c1adb6b104316f8fe2380aeaa72779cc961cde3416d5d27.webp)
+
+## Experiment insights
+
+On the experiment comparison page, the **Insights** tab shows **Experiments overview**, a read-only dashboard for the experiments you selected. It contains a radar chart and a bar chart of their feedback scores. The tab isn't available for test suite experiments.
+
+![The Insights tab of the experiment comparison page](/docs/opik/_fern-img/bd290d6c50d9a8f37c342feea51be0dd48259dc17a3ec5c169c0bc3da46e12e4.webp)
+
+To track experiments over time or build your own charts, create an **Experiments** workspace dashboard.
+
+## Adding widgets
+
+1. Click **Add widget** in the header of a section, or **Ask Ollie** to describe a custom one (see [Custom widgets with Ollie](#custom-widgets-with-ollie)).
+2. Pick a **Widget type**. The list depends on the dashboard type.
+3. Fill in the settings for that widget type. The **Widget preview** on the right updates as you go.
+4. Optionally, click the title or **Click to add a description** in the preview to rename the widget or describe it.
+5. Click **Add widget**.
+
+![The Add widget dialog with the widget settings on the left and a live preview on the right](/docs/opik/_fern-img/6c53fb07e1dabe79d64cb48604fe0742c005462d200638a12b9bbb25809359bf.webp)
+
+> **Tip**
+>
+> Need a chart that no built-in widget covers? Click **Ask Ollie** next to **Need a custom widget?** at the bottom of
+> the dialog, or read [Custom widgets with Ollie](#custom-widgets-with-ollie).
+
+## Widget types
+
+### Time series
+
+Charts a project metric over time as a **Line chart** or a **Bar chart**.
+
+![A time series widget showing cost grouped by model](/docs/opik/_fern-img/9e7b6e669dc239cbc8e1e407f0beb4bb9e6f6ee7d34d485c71700d5a1fde999c.webp)
+
+**Settings:**
+
+* **Project** (workspace dashboards only): one or more projects, or **All projects in the workspace**. With more than one project, the only metric available is **Span token usage**.
+* **Metric type:**
+  * Traces: **Trace metrics** (feedback scores), **Number of traces**, **Trace duration**, **Token usage**, **Estimated cost**, **Failed guardrails**
+  * Threads: **Number of threads**, **Thread duration**, **Thread estimated cost**, **Thread metrics**
+  * Spans: **Number of spans**, **Span duration**, **Span estimated cost**, **Span metrics**, **Span token usage**
+* **Metrics**, **Duration metrics**, or **Usage metrics**: pick the scores, percentiles (P50, P90, P99), or token counts to plot. Leave the field empty to plot all of them.
+* **Filters:** limit the data to matching traces, threads, or spans, for example by tag, metadata, or feedback score.
+* **Group by:** split the metric into one series per value of a field:
+
+  * Trace metrics: **Tags**, **Metadata** (with a key), **Name**, **Has error**, **Error type**
+  * **Failed guardrails**: the trace fields plus **Guardrail name**
+  * Span metrics: the trace fields plus **Model**, **Provider**, and **Span type**
+  * Thread metrics: **Tags**
+  * **Thread estimated cost** and **Span estimated cost** can't be grouped
+
+  To group a score, duration, or token metric, select exactly one score, percentile, or token count first. Set **Aggregation mode** to **Time-based** for one value per time bucket, or to **Total** for one value per group over the whole date range.
+
+Click a series name in the legend to open the project **Logs** filtered to that series.
+
+### Single metric
+
+Shows one number, such as a trace count, a latency percentile, or a total cost.
+
+![A section of single metric widgets](/docs/opik/_fern-img/44f7caf66548af03710f3fc218687092e040bf10f1aa781c84e986dff97d8591.webp)
+
+**Settings:**
+
+* **Project** (workspace dashboards only): one project, several projects, or **All projects in the workspace**. With more than one project, the metric is **Total span token usage** and you pick the **Usage metric**.
+* **Source:** **Traces** or **Spans**.
+* **Metric type:**
+  * Traces only: **Total trace count**, **Total thread count**, **Average LLM span count**, **Average span count**, **Average estimated cost per trace**, **Total guardrails failed count**
+  * Spans only: **Total span count**, **Average estimated cost per span**
+  * Both: **P50 duration**, **P90 duration**, **P99 duration**, **Total input count**, **Total output count**, **Total metadata count**, **Average number of tags**, **Total estimated cost sum**, **Avg input tokens**, **Avg output tokens**, **Avg total tokens**, **Total error count**, and an **Average** entry for each feedback score
+* **Filters:** limit the data to matching traces or spans.
+
+### Metrics
+
+Compares experiment feedback scores as a **Bar chart** (default), **Line chart**, or **Radar chart**. Available on Experiments dashboards.
+
+![A metrics widget comparing scores across seven experiments](/docs/opik/_fern-img/3d0fcf17b9d1649f227b5c676c13a2ed9cc31f7a928b9b515488b6abee1dc4fe.webp)
+
+**Settings:**
+
+* **Metrics:** the scores to show. Leave it empty to show all of them.
+* **Filter experiments:** target experiments by **Experiments**, **Item source** (the dataset or test suite), **Tags**, or **Configuration** (experiment configuration keys such as `model`). Leave it empty to include all experiments.
+* **Group by:** aggregate scores by **Item source**, **Tags**, or **Configuration**, up to five levels. Grouping isn't available when you filter by specific experiments.
+* **Max experiments:** how many experiments to load, up to 100. The default is 10.
+
+### Leaderboard
+
+Ranks experiments in a table. Available on Experiments dashboards.
+
+![A leaderboard widget ranking experiments by answer relevance](/docs/opik/_fern-img/6e04e9cf50f460b0a4ee1b6a3619ceefa71e5d81165e50e454c008c71c6c442d.webp)
+
+**Settings:**
+
+* **Filter experiments** and **Max experiments:** the same as the Metrics widget.
+* **Columns:** pick and reorder columns, such as **Item source**, **Avg duration**, **Total estimated cost**, **Pass rate**, experiment configuration keys, and feedback scores.
+* **Ranking metric:** a feedback score to rank by, or **No ranking**.
+* **Ranking order:** **High first** or **Low first**.
+
+### Markdown
+
+Adds text, links, and notes to a dashboard, for example a description of what the dashboard tracks or an on-call checklist. Available on all dashboards.
+
+![A markdown widget with an on-call checklist](/docs/opik/_fern-img/9aa427e2f4f17c4b0f37451af1541f4a137ba09e3ae253f5f4ccd4840c044379.webp)
+
+### Ollie chart
+
+A chart or table that Ollie built from a description you typed, backed by a query over your workspace data. It isn't in the **Pick a chart** list: you create one by asking Ollie, as described in [Custom widgets with Ollie](#custom-widgets-with-ollie). Available on all dashboards on Opik Cloud.
+
+## Custom widgets with Ollie
+
+When no built-in widget shows what you need, describe the chart to [Ollie](/docs/opik/ollie). Ollie writes a read-only query over your workspace's traces, spans, threads, feedback scores, experiments, and datasets, draws the chart in the chat, and adds it to a dashboard as an **Ollie chart** widget. The widget keeps the query and re-runs it whenever the dashboard loads, so the chart stays live.
+
+> **Note**
+>
+> Custom widgets are available on Opik Cloud, where Ollie is available. Ollie's queries are read-only and limited to
+> the workspace you are in.
+
+### Ask Ollie for a widget
+
+#### Open Ollie from the dashboard
+
+Start from the dashboard the widget belongs on, so Ollie can add the chart there in one click:
+
+* Click **Add widget** in a section header and choose **Ask Ollie**.
+* In an empty section, click the **Ask Ollie** card.
+* In the **Add widget** dialog, click **Ask Ollie** next to **Need a custom widget?**.
+
+Ollie opens in the sidebar and asks what the widget should show. You can also open Ollie from any other page and ask for a chart; you then pick the dashboard when you add it.
+
+![The Add widget menu of an empty section, with Pick a chart and Ask Ollie](/docs/opik/_fern-img/d8d88b9d6903081d954e5d25326a74254a8ab203e8b3dda2fc8582738ee6ba19.webp)
+
+#### Describe the chart
+
+Say what to measure, how to break it down, and which period to cover. For example:
+
+* *"Average trace duration per day for the last 7 days, one line per tag."*
+* *"Total tokens by model over the last 30 days, as a bar chart."*
+* *"A table of the 10 slowest tool spans with their name and duration."*
+* *"Average hallucination score per experiment on the support-bot dataset."*
+
+Ollie writes the query, runs it, and shows the result in the chat. It can draw bar, line, area, scatter, bubble, pie and donut, heatmap, histogram, box plot, funnel, gauge, and waterfall charts, and it can show a table. It can't draw radar, treemap, sunburst, sankey, network, or map charts, or put two y-axes on one chart: it offers the closest chart, or one chart per metric, instead.
+
+Reply in the chat to refine the result: *"make it a line chart"*, *"group by model instead"*, *"last 14 days"*. Ollie redraws the chart in place.
+
+#### Add it to a dashboard
+
+Click **Add to “Dashboard name”** on the chart card to add the chart to the dashboard you started from. **Add to different dashboard** (or **Add to dashboard…** when you started from another page) lists the other dashboards the chart can go on and lets you create a new one. You can also ask in the chat: *"add it to the Latency dashboard"*.
+
+![Ollie's chart card in the sidebar, with the chart it drew and the Add to dashboard button, next to the empty dashboard](/docs/opik/_fern-img/1986d6422dfee64c3e9d6006f234fad82da0e2d918efc737b6c04248c2dd2103.webp)
+
+The widget lands in the first section of the dashboard, and an open dashboard reloads to show it. From then on it behaves like any other widget: move it, resize it, or [edit it in Ollie](#editing-an-ollie-chart).
+
+### How an Ollie chart widget works
+
+* The title carries an owl badge, **Created with Ollie**. The header shows when the chart was last computed, with a refresh icon next to it.
+* Each time the dashboard loads, the widget re-runs its query. On project dashboards and Multi-project dashboards it uses the dashboard's [date range](#date-range), so changing the range changes the chart. Experiments dashboards have no date range, so the widget shows whatever period the query covers.
+* The widget's **...** menu offers **Edit in Ollie**, **Refresh**, **Duplicate**, and **Remove**.
+* The query is read-only, scoped to your workspace, and only Ollie can create or change it.
+
+![An Ollie chart widget on a project dashboard, with the Created with Ollie badge next to its title](/docs/opik/_fern-img/13f74dfaec271f3a2eacbf31f7cdf31ce938786b04d9ec740ab0155268344e01.webp)
+
+### Editing an Ollie chart
+
+1. Open the widget's **...** menu and click **Edit in Ollie**.
+2. Ollie opens with the current chart pinned at the top of the chat, marked **On the dashboard now**. Describe what to change, for example *"show it as a line chart"* or *"group by provider instead of model"*.
+3. Under the redrawn chart, click **Save changes** to replace the widget in place, keeping its position and size, or **Duplicate** to add the new version next to the original.
+
+If Ollie isn't available, the menu shows **Edit** instead, which opens the chart's Vega-Lite spec for manual changes.
+
+### When a widget shows a message instead of a chart
+
+| Message                             | Why                                                                                                          | What to do                                                      |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| **No data for the selected period** | The query returned no rows for the current date range                                                        | Widen the date range, or ask Ollie to loosen the filters        |
+| **Query not found**                 | The query behind the widget no longer exists                                                                 | Ask Ollie to create the chart again, then remove the old widget |
+| **Data is masked**                  | Sensitive data is masked for your account in this workspace, and a chart from a custom query can't be masked | Ask a workspace admin for access to the original data           |
+
+## Organizing a dashboard
+
+**Sections** group widgets:
+
+* Click **Add section** at the bottom of the dashboard to add one.
+* Hover a section title and click the pencil icon to rename it.
+* Click a section header to collapse or expand it. Opik remembers the state.
+* Use the section **...** menu to **Insert section above**, **Insert section below**, or **Delete section**. A dashboard always keeps at least one section.
+* Drag the handle on the right of a section header to reorder sections.
+
+**Widgets** sit on a six-column grid:
+
+* Drag a widget to move it, and drag its edge to resize it.
+* Use the widget **...** menu to **Edit widget**, **Duplicate widget**, **Move to section**, or **Delete widget**. An Ollie chart's menu offers **Edit in Ollie**, **Refresh**, **Duplicate**, and **Remove** instead.
+
+## Date range
+
+Project dashboards and Multi-project dashboards have a date range picker in the toolbar. Pick **Past 24 hours**, **Past 3 days**, **Past 7 days**, **Past 30 days**, **Past 60 days**, or **Custom dates**. The default is the past 30 days.
+
+Time series, Single metric, and Ollie chart widgets use the date range. Experiments dashboards and experiment insights have no date range: they always show the selected experiments.
+
+## Saving and permissions
+
+Opik saves every change automatically, and the toolbar shows **Saving...** and then **Saved**. There is no save button.
+
+**Project overview** and **Experiments overview** are read-only. Duplicate **Project overview** to get an editable copy. Users without edit permission see every dashboard as read-only.
+
+## Sharing a dashboard
+
+Click **Share** to copy a link to the dashboard. The link includes the selected date range, so your teammates see the same view. They need access to the workspace to open it.
+
+## Next steps
+
+* Set up [online evaluation rules](/docs/opik/production/online-evaluation/rules) to score production traces and chart the scores on your dashboards.
+* Configure [alerts](/docs/opik/production/alerts/alerts) to get notified when a metric crosses a threshold.
+* Read [Production monitoring](/docs/opik/tracing/dashboards/production_monitoring) for more ways to monitor agents in production.
+* Meet [Ollie](/docs/opik/ollie), the assistant that builds custom widgets and helps you debug the traces behind them.

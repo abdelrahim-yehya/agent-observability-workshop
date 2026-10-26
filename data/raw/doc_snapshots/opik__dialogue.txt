@@ -1,0 +1,47 @@
+> For clean Markdown of any page, append .md to the page URL.
+> For a complete documentation index, see https://www.comet.com/docs/opik/llms.txt.
+
+# Dialogue helpfulness
+
+> Measure how helpful an assistant reply is within a dialogue
+
+# Dialogue Helpfulness Judge
+
+`DialogueHelpfulnessJudge` rates how helpful an assistant reply is. It rewards responses that acknowledge the user’s request, use the available context, and offer actionable guidance. The judge only sees the `output` string, so to have it weigh the earlier turns, include them in `output` together with the reply.
+
+**`Scoring a support reply`**
+
+```python title="Scoring a support reply" wordWrap
+from opik.evaluation.metrics import DialogueHelpfulnessJudge
+
+dialogue = """USER: My VPN disconnects every 5 minutes.
+ASSISTANT: Try reinstalling the client.
+USER: I already did.
+LATEST ASSISTANT REPLY: Can you send logs? I'll escalate to network engineering.
+"""
+
+metric = DialogueHelpfulnessJudge()
+score = metric.score(output=dialogue)
+
+print(score.value)
+print(score.reason)
+```
+
+## Inputs
+
+| Argument | Type  | Required | Description                                                                                                                     |
+| -------- | ----- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `output` | `str` | **Yes**  | Text sent to the judge. Put the conversation history (alternating USER / ASSISTANT blocks) and the latest assistant reply here. |
+
+`input`, `conversation`, and any other keyword arguments are accepted but ignored: they never reach the judge prompt.
+
+## Configuration
+
+| Parameter      | Default      | Notes                                                          |
+| -------------- | ------------ | -------------------------------------------------------------- |
+| `model`        | `gpt-5-nano` | Switch to a larger evaluator for complex enterprise workflows. |
+| `temperature`  | `0.0`        | Use low temperature for reproducible benchmarks.               |
+| `track`        | `True`       | Record the evaluation in Opik.                                 |
+| `project_name` | `None`       | Set when routing results to a different project.               |
+
+Integrate this judge into regression suites to catch regressions after prompt changes or upgrades to your assistant model.

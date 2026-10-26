@@ -1,0 +1,168 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://www.traceloop.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Made by Traceloop
+
+> Pre-configured evaluators by Traceloop for common assessment tasks
+
+The Evaluator Library provides a comprehensive collection of pre-built quality checks designed to systematically assess AI outputs.
+
+Each evaluator comes with a predefined input and output schema. When using an evaluator, you'll need to map your data to its input schema.
+
+![](https://mintcdn.com/enrolla/-xQ9K52hAYrcQGvz/img/evaluator/eval-made-by-traceloop-light.png?fit=max\&auto=format\&n=-xQ9K52hAYrcQGvz\&q=85\&s=99441f9ee05624cc1167e7a16600984d)
+
+## Evaluator Types
+
+### Style
+
+> **[Character Count](https://www.traceloop.com/docs/api-reference/evaluators/execute-char-count-evaluator.md)**
+>
+> Analyze response length and verbosity to ensure outputs meet specific length requirements.
+
+> **[Character Count Ratio](https://www.traceloop.com/docs/api-reference/evaluators/execute-char-count-ratio-evaluator.md)**
+>
+> Measure the ratio of characters to the input to assess response proportionality and expansion.
+
+> **[Word Count](https://www.traceloop.com/docs/api-reference/evaluators/execute-word-count-evaluator.md)**
+>
+> Ensure appropriate response detail level by tracking the total number of words in outputs.
+
+> **[Word Count Ratio](https://www.traceloop.com/docs/api-reference/evaluators/execute-word-count-ratio-evaluator.md)**
+>
+> Measure the ratio of words to the input to compare input/output verbosity and expansion patterns.
+
+> **[Tone Detection](https://www.traceloop.com/docs/api-reference/evaluators/execute-tone-detection-evaluator.md)**
+>
+> Detect and classify the tone of AI responses to ensure appropriate communication style.
+
+### Quality & Correctness
+
+> **[Answer Relevancy](https://www.traceloop.com/docs/api-reference/evaluators/execute-answer-relevancy-evaluator.md)**
+>
+> Verify responses address the query to ensure AI outputs stay on topic and remain relevant.
+
+> **[Faithfulness](https://www.traceloop.com/docs/api-reference/evaluators/execute-faithfulness-evaluator.md)**
+>
+> Detect hallucinations and verify facts to maintain accuracy and truthfulness in AI responses.
+
+> **[Answer Correctness](https://www.traceloop.com/docs/api-reference/evaluators/execute-answer-correctness-evaluator.md)**
+>
+> Evaluate factual accuracy by comparing answers against ground truth.
+
+> **[Answer Completeness](https://www.traceloop.com/docs/api-reference/evaluators/execute-answer-completeness-evaluator.md)**
+>
+> Measure how completely responses use relevant context to ensure all relevant information is addressed.
+
+> **[Topic Adherence](https://www.traceloop.com/docs/api-reference/evaluators/execute-topic-adherence-evaluator.md)**
+>
+> Validate topic adherence to ensure responses stay focused on the specified subject matter.
+
+> **[Semantic Similarity](https://www.traceloop.com/docs/api-reference/evaluators/execute-semantic-similarity-evaluator.md)**
+>
+> Validate semantic similarity between expected and actual responses to measure content alignment.
+
+> **[Instruction Adherence](https://www.traceloop.com/docs/api-reference/evaluators/execute-instruction-adherence-evaluator.md)**
+>
+> Measure how well the LLM response follows given instructions to ensure compliance with specified requirements.
+
+> **[Measure Perplexity](https://www.traceloop.com/docs/api-reference/evaluators/execute-perplexity-evaluator.md)**
+>
+> Measure text perplexity from logprobs to assess the predictability and coherence of generated text.
+
+> **[Uncertainty Detector](https://www.traceloop.com/docs/api-reference/evaluators/execute-uncertainty-detector-evaluator.md)**
+>
+> Generate responses and measure model uncertainty from logprobs to identify when the model is less confident in its outputs.
+
+> **[Context Relevance](https://www.traceloop.com/docs/api-reference/evaluators/execute-context-relevance-evaluator.md)**
+>
+> Validate context relevance to ensure retrieved context is pertinent to the query.
+
+> **[Prompt Perplexity](https://www.traceloop.com/docs/api-reference/evaluators/execute-prompt-perplexity-evaluator.md)**
+>
+> Measure prompt perplexity from logprobs to assess the complexity and clarity of input prompts.
+
+### Security & Compliance
+
+> **[PII Detection](https://www.traceloop.com/docs/api-reference/evaluators/execute-pii-detector-evaluator.md)**
+>
+> Identify personal information exposure to protect user privacy and ensure data security compliance.
+
+> **[Profanity Detection](https://www.traceloop.com/docs/api-reference/evaluators/execute-profanity-detector-evaluator.md)**
+>
+> Flag inappropriate language use to maintain content quality standards and professional communication.
+
+> **[Sexism Detection](https://www.traceloop.com/docs/api-reference/evaluators/execute-sexism-detector-evaluator.md)**
+>
+> Detect sexist and discriminatory content.
+
+> **[Prompt Injection](https://www.traceloop.com/docs/api-reference/evaluators/execute-prompt-injection-evaluator.md)**
+>
+> Detect prompt injection attacks in user inputs.
+
+> **[Toxicity Detector](https://www.traceloop.com/docs/api-reference/evaluators/execute-toxicity-detector-evaluator.md)**
+>
+> Detect toxic content including personal attacks, mockery, hate, and threats.
+
+> **[Secrets Detection](https://www.traceloop.com/docs/api-reference/evaluators/execute-secrets-detector-evaluator.md)**
+>
+> Monitor for credential and key leaks to prevent accidental exposure of sensitive information.
+
+### Formatting
+
+> **[SQL Validation](https://www.traceloop.com/docs/api-reference/evaluators/execute-sql-validator-evaluator.md)**
+>
+> Validate SQL queries to ensure proper syntax and structure in database-related AI outputs.
+
+> **[JSON Validation](https://www.traceloop.com/docs/api-reference/evaluators/execute-json-validator-evaluator.md)**
+>
+> Validate JSON responses to ensure proper formatting and structure in API-related outputs.
+
+> **[Regex Validation](https://www.traceloop.com/docs/api-reference/evaluators/execute-regex-validator-evaluator.md)**
+>
+> Validate regex patterns to ensure correct regular expression syntax and functionality.
+
+> **[Placeholder Regex](https://www.traceloop.com/docs/api-reference/evaluators/execute-placeholder-regex-evaluator.md)**
+>
+> Validate placeholder regex patterns to ensure proper template and variable replacement structures.
+
+> **[HTML Comparison](https://www.traceloop.com/docs/api-reference/evaluators/execute-html-comparison-evaluator.md)**
+>
+> Compare HTML outputs to validate structure and content accuracy in generated HTML.
+
+### Agents
+
+> **[Agent Goal Accuracy](https://www.traceloop.com/docs/api-reference/evaluators/execute-agent-goal-accuracy-evaluator.md)**
+>
+> Validate agent goal accuracy to ensure AI systems achieve their intended objectives effectively.
+
+> **[Agent Tool Error Detector](https://www.traceloop.com/docs/api-reference/evaluators/execute-agent-tool-error-detector-evaluator.md)**
+>
+> Detect errors or failures during tool execution to monitor agent tool performance.
+
+> **[Agent Flow Quality](https://www.traceloop.com/docs/api-reference/evaluators/execute-agent-flow-quality-evaluator.md)**
+>
+> Validate agent trajectories against user-defined natural language tests to assess agent decision-making paths.
+
+> **[Agent Efficiency](https://www.traceloop.com/docs/api-reference/evaluators/execute-agent-efficiency-evaluator.md)**
+>
+> Evaluate agent efficiency by checking for redundant calls and optimal paths to optimize agent performance.
+
+> **[Agent Goal Completeness](https://www.traceloop.com/docs/api-reference/evaluators/execute-agent-goal-completeness-evaluator.md)**
+>
+> Measure whether the agent successfully accomplished all user goals to verify comprehensive goal achievement.
+
+> **[Agent Tool Trajectory](https://www.traceloop.com/docs/api-reference/evaluators/execute-agent-tool-trajectory-evaluator.md)**
+>
+> Evaluate the sequence of tool calls made by an agent to assess decision-making quality.
+
+> **[Intent Change](https://www.traceloop.com/docs/api-reference/evaluators/execute-intent-change-evaluator.md)**
+>
+> Detect whether the user's primary intent or workflow changed significantly during a conversation.
+
+> **[Conversation Quality](https://www.traceloop.com/docs/api-reference/evaluators/execute-conversation-quality-evaluator.md)**
+>
+> Evaluate conversation quality based on tone, clarity, flow, responsiveness, and transparency.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

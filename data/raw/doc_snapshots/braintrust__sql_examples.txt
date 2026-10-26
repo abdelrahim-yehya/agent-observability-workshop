@@ -1,0 +1,492 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://www.braintrust.dev/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Example queries
+
+> Copy and adapt SQL queries for tracking tokens, cost, quality, errors, latency, tags, classifications, and facets in Braintrust.
+
+These queries show common analysis patterns you can copy and adapt. For clauses, data sources, and field access, see [SQL query structure](https://www.braintrust.dev/docs/reference/sql/query-structure.md). For the full function and operator catalog, see [Functions and operators](https://www.braintrust.dev/docs/reference/sql/functions.md).
+
+## Track token usage
+
+This query helps you monitor token consumption across your application.
+
+```sql SQL syntax theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT
+  day(created) AS time,
+  sum(metrics.total_tokens) AS total_tokens,
+  sum(metrics.prompt_tokens) AS input_tokens,
+  sum(metrics.completion_tokens) AS output_tokens
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE created > '<ISO_8601_TIME>'
+GROUP BY 1
+ORDER BY time ASC
+```
+
+```sql SQL syntax (using date_trunc) theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Alternative using date_trunc function
+SELECT
+  date_trunc('day', created) AS time,
+  sum(metrics.total_tokens) AS total_tokens,
+  sum(metrics.prompt_tokens) AS input_tokens,
+  sum(metrics.completion_tokens) AS output_tokens
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE created > '<ISO_8601_TIME>'
+GROUP BY date_trunc('day', created)
+ORDER BY time ASC
+```
+
+```sql SQL syntax (15-minute buckets) theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Custom interval multiples for finer-grained buckets
+SELECT
+  date_trunc('15 minutes', created) AS time,
+  sum(metrics.total_tokens) AS total_tokens,
+  sum(metrics.prompt_tokens) AS input_tokens,
+  sum(metrics.completion_tokens) AS output_tokens
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE created > '<ISO_8601_TIME>'
+GROUP BY date_trunc('15 minutes', created)
+ORDER BY time ASC
+```
+
+The response shows daily token usage:
+
+```json theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+{
+  "time": "2024-11-09T00:00:00Z",
+  "total_tokens": 100000,
+  "input_tokens": 50000,
+  "output_tokens": 50000
+}
+```
+
+## Analyze cost breakdown
+
+Use `estimated_cost_component()` to break total cost into its components. This is useful for understanding how much of your spend comes from cached reads vs. uncached prompt tokens vs. completions.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Cost breakdown by component, model, and day
+SELECT
+  metadata.model AS model,
+  day(created) AS date,
+  sum(estimated_cost_component('promptUncachedTokensCost'))      AS uncached_prompt_cost,
+  sum(estimated_cost_component('promptCachedTokensCost'))        AS cached_read_cost,
+  sum(estimated_cost_component('promptCacheCreationTokensCost')) AS cache_write_cost,
+  sum(estimated_cost_component('completionTokensCost'))          AS completion_cost,
+  sum(estimated_cost()) AS total_cost
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE created > now() - interval 7 day
+  AND span_attributes.type = 'llm'
+GROUP BY metadata.model, day(created)
+ORDER BY date DESC, total_cost DESC
+```
+
+> [!NOTE]
+>
+> For models with two-tier cache creation (e.g., Anthropic), replace `promptCacheCreationTokensCost` with `promptCacheCreation5mTokensCost` and `promptCacheCreation1hTokensCost` to split by tier.
+
+Use `estimated_cost_breakdown()` when you want all components at once as a JSON object, for example to export or inspect the full breakdown per span.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT id, metadata.model, estimated_cost_breakdown() AS cost_breakdown
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE created > now() - interval 1 day
+  AND span_attributes.type = 'llm'
+LIMIT 100
+```
+
+## Monitor model quality
+
+Track model performance across different versions and configurations.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Compare factuality scores across models
+SELECT
+  metadata.model AS model,
+  day(created) AS date,
+  avg(scores.Factuality) AS avg_factuality,
+  percentile(scores.Factuality, 0.05) AS p05_factuality,
+  percentile(scores.Factuality, 0.95) AS p95_factuality,
+  count(1) AS total_calls
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE created > '2024-01-01'
+GROUP BY 1, 2
+ORDER BY date DESC, model ASC
+```
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Find potentially problematic responses
+SELECT *
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE scores.Factuality < 0.5
+  AND metadata.is_production = true
+  AND created > now() - interval 1 day
+ORDER BY scores.Factuality ASC
+LIMIT 100
+```
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Compare performance across specific models
+SELECT *
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE metadata.model IN ('gpt-4', 'gpt-4-turbo', 'claude-3-opus')
+  AND scores.Factuality IS NOT NULL
+  AND created > now() - interval 7 day
+ORDER BY scores.Factuality DESC
+LIMIT 500
+```
+
+## Analyze errors
+
+Identify and investigate errors in your application.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Error rate by model
+SELECT
+  metadata.model AS model,
+  hour(created) AS hour,
+  count(1) AS total,
+  count(error) AS errors,
+  count(error) / count(1) AS error_rate
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE created > now() - interval 1 day
+GROUP BY 1, 2
+ORDER BY error_rate DESC
+```
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Find common error patterns
+SELECT
+  error.type AS error_type,
+  metadata.model AS model,
+  count(1) AS error_count,
+  avg(metrics.latency) AS avg_latency
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE error IS NOT NULL
+  AND created > now() - interval 7 day
+GROUP BY 1, 2
+ORDER BY error_count DESC
+```
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Exclude known error types from analysis
+SELECT *
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE error IS NOT NULL
+  AND error.type NOT IN ('rate_limit', 'timeout', 'network_error')
+  AND metadata.is_production = true
+  AND created > now() - interval 1 day
+ORDER BY created DESC
+LIMIT 100
+```
+
+## Analyze latency
+
+Monitor and optimize response times.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Track p95 latency by endpoint
+SELECT
+  metadata.endpoint AS endpoint,
+  hour(created) AS hour,
+  percentile(metrics.latency, 0.95) AS p95_latency,
+  percentile(metrics.latency, 0.50) AS median_latency,
+  count(1) AS requests
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE created > now() - interval 1 day
+GROUP BY 1, 2
+ORDER BY hour DESC, p95_latency DESC
+```
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Find slow requests
+SELECT
+  metadata.endpoint,
+  metrics.latency,
+  metrics.tokens,
+  input,
+  created
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE metrics.latency > 5000  -- Requests over 5 seconds
+  AND created > now() - interval 1 hour
+ORDER BY metrics.latency DESC
+LIMIT 20
+```
+
+## Analyze prompts
+
+Analyze prompt effectiveness and patterns.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Track prompt token efficiency
+SELECT
+  metadata.prompt_template AS template,
+  day(created) AS date,
+  avg(metrics.prompt_tokens) AS avg_prompt_tokens,
+  avg(metrics.completion_tokens) AS avg_completion_tokens,
+  avg(metrics.completion_tokens) / avg(metrics.prompt_tokens) AS token_efficiency,
+  avg(scores.Factuality) AS avg_factuality
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE created > now() - interval 7 day
+GROUP BY 1, 2
+ORDER BY date DESC, token_efficiency DESC
+```
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Find similar prompts
+SELECT *
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE input MATCH 'explain the concept of recursion'
+  AND scores.Factuality > 0.8
+  AND created > now() - interval 7 day
+ORDER BY created DESC
+LIMIT 10
+```
+
+## Analyze based on tags
+
+Use tags to track and analyze specific behaviors.
+
+In SQL mode, use `IN` and `NOT IN` to filter tags by exact membership:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Track issue resolution: tagged needs-review but not resolved
+SELECT created, tags, metadata.model, scores.Factuality, output
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE tags IN ('needs-review')
+  AND tags NOT IN ('resolved')
+  AND created > now() - interval 1 day
+ORDER BY scores.Factuality ASC
+```
+
+`tags IN ('needs-review')` matches rows where `needs-review` is one of the tags, and `tags NOT IN ('resolved')` matches rows without the `resolved` tag. `NOT IN` excludes rows where `tags` is null or absent.
+
+> [!NOTE]
+>
+> `MATCH` (`tags MATCH 'feedback'`) is a fuzzy approximation. It tokenizes text, so it also matches tags that contain the term as a token, such as `feedback-given`.
+
+`INCLUDES` is not supported in SQL mode. The examples below use BTQL syntax, which supports `INCLUDES` for exact array membership:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Monitor feedback patterns
+select: tags[0] AS primary_tag, metadata.model AS model, count(1) AS feedback_count, avg(scores.Factuality > 0.8 ? 1 : 0) AS high_quality_rate
+| from: project_logs('<YOUR_PROJECT_ID>')
+| filter: tags INCLUDES 'feedback' AND created > now() - interval 30 day
+| dimensions: 1, 2
+| sort: feedback_count DESC
+```
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Track issue resolution
+select: created, tags, metadata.model, scores.Factuality, output
+| from: project_logs('<YOUR_PROJECT_ID>')
+| filter: tags INCLUDES 'needs-review' AND NOT tags INCLUDES 'resolved' AND created > now() - interval 1 day
+| sort: scores.Factuality ASC
+```
+
+## Analyze based on tags and scores
+
+A common pattern is filtering traces by both tags and scores when automated scorers apply scores at the span level while tags exist on root spans. Use separate `ANY_SPAN()` clauses to match traces where any span contains the tag AND any span contains the score.
+
+Each `ANY_SPAN()` clause evaluates independently across all spans in a trace. The conditions don't need to match on the same span. The first `ANY_SPAN()` finds traces where at least one span has the tag, while the second finds traces where at least one span has the score.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Find traces with a specific tag and score
+select: *
+| from: project_logs('<YOUR_PROJECT_ID>') traces
+| filter: ANY_SPAN(tags INCLUDES 'content-change') AND ANY_SPAN(scores."email sent" IS NOT NULL) AND created > now() - interval 7 day
+| limit: 100
+```
+
+For score names with spaces or special characters, wrap the name in double quotes:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Filter by tag and score with spaces in name
+select: *
+| from: project_logs('<YOUR_PROJECT_ID>') summary
+| filter: ANY_SPAN(tags INCLUDES 'production') AND ANY_SPAN(scores."Email Draft vs Sent Similarity" IS NOT NULL) AND created > now() - interval 7 day
+| sort: created DESC
+| limit: 50
+```
+
+## Analyze traces with span filters
+
+Use [single span filters](https://www.braintrust.dev/docs/reference/sql/query-structure.md#single-span-filters) with aggregations to analyze traces based on span-level conditions. This is useful for understanding patterns across complex, multi-step operations.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Find traces with both errors and LLM spans, grouped by error type
+SELECT
+  error.type AS error_type,
+  metadata.model AS model,
+  count_distinct(root_span_id) AS trace_count,
+  sum(estimated_cost()) / count_distinct(root_span_id) AS avg_cost_per_trace
+FROM project_logs('<YOUR_PROJECT_ID>', shape => 'traces')
+WHERE ANY_SPAN(error IS NOT NULL)
+  AND ANY_SPAN(span_attributes.type = 'llm')
+  AND created > now() - interval 7 day
+GROUP BY error.type, metadata.model
+ORDER BY trace_count DESC
+```
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Analyze average cost per trace by day for traces with errors and LLM calls
+SELECT
+  day(created) AS date,
+  sum(estimated_cost()) / count_distinct(root_span_id) AS avg_cost_per_trace,
+  count_distinct(root_span_id) AS trace_count
+FROM project_logs('<YOUR_PROJECT_ID>', shape => 'traces')
+WHERE ANY_SPAN(error IS NOT NULL)
+  AND ANY_SPAN(span_attributes.type = 'llm')
+  AND created > now() - interval 7 day
+GROUP BY day(created)
+ORDER BY date DESC
+```
+
+Use `FILTER_SPANS()` to analyze only the spans that match specific criteria:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Analyze score distribution for only scorer spans
+SELECT
+  span_attributes.name AS scorer_name,
+  avg(scores.Factuality) AS avg_score,
+  count(1) AS span_count
+FROM project_logs('<YOUR_PROJECT_ID>', shape => 'traces')
+WHERE FILTER_SPANS(span_attributes.type = 'score')
+  AND created > now() - interval 7 day
+GROUP BY span_attributes.name
+ORDER BY avg_score DESC
+```
+
+## Extract data from JSON strings
+
+Use `json_extract` to pull values out of a field whose value is a JSON-encoded string (rather than a native SQL object). The second argument is a JSONPath expression that supports nested object keys, array indexing (including negative indices), and an optional `$` root prefix.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Extract a top-level field
+SELECT
+  id,
+  json_extract(metadata.config, 'api_key') AS api_key
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE created > now() - interval 7 day
+```
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Traverse nested keys and array elements
+SELECT
+  id,
+  json_extract(metadata.settings, 'user.preferences.theme') AS theme,
+  json_extract(output, 'choices[0].message.content') AS first_message
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE created > now() - interval 7 day
+```
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+-- Extract and filter
+SELECT *
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE json_extract(metadata.config, 'environment') = 'production'
+  AND json_extract(metadata.config, 'version') > 2.0
+  AND created > now() - interval 7 day
+```
+
+> [!NOTE]
+>
+> `json_extract` returns `null` for invalid JSON or missing keys rather than raising an error, making it safe to use in filters and aggregations. Because the path is a JSONPath expression, dots and brackets are interpreted as traversal: `a.b` descends into key `a` then key `b`, and `a[0]` indexes into an array. A JSON key whose name literally contains a dot or bracket can't be addressed this way.
+
+## Query by classifications
+
+**Classifications** are categorical labels generated by [topics automations](https://www.braintrust.dev/docs/observe/topics.md) (for example, `classifications.Task[0].label`). Each classification object has these nested fields, accessed as `classifications.<name>[<i>].<field>`:
+
+* `classifications.<name>[<i>].label`: the category label.
+* `classifications.<name>[<i>].metadata.distance`: distance metric for the classification.
+* `classifications.<name>[<i>].source`: source of the classification.
+
+Filter and analyze logs by topic classifications to understand patterns in your data.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT
+  classifications.Task[0].label as topic,
+  count(*) as count
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE classifications.Task IS NOT NULL
+  AND created > now() - interval 7 day
+GROUP BY topic
+ORDER BY count DESC
+```
+
+> [!TIP]
+>
+> To analyze all classifications in an array rather than just the first element, use [UNPIVOT](https://www.braintrust.dev/docs/reference/sql/query-structure.md#unpivot) to expand the array. See [Array of objects unpivot](https://www.braintrust.dev/docs/reference/sql/query-structure.md#unpivot) for examples.
+
+Filter the first classification by topic and distance threshold:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT id, facets.task, classifications.Task[0].label as topic
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE classifications.Task[0].label = 'Creating datasets'
+  AND classifications.Task[0].metadata.distance < 0.5
+  AND created > now() - interval 7 day
+ORDER BY classifications.Task[0].metadata.distance ASC
+LIMIT 50
+```
+
+Numeric array positions in `WHERE` conditions cannot use the index to filter rows. This example keeps `[0]` so both conditions apply to the first classification. If you only need to match a label at any position, use `classifications.Task.label` instead. Do not simply remove both indexes above: the label and distance conditions could then match different classifications. See [Keep filters indexable](https://www.braintrust.dev/docs/reference/sql/best-practices.md#keep-filters-indexable).
+
+## Analyze facet distributions
+
+**Facets** are AI-extracted attributes that summarize logs (e.g., `facets.task`, `facets.sentiment`). They're generated by [topics automations](https://www.braintrust.dev/docs/observe/topics.md).
+
+Query logs by facet values to identify patterns and issues.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT id, created, facets.task, facets.sentiment
+FROM project_logs('<YOUR_PROJECT_ID>')
+WHERE facets.sentiment IN ('NEGATIVE', 'MIXED')
+  AND created > now() - interval 7 day
+ORDER BY created DESC
+LIMIT 100
+```
+
+## Combine facets and classifications
+
+Analyze relationships between facets and classifications to gain deeper insights.
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT
+  facets.sentiment,
+  classifications.Task[0].label as topic,
+  count(*) as count,
+  avg(metrics.total_tokens) as avg_tokens
+FROM project_logs('<YOUR_PROJECT_ID>', shape => 'traces')
+WHERE facets.sentiment IS NOT NULL
+  AND classifications.Task IS NOT NULL
+  AND created > now() - interval 7 day
+GROUP BY facets.sentiment, topic
+ORDER BY count DESC
+LIMIT 20
+```
+
+Analyze topic distribution with distance metrics:
+
+```sql theme={"theme":{"light":"github-light","dark":"github-dark-dimmed"}}
+SELECT
+  classifications.Task[0].label as topic,
+  count(*) as occurrences,
+  avg(classifications.Task[0].metadata.distance) as avg_distance
+FROM project_logs('<YOUR_PROJECT_ID>', shape => 'traces')
+WHERE classifications.Task IS NOT NULL
+  AND created > now() - interval 7 day
+GROUP BY topic
+HAVING count(*) > 10
+ORDER BY occurrences DESC
+```
+
+## Next steps
+
+* Learn how to structure queries in the [SQL reference](https://www.braintrust.dev/docs/reference/sql.md).
+* Look up syntax in [Functions and operators](https://www.braintrust.dev/docs/reference/sql/functions.md).
+* Optimize slow or incorrect queries with [SQL best practices](https://www.braintrust.dev/docs/reference/sql/best-practices.md).
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.
