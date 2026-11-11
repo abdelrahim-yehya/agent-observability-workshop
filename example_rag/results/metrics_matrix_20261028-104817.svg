@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1130 1440" width="1130" height="1440" role="img" aria-label="Taxonomy metrics detected by each tool in the RAG run">
+<style>:root{--bg:#fbfaf8;--fg:#1d2328;--muted:#5d666d;--line:#d9d6cf;--obs:#1f6f8b;--ev:#b4582a;--obsf:#dcebf0;--evf:#f4e3d8;--empty:#efede8}
+@media (prefers-color-scheme:dark){:root{--bg:#14181b;--fg:#e8ebec;--muted:#98a1a7;--line:#3a444b;--obs:#5cb3d1;--ev:#e08a58;--obsf:#1f3a45;--evf:#47301f;--empty:#22282c}}
+text{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;fill:var(--fg);font-size:12px}.mut{fill:var(--muted)}
+.cap{font-size:11px;letter-spacing:.06em;text-transform:uppercase}.cat{font-size:11px;font-weight:600}</style>
+<rect width="1130" height="1440" fill="var(--bg)"/>
+<text x="24" y="30" font-size="20" font-family="Georgia,serif">Metrics detected in one RAG run</text>
+<text class="mut" x="24" y="50">12 questions on gpt-5-mini; the app is the course RAG chatbot, traced by Langfuse. 16 of 19 Observability and 14 of 27 Evaluation metrics have a value.</text>
+<text class="mut" x="24" y="68">Cells show what each tool reported in this run. Blank = the tool reported nothing for that metric. Judge: gpt-5-mini, unvalidated against human labels. Drawn by plot_matrix.py from the tools' output.</text>
+<text class="cap mut" x="318" y="106">Langfuse</text>
+<text class="cap mut" x="580" y="106">Phoenix evals</text>
+<text class="cap mut" x="842" y="106">DeepEval</text>
+<text class="cat" x="24" y="133" fill="var(--obs)" style="fill:var(--obs)">Observability · Tool use</text>
+<text x="32" y="154">Tool execution errors</text>
+<rect x="318" y="141" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="154" style="">0 of 10 tool calls</text>
+<rect x="580" y="141" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="141" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="175">Tool call count</text>
+<rect x="318" y="162" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="175" style="">10 in 12 turns</text>
+<rect x="580" y="162" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="162" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="196">Tool execution latency</text>
+<rect x="318" y="183" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="196" style="">median 18 ms</text>
+<rect x="580" y="183" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="183" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text class="cat" x="24" y="218" fill="var(--obs)" style="fill:var(--obs)">Observability · Plan and trajectory</text>
+<text x="32" y="239">Step count</text>
+<rect x="318" y="226" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="226" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="226" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text class="cat" x="24" y="261" fill="var(--obs)" style="fill:var(--obs)">Observability · Token usage</text>
+<text x="32" y="282">Input tokens</text>
+<rect x="318" y="269" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="282" style="">19,684</text>
+<rect x="580" y="269" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="269" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="303">Output tokens</text>
+<rect x="318" y="290" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="303" style="">2,598</text>
+<rect x="580" y="290" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="290" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="324">Total tokens</text>
+<rect x="318" y="311" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="324" style="">27,914</text>
+<rect x="580" y="311" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="311" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="345">Cached tokens</text>
+<rect x="318" y="332" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="345" style="">0</text>
+<rect x="580" y="332" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="332" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="366">Reasoning tokens</text>
+<rect x="318" y="353" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="366" style="">5,632</text>
+<rect x="580" y="353" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="353" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text class="cat" x="24" y="388" fill="var(--obs)" style="fill:var(--obs)">Observability · Cost</text>
+<text x="32" y="409">Estimated cost</text>
+<rect x="318" y="396" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="409" style="">$0.0214</text>
+<rect x="580" y="396" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="396" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="430">Cost breakdown by token type</text>
+<rect x="318" y="417" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="430" style="">in $0.0049 · out $0.0052 · reasoning $0.0113</text>
+<rect x="580" y="417" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="417" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text class="cat" x="24" y="452" fill="var(--obs)" style="fill:var(--obs)">Observability · Latency</text>
+<text x="32" y="473">Trace / run latency</text>
+<rect x="318" y="460" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="473" style="">median 8.8 s per turn</text>
+<rect x="580" y="460" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="460" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="494">LLM call latency</text>
+<rect x="318" y="481" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="494" style="">median 3.0 s</text>
+<rect x="580" y="481" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="481" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="515">Span duration</text>
+<rect x="318" y="502" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="515" style="">on every observation</text>
+<rect x="580" y="502" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="502" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="536">Time to first token</text>
+<rect x="318" y="523" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="523" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="523" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="557">Time per output token / generation time</text>
+<rect x="318" y="544" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="544" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="544" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text class="cat" x="24" y="579" fill="var(--obs)" style="fill:var(--obs)">Observability · Errors and volume</text>
+<text x="32" y="600">Error count / rate</text>
+<rect x="318" y="587" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="600" style="">0 error observations</text>
+<rect x="580" y="587" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="587" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="621">Trace / span count</text>
+<rect x="318" y="608" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="621" style="">12 traces, 44 observations</text>
+<rect x="580" y="608" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="608" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="642">LLM call count</text>
+<rect x="318" y="629" width="256" height="18" rx="3" fill="var(--obsf)"/><text x="324" y="642" style="">22</text>
+<rect x="580" y="629" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="629" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text class="cat" x="24" y="664" fill="var(--ev)" style="fill:var(--ev)">Evaluation · Tool use</text>
+<text x="32" y="685">Tool selection</text>
+<rect x="318" y="672" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="672" width="256" height="18" rx="3" fill="var(--evf)"/><text x="586" y="685" style="">8/10 calls correct</text>
+<rect x="842" y="672" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="706">Tool argument validity</text>
+<rect x="318" y="693" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="693" width="256" height="18" rx="3" fill="var(--evf)"/><text x="586" y="706" style="">10/10 calls valid</text>
+<rect x="842" y="693" width="256" height="18" rx="3" fill="var(--evf)"/><text x="848" y="706" style="">mean 1.00 over 8 (ArgumentCorrectness)</text>
+<text x="32" y="727">Tool call correctness</text>
+<rect x="318" y="714" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="714" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="714" width="256" height="18" rx="3" fill="var(--evf)"/><text x="848" y="727" style="">mean 0.88 over 8 (ToolCorrectness)</text>
+<text x="32" y="748">Tool call efficiency</text>
+<rect x="318" y="735" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="735" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="735" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="769">Tool response handling</text>
+<rect x="318" y="756" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="756" width="256" height="18" rx="3" fill="var(--evf)"/><text x="586" y="769" style="">8/8 turns correct</text>
+<rect x="842" y="756" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text class="cat" x="24" y="791" fill="var(--ev)" style="fill:var(--ev)">Evaluation · Task and goal</text>
+<text x="32" y="812">Task / goal completion</text>
+<rect x="318" y="799" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="799" width="256" height="18" rx="3" fill="var(--evf)"/><text x="586" y="812" style="">10/12 turns complete</text>
+<rect x="842" y="799" width="256" height="18" rx="3" fill="var(--evf)"/><text x="848" y="812" style="">mean 0.71 over 12 (TaskCompletion)</text>
+<text class="cat" x="24" y="834" fill="var(--ev)" style="fill:var(--ev)">Evaluation · Plan and trajectory</text>
+<text x="32" y="855">Plan quality</text>
+<rect x="318" y="842" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="842" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="842" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="876">Plan adherence</text>
+<rect x="318" y="863" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="863" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="863" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="897">Trajectory accuracy</text>
+<rect x="318" y="884" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="884" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="884" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="918">Step / action efficiency</text>
+<rect x="318" y="905" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="905" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="905" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="939">Action progress toward goal</text>
+<rect x="318" y="926" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="926" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="926" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="960">Flow and reasoning coherence</text>
+<rect x="318" y="947" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="947" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="947" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text class="cat" x="24" y="982" fill="var(--ev)" style="fill:var(--ev)">Evaluation · Answer quality</text>
+<text x="32" y="1003">Answer correctness</text>
+<rect x="318" y="990" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="990" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="990" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="1024">Answer relevance</text>
+<rect x="318" y="1011" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1011" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="1011" width="256" height="18" rx="3" fill="var(--evf)"/><text x="848" y="1024" style="">mean 0.92 over 12 (AnswerRelevancy)</text>
+<text x="32" y="1045">Helpfulness</text>
+<rect x="318" y="1032" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1032" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="1032" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="1066">Conciseness</text>
+<rect x="318" y="1053" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1053" width="256" height="18" rx="3" fill="var(--evf)"/><text x="586" y="1066" style="">1/12 turns concise</text>
+<rect x="842" y="1053" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="1087">Tone appropriateness</text>
+<rect x="318" y="1074" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1074" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="1074" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text class="cat" x="24" y="1109" fill="var(--ev)" style="fill:var(--ev)">Evaluation · Grounding</text>
+<text x="32" y="1130">Faithfulness to context</text>
+<rect x="318" y="1117" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1117" width="256" height="18" rx="3" fill="var(--evf)"/><text x="586" y="1130" style="">7/8 turns faithful</text>
+<rect x="842" y="1117" width="256" height="18" rx="3" fill="var(--evf)"/><text x="848" y="1130" style="">mean 1.00 over 8 (Faithfulness)</text>
+<text class="cat" x="24" y="1152" fill="var(--ev)" style="fill:var(--ev)">Evaluation · Safety and policy</text>
+<text x="32" y="1173">Toxicity</text>
+<rect x="318" y="1160" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1160" width="256" height="18" rx="3" fill="var(--evf)"/><text x="586" y="1173" style="">0/12 turns toxic</text>
+<rect x="842" y="1160" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="1194">Bias and fairness</text>
+<rect x="318" y="1181" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1181" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="1181" width="256" height="18" rx="3" fill="var(--evf)"/><text x="848" y="1194" style="">mean 1.00 over 12 (Bias)</text>
+<text x="32" y="1215">Sensitive data leakage</text>
+<rect x="318" y="1202" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1202" width="256" height="18" rx="3" fill="var(--evf)"/><text x="586" y="1215" style="">0/12 turns flagged</text>
+<rect x="842" y="1202" width="256" height="18" rx="3" fill="var(--evf)"/><text x="848" y="1215" style="">mean 0.99 over 12 (PIILeakage)</text>
+<text x="32" y="1236">Injection detection</text>
+<rect x="318" y="1223" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1223" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="1223" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="1257">Refusal detection</text>
+<rect x="318" y="1244" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1244" width="256" height="18" rx="3" fill="var(--evf)"/><text x="586" y="1257" style="">1/11 turns refused</text>
+<rect x="842" y="1244" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="1278">Policy and moderation violations</text>
+<rect x="318" y="1265" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1265" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="1265" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text class="cat" x="24" y="1300" fill="var(--ev)" style="fill:var(--ev)">Evaluation · Conversation</text>
+<text x="32" y="1321">Knowledge retention</text>
+<rect x="318" y="1308" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1308" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="1308" width="256" height="18" rx="3" fill="var(--evf)"/><text x="848" y="1321" style="">mean 1.00 over 1 (KnowledgeRetention)</text>
+<text x="32" y="1342">User satisfaction or frustration</text>
+<rect x="318" y="1329" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1329" width="256" height="18" rx="3" fill="var(--evf)"/><text x="586" y="1342" style="">1/12 turns with friction</text>
+<rect x="842" y="1329" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="32" y="1363">Conversation coherence</text>
+<rect x="318" y="1350" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="580" y="1350" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="842" y="1350" width="256" height="18" rx="3" fill="var(--empty)" opacity=".5"/>
+</svg>

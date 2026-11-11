@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 885 828" width="885" height="828" role="img" aria-label="Metrics reported by each tool in one run">
+<style>:root{--bg:#fbfaf8;--fg:#1d2328;--muted:#5d666d;--line:#d9d6cf;--obs:#1f6f8b;--ev:#b4582a;--obsf:#dcebf0;--evf:#f4e3d8;--empty:#efede8}
+@media (prefers-color-scheme:dark){:root{--bg:#14181b;--fg:#e8ebec;--muted:#98a1a7;--line:#3a444b;--obs:#5cb3d1;--ev:#e08a58;--obsf:#1f3a45;--evf:#47301f;--empty:#22282c}}
+text{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;fill:var(--fg);font-size:13px}.mut{fill:var(--muted)}
+.cap{font-size:12px;letter-spacing:.06em}.cat{font-size:12px;font-weight:600}</style>
+<rect width="885" height="828" fill="var(--bg)"/>
+<text x="24" y="30" style="font-size:20px;font-family:Georgia,serif">Metrics reported by each tool in one run</text>
+<text class="mut" x="24" y="52">12 questions to a RAG chatbot running on gpt-5-mini. A cell shows what the tool reported for that metric; a blank cell means it reported nothing.</text>
+<text class="mut" x="24" y="72">LLM judge for the evaluators: gpt-5-mini, not validated against human labels. Drawn by plot_measured.py from the tools' output.</text>
+<text class="cap mut" x="263" y="94">Langfuse</text>
+<text class="cap mut" x="566" y="94">Phoenix evals</text>
+<text class="cap mut" x="743" y="94">DeepEval</text>
+<text class="cat" x="24" y="121" style="fill:var(--obs)">Recorded by the tracer</text>
+<text x="34" y="147">Tool execution errors</text>
+<rect x="263" y="134" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="147">0 of 10 tool calls</text>
+<rect x="566" y="134" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="134" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="168">Tool call count</text>
+<rect x="263" y="155" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="168">10 in 12 turns</text>
+<rect x="566" y="155" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="155" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="189">Tool execution latency</text>
+<rect x="263" y="176" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="189">median 18 ms</text>
+<rect x="566" y="176" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="176" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="210">Input tokens</text>
+<rect x="263" y="197" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="210">19,684</text>
+<rect x="566" y="197" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="197" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="231">Output tokens</text>
+<rect x="263" y="218" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="231">2,598</text>
+<rect x="566" y="218" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="218" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="252">Total tokens</text>
+<rect x="263" y="239" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="252">27,914</text>
+<rect x="566" y="239" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="239" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="273">Cached tokens</text>
+<rect x="263" y="260" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="273">0</text>
+<rect x="566" y="260" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="260" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="294">Reasoning tokens</text>
+<rect x="263" y="281" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="294">5,632</text>
+<rect x="566" y="281" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="281" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="315">Estimated cost</text>
+<rect x="263" y="302" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="315">$0.0214</text>
+<rect x="566" y="302" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="302" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="336">Cost breakdown by token type</text>
+<rect x="263" y="323" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="336">in $0.0049 · out $0.0052 · reasoning $0.0113</text>
+<rect x="566" y="323" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="323" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="357">Trace / run latency</text>
+<rect x="263" y="344" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="357">median 8.8 s per turn</text>
+<rect x="566" y="344" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="344" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="378">LLM call latency</text>
+<rect x="263" y="365" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="378">median 3.0 s</text>
+<rect x="566" y="365" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="365" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="399">Span duration</text>
+<rect x="263" y="386" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="399">on every observation</text>
+<rect x="566" y="386" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="386" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="420">Error count / rate</text>
+<rect x="263" y="407" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="420">0 error observations</text>
+<rect x="566" y="407" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="407" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="441">Trace / span count</text>
+<rect x="263" y="428" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="441">12 traces, 44 observations</text>
+<rect x="566" y="428" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="428" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="462">LLM call count</text>
+<rect x="263" y="449" width="295" height="17" rx="3" fill="var(--obsf)"/><text x="270" y="462">22</text>
+<rect x="566" y="449" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="449" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text class="cat" x="24" y="483" style="fill:var(--ev)">Scored by the evaluators</text>
+<text x="34" y="509">Tool selection</text>
+<rect x="263" y="496" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="496" width="169" height="17" rx="3" fill="var(--evf)"/><text x="573" y="509">8/10 calls correct</text>
+<rect x="743" y="496" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="530">Tool argument validity</text>
+<rect x="263" y="517" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="517" width="169" height="17" rx="3" fill="var(--evf)"/><text x="573" y="530">10/10 calls valid</text>
+<rect x="743" y="517" width="118" height="17" rx="3" fill="var(--evf)"/><text x="750" y="530">mean 1.00 (n=8)</text>
+<text x="34" y="551">Tool call correctness</text>
+<rect x="263" y="538" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="538" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="538" width="118" height="17" rx="3" fill="var(--evf)"/><text x="750" y="551">mean 0.88 (n=8)</text>
+<text x="34" y="572">Tool response handling</text>
+<rect x="263" y="559" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="559" width="169" height="17" rx="3" fill="var(--evf)"/><text x="573" y="572">8/8 turns correct</text>
+<rect x="743" y="559" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="593">Task / goal completion</text>
+<rect x="263" y="580" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="580" width="169" height="17" rx="3" fill="var(--evf)"/><text x="573" y="593">10/12 turns complete</text>
+<rect x="743" y="580" width="118" height="17" rx="3" fill="var(--evf)"/><text x="750" y="593">mean 0.71 (n=12)</text>
+<text x="34" y="614">Answer relevance</text>
+<rect x="263" y="601" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="601" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="601" width="118" height="17" rx="3" fill="var(--evf)"/><text x="750" y="614">mean 0.92 (n=12)</text>
+<text x="34" y="635">Conciseness</text>
+<rect x="263" y="622" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="622" width="169" height="17" rx="3" fill="var(--evf)"/><text x="573" y="635">1/12 turns concise</text>
+<rect x="743" y="622" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="656">Faithfulness to context</text>
+<rect x="263" y="643" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="643" width="169" height="17" rx="3" fill="var(--evf)"/><text x="573" y="656">7/8 turns faithful</text>
+<rect x="743" y="643" width="118" height="17" rx="3" fill="var(--evf)"/><text x="750" y="656">mean 1.00 (n=8)</text>
+<text x="34" y="677">Toxicity</text>
+<rect x="263" y="664" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="664" width="169" height="17" rx="3" fill="var(--evf)"/><text x="573" y="677">0/12 turns toxic</text>
+<rect x="743" y="664" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="698">Bias and fairness</text>
+<rect x="263" y="685" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="685" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="685" width="118" height="17" rx="3" fill="var(--evf)"/><text x="750" y="698">mean 1.00 (n=12)</text>
+<text x="34" y="719">Sensitive data leakage</text>
+<rect x="263" y="706" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="706" width="169" height="17" rx="3" fill="var(--evf)"/><text x="573" y="719">0/12 turns flagged</text>
+<rect x="743" y="706" width="118" height="17" rx="3" fill="var(--evf)"/><text x="750" y="719">mean 0.99 (n=12)</text>
+<text x="34" y="740">Refusal detection</text>
+<rect x="263" y="727" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="727" width="169" height="17" rx="3" fill="var(--evf)"/><text x="573" y="740">1/11 turns refused</text>
+<rect x="743" y="727" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<text x="34" y="761">Knowledge retention</text>
+<rect x="263" y="748" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="748" width="169" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="743" y="748" width="118" height="17" rx="3" fill="var(--evf)"/><text x="750" y="761">mean 1.00 (n=1)</text>
+<text x="34" y="782">User satisfaction or frustration</text>
+<rect x="263" y="769" width="295" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+<rect x="566" y="769" width="169" height="17" rx="3" fill="var(--evf)"/><text x="573" y="782">1/12 turns with friction</text>
+<rect x="743" y="769" width="118" height="17" rx="3" fill="var(--empty)" opacity=".5"/>
+</svg>
