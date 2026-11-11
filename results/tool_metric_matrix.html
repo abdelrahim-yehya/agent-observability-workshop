@@ -38,7 +38,7 @@ th,td{padding:0;font-weight:400}
 .note{margin:1rem 0 0;font-size:.78rem;color:var(--muted);max-width:75ch}
 </style></head><body>
 <h1>Agent metrics by tool</h1>
-<p class="lead">Each cell shows whether a tool documents a metric as built-in. LangSmith documents the most built-in metrics (32 of 46); Input tokens is the metric most tools ship built-in (10 of 13 tools).</p>
+<p class="lead">Each cell shows whether a tool documents a metric as built-in. LangSmith documents the most built-in metrics (32 of 46); Input tokens is the metric most tools ship built-in (14 of 16 tools).</p>
 <div class="card"><ul class="legend">
 <li><span class="sw s-built-in">B</span><span><b>Built-in</b>: A documented built-in metric</span></li>
 <li><span class="sw s-integration">I</span><span><b>Integration</b>: Only through a third-party library the tool wraps</span></li>
@@ -51,18 +51,21 @@ th,td{padding:0;font-weight:400}
 <th class="hd"><div><span class="bar" style="height:16px"></span><span class="n">23</span><span class="vt">Arize Phoenix</span></div></th>
 <th class="hd"><div><span class="bar" style="height:6px"></span><span class="n">9</span><span class="vt">Langfuse</span></div></th>
 <th class="hd"><div><span class="bar" style="height:22px"></span><span class="n">32</span><span class="vt">LangSmith</span></div></th>
-<th class="hd"><div><span class="bar" style="height:10px"></span><span class="n">14</span><span class="vt">DeepEval</span></div></th>
-<th class="hd"><div><span class="bar" style="height:8px"></span><span class="n">11</span><span class="vt">OpenTelemetry</span></div></th>
+<th class="hd"><div><span class="bar" style="height:15px"></span><span class="n">22</span><span class="vt">DeepEval</span></div></th>
+<th class="hd"><div><span class="bar" style="height:7px"></span><span class="n">10</span><span class="vt">OpenTelemetry</span></div></th>
 <th class="hd"><div><span class="bar" style="height:6px"></span><span class="n">8</span><span class="vt">Helicone</span></div></th>
 <th class="hd"><div><span class="bar" style="height:12px"></span><span class="n">18</span><span class="vt">Braintrust</span></div></th>
 <th class="hd"><div><span class="bar" style="height:12px"></span><span class="n">18</span><span class="vt">promptfoo</span></div></th>
-<th class="hd"><div><span class="bar" style="height:14px"></span><span class="n">20</span><span class="vt">OpenLLMetry</span></div></th>
+<th class="hd"><div><span class="bar" style="height:3px"></span><span class="n">5</span><span class="vt">OpenLLMetry</span></div></th>
 <th class="hd"><div><span class="bar" style="height:14px"></span><span class="n">20</span><span class="vt">Opik</span></div></th>
 <th class="hd"><div><span class="bar" style="height:10px"></span><span class="n">15</span><span class="vt">Galileo</span></div></th>
 <th class="hd"><div><span class="bar" style="height:5px"></span><span class="n">7</span><span class="vt">OpenInference</span></div></th>
 <th class="hd"><div><span class="bar" style="height:4px"></span><span class="n">6</span><span class="vt">Weights &amp; Biases Weave</span></div></th>
+<th class="hd"><div><span class="bar" style="height:11px"></span><span class="n">16</span><span class="vt">MLflow</span></div></th>
+<th class="hd"><div><span class="bar" style="height:7px"></span><span class="n">10</span><span class="vt">Laminar</span></div></th>
+<th class="hd"><div><span class="bar" style="height:10px"></span><span class="n">15</span><span class="vt">LangWatch</span></div></th>
 <th class="last">Tools with it built-in</th></tr></thead><tbody>
-<tr class="grp"><th colspan="15"><b>Tool use</b>Observability</th></tr>
+<tr class="grp"><th colspan="18"><b>Tool use</b>Observability</th></tr>
 <tr><th class="lbl" scope="row">Tool execution errors</th>
 <td class="c s-built-in" title="Tool execution errors / Arize Phoenix: Built-in (called: Tool spans with errors)">B</td>
 <td class="c s-not-documented" title="Tool execution errors / Langfuse: Not documented">·</td>
@@ -72,12 +75,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Tool execution errors / Helicone: Not documented">·</td>
 <td class="c s-built-in" title="Tool execution errors / Braintrust: Built-in (called: metrics.tool_errors)">B</td>
 <td class="c s-not-documented" title="Tool execution errors / promptfoo: Not documented">·</td>
-<td class="c s-built-in" title="Tool execution errors / OpenLLMetry: Built-in (called: Tool Error)">B</td>
+<td class="c s-not-documented" title="Tool execution errors / OpenLLMetry: Not documented">·</td>
 <td class="c s-not-documented" title="Tool execution errors / Opik: Not documented">·</td>
 <td class="c s-built-in" title="Tool execution errors / Galileo: Built-in (called: Tool Errors)">B</td>
 <td class="c s-not-documented" title="Tool execution errors / OpenInference: Not documented">·</td>
 <td class="c s-not-documented" title="Tool execution errors / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:38%"></i></span>5</div></td></tr>
+<td class="c s-not-documented" title="Tool execution errors / MLflow: Not documented">·</td>
+<td class="c s-not-documented" title="Tool execution errors / Laminar: Not documented">·</td>
+<td class="c s-not-documented" title="Tool execution errors / LangWatch: Not documented">·</td>
+<td><div class="rb"><span class="tr"><i style="width:25%"></i></span>4</div></td></tr>
 <tr><th class="lbl" scope="row">Tool call count</th>
 <td class="c s-built-in" title="Tool call count / Arize Phoenix: Built-in (called: Tool span counts)">B</td>
 <td class="c s-not-documented" title="Tool call count / Langfuse: Not documented">·</td>
@@ -92,7 +98,10 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Tool call count / Galileo: Not documented">·</td>
 <td class="c s-not-documented" title="Tool call count / OpenInference: Not documented">·</td>
 <td class="c s-not-documented" title="Tool call count / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:31%"></i></span>4</div></td></tr>
+<td class="c s-not-documented" title="Tool call count / MLflow: Not documented">·</td>
+<td class="c s-not-documented" title="Tool call count / Laminar: Not documented">·</td>
+<td class="c s-not-documented" title="Tool call count / LangWatch: Not documented">·</td>
+<td><div class="rb"><span class="tr"><i style="width:25%"></i></span>4</div></td></tr>
 <tr><th class="lbl" scope="row">Tool execution latency</th>
 <td class="c s-not-documented" title="Tool execution latency / Arize Phoenix: Not documented">·</td>
 <td class="c s-not-documented" title="Tool execution latency / Langfuse: Not documented">·</td>
@@ -107,8 +116,11 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Tool execution latency / Galileo: Not documented">·</td>
 <td class="c s-not-documented" title="Tool execution latency / OpenInference: Not documented">·</td>
 <td class="c s-not-documented" title="Tool execution latency / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:15%"></i></span>2</div></td></tr>
-<tr class="grp"><th colspan="15"><b>Plan and trajectory</b>Observability</th></tr>
+<td class="c s-not-documented" title="Tool execution latency / MLflow: Not documented">·</td>
+<td class="c s-not-documented" title="Tool execution latency / Laminar: Not documented">·</td>
+<td class="c s-not-documented" title="Tool execution latency / LangWatch: Not documented">·</td>
+<td><div class="rb"><span class="tr"><i style="width:12%"></i></span>2</div></td></tr>
+<tr class="grp"><th colspan="18"><b>Plan and trajectory</b>Observability</th></tr>
 <tr><th class="lbl" scope="row">Step count</th>
 <td class="c s-not-documented" title="Step count / Arize Phoenix: Not documented">·</td>
 <td class="c s-not-documented" title="Step count / Langfuse: Not documented">·</td>
@@ -123,13 +135,16 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Step count / Galileo: Not documented">·</td>
 <td class="c s-not-documented" title="Step count / OpenInference: Not documented">·</td>
 <td class="c s-not-documented" title="Step count / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:8%"></i></span>1</div></td></tr>
-<tr class="grp"><th colspan="15"><b>Token usage</b>Observability</th></tr>
+<td class="c s-not-documented" title="Step count / MLflow: Not documented">·</td>
+<td class="c s-not-documented" title="Step count / Laminar: Not documented">·</td>
+<td class="c s-not-documented" title="Step count / LangWatch: Not documented">·</td>
+<td><div class="rb"><span class="tr"><i style="width:6%"></i></span>1</div></td></tr>
+<tr class="grp"><th colspan="18"><b>Token usage</b>Observability</th></tr>
 <tr><th class="lbl" scope="row">Input tokens</th>
 <td class="c s-built-in" title="Input tokens / Arize Phoenix: Built-in (called: Prompt token details | Token usage)">B</td>
 <td class="c s-built-in" title="Input tokens / Langfuse: Built-in (called: Usage details)">B</td>
 <td class="c s-built-in" title="Input tokens / LangSmith: Built-in (called: Cost &amp; Tokens (prebuilt dashboard) | Tokens (dashboard metric))">B</td>
-<td class="c s-not-documented" title="Input tokens / DeepEval: Not documented">·</td>
+<td class="c s-built-in" title="Input tokens / DeepEval: Built-in (called: Token usage: input_token_count, output_token_count | Widget aggregation measures (API): count, latency, error, cost and token measures)">B</td>
 <td class="c s-built-in" title="Input tokens / OpenTelemetry: Built-in (called: gen_ai.client.inference.operation.input_tokens | gen_ai.client.inference.usage.input_tokens)">B</td>
 <td class="c s-built-in" title="Input tokens / Helicone: Built-in (called: prompt_tokens, completion_tokens, total_tokens)">B</td>
 <td class="c s-built-in" title="Input tokens / Braintrust: Built-in (called: metrics.prompt_tokens)">B</td>
@@ -139,12 +154,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Input tokens / Galileo: Not documented">·</td>
 <td class="c s-built-in" title="Input tokens / OpenInference: Built-in (called: llm.token_count.prompt)">B</td>
 <td class="c s-not-documented" title="Input tokens / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:77%"></i></span>10</div></td></tr>
+<td class="c s-built-in" title="Input tokens / MLflow: Built-in (called: Token usage)">B</td>
+<td class="c s-built-in" title="Input tokens / Laminar: Built-in (called: LLM span token usage and cost)">B</td>
+<td class="c s-built-in" title="Input tokens / LangWatch: Built-in (called: Token usage (input, output, cached, reasoning))">B</td>
+<td><div class="rb"><span class="tr"><i style="width:88%"></i></span>14</div></td></tr>
 <tr><th class="lbl" scope="row">Output tokens</th>
 <td class="c s-built-in" title="Output tokens / Arize Phoenix: Built-in (called: Completion token details | Token usage)">B</td>
 <td class="c s-built-in" title="Output tokens / Langfuse: Built-in (called: Usage details)">B</td>
 <td class="c s-built-in" title="Output tokens / LangSmith: Built-in (called: Cost &amp; Tokens (prebuilt dashboard) | Tokens (dashboard metric))">B</td>
-<td class="c s-not-documented" title="Output tokens / DeepEval: Not documented">·</td>
+<td class="c s-built-in" title="Output tokens / DeepEval: Built-in (called: Token usage: input_token_count, output_token_count | Widget aggregation measures (API): count, latency, error, cost and token measures)">B</td>
 <td class="c s-built-in" title="Output tokens / OpenTelemetry: Built-in (called: gen_ai.client.inference.operation.output_tokens | gen_ai.client.inference.usage.output_tokens)">B</td>
 <td class="c s-built-in" title="Output tokens / Helicone: Built-in (called: prompt_tokens, completion_tokens, total_tokens)">B</td>
 <td class="c s-built-in" title="Output tokens / Braintrust: Built-in (called: metrics.completion_tokens)">B</td>
@@ -154,12 +172,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Output tokens / Galileo: Not documented">·</td>
 <td class="c s-built-in" title="Output tokens / OpenInference: Built-in (called: llm.token_count.completion)">B</td>
 <td class="c s-not-documented" title="Output tokens / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:77%"></i></span>10</div></td></tr>
+<td class="c s-built-in" title="Output tokens / MLflow: Built-in (called: Token usage)">B</td>
+<td class="c s-built-in" title="Output tokens / Laminar: Built-in (called: LLM span token usage and cost)">B</td>
+<td class="c s-built-in" title="Output tokens / LangWatch: Built-in (called: Token usage (input, output, cached, reasoning))">B</td>
+<td><div class="rb"><span class="tr"><i style="width:88%"></i></span>14</div></td></tr>
 <tr><th class="lbl" scope="row">Total tokens</th>
 <td class="c s-built-in" title="Total tokens / Arize Phoenix: Built-in (called: Top models by tokens | llm.token_count.total)">B</td>
 <td class="c s-not-documented" title="Total tokens / Langfuse: Not documented">·</td>
 <td class="c s-built-in" title="Total tokens / LangSmith: Built-in (called: Automatic token and cost recording | Tokens (dashboard metric))">B</td>
-<td class="c s-not-documented" title="Total tokens / DeepEval: Not documented">·</td>
+<td class="c s-built-in" title="Total tokens / DeepEval: Built-in (called: Widget aggregation measures (API): count, latency, error, cost and token measures)">B</td>
 <td class="c s-not-documented" title="Total tokens / OpenTelemetry: Not documented">·</td>
 <td class="c s-built-in" title="Total tokens / Helicone: Built-in (called: prompt_tokens, completion_tokens, total_tokens)">B</td>
 <td class="c s-built-in" title="Total tokens / Braintrust: Built-in (called: metrics.total_tokens)">B</td>
@@ -169,7 +190,10 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Total tokens / Galileo: Not documented">·</td>
 <td class="c s-built-in" title="Total tokens / OpenInference: Built-in (called: llm.token_count.total)">B</td>
 <td class="c s-built-in" title="Total tokens / Weights &amp; Biases Weave: Built-in (called: Token usage and cost (automatic))">B</td>
-<td><div class="rb"><span class="tr"><i style="width:69%"></i></span>9</div></td></tr>
+<td class="c s-built-in" title="Total tokens / MLflow: Built-in (called: Token usage)">B</td>
+<td class="c s-built-in" title="Total tokens / Laminar: Built-in (called: Dashboard preset: Spans)">B</td>
+<td class="c s-not-documented" title="Total tokens / LangWatch: Not documented">·</td>
+<td><div class="rb"><span class="tr"><i style="width:75%"></i></span>12</div></td></tr>
 <tr><th class="lbl" scope="row">Cached tokens</th>
 <td class="c s-built-in" title="Cached tokens / Arize Phoenix: Built-in (called: Prompt token details)">B</td>
 <td class="c s-not-documented" title="Cached tokens / Langfuse: Not documented">·</td>
@@ -184,7 +208,10 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Cached tokens / Galileo: Not documented">·</td>
 <td class="c s-built-in" title="Cached tokens / OpenInference: Built-in (called: llm.token_count.prompt_details.cache_read | llm.token_count.prompt_details.cache_write)">B</td>
 <td class="c s-not-documented" title="Cached tokens / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:46%"></i></span>6</div></td></tr>
+<td class="c s-not-documented" title="Cached tokens / MLflow: Not documented">·</td>
+<td class="c s-built-in" title="Cached tokens / Laminar: Built-in (called: Per-kind token pricing (input, output, cache read, cache write, reasoning))">B</td>
+<td class="c s-built-in" title="Cached tokens / LangWatch: Built-in (called: Token usage (input, output, cached, reasoning))">B</td>
+<td><div class="rb"><span class="tr"><i style="width:50%"></i></span>8</div></td></tr>
 <tr><th class="lbl" scope="row">Reasoning tokens</th>
 <td class="c s-built-in" title="Reasoning tokens / Arize Phoenix: Built-in (called: Completion token details)">B</td>
 <td class="c s-not-documented" title="Reasoning tokens / Langfuse: Not documented">·</td>
@@ -199,13 +226,16 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Reasoning tokens / Galileo: Not documented">·</td>
 <td class="c s-built-in" title="Reasoning tokens / OpenInference: Built-in (called: llm.token_count.completion_details.reasoning)">B</td>
 <td class="c s-not-documented" title="Reasoning tokens / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:23%"></i></span>3</div></td></tr>
-<tr class="grp"><th colspan="15"><b>Cost</b>Observability</th></tr>
+<td class="c s-not-documented" title="Reasoning tokens / MLflow: Not documented">·</td>
+<td class="c s-built-in" title="Reasoning tokens / Laminar: Built-in (called: Per-kind token pricing (input, output, cache read, cache write, reasoning))">B</td>
+<td class="c s-built-in" title="Reasoning tokens / LangWatch: Built-in (called: Token usage (input, output, cached, reasoning))">B</td>
+<td><div class="rb"><span class="tr"><i style="width:31%"></i></span>5</div></td></tr>
+<tr class="grp"><th colspan="18"><b>Cost</b>Observability</th></tr>
 <tr><th class="lbl" scope="row">Estimated cost</th>
 <td class="c s-built-in" title="Estimated cost / Arize Phoenix: Built-in (called: Cost | Token-based cost tracking | Top models by cost)">B</td>
 <td class="c s-built-in" title="Estimated cost / Langfuse: Built-in (called: Cost details | Inferred cost | totalCost)">B</td>
 <td class="c s-built-in" title="Estimated cost / LangSmith: Built-in (called: Automatic token and cost recording | Cost &amp; Tokens (prebuilt dashboard) | Cost (dashboard metric))">B</td>
-<td class="c s-not-documented" title="Estimated cost / DeepEval: Not documented">·</td>
+<td class="c s-built-in" title="Estimated cost / DeepEval: Built-in (called: Drift overlay: Cost | Alert aggregations: trace count, error rate, average latency, token cost | LLM span cost: per-token, model and inferred cost | Widget aggregation measures (API): count, latency, error, cost and token measures)">B</td>
 <td class="c s-not-documented" title="Estimated cost / OpenTelemetry: Not documented">·</td>
 <td class="c s-built-in" title="Estimated cost / Helicone: Built-in (called: cost / provider_total_cost)">B</td>
 <td class="c s-built-in" title="Estimated cost / Braintrust: Built-in (called: estimated_cost)">B</td>
@@ -215,12 +245,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Estimated cost / Galileo: Not documented">·</td>
 <td class="c s-built-in" title="Estimated cost / OpenInference: Built-in (called: llm.cost.total)">B</td>
 <td class="c s-built-in" title="Estimated cost / Weights &amp; Biases Weave: Built-in (called: Token usage and cost (automatic))">B</td>
-<td><div class="rb"><span class="tr"><i style="width:69%"></i></span>9</div></td></tr>
+<td class="c s-built-in" title="Estimated cost / MLflow: Built-in (called: Cost)">B</td>
+<td class="c s-built-in" title="Estimated cost / Laminar: Built-in (called: LLM span token usage and cost | Dashboard preset: Traces | Dashboard preset: Spans)">B</td>
+<td class="c s-built-in" title="Estimated cost / LangWatch: Built-in (called: LLM cost from the model price registry)">B</td>
+<td><div class="rb"><span class="tr"><i style="width:81%"></i></span>13</div></td></tr>
 <tr><th class="lbl" scope="row">Cost breakdown by token type</th>
 <td class="c s-not-documented" title="Cost breakdown by token type / Arize Phoenix: Not documented">·</td>
 <td class="c s-built-in" title="Cost breakdown by token type / Langfuse: Built-in (called: Cost details)">B</td>
 <td class="c s-built-in" title="Cost breakdown by token type / LangSmith: Built-in (called: Cost &amp; Tokens (prebuilt dashboard) | Cost (dashboard metric))">B</td>
-<td class="c s-not-documented" title="Cost breakdown by token type / DeepEval: Not documented">·</td>
+<td class="c s-built-in" title="Cost breakdown by token type / DeepEval: Built-in (called: LLM span cost: per-token, model and inferred cost | Widget aggregation measures (API): count, latency, error, cost and token measures)">B</td>
 <td class="c s-not-documented" title="Cost breakdown by token type / OpenTelemetry: Not documented">·</td>
 <td class="c s-not-documented" title="Cost breakdown by token type / Helicone: Not documented">·</td>
 <td class="c s-built-in" title="Cost breakdown by token type / Braintrust: Built-in (called: estimated_cost_breakdown)">B</td>
@@ -230,13 +263,16 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Cost breakdown by token type / Galileo: Not documented">·</td>
 <td class="c s-built-in" title="Cost breakdown by token type / OpenInference: Built-in (called: llm.cost.prompt | llm.cost.completion | llm.cost.completion_details.reasoning | llm.cost.prompt_details.cache_read | llm.cost.prompt_details.cache_write)">B</td>
 <td class="c s-not-documented" title="Cost breakdown by token type / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:31%"></i></span>4</div></td></tr>
-<tr class="grp"><th colspan="15"><b>Latency</b>Observability</th></tr>
+<td class="c s-not-documented" title="Cost breakdown by token type / MLflow: Not documented">·</td>
+<td class="c s-built-in" title="Cost breakdown by token type / Laminar: Built-in (called: Per-kind token pricing (input, output, cache read, cache write, reasoning))">B</td>
+<td class="c s-built-in" title="Cost breakdown by token type / LangWatch: Built-in (called: LLM cost from the model price registry)">B</td>
+<td><div class="rb"><span class="tr"><i style="width:44%"></i></span>7</div></td></tr>
+<tr class="grp"><th colspan="18"><b>Latency</b>Observability</th></tr>
 <tr><th class="lbl" scope="row">Trace / run latency</th>
 <td class="c s-built-in" title="Trace / run latency / Arize Phoenix: Built-in (called: Trace Latency)">B</td>
 <td class="c s-built-in" title="Trace / run latency / Langfuse: Built-in (called: latency)">B</td>
 <td class="c s-built-in" title="Trace / run latency / LangSmith: Built-in (called: Latency (dashboard metric) | Trace count, latency and error rates (prebuilt dashboard))">B</td>
-<td class="c s-not-documented" title="Trace / run latency / DeepEval: Not documented">·</td>
+<td class="c s-built-in" title="Trace / run latency / DeepEval: Built-in (called: Drift overlay: Latency | Dashboard aggregations: Count, Average latency, P95 latency | Alert aggregations: trace count, error rate, average latency, token cost | Widget aggregation measures (API): count, latency, error, cost and token measures)">B</td>
 <td class="c s-built-in" title="Trace / run latency / OpenTelemetry: Built-in (called: gen_ai.invoke_agent.duration | gen_ai.invoke_workflow.duration)">B</td>
 <td class="c s-not-documented" title="Trace / run latency / Helicone: Not documented">·</td>
 <td class="c s-built-in" title="Trace / run latency / Braintrust: Built-in (called: metrics.duration)">B</td>
@@ -246,7 +282,10 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Trace / run latency / Galileo: Not documented">·</td>
 <td class="c s-not-documented" title="Trace / run latency / OpenInference: Not documented">·</td>
 <td class="c s-not-documented" title="Trace / run latency / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:46%"></i></span>6</div></td></tr>
+<td class="c s-not-documented" title="Trace / run latency / MLflow: Not documented">·</td>
+<td class="c s-built-in" title="Trace / run latency / Laminar: Built-in (called: Dashboard preset: Traces)">B</td>
+<td class="c s-not-documented" title="Trace / run latency / LangWatch: Not documented">·</td>
+<td><div class="rb"><span class="tr"><i style="width:50%"></i></span>8</div></td></tr>
 <tr><th class="lbl" scope="row">LLM call latency</th>
 <td class="c s-not-documented" title="LLM call latency / Arize Phoenix: Not documented">·</td>
 <td class="c s-not-documented" title="LLM call latency / Langfuse: Not documented">·</td>
@@ -261,7 +300,10 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="LLM call latency / Galileo: Not documented">·</td>
 <td class="c s-not-documented" title="LLM call latency / OpenInference: Not documented">·</td>
 <td class="c s-not-documented" title="LLM call latency / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:46%"></i></span>6</div></td></tr>
+<td class="c s-not-documented" title="LLM call latency / MLflow: Not documented">·</td>
+<td class="c s-not-documented" title="LLM call latency / Laminar: Not documented">·</td>
+<td class="c s-not-documented" title="LLM call latency / LangWatch: Not documented">·</td>
+<td><div class="rb"><span class="tr"><i style="width:38%"></i></span>6</div></td></tr>
 <tr><th class="lbl" scope="row">Span duration</th>
 <td class="c s-not-documented" title="Span duration / Arize Phoenix: Not documented">·</td>
 <td class="c s-not-documented" title="Span duration / Langfuse: Not documented">·</td>
@@ -276,7 +318,10 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Span duration / Galileo: Not documented">·</td>
 <td class="c s-not-documented" title="Span duration / OpenInference: Not documented">·</td>
 <td class="c s-built-in" title="Span duration / Weights &amp; Biases Weave: Built-in (called: Latency (Call timing))">B</td>
-<td><div class="rb"><span class="tr"><i style="width:31%"></i></span>4</div></td></tr>
+<td class="c s-built-in" title="Span duration / MLflow: Built-in (called: Latency)">B</td>
+<td class="c s-built-in" title="Span duration / Laminar: Built-in (called: Dashboard preset: Spans)">B</td>
+<td class="c s-not-documented" title="Span duration / LangWatch: Not documented">·</td>
+<td><div class="rb"><span class="tr"><i style="width:38%"></i></span>6</div></td></tr>
 <tr><th class="lbl" scope="row">Time to first token</th>
 <td class="c s-not-documented" title="Time to first token / Arize Phoenix: Not documented">·</td>
 <td class="c s-built-in" title="Time to first token / Langfuse: Built-in (called: completion_start_time (time to first token))">B</td>
@@ -291,28 +336,16 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Time to first token / Galileo: Not documented">·</td>
 <td class="c s-not-documented" title="Time to first token / OpenInference: Not documented">·</td>
 <td class="c s-not-documented" title="Time to first token / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:31%"></i></span>4</div></td></tr>
-<tr><th class="lbl" scope="row">Time per output token / generation time</th>
-<td class="c s-not-documented" title="Time per output token / generation time / Arize Phoenix: Not documented">·</td>
-<td class="c s-not-documented" title="Time per output token / generation time / Langfuse: Not documented">·</td>
-<td class="c s-not-documented" title="Time per output token / generation time / LangSmith: Not documented">·</td>
-<td class="c s-not-documented" title="Time per output token / generation time / DeepEval: Not documented">·</td>
-<td class="c s-built-in" title="Time per output token / generation time / OpenTelemetry: Built-in (called: gen_ai.server.time_per_output_token)">B</td>
-<td class="c s-not-documented" title="Time per output token / generation time / Helicone: Not documented">·</td>
-<td class="c s-not-documented" title="Time per output token / generation time / Braintrust: Not documented">·</td>
-<td class="c s-not-documented" title="Time per output token / generation time / promptfoo: Not documented">·</td>
-<td class="c s-built-in" title="Time per output token / generation time / OpenLLMetry: Built-in (called: llm.chat_completions.streaming_time_to_generate)">B</td>
-<td class="c s-not-documented" title="Time per output token / generation time / Opik: Not documented">·</td>
-<td class="c s-not-documented" title="Time per output token / generation time / Galileo: Not documented">·</td>
-<td class="c s-not-documented" title="Time per output token / generation time / OpenInference: Not documented">·</td>
-<td class="c s-not-documented" title="Time per output token / generation time / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:15%"></i></span>2</div></td></tr>
-<tr class="grp"><th colspan="15"><b>Errors and volume</b>Observability</th></tr>
+<td class="c s-not-documented" title="Time to first token / MLflow: Not documented">·</td>
+<td class="c s-not-documented" title="Time to first token / Laminar: Not documented">·</td>
+<td class="c s-built-in" title="Time to first token / LangWatch: Built-in (called: Time to first token (TTFT))">B</td>
+<td><div class="rb"><span class="tr"><i style="width:31%"></i></span>5</div></td></tr>
+<tr class="grp"><th colspan="18"><b>Errors and volume</b>Observability</th></tr>
 <tr><th class="lbl" scope="row">Error count / rate</th>
 <td class="c s-built-in" title="Error count / rate / Arize Phoenix: Built-in (called: LLM spans with errors | Tool spans with errors)">B</td>
 <td class="c s-not-documented" title="Error count / rate / Langfuse: Not documented">·</td>
 <td class="c s-built-in" title="Error count / rate / LangSmith: Built-in (called: Trace count, latency and error rates (prebuilt dashboard))">B</td>
-<td class="c s-not-documented" title="Error count / rate / DeepEval: Not documented">·</td>
+<td class="c s-built-in" title="Error count / rate / DeepEval: Built-in (called: Drift overlay: Error rate | Alert aggregations: trace count, error rate, average latency, token cost | Widget aggregation measures (API): count, latency, error, cost and token measures)">B</td>
 <td class="c s-not-documented" title="Error count / rate / OpenTelemetry: Not documented">·</td>
 <td class="c s-built-in" title="Error count / rate / Helicone: Built-in (called: Alert metric: Error Rate)">B</td>
 <td class="c s-built-in" title="Error count / rate / Braintrust: Built-in (called: metrics.errors | metrics.llm_errors)">B</td>
@@ -322,12 +355,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Error count / rate / Galileo: Not documented">·</td>
 <td class="c s-not-documented" title="Error count / rate / OpenInference: Not documented">·</td>
 <td class="c s-built-in" title="Error count / rate / Weights &amp; Biases Weave: Built-in (called: Errors (Call errors))">B</td>
-<td><div class="rb"><span class="tr"><i style="width:62%"></i></span>8</div></td></tr>
+<td class="c s-not-documented" title="Error count / rate / MLflow: Not documented">·</td>
+<td class="c s-not-documented" title="Error count / rate / Laminar: Not documented">·</td>
+<td class="c s-not-documented" title="Error count / rate / LangWatch: Not documented">·</td>
+<td><div class="rb"><span class="tr"><i style="width:56%"></i></span>9</div></td></tr>
 <tr><th class="lbl" scope="row">Trace / span count</th>
 <td class="c s-built-in" title="Trace / span count / Arize Phoenix: Built-in (called: Traces over time)">B</td>
 <td class="c s-not-documented" title="Trace / span count / Langfuse: Not documented">·</td>
 <td class="c s-built-in" title="Trace / span count / LangSmith: Built-in (called: Trace count, latency and error rates (prebuilt dashboard))">B</td>
-<td class="c s-not-documented" title="Trace / span count / DeepEval: Not documented">·</td>
+<td class="c s-built-in" title="Trace / span count / DeepEval: Built-in (called: Dashboard aggregations: Count, Average latency, P95 latency | Alert aggregations: trace count, error rate, average latency, token cost | Widget aggregation measures (API): count, latency, error, cost and token measures)">B</td>
 <td class="c s-not-documented" title="Trace / span count / OpenTelemetry: Not documented">·</td>
 <td class="c s-not-documented" title="Trace / span count / Helicone: Not documented">·</td>
 <td class="c s-not-documented" title="Trace / span count / Braintrust: Not documented">·</td>
@@ -337,7 +373,10 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="Trace / span count / Galileo: Not documented">·</td>
 <td class="c s-not-documented" title="Trace / span count / OpenInference: Not documented">·</td>
 <td class="c s-not-documented" title="Trace / span count / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:31%"></i></span>4</div></td></tr>
+<td class="c s-not-documented" title="Trace / span count / MLflow: Not documented">·</td>
+<td class="c s-built-in" title="Trace / span count / Laminar: Built-in (called: Dashboard preset: Traces)">B</td>
+<td class="c s-not-documented" title="Trace / span count / LangWatch: Not documented">·</td>
+<td><div class="rb"><span class="tr"><i style="width:38%"></i></span>6</div></td></tr>
 <tr><th class="lbl" scope="row">LLM call count</th>
 <td class="c s-built-in" title="LLM call count / Arize Phoenix: Built-in (called: LLM span counts)">B</td>
 <td class="c s-not-documented" title="LLM call count / Langfuse: Not documented">·</td>
@@ -352,8 +391,11 @@ th,td{padding:0;font-weight:400}
 <td class="c s-not-documented" title="LLM call count / Galileo: Not documented">·</td>
 <td class="c s-not-documented" title="LLM call count / OpenInference: Not documented">·</td>
 <td class="c s-not-documented" title="LLM call count / Weights &amp; Biases Weave: Not documented">·</td>
-<td><div class="rb"><span class="tr"><i style="width:38%"></i></span>5</div></td></tr>
-<tr class="grp"><th colspan="15"><b>Tool use</b>Evaluation</th></tr>
+<td class="c s-not-documented" title="LLM call count / MLflow: Not documented">·</td>
+<td class="c s-not-documented" title="LLM call count / Laminar: Not documented">·</td>
+<td class="c s-not-documented" title="LLM call count / LangWatch: Not documented">·</td>
+<td><div class="rb"><span class="tr"><i style="width:31%"></i></span>5</div></td></tr>
+<tr class="grp"><th colspan="18"><b>Tool use</b>Evaluation</th></tr>
 <tr><th class="lbl" scope="row">Tool selection</th>
 <td class="c s-built-in" title="Tool selection / Arize Phoenix: Built-in (called: Tool Selection)">B</td>
 <td class="c s-generic-custom" title="Tool selection / Langfuse: Generic custom">G</td>
@@ -363,12 +405,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Tool selection / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Tool selection / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Tool selection / promptfoo: Generic custom">G</td>
-<td class="c s-generic-custom" title="Tool selection / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="Tool selection / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Tool selection / Opik: Generic custom">G</td>
 <td class="c s-built-in" title="Tool selection / Galileo: Built-in (called: Tool Selection Quality)">B</td>
 <td class="c s-records-scores" title="Tool selection / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Tool selection / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:31%"></i></span>4</div></td></tr>
+<td class="c s-generic-custom" title="Tool selection / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Tool selection / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Tool selection / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:25%"></i></span>4</div></td></tr>
 <tr><th class="lbl" scope="row">Tool argument validity</th>
 <td class="c s-built-in" title="Tool argument validity / Arize Phoenix: Built-in (called: Tool Invocation)">B</td>
 <td class="c s-generic-custom" title="Tool argument validity / Langfuse: Generic custom">G</td>
@@ -378,12 +423,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Tool argument validity / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Tool argument validity / Braintrust: Generic custom">G</td>
 <td class="c s-built-in" title="Tool argument validity / promptfoo: Built-in (called: is-valid-function-call | is-valid-openai-tools-call | trajectory:tool-args-match)">B</td>
-<td class="c s-generic-custom" title="Tool argument validity / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="Tool argument validity / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Tool argument validity / Opik: Generic custom">G</td>
 <td class="c s-generic-custom" title="Tool argument validity / Galileo: Generic custom">G</td>
 <td class="c s-records-scores" title="Tool argument validity / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Tool argument validity / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:23%"></i></span>3</div></td></tr>
+<td class="c s-built-in" title="Tool argument validity / MLflow: Built-in (called: ToolCallCorrectness)">B</td>
+<td class="c s-generic-custom" title="Tool argument validity / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Tool argument validity / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:25%"></i></span>4</div></td></tr>
 <tr><th class="lbl" scope="row">Tool call correctness</th>
 <td class="c s-generic-custom" title="Tool call correctness / Arize Phoenix: Generic custom">G</td>
 <td class="c s-generic-custom" title="Tool call correctness / Langfuse: Generic custom">G</td>
@@ -393,12 +441,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Tool call correctness / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Tool call correctness / Braintrust: Generic custom">G</td>
 <td class="c s-built-in" title="Tool call correctness / promptfoo: Built-in (called: skill-used | tool-call-f1 | trajectory:tool-used)">B</td>
-<td class="c s-generic-custom" title="Tool call correctness / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="Tool call correctness / OpenLLMetry: Not documented">·</td>
 <td class="c s-built-in" title="Tool call correctness / Opik: Built-in (called: Agent Tool Correctness Judge)">B</td>
 <td class="c s-generic-custom" title="Tool call correctness / Galileo: Generic custom">G</td>
 <td class="c s-records-scores" title="Tool call correctness / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Tool call correctness / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:23%"></i></span>3</div></td></tr>
+<td class="c s-built-in" title="Tool call correctness / MLflow: Built-in (called: ToolCallCorrectness)">B</td>
+<td class="c s-generic-custom" title="Tool call correctness / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Tool call correctness / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:25%"></i></span>4</div></td></tr>
 <tr><th class="lbl" scope="row">Tool call efficiency</th>
 <td class="c s-generic-custom" title="Tool call efficiency / Arize Phoenix: Generic custom">G</td>
 <td class="c s-generic-custom" title="Tool call efficiency / Langfuse: Generic custom">G</td>
@@ -408,12 +459,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Tool call efficiency / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Tool call efficiency / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Tool call efficiency / promptfoo: Generic custom">G</td>
-<td class="c s-generic-custom" title="Tool call efficiency / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="Tool call efficiency / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Tool call efficiency / Opik: Generic custom">G</td>
 <td class="c s-generic-custom" title="Tool call efficiency / Galileo: Generic custom">G</td>
 <td class="c s-records-scores" title="Tool call efficiency / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Tool call efficiency / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:8%"></i></span>1</div></td></tr>
+<td class="c s-built-in" title="Tool call efficiency / MLflow: Built-in (called: ConversationalToolCallEfficiency | ToolCallEfficiency)">B</td>
+<td class="c s-generic-custom" title="Tool call efficiency / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Tool call efficiency / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:12%"></i></span>2</div></td></tr>
 <tr><th class="lbl" scope="row">Tool response handling</th>
 <td class="c s-built-in" title="Tool response handling / Arize Phoenix: Built-in (called: Tool Response Handling)">B</td>
 <td class="c s-generic-custom" title="Tool response handling / Langfuse: Generic custom">G</td>
@@ -423,13 +477,16 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Tool response handling / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Tool response handling / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Tool response handling / promptfoo: Generic custom">G</td>
-<td class="c s-generic-custom" title="Tool response handling / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="Tool response handling / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Tool response handling / Opik: Generic custom">G</td>
 <td class="c s-generic-custom" title="Tool response handling / Galileo: Generic custom">G</td>
 <td class="c s-records-scores" title="Tool response handling / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Tool response handling / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:8%"></i></span>1</div></td></tr>
-<tr class="grp"><th colspan="15"><b>Task and goal</b>Evaluation</th></tr>
+<td class="c s-generic-custom" title="Tool response handling / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Tool response handling / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Tool response handling / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:6%"></i></span>1</div></td></tr>
+<tr class="grp"><th colspan="18"><b>Task and goal</b>Evaluation</th></tr>
 <tr><th class="lbl" scope="row">Task / goal completion</th>
 <td class="c s-built-in" title="Task / goal completion / Arize Phoenix: Built-in (called: Completeness)">B</td>
 <td class="c s-generic-custom" title="Task / goal completion / Langfuse: Generic custom">G</td>
@@ -439,13 +496,16 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Task / goal completion / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Task / goal completion / Braintrust: Generic custom">G</td>
 <td class="c s-built-in" title="Task / goal completion / promptfoo: Built-in (called: trajectory:goal-success)">B</td>
-<td class="c s-built-in" title="Task / goal completion / OpenLLMetry: Built-in (called: Agent Goal Accuracy | Agent Goal Completeness | Answer Completeness)">B</td>
+<td class="c s-not-documented" title="Task / goal completion / OpenLLMetry: Not documented">·</td>
 <td class="c s-built-in" title="Task / goal completion / Opik: Built-in (called: Agent Task Completion Judge | SessionCompletenessQuality)">B</td>
 <td class="c s-built-in" title="Task / goal completion / Galileo: Built-in (called: Action Completion | Completeness)">B</td>
 <td class="c s-records-scores" title="Task / goal completion / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Task / goal completion / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:54%"></i></span>7</div></td></tr>
-<tr class="grp"><th colspan="15"><b>Plan and trajectory</b>Evaluation</th></tr>
+<td class="c s-built-in" title="Task / goal completion / MLflow: Built-in (called: Completeness | ConversationCompleteness)">B</td>
+<td class="c s-generic-custom" title="Task / goal completion / Laminar: Generic custom">G</td>
+<td class="c s-built-in" title="Task / goal completion / LangWatch: Built-in (called: Query Resolution)">B</td>
+<td><div class="rb"><span class="tr"><i style="width:50%"></i></span>8</div></td></tr>
+<tr class="grp"><th colspan="18"><b>Plan and trajectory</b>Evaluation</th></tr>
 <tr><th class="lbl" scope="row">Plan quality</th>
 <td class="c s-generic-custom" title="Plan quality / Arize Phoenix: Generic custom">G</td>
 <td class="c s-generic-custom" title="Plan quality / Langfuse: Generic custom">G</td>
@@ -455,12 +515,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Plan quality / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Plan quality / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Plan quality / promptfoo: Generic custom">G</td>
-<td class="c s-generic-custom" title="Plan quality / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="Plan quality / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Plan quality / Opik: Generic custom">G</td>
 <td class="c s-generic-custom" title="Plan quality / Galileo: Generic custom">G</td>
 <td class="c s-records-scores" title="Plan quality / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Plan quality / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:8%"></i></span>1</div></td></tr>
+<td class="c s-generic-custom" title="Plan quality / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Plan quality / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Plan quality / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:6%"></i></span>1</div></td></tr>
 <tr><th class="lbl" scope="row">Plan adherence</th>
 <td class="c s-generic-custom" title="Plan adherence / Arize Phoenix: Generic custom">G</td>
 <td class="c s-generic-custom" title="Plan adherence / Langfuse: Generic custom">G</td>
@@ -470,12 +533,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Plan adherence / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Plan adherence / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Plan adherence / promptfoo: Generic custom">G</td>
-<td class="c s-generic-custom" title="Plan adherence / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="Plan adherence / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Plan adherence / Opik: Generic custom">G</td>
 <td class="c s-generic-custom" title="Plan adherence / Galileo: Generic custom">G</td>
 <td class="c s-records-scores" title="Plan adherence / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Plan adherence / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:15%"></i></span>2</div></td></tr>
+<td class="c s-generic-custom" title="Plan adherence / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Plan adherence / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Plan adherence / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:12%"></i></span>2</div></td></tr>
 <tr><th class="lbl" scope="row">Trajectory accuracy</th>
 <td class="c s-generic-custom" title="Trajectory accuracy / Arize Phoenix: Generic custom">G</td>
 <td class="c s-template" title="Trajectory accuracy / Langfuse: Template (called: Trajectory Evaluation (guide example))">T</td>
@@ -485,12 +551,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Trajectory accuracy / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Trajectory accuracy / Braintrust: Generic custom">G</td>
 <td class="c s-built-in" title="Trajectory accuracy / promptfoo: Built-in (called: trajectory:tool-sequence)">B</td>
-<td class="c s-built-in" title="Trajectory accuracy / OpenLLMetry: Built-in (called: Agent Tool Trajectory)">B</td>
+<td class="c s-not-documented" title="Trajectory accuracy / OpenLLMetry: Not documented">·</td>
 <td class="c s-built-in" title="Trajectory accuracy / Opik: Built-in (called: Trajectory Accuracy)">B</td>
 <td class="c s-generic-custom" title="Trajectory accuracy / Galileo: Generic custom">G</td>
 <td class="c s-records-scores" title="Trajectory accuracy / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Trajectory accuracy / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:31%"></i></span>4</div></td></tr>
+<td class="c s-generic-custom" title="Trajectory accuracy / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Trajectory accuracy / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Trajectory accuracy / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:19%"></i></span>3</div></td></tr>
 <tr><th class="lbl" scope="row">Step / action efficiency</th>
 <td class="c s-generic-custom" title="Step / action efficiency / Arize Phoenix: Generic custom">G</td>
 <td class="c s-generic-custom" title="Step / action efficiency / Langfuse: Generic custom">G</td>
@@ -500,12 +569,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Step / action efficiency / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Step / action efficiency / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Step / action efficiency / promptfoo: Generic custom">G</td>
-<td class="c s-built-in" title="Step / action efficiency / OpenLLMetry: Built-in (called: Agent Efficiency)">B</td>
+<td class="c s-not-documented" title="Step / action efficiency / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Step / action efficiency / Opik: Generic custom">G</td>
 <td class="c s-built-in" title="Step / action efficiency / Galileo: Built-in (called: Agent Efficiency)">B</td>
 <td class="c s-records-scores" title="Step / action efficiency / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Step / action efficiency / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:23%"></i></span>3</div></td></tr>
+<td class="c s-generic-custom" title="Step / action efficiency / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Step / action efficiency / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Step / action efficiency / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:12%"></i></span>2</div></td></tr>
 <tr><th class="lbl" scope="row">Action progress toward goal</th>
 <td class="c s-generic-custom" title="Action progress toward goal / Arize Phoenix: Generic custom">G</td>
 <td class="c s-generic-custom" title="Action progress toward goal / Langfuse: Generic custom">G</td>
@@ -515,12 +587,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Action progress toward goal / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Action progress toward goal / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Action progress toward goal / promptfoo: Generic custom">G</td>
-<td class="c s-generic-custom" title="Action progress toward goal / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="Action progress toward goal / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Action progress toward goal / Opik: Generic custom">G</td>
 <td class="c s-built-in" title="Action progress toward goal / Galileo: Built-in (called: Action Advancement)">B</td>
 <td class="c s-records-scores" title="Action progress toward goal / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Action progress toward goal / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:8%"></i></span>1</div></td></tr>
+<td class="c s-generic-custom" title="Action progress toward goal / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Action progress toward goal / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Action progress toward goal / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:6%"></i></span>1</div></td></tr>
 <tr><th class="lbl" scope="row">Flow and reasoning coherence</th>
 <td class="c s-generic-custom" title="Flow and reasoning coherence / Arize Phoenix: Generic custom">G</td>
 <td class="c s-generic-custom" title="Flow and reasoning coherence / Langfuse: Generic custom">G</td>
@@ -530,13 +605,16 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Flow and reasoning coherence / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Flow and reasoning coherence / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Flow and reasoning coherence / promptfoo: Generic custom">G</td>
-<td class="c s-built-in" title="Flow and reasoning coherence / OpenLLMetry: Built-in (called: Agent Flow Quality)">B</td>
+<td class="c s-not-documented" title="Flow and reasoning coherence / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Flow and reasoning coherence / Opik: Generic custom">G</td>
 <td class="c s-built-in" title="Flow and reasoning coherence / Galileo: Built-in (called: Agent Flow | Reasoning Coherence)">B</td>
 <td class="c s-records-scores" title="Flow and reasoning coherence / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Flow and reasoning coherence / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:15%"></i></span>2</div></td></tr>
-<tr class="grp"><th colspan="15"><b>Answer quality</b>Evaluation</th></tr>
+<td class="c s-generic-custom" title="Flow and reasoning coherence / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Flow and reasoning coherence / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Flow and reasoning coherence / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:6%"></i></span>1</div></td></tr>
+<tr class="grp"><th colspan="18"><b>Answer quality</b>Evaluation</th></tr>
 <tr><th class="lbl" scope="row">Answer correctness</th>
 <td class="c s-built-in" title="Answer correctness / Arize Phoenix: Built-in (called: Correctness)">B</td>
 <td class="c s-generic-custom" title="Answer correctness / Langfuse: Generic custom">G</td>
@@ -546,12 +624,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Answer correctness / Helicone: Records scores">R</td>
 <td class="c s-built-in" title="Answer correctness / Braintrust: Built-in (called: AnswerCorrectness | ClosedQA | Factuality)">B</td>
 <td class="c s-built-in" title="Answer correctness / promptfoo: Built-in (called: factuality)">B</td>
-<td class="c s-built-in" title="Answer correctness / OpenLLMetry: Built-in (called: Answer Correctness)">B</td>
+<td class="c s-not-documented" title="Answer correctness / OpenLLMetry: Not documented">·</td>
 <td class="c s-built-in" title="Answer correctness / Opik: Built-in (called: Meaning Match)">B</td>
 <td class="c s-built-in" title="Answer correctness / Galileo: Built-in (called: Correctness (factuality) | Ground Truth Adherence)">B</td>
 <td class="c s-records-scores" title="Answer correctness / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Answer correctness / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:54%"></i></span>7</div></td></tr>
+<td class="c s-built-in" title="Answer correctness / MLflow: Built-in (called: Correctness)">B</td>
+<td class="c s-generic-custom" title="Answer correctness / Laminar: Generic custom">G</td>
+<td class="c s-built-in" title="Answer correctness / LangWatch: Built-in (called: LLM Answer Match | LLM Factual Match)">B</td>
+<td><div class="rb"><span class="tr"><i style="width:50%"></i></span>8</div></td></tr>
 <tr><th class="lbl" scope="row">Answer relevance</th>
 <td class="c s-generic-custom" title="Answer relevance / Arize Phoenix: Generic custom">G</td>
 <td class="c s-integration" title="Answer relevance / Langfuse: Integration (called: ResponseRelevancy)">I</td>
@@ -561,12 +642,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Answer relevance / Helicone: Records scores">R</td>
 <td class="c s-built-in" title="Answer relevance / Braintrust: Built-in (called: AnswerRelevancy)">B</td>
 <td class="c s-built-in" title="Answer relevance / promptfoo: Built-in (called: answer-relevance | conversation-relevance)">B</td>
-<td class="c s-built-in" title="Answer relevance / OpenLLMetry: Built-in (called: Answer Relevancy)">B</td>
+<td class="c s-not-documented" title="Answer relevance / OpenLLMetry: Not documented">·</td>
 <td class="c s-built-in" title="Answer relevance / Opik: Built-in (called: Answer Relevance | ConversationQARelevanceMetric | QA Relevance Judge)">B</td>
 <td class="c s-generic-custom" title="Answer relevance / Galileo: Generic custom">G</td>
 <td class="c s-records-scores" title="Answer relevance / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Answer relevance / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:46%"></i></span>6</div></td></tr>
+<td class="c s-built-in" title="Answer relevance / MLflow: Built-in (called: RelevanceToQuery)">B</td>
+<td class="c s-generic-custom" title="Answer relevance / Laminar: Generic custom">G</td>
+<td class="c s-built-in" title="Answer relevance / LangWatch: Built-in (called: Ragas Response Relevancy)">B</td>
+<td><div class="rb"><span class="tr"><i style="width:44%"></i></span>7</div></td></tr>
 <tr><th class="lbl" scope="row">Helpfulness</th>
 <td class="c s-generic-custom" title="Helpfulness / Arize Phoenix: Generic custom">G</td>
 <td class="c s-built-in" title="Helpfulness / Langfuse: Built-in (called: Managed evaluator catalog)">B</td>
@@ -576,12 +660,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Helpfulness / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Helpfulness / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Helpfulness / promptfoo: Generic custom">G</td>
-<td class="c s-generic-custom" title="Helpfulness / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="Helpfulness / OpenLLMetry: Not documented">·</td>
 <td class="c s-built-in" title="Helpfulness / Opik: Built-in (called: ConversationDialogueHelpfulnessMetric | Dialogue Helpfulness Judge | Usefulness)">B</td>
 <td class="c s-generic-custom" title="Helpfulness / Galileo: Generic custom">G</td>
 <td class="c s-records-scores" title="Helpfulness / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Helpfulness / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:23%"></i></span>3</div></td></tr>
+<td class="c s-generic-custom" title="Helpfulness / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Helpfulness / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Helpfulness / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:19%"></i></span>3</div></td></tr>
 <tr><th class="lbl" scope="row">Conciseness</th>
 <td class="c s-built-in" title="Conciseness / Arize Phoenix: Built-in (called: Conciseness)">B</td>
 <td class="c s-generic-custom" title="Conciseness / Langfuse: Generic custom">G</td>
@@ -591,12 +678,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Conciseness / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Conciseness / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Conciseness / promptfoo: Generic custom">G</td>
-<td class="c s-generic-custom" title="Conciseness / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="Conciseness / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Conciseness / Opik: Generic custom">G</td>
 <td class="c s-generic-custom" title="Conciseness / Galileo: Generic custom">G</td>
 <td class="c s-records-scores" title="Conciseness / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Conciseness / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:15%"></i></span>2</div></td></tr>
+<td class="c s-generic-custom" title="Conciseness / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Conciseness / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Conciseness / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:12%"></i></span>2</div></td></tr>
 <tr><th class="lbl" scope="row">Tone appropriateness</th>
 <td class="c s-generic-custom" title="Tone appropriateness / Arize Phoenix: Generic custom">G</td>
 <td class="c s-generic-custom" title="Tone appropriateness / Langfuse: Generic custom">G</td>
@@ -606,13 +696,34 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Tone appropriateness / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Tone appropriateness / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Tone appropriateness / promptfoo: Generic custom">G</td>
-<td class="c s-built-in" title="Tone appropriateness / OpenLLMetry: Built-in (called: Tone Detection)">B</td>
+<td class="c s-not-documented" title="Tone appropriateness / OpenLLMetry: Not documented">·</td>
 <td class="c s-built-in" title="Tone appropriateness / Opik: Built-in (called: Tone)">B</td>
 <td class="c s-built-in" title="Tone appropriateness / Galileo: Built-in (called: Tone)">B</td>
 <td class="c s-records-scores" title="Tone appropriateness / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Tone appropriateness / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:31%"></i></span>4</div></td></tr>
-<tr class="grp"><th colspan="15"><b>Grounding</b>Evaluation</th></tr>
+<td class="c s-generic-custom" title="Tone appropriateness / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Tone appropriateness / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Tone appropriateness / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:19%"></i></span>3</div></td></tr>
+<tr><th class="lbl" scope="row">Fluency</th>
+<td class="c s-generic-custom" title="Fluency / Arize Phoenix: Generic custom">G</td>
+<td class="c s-generic-custom" title="Fluency / Langfuse: Generic custom">G</td>
+<td class="c s-generic-custom" title="Fluency / LangSmith: Generic custom">G</td>
+<td class="c s-generic-custom" title="Fluency / DeepEval: Generic custom">G</td>
+<td class="c s-records-scores" title="Fluency / OpenTelemetry: Records scores">R</td>
+<td class="c s-records-scores" title="Fluency / Helicone: Records scores">R</td>
+<td class="c s-generic-custom" title="Fluency / Braintrust: Generic custom">G</td>
+<td class="c s-generic-custom" title="Fluency / promptfoo: Generic custom">G</td>
+<td class="c s-not-documented" title="Fluency / OpenLLMetry: Not documented">·</td>
+<td class="c s-generic-custom" title="Fluency / Opik: Generic custom">G</td>
+<td class="c s-generic-custom" title="Fluency / Galileo: Generic custom">G</td>
+<td class="c s-records-scores" title="Fluency / OpenInference: Records scores">R</td>
+<td class="c s-generic-custom" title="Fluency / Weights &amp; Biases Weave: Generic custom">G</td>
+<td class="c s-built-in" title="Fluency / MLflow: Built-in (called: Fluency)">B</td>
+<td class="c s-generic-custom" title="Fluency / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Fluency / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:6%"></i></span>1</div></td></tr>
+<tr class="grp"><th colspan="18"><b>Grounding</b>Evaluation</th></tr>
 <tr><th class="lbl" scope="row">Faithfulness to context</th>
 <td class="c s-built-in" title="Faithfulness to context / Arize Phoenix: Built-in (called: Faithfulness | Hallucination)">B</td>
 <td class="c s-built-in" title="Faithfulness to context / Langfuse: Built-in (called: Managed evaluator catalog)">B</td>
@@ -622,13 +733,16 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Faithfulness to context / Helicone: Records scores">R</td>
 <td class="c s-built-in" title="Faithfulness to context / Braintrust: Built-in (called: Faithfulness)">B</td>
 <td class="c s-built-in" title="Faithfulness to context / promptfoo: Built-in (called: context-faithfulness)">B</td>
-<td class="c s-built-in" title="Faithfulness to context / OpenLLMetry: Built-in (called: Faithfulness)">B</td>
+<td class="c s-not-documented" title="Faithfulness to context / OpenLLMetry: Not documented">·</td>
 <td class="c s-built-in" title="Faithfulness to context / Opik: Built-in (called: Hallucination)">B</td>
 <td class="c s-built-in" title="Faithfulness to context / Galileo: Built-in (called: Context Adherence)">B</td>
 <td class="c s-records-scores" title="Faithfulness to context / OpenInference: Records scores">R</td>
 <td class="c s-built-in" title="Faithfulness to context / Weights &amp; Biases Weave: Built-in (called: HallucinationFreeScorer)">B</td>
-<td><div class="rb"><span class="tr"><i style="width:77%"></i></span>10</div></td></tr>
-<tr class="grp"><th colspan="15"><b>Safety and policy</b>Evaluation</th></tr>
+<td class="c s-built-in" title="Faithfulness to context / MLflow: Built-in (called: RetrievalGroundedness)">B</td>
+<td class="c s-generic-custom" title="Faithfulness to context / Laminar: Generic custom">G</td>
+<td class="c s-built-in" title="Faithfulness to context / LangWatch: Built-in (called: Ragas Faithfulness)">B</td>
+<td><div class="rb"><span class="tr"><i style="width:69%"></i></span>11</div></td></tr>
+<tr class="grp"><th colspan="18"><b>Safety and policy</b>Evaluation</th></tr>
 <tr><th class="lbl" scope="row">Toxicity</th>
 <td class="c s-built-in" title="Toxicity / Arize Phoenix: Built-in (called: Toxicity)">B</td>
 <td class="c s-built-in" title="Toxicity / Langfuse: Built-in (called: Managed evaluator catalog)">B</td>
@@ -638,12 +752,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Toxicity / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Toxicity / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Toxicity / promptfoo: Generic custom">G</td>
-<td class="c s-built-in" title="Toxicity / OpenLLMetry: Built-in (called: Profanity Detection | Toxicity Detection)">B</td>
+<td class="c s-not-documented" title="Toxicity / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Toxicity / Opik: Generic custom">G</td>
 <td class="c s-built-in" title="Toxicity / Galileo: Built-in (called: Toxicity)">B</td>
 <td class="c s-records-scores" title="Toxicity / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Toxicity / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:46%"></i></span>6</div></td></tr>
+<td class="c s-built-in" title="Toxicity / MLflow: Built-in (called: ConversationalSafety | Safety)">B</td>
+<td class="c s-generic-custom" title="Toxicity / Laminar: Generic custom">G</td>
+<td class="c s-built-in" title="Toxicity / LangWatch: Built-in (called: Content Safety)">B</td>
+<td><div class="rb"><span class="tr"><i style="width:44%"></i></span>7</div></td></tr>
 <tr><th class="lbl" scope="row">Bias and fairness</th>
 <td class="c s-generic-custom" title="Bias and fairness / Arize Phoenix: Generic custom">G</td>
 <td class="c s-generic-custom" title="Bias and fairness / Langfuse: Generic custom">G</td>
@@ -653,12 +770,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Bias and fairness / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Bias and fairness / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Bias and fairness / promptfoo: Generic custom">G</td>
-<td class="c s-built-in" title="Bias and fairness / OpenLLMetry: Built-in (called: Sexism Detection)">B</td>
+<td class="c s-not-documented" title="Bias and fairness / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Bias and fairness / Opik: Generic custom">G</td>
 <td class="c s-built-in" title="Bias and fairness / Galileo: Built-in (called: Sexism / Bias)">B</td>
 <td class="c s-records-scores" title="Bias and fairness / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Bias and fairness / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:31%"></i></span>4</div></td></tr>
+<td class="c s-generic-custom" title="Bias and fairness / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Bias and fairness / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Bias and fairness / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:19%"></i></span>3</div></td></tr>
 <tr><th class="lbl" scope="row">Sensitive data leakage</th>
 <td class="c s-built-in" title="Sensitive data leakage / Arize Phoenix: Built-in (called: PII Detection)">B</td>
 <td class="c s-generic-custom" title="Sensitive data leakage / Langfuse: Generic custom">G</td>
@@ -668,12 +788,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Sensitive data leakage / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Sensitive data leakage / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Sensitive data leakage / promptfoo: Generic custom">G</td>
-<td class="c s-built-in" title="Sensitive data leakage / OpenLLMetry: Built-in (called: PII Detection | Secrets Detection)">B</td>
+<td class="c s-not-documented" title="Sensitive data leakage / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Sensitive data leakage / Opik: Generic custom">G</td>
 <td class="c s-built-in" title="Sensitive data leakage / Galileo: Built-in (called: PII / CPNI / PHI)">B</td>
 <td class="c s-records-scores" title="Sensitive data leakage / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Sensitive data leakage / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:38%"></i></span>5</div></td></tr>
+<td class="c s-generic-custom" title="Sensitive data leakage / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Sensitive data leakage / Laminar: Generic custom">G</td>
+<td class="c s-built-in" title="Sensitive data leakage / LangWatch: Built-in (called: PII Detection)">B</td>
+<td><div class="rb"><span class="tr"><i style="width:31%"></i></span>5</div></td></tr>
 <tr><th class="lbl" scope="row">Injection detection</th>
 <td class="c s-generic-custom" title="Injection detection / Arize Phoenix: Generic custom">G</td>
 <td class="c s-generic-custom" title="Injection detection / Langfuse: Generic custom">G</td>
@@ -683,12 +806,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Injection detection / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Injection detection / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Injection detection / promptfoo: Generic custom">G</td>
-<td class="c s-built-in" title="Injection detection / OpenLLMetry: Built-in (called: Prompt Injection Detection)">B</td>
+<td class="c s-not-documented" title="Injection detection / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Injection detection / Opik: Generic custom">G</td>
 <td class="c s-built-in" title="Injection detection / Galileo: Built-in (called: Prompt Injection | SQL Injection)">B</td>
 <td class="c s-records-scores" title="Injection detection / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Injection detection / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:23%"></i></span>3</div></td></tr>
+<td class="c s-generic-custom" title="Injection detection / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Injection detection / Laminar: Generic custom">G</td>
+<td class="c s-built-in" title="Injection detection / LangWatch: Built-in (called: Prompt Injection Detection | Jailbreak Detection)">B</td>
+<td><div class="rb"><span class="tr"><i style="width:19%"></i></span>3</div></td></tr>
 <tr><th class="lbl" scope="row">Refusal detection</th>
 <td class="c s-built-in" title="Refusal detection / Arize Phoenix: Built-in (called: Refusal)">B</td>
 <td class="c s-generic-custom" title="Refusal detection / Langfuse: Generic custom">G</td>
@@ -698,12 +824,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Refusal detection / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Refusal detection / Braintrust: Generic custom">G</td>
 <td class="c s-built-in" title="Refusal detection / promptfoo: Built-in (called: is-refusal)">B</td>
-<td class="c s-generic-custom" title="Refusal detection / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="Refusal detection / OpenLLMetry: Not documented">·</td>
 <td class="c s-generic-custom" title="Refusal detection / Opik: Generic custom">G</td>
 <td class="c s-generic-custom" title="Refusal detection / Galileo: Generic custom">G</td>
 <td class="c s-records-scores" title="Refusal detection / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Refusal detection / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:15%"></i></span>2</div></td></tr>
+<td class="c s-generic-custom" title="Refusal detection / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Refusal detection / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Refusal detection / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:12%"></i></span>2</div></td></tr>
 <tr><th class="lbl" scope="row">Policy and moderation violations</th>
 <td class="c s-generic-custom" title="Policy and moderation violations / Arize Phoenix: Generic custom">G</td>
 <td class="c s-generic-custom" title="Policy and moderation violations / Langfuse: Generic custom">G</td>
@@ -713,13 +842,16 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Policy and moderation violations / Helicone: Records scores">R</td>
 <td class="c s-built-in" title="Policy and moderation violations / Braintrust: Built-in (called: Moderation | Security)">B</td>
 <td class="c s-integration" title="Policy and moderation violations / promptfoo: Integration (called: moderation | guardrails)">I</td>
-<td class="c s-generic-custom" title="Policy and moderation violations / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="Policy and moderation violations / OpenLLMetry: Not documented">·</td>
 <td class="c s-built-in" title="Policy and moderation violations / Opik: Built-in (called: Compliance Risk Judge | ConversationComplianceRiskMetric | Moderation)">B</td>
 <td class="c s-built-in" title="Policy and moderation violations / Galileo: Built-in (called: Unsafe Output)">B</td>
 <td class="c s-records-scores" title="Policy and moderation violations / OpenInference: Records scores">R</td>
 <td class="c s-built-in" title="Policy and moderation violations / Weights &amp; Biases Weave: Built-in (called: OpenAIModerationScorer)">B</td>
-<td><div class="rb"><span class="tr"><i style="width:46%"></i></span>6</div></td></tr>
-<tr class="grp"><th colspan="15"><b>Conversation</b>Evaluation</th></tr>
+<td class="c s-generic-custom" title="Policy and moderation violations / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Policy and moderation violations / Laminar: Generic custom">G</td>
+<td class="c s-built-in" title="Policy and moderation violations / LangWatch: Built-in (called: Content Safety | Moderation)">B</td>
+<td><div class="rb"><span class="tr"><i style="width:44%"></i></span>7</div></td></tr>
+<tr class="grp"><th colspan="18"><b>Conversation</b>Evaluation</th></tr>
 <tr><th class="lbl" scope="row">Knowledge retention</th>
 <td class="c s-generic-custom" title="Knowledge retention / Arize Phoenix: Generic custom">G</td>
 <td class="c s-generic-custom" title="Knowledge retention / Langfuse: Generic custom">G</td>
@@ -729,12 +861,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Knowledge retention / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Knowledge retention / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Knowledge retention / promptfoo: Generic custom">G</td>
-<td class="c s-generic-custom" title="Knowledge retention / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="Knowledge retention / OpenLLMetry: Not documented">·</td>
 <td class="c s-built-in" title="Knowledge retention / Opik: Built-in (called: KnowledgeRetentionMetric)">B</td>
 <td class="c s-generic-custom" title="Knowledge retention / Galileo: Generic custom">G</td>
 <td class="c s-records-scores" title="Knowledge retention / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Knowledge retention / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:23%"></i></span>3</div></td></tr>
+<td class="c s-built-in" title="Knowledge retention / MLflow: Built-in (called: KnowledgeRetention)">B</td>
+<td class="c s-generic-custom" title="Knowledge retention / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Knowledge retention / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:25%"></i></span>4</div></td></tr>
 <tr><th class="lbl" scope="row">User satisfaction or frustration</th>
 <td class="c s-built-in" title="User satisfaction or frustration / Arize Phoenix: Built-in (called: User Friction)">B</td>
 <td class="c s-generic-custom" title="User satisfaction or frustration / Langfuse: Generic custom">G</td>
@@ -744,12 +879,15 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="User satisfaction or frustration / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="User satisfaction or frustration / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="User satisfaction or frustration / promptfoo: Generic custom">G</td>
-<td class="c s-generic-custom" title="User satisfaction or frustration / OpenLLMetry: Generic custom">G</td>
+<td class="c s-not-documented" title="User satisfaction or frustration / OpenLLMetry: Not documented">·</td>
 <td class="c s-built-in" title="User satisfaction or frustration / Opik: Built-in (called: UserFrustrationMetric)">B</td>
 <td class="c s-generic-custom" title="User satisfaction or frustration / Galileo: Generic custom">G</td>
 <td class="c s-records-scores" title="User satisfaction or frustration / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="User satisfaction or frustration / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:23%"></i></span>3</div></td></tr>
+<td class="c s-built-in" title="User satisfaction or frustration / MLflow: Built-in (called: UserFrustration)">B</td>
+<td class="c s-generic-custom" title="User satisfaction or frustration / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="User satisfaction or frustration / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:25%"></i></span>4</div></td></tr>
 <tr><th class="lbl" scope="row">Conversation coherence</th>
 <td class="c s-generic-custom" title="Conversation coherence / Arize Phoenix: Generic custom">G</td>
 <td class="c s-generic-custom" title="Conversation coherence / Langfuse: Generic custom">G</td>
@@ -759,11 +897,14 @@ th,td{padding:0;font-weight:400}
 <td class="c s-records-scores" title="Conversation coherence / Helicone: Records scores">R</td>
 <td class="c s-generic-custom" title="Conversation coherence / Braintrust: Generic custom">G</td>
 <td class="c s-generic-custom" title="Conversation coherence / promptfoo: Generic custom">G</td>
-<td class="c s-built-in" title="Conversation coherence / OpenLLMetry: Built-in (called: Conversation Quality)">B</td>
+<td class="c s-not-documented" title="Conversation coherence / OpenLLMetry: Not documented">·</td>
 <td class="c s-built-in" title="Conversation coherence / Opik: Built-in (called: ConversationDegenerationMetric | ConversationalCoherenceMetric)">B</td>
 <td class="c s-built-in" title="Conversation coherence / Galileo: Built-in (called: Conversation Quality)">B</td>
 <td class="c s-records-scores" title="Conversation coherence / OpenInference: Records scores">R</td>
 <td class="c s-generic-custom" title="Conversation coherence / Weights &amp; Biases Weave: Generic custom">G</td>
-<td><div class="rb"><span class="tr"><i style="width:23%"></i></span>3</div></td></tr>
+<td class="c s-generic-custom" title="Conversation coherence / MLflow: Generic custom">G</td>
+<td class="c s-generic-custom" title="Conversation coherence / Laminar: Generic custom">G</td>
+<td class="c s-generic-custom" title="Conversation coherence / LangWatch: Generic custom">G</td>
+<td><div class="rb"><span class="tr"><i style="width:12%"></i></span>2</div></td></tr>
 </tbody></table></div>
 <p class="note">A dashed cell means nothing was found in the documentation pages read. That is not proof the tool lacks the metric. Counts are documentation entries, not capability scores: some documentation lists many narrow metrics, other documentation a few broad ones. Source: results/tool_metric_matrix_long.csv, built by src/build_matrix.py.</p></div></body></html>

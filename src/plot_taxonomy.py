@@ -5,9 +5,11 @@ Input:   results/metric_taxonomy.csv    (from build_taxonomy.py)
          results/best_tools.csv         (number of tools, for the pip scale)
 Output:  results/metric_taxonomy_diagram.svg   (self-contained, light and dark themes)
 Run:     python3 src/build_taxonomy.py && python3 src/plot_taxonomy.py
+         python3 src/plot_taxonomy.py --no-tools   -> results/metric_taxonomy_diagram_no_tools.svg (no tool counts or pips)
 Each metric shows one pip per tool that documents it as built-in; a dagger marks a metric only one tool provides.
 """
 import csv
+import sys
 from html import escape
 
 from paths import ROOT
@@ -28,6 +30,7 @@ def read(path):
 
 
 def main():
+    no_tools = "--no-tools" in sys.argv[1:]
     rows = read(RESULTS / "metric_taxonomy.csv")
     n_tools_total = len(read(RESULTS / "best_tools.csv"))
     types = {}
@@ -42,7 +45,7 @@ def main():
             cats.append((t, c, ms, y, h))
             y += h + GAP
     height = y + 56
-    width = X_PIPS + n_tools_total * PIP + 60
+    width = X_LEAF + 360 if no_tools else X_PIPS + n_tools_total * PIP + 60
 
     def mid(top, h):
         return top + h / 2
@@ -65,9 +68,12 @@ def main():
         "</style>",
         f'<rect class="bg" width="{width}" height="{height}"/>',
         f'<text x="{LEFT}" y="30" font-size="20" font-family="Georgia,serif">Taxonomy of agent metrics</text>',
-        f'<text class="mut" x="{LEFT}" y="50" font-size="12.5">{len(rows)} metrics in {len(cats)} categories, built from the documentation of {n_tools_total} tools. Only metrics the tools document as built-in are included.</text>',
+        f'<text class="mut" x="{LEFT}" y="50" font-size="12.5">{len(rows)} metrics in {len(cats)} categories{". " if no_tools else ", "}{"" if no_tools else f"built from the documentation of {n_tools_total} tools. "}{"Observability metrics are measured from a run; evaluation metrics are judgements of behaviour or output." if no_tools else "Only metrics the tools document as built-in are included."}</text>',
     ]
-    for x, label in ((X_ROOT, "Agent metrics"), (X_TYPE, "Type"), (X_CAT, "Category"), (X_LEAF, "Metric"), (X_PIPS, f"Built-in in (of {n_tools_total} tools)")):
+    heads = [(X_ROOT, "Agent metrics"), (X_TYPE, "Type"), (X_CAT, "Category"), (X_LEAF, "Metric")]
+    if not no_tools:
+        heads.append((X_PIPS, f"Built-in in (of {n_tools_total} tools)"))
+    for x, label in heads:
         out.append(f'<text class="mut cap" x="{x}" y="{TOP - 14}" font-size="11">{escape(label)}</text>')
 
     # connectors first so boxes sit on top
@@ -106,18 +112,24 @@ def main():
         for i, m in enumerate(ms):
             ly = first + i * ROW
             n = int(m["n_tools"])
-            dagger = "†" if n == 1 else ""
-            tip = f'{m["metric"]}: {m["definition"]} Built-in in: {m["tools"]}.'
+            dagger = "" if no_tools or n != 1 else "†"
+            tip = m["metric"] + ": " + m["definition"] + ("" if no_tools else " Built-in in: " + m["tools"] + ".")
             out.append(f'<g class="t-{t}"><title>{escape(tip)}</title><circle class="on" cx="{X_LEAF}" cy="{ly}" r="3.5"/>'
                        f'<text x="{X_LEAF + 12}" y="{ly + 4}" font-size="12.5">{escape(m["metric"])}{dagger}</text>')
-            for k in range(n_tools_total):
-                out.append(f'<circle class="{"on" if k < n else "off"}" cx="{X_PIPS + k * PIP + PIP / 2}" cy="{ly}" r="3.4"/>')
-            out.append(f'<text class="mut" x="{X_PIPS + n_tools_total * PIP + 8}" y="{ly + 4}" font-size="11.5">{n}</text></g>')
-    out.append(f'<text class="mut" x="{LEFT}" y="{height - 22}" font-size="11.5">† Documented as built-in by one tool only.   '
-               f'Source: results/metric_taxonomy.csv, built from official documentation (quotes in results/built_in_metrics.csv).</text>')
+            if not no_tools:
+                for k in range(n_tools_total):
+                    out.append(f'<circle class="{"on" if k < n else "off"}" cx="{X_PIPS + k * PIP + PIP / 2}" cy="{ly}" r="3.4"/>')
+                out.append(f'<text class="mut" x="{X_PIPS + n_tools_total * PIP + 8}" y="{ly + 4}" font-size="11.5">{n}</text>')
+            out[-1] += "</g>"
+    if no_tools:
+        out.append(f'<text class="mut" x="{LEFT}" y="{height - 22}" font-size="11.5">Source: results/metric_taxonomy.csv.</text>')
+    else:
+        out.append(f'<text class="mut" x="{LEFT}" y="{height - 22}" font-size="11.5">† Documented as built-in by one tool only.   '
+                   f'Source: results/metric_taxonomy.csv, built from official documentation (quotes in results/built_in_metrics.csv).</text>')
     out.append("</svg>")
-    (RESULTS / "metric_taxonomy_diagram.svg").write_text("\n".join(out), encoding="utf-8")
-    print(f"wrote {RESULTS / 'metric_taxonomy_diagram.svg'}: {len(rows)} metrics, {len(cats)} categories, {width}x{height}")
+    target = RESULTS / ("metric_taxonomy_diagram_no_tools.svg" if no_tools else "metric_taxonomy_diagram.svg")
+    target.write_text("\n".join(out), encoding="utf-8")
+    print(f"wrote {target}: {len(rows)} metrics, {len(cats)} categories, {width}x{height}")
 
 
 if __name__ == "__main__":

@@ -7,11 +7,14 @@ Observability,Tool use,Tool execution errors,OpenTelemetry,not documented,,,
 Observability,Tool use,Tool execution errors,Helicone,not documented,,,
 Observability,Tool use,Tool execution errors,Braintrust,built-in,metrics.tool_errors,dashboard or query,https://www.braintrust.dev/docs/reference/sql/query-structure.md
 Observability,Tool use,Tool execution errors,promptfoo,not documented,,,
-Observability,Tool use,Tool execution errors,OpenLLMetry,built-in,Tool Error,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Observability,Tool use,Tool execution errors,OpenLLMetry,not documented,,,
 Observability,Tool use,Tool execution errors,Opik,not documented,,,
 Observability,Tool use,Tool execution errors,Galileo,built-in,Tool Errors,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Observability,Tool use,Tool execution errors,OpenInference,not documented,,,
 Observability,Tool use,Tool execution errors,Weights & Biases Weave,not documented,,,
+Observability,Tool use,Tool execution errors,MLflow,not documented,,,
+Observability,Tool use,Tool execution errors,Laminar,not documented,,,
+Observability,Tool use,Tool execution errors,LangWatch,not documented,,,
 Observability,Tool use,Tool call count,Arize Phoenix,built-in,Tool span counts,automatic telemetry,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Tool use,Tool call count,Langfuse,not documented,,,
 Observability,Tool use,Tool call count,LangSmith,built-in,"Tool run counts, error rates and latency (prebuilt dashboard)",dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
@@ -25,6 +28,9 @@ Observability,Tool use,Tool call count,Opik,not documented,,,
 Observability,Tool use,Tool call count,Galileo,not documented,,,
 Observability,Tool use,Tool call count,OpenInference,not documented,,,
 Observability,Tool use,Tool call count,Weights & Biases Weave,not documented,,,
+Observability,Tool use,Tool call count,MLflow,not documented,,,
+Observability,Tool use,Tool call count,Laminar,not documented,,,
+Observability,Tool use,Tool call count,LangWatch,not documented,,,
 Observability,Tool use,Tool execution latency,Arize Phoenix,not documented,,,
 Observability,Tool use,Tool execution latency,Langfuse,not documented,,,
 Observability,Tool use,Tool execution latency,LangSmith,built-in,"Tool run counts, error rates and latency (prebuilt dashboard)",dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
@@ -38,6 +44,9 @@ Observability,Tool use,Tool execution latency,Opik,not documented,,,
 Observability,Tool use,Tool execution latency,Galileo,not documented,,,
 Observability,Tool use,Tool execution latency,OpenInference,not documented,,,
 Observability,Tool use,Tool execution latency,Weights & Biases Weave,not documented,,,
+Observability,Tool use,Tool execution latency,MLflow,not documented,,,
+Observability,Tool use,Tool execution latency,Laminar,not documented,,,
+Observability,Tool use,Tool execution latency,LangWatch,not documented,,,
 Observability,Plan and trajectory,Step count,Arize Phoenix,not documented,,,
 Observability,Plan and trajectory,Step count,Langfuse,not documented,,,
 Observability,Plan and trajectory,Step count,LangSmith,not documented,,,
@@ -51,10 +60,13 @@ Observability,Plan and trajectory,Step count,Opik,not documented,,,
 Observability,Plan and trajectory,Step count,Galileo,not documented,,,
 Observability,Plan and trajectory,Step count,OpenInference,not documented,,,
 Observability,Plan and trajectory,Step count,Weights & Biases Weave,not documented,,,
+Observability,Plan and trajectory,Step count,MLflow,not documented,,,
+Observability,Plan and trajectory,Step count,Laminar,not documented,,,
+Observability,Plan and trajectory,Step count,LangWatch,not documented,,,
 Observability,Token usage,Input tokens,Arize Phoenix,built-in,Prompt token details | Token usage,automatic telemetry; dashboard or query,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Token usage,Input tokens,Langfuse,built-in,Usage details,automatic telemetry,https://langfuse.com/docs/observability/features/token-and-cost-tracking
 Observability,Token usage,Input tokens,LangSmith,built-in,Cost & Tokens (prebuilt dashboard) | Tokens (dashboard metric),dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
-Observability,Token usage,Input tokens,DeepEval,not documented,,,
+Observability,Token usage,Input tokens,DeepEval,built-in,"Token usage: input_token_count, output_token_count | Widget aggregation measures (API): count, latency, error, cost and token measures",automatic telemetry; dashboard or query,https://www.confident-ai.com/docs/llm-tracing/features/token-usage-cost
 Observability,Token usage,Input tokens,OpenTelemetry,built-in,gen_ai.client.inference.operation.input_tokens | gen_ai.client.inference.usage.input_tokens,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-token-metrics.md
 Observability,Token usage,Input tokens,Helicone,built-in,"prompt_tokens, completion_tokens, total_tokens",dashboard or query,https://docs.helicone.ai/features/hql
 Observability,Token usage,Input tokens,Braintrust,built-in,metrics.prompt_tokens,dashboard or query,https://www.braintrust.dev/docs/reference/sql/examples.md
@@ -64,10 +76,13 @@ Observability,Token usage,Input tokens,Opik,built-in,Token usage (input/output/t
 Observability,Token usage,Input tokens,Galileo,not documented,,,
 Observability,Token usage,Input tokens,OpenInference,built-in,llm.token_count.prompt,convention,https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md
 Observability,Token usage,Input tokens,Weights & Biases Weave,not documented,,,
+Observability,Token usage,Input tokens,MLflow,built-in,Token usage,automatic telemetry,https://mlflow.org/docs/latest/genai/tracing/token-usage-cost
+Observability,Token usage,Input tokens,Laminar,built-in,LLM span token usage and cost,automatic telemetry,https://laminar.sh/docs/tracing/cost-tracking
+Observability,Token usage,Input tokens,LangWatch,built-in,"Token usage (input, output, cached, reasoning)",automatic telemetry,https://langwatch.ai/docs/integration/python/tutorials/tracking-llm-costs
 Observability,Token usage,Output tokens,Arize Phoenix,built-in,Completion token details | Token usage,automatic telemetry; dashboard or query,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Token usage,Output tokens,Langfuse,built-in,Usage details,automatic telemetry,https://langfuse.com/docs/observability/features/token-and-cost-tracking
 Observability,Token usage,Output tokens,LangSmith,built-in,Cost & Tokens (prebuilt dashboard) | Tokens (dashboard metric),dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
-Observability,Token usage,Output tokens,DeepEval,not documented,,,
+Observability,Token usage,Output tokens,DeepEval,built-in,"Token usage: input_token_count, output_token_count | Widget aggregation measures (API): count, latency, error, cost and token measures",automatic telemetry; dashboard or query,https://www.confident-ai.com/docs/llm-tracing/features/token-usage-cost
 Observability,Token usage,Output tokens,OpenTelemetry,built-in,gen_ai.client.inference.operation.output_tokens | gen_ai.client.inference.usage.output_tokens,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-token-metrics.md
 Observability,Token usage,Output tokens,Helicone,built-in,"prompt_tokens, completion_tokens, total_tokens",dashboard or query,https://docs.helicone.ai/features/hql
 Observability,Token usage,Output tokens,Braintrust,built-in,metrics.completion_tokens,dashboard or query,https://www.braintrust.dev/docs/reference/sql/examples.md
@@ -77,10 +92,13 @@ Observability,Token usage,Output tokens,Opik,built-in,Token usage (input/output/
 Observability,Token usage,Output tokens,Galileo,not documented,,,
 Observability,Token usage,Output tokens,OpenInference,built-in,llm.token_count.completion,convention,https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md
 Observability,Token usage,Output tokens,Weights & Biases Weave,not documented,,,
+Observability,Token usage,Output tokens,MLflow,built-in,Token usage,automatic telemetry,https://mlflow.org/docs/latest/genai/tracing/token-usage-cost
+Observability,Token usage,Output tokens,Laminar,built-in,LLM span token usage and cost,automatic telemetry,https://laminar.sh/docs/tracing/cost-tracking
+Observability,Token usage,Output tokens,LangWatch,built-in,"Token usage (input, output, cached, reasoning)",automatic telemetry,https://langwatch.ai/docs/integration/python/tutorials/tracking-llm-costs
 Observability,Token usage,Total tokens,Arize Phoenix,built-in,Top models by tokens | llm.token_count.total,automatic telemetry; dashboard or query,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Token usage,Total tokens,Langfuse,not documented,,,
 Observability,Token usage,Total tokens,LangSmith,built-in,Automatic token and cost recording | Tokens (dashboard metric),automatic telemetry; dashboard or query,https://docs.langchain.com/langsmith/cost-tracking.md
-Observability,Token usage,Total tokens,DeepEval,not documented,,,
+Observability,Token usage,Total tokens,DeepEval,built-in,"Widget aggregation measures (API): count, latency, error, cost and token measures",dashboard or query,https://www.confident-ai.com/docs/reference/api/v2/dashboards/widgets/create-widget
 Observability,Token usage,Total tokens,OpenTelemetry,not documented,,,
 Observability,Token usage,Total tokens,Helicone,built-in,"prompt_tokens, completion_tokens, total_tokens",dashboard or query,https://docs.helicone.ai/features/hql
 Observability,Token usage,Total tokens,Braintrust,built-in,metrics.total_tokens,dashboard or query,https://www.braintrust.dev/docs/reference/sql/examples.md
@@ -90,6 +108,9 @@ Observability,Token usage,Total tokens,Opik,built-in,Token usage (input/output/t
 Observability,Token usage,Total tokens,Galileo,not documented,,,
 Observability,Token usage,Total tokens,OpenInference,built-in,llm.token_count.total,convention,https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md
 Observability,Token usage,Total tokens,Weights & Biases Weave,built-in,Token usage and cost (automatic),automatic telemetry,https://docs.coreweave.com/products/wandb/weave/guides/tracking/costs
+Observability,Token usage,Total tokens,MLflow,built-in,Token usage,automatic telemetry,https://mlflow.org/docs/latest/genai/tracing/token-usage-cost
+Observability,Token usage,Total tokens,Laminar,built-in,Dashboard preset: Spans,dashboard or query,https://laminar.sh/docs/platform/dashboards
+Observability,Token usage,Total tokens,LangWatch,not documented,,,
 Observability,Token usage,Cached tokens,Arize Phoenix,built-in,Prompt token details,automatic telemetry,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Token usage,Cached tokens,Langfuse,not documented,,,
 Observability,Token usage,Cached tokens,LangSmith,not documented,,,
@@ -103,6 +124,9 @@ Observability,Token usage,Cached tokens,Opik,not documented,,,
 Observability,Token usage,Cached tokens,Galileo,not documented,,,
 Observability,Token usage,Cached tokens,OpenInference,built-in,llm.token_count.prompt_details.cache_read | llm.token_count.prompt_details.cache_write,convention,https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md
 Observability,Token usage,Cached tokens,Weights & Biases Weave,not documented,,,
+Observability,Token usage,Cached tokens,MLflow,not documented,,,
+Observability,Token usage,Cached tokens,Laminar,built-in,"Per-kind token pricing (input, output, cache read, cache write, reasoning)",automatic telemetry,https://laminar.sh/docs/tracing/cost-tracking
+Observability,Token usage,Cached tokens,LangWatch,built-in,"Token usage (input, output, cached, reasoning)",automatic telemetry,https://langwatch.ai/docs/integration/python/tutorials/tracking-llm-costs
 Observability,Token usage,Reasoning tokens,Arize Phoenix,built-in,Completion token details,automatic telemetry,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Token usage,Reasoning tokens,Langfuse,not documented,,,
 Observability,Token usage,Reasoning tokens,LangSmith,not documented,,,
@@ -116,10 +140,13 @@ Observability,Token usage,Reasoning tokens,Opik,not documented,,,
 Observability,Token usage,Reasoning tokens,Galileo,not documented,,,
 Observability,Token usage,Reasoning tokens,OpenInference,built-in,llm.token_count.completion_details.reasoning,convention,https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md
 Observability,Token usage,Reasoning tokens,Weights & Biases Weave,not documented,,,
+Observability,Token usage,Reasoning tokens,MLflow,not documented,,,
+Observability,Token usage,Reasoning tokens,Laminar,built-in,"Per-kind token pricing (input, output, cache read, cache write, reasoning)",automatic telemetry,https://laminar.sh/docs/tracing/cost-tracking
+Observability,Token usage,Reasoning tokens,LangWatch,built-in,"Token usage (input, output, cached, reasoning)",automatic telemetry,https://langwatch.ai/docs/integration/python/tutorials/tracking-llm-costs
 Observability,Cost,Estimated cost,Arize Phoenix,built-in,Cost | Token-based cost tracking | Top models by cost,automatic telemetry; dashboard or query,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Cost,Estimated cost,Langfuse,built-in,Cost details | Inferred cost | totalCost,automatic telemetry; dashboard or query,https://langfuse.com/docs/observability/features/token-and-cost-tracking
 Observability,Cost,Estimated cost,LangSmith,built-in,Automatic token and cost recording | Cost & Tokens (prebuilt dashboard) | Cost (dashboard metric),automatic telemetry; dashboard or query,https://docs.langchain.com/langsmith/cost-tracking.md
-Observability,Cost,Estimated cost,DeepEval,not documented,,,
+Observability,Cost,Estimated cost,DeepEval,built-in,"Drift overlay: Cost | Alert aggregations: trace count, error rate, average latency, token cost | LLM span cost: per-token, model and inferred cost | Widget aggregation measures (API): count, latency, error, cost and token measures",automatic telemetry; dashboard or query,https://www.confident-ai.com/docs/llm-tracing/features/monitors
 Observability,Cost,Estimated cost,OpenTelemetry,not documented,,,
 Observability,Cost,Estimated cost,Helicone,built-in,cost / provider_total_cost,dashboard or query,https://docs.helicone.ai/features/hql
 Observability,Cost,Estimated cost,Braintrust,built-in,estimated_cost,dashboard or query,https://www.braintrust.dev/docs/reference/sql/functions.md
@@ -129,10 +156,13 @@ Observability,Cost,Estimated cost,Opik,built-in,Estimated cost,automatic telemet
 Observability,Cost,Estimated cost,Galileo,not documented,,,
 Observability,Cost,Estimated cost,OpenInference,built-in,llm.cost.total,convention,https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md
 Observability,Cost,Estimated cost,Weights & Biases Weave,built-in,Token usage and cost (automatic),automatic telemetry,https://docs.coreweave.com/products/wandb/weave/guides/tracking/costs
+Observability,Cost,Estimated cost,MLflow,built-in,Cost,automatic telemetry,https://mlflow.org/docs/latest/genai/tracing/token-usage-cost
+Observability,Cost,Estimated cost,Laminar,built-in,LLM span token usage and cost | Dashboard preset: Traces | Dashboard preset: Spans,automatic telemetry; dashboard or query,https://laminar.sh/docs/tracing/cost-tracking
+Observability,Cost,Estimated cost,LangWatch,built-in,LLM cost from the model price registry,automatic telemetry,https://langwatch.ai/docs/integration/python/tutorials/tracking-llm-costs
 Observability,Cost,Cost breakdown by token type,Arize Phoenix,not documented,,,
 Observability,Cost,Cost breakdown by token type,Langfuse,built-in,Cost details,automatic telemetry,https://langfuse.com/docs/observability/features/token-and-cost-tracking
 Observability,Cost,Cost breakdown by token type,LangSmith,built-in,Cost & Tokens (prebuilt dashboard) | Cost (dashboard metric),dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
-Observability,Cost,Cost breakdown by token type,DeepEval,not documented,,,
+Observability,Cost,Cost breakdown by token type,DeepEval,built-in,"LLM span cost: per-token, model and inferred cost | Widget aggregation measures (API): count, latency, error, cost and token measures",automatic telemetry; dashboard or query,https://www.confident-ai.com/docs/llm-tracing/features/token-usage-cost
 Observability,Cost,Cost breakdown by token type,OpenTelemetry,not documented,,,
 Observability,Cost,Cost breakdown by token type,Helicone,not documented,,,
 Observability,Cost,Cost breakdown by token type,Braintrust,built-in,estimated_cost_breakdown,dashboard or query,https://www.braintrust.dev/docs/reference/sql/functions.md
@@ -142,10 +172,13 @@ Observability,Cost,Cost breakdown by token type,Opik,not documented,,,
 Observability,Cost,Cost breakdown by token type,Galileo,not documented,,,
 Observability,Cost,Cost breakdown by token type,OpenInference,built-in,llm.cost.prompt | llm.cost.completion | llm.cost.completion_details.reasoning | llm.cost.prompt_details.cache_read | llm.cost.prompt_details.cache_write,convention,https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md
 Observability,Cost,Cost breakdown by token type,Weights & Biases Weave,not documented,,,
+Observability,Cost,Cost breakdown by token type,MLflow,not documented,,,
+Observability,Cost,Cost breakdown by token type,Laminar,built-in,"Per-kind token pricing (input, output, cache read, cache write, reasoning)",automatic telemetry,https://laminar.sh/docs/tracing/cost-tracking
+Observability,Cost,Cost breakdown by token type,LangWatch,built-in,LLM cost from the model price registry,automatic telemetry,https://langwatch.ai/docs/integration/python/tutorials/tracking-llm-costs
 Observability,Latency,Trace / run latency,Arize Phoenix,built-in,Trace Latency,dashboard or query,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Latency,Trace / run latency,Langfuse,built-in,latency,automatic telemetry,https://langfuse.com/docs/observability/overview
 Observability,Latency,Trace / run latency,LangSmith,built-in,"Latency (dashboard metric) | Trace count, latency and error rates (prebuilt dashboard)",dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
-Observability,Latency,Trace / run latency,DeepEval,not documented,,,
+Observability,Latency,Trace / run latency,DeepEval,built-in,"Drift overlay: Latency | Dashboard aggregations: Count, Average latency, P95 latency | Alert aggregations: trace count, error rate, average latency, token cost | Widget aggregation measures (API): count, latency, error, cost and token measures",dashboard or query,https://www.confident-ai.com/docs/llm-tracing/features/monitors
 Observability,Latency,Trace / run latency,OpenTelemetry,built-in,gen_ai.invoke_agent.duration | gen_ai.invoke_workflow.duration,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-metrics.md
 Observability,Latency,Trace / run latency,Helicone,not documented,,,
 Observability,Latency,Trace / run latency,Braintrust,built-in,metrics.duration,dashboard or query,https://www.braintrust.dev/docs/reference/sql/query-structure.md
@@ -155,6 +188,9 @@ Observability,Latency,Trace / run latency,Opik,built-in,"Latency (trace duration
 Observability,Latency,Trace / run latency,Galileo,not documented,,,
 Observability,Latency,Trace / run latency,OpenInference,not documented,,,
 Observability,Latency,Trace / run latency,Weights & Biases Weave,not documented,,,
+Observability,Latency,Trace / run latency,MLflow,not documented,,,
+Observability,Latency,Trace / run latency,Laminar,built-in,Dashboard preset: Traces,dashboard or query,https://laminar.sh/docs/platform/dashboards
+Observability,Latency,Trace / run latency,LangWatch,not documented,,,
 Observability,Latency,LLM call latency,Arize Phoenix,not documented,,,
 Observability,Latency,LLM call latency,Langfuse,not documented,,,
 Observability,Latency,LLM call latency,LangSmith,built-in,LLM call count and latency (prebuilt dashboard),dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
@@ -168,6 +204,9 @@ Observability,Latency,LLM call latency,Opik,not documented,,,
 Observability,Latency,LLM call latency,Galileo,not documented,,,
 Observability,Latency,LLM call latency,OpenInference,not documented,,,
 Observability,Latency,LLM call latency,Weights & Biases Weave,not documented,,,
+Observability,Latency,LLM call latency,MLflow,not documented,,,
+Observability,Latency,LLM call latency,Laminar,not documented,,,
+Observability,Latency,LLM call latency,LangWatch,not documented,,,
 Observability,Latency,Span duration,Arize Phoenix,not documented,,,
 Observability,Latency,Span duration,Langfuse,not documented,,,
 Observability,Latency,Span duration,LangSmith,not documented,,,
@@ -181,6 +220,9 @@ Observability,Latency,Span duration,Opik,built-in,"Latency (trace duration, span
 Observability,Latency,Span duration,Galileo,not documented,,,
 Observability,Latency,Span duration,OpenInference,not documented,,,
 Observability,Latency,Span duration,Weights & Biases Weave,built-in,Latency (Call timing),automatic telemetry,https://docs.coreweave.com/products/wandb/weave/guides/tracking/tracing
+Observability,Latency,Span duration,MLflow,built-in,Latency,automatic telemetry,https://mlflow.org/docs/latest/genai/tracing
+Observability,Latency,Span duration,Laminar,built-in,Dashboard preset: Spans,dashboard or query,https://laminar.sh/docs/platform/dashboards
+Observability,Latency,Span duration,LangWatch,not documented,,,
 Observability,Latency,Time to first token,Arize Phoenix,not documented,,,
 Observability,Latency,Time to first token,Langfuse,built-in,completion_start_time (time to first token),automatic telemetry,https://langfuse.com/docs/observability/sdk/advanced-features
 Observability,Latency,Time to first token,LangSmith,built-in,Time to first token (dashboard metric),dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
@@ -194,23 +236,13 @@ Observability,Latency,Time to first token,Opik,not documented,,,
 Observability,Latency,Time to first token,Galileo,not documented,,,
 Observability,Latency,Time to first token,OpenInference,not documented,,,
 Observability,Latency,Time to first token,Weights & Biases Weave,not documented,,,
-Observability,Latency,Time per output token / generation time,Arize Phoenix,not documented,,,
-Observability,Latency,Time per output token / generation time,Langfuse,not documented,,,
-Observability,Latency,Time per output token / generation time,LangSmith,not documented,,,
-Observability,Latency,Time per output token / generation time,DeepEval,not documented,,,
-Observability,Latency,Time per output token / generation time,OpenTelemetry,built-in,gen_ai.server.time_per_output_token,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-metrics.md
-Observability,Latency,Time per output token / generation time,Helicone,not documented,,,
-Observability,Latency,Time per output token / generation time,Braintrust,not documented,,,
-Observability,Latency,Time per output token / generation time,promptfoo,not documented,,,
-Observability,Latency,Time per output token / generation time,OpenLLMetry,built-in,llm.chat_completions.streaming_time_to_generate,automatic telemetry,https://raw.githubusercontent.com/traceloop/openllmetry/main/packages/opentelemetry-semantic-conventions-ai/opentelemetry/semconv_ai/__init__.py
-Observability,Latency,Time per output token / generation time,Opik,not documented,,,
-Observability,Latency,Time per output token / generation time,Galileo,not documented,,,
-Observability,Latency,Time per output token / generation time,OpenInference,not documented,,,
-Observability,Latency,Time per output token / generation time,Weights & Biases Weave,not documented,,,
+Observability,Latency,Time to first token,MLflow,not documented,,,
+Observability,Latency,Time to first token,Laminar,not documented,,,
+Observability,Latency,Time to first token,LangWatch,built-in,Time to first token (TTFT),automatic telemetry,https://langwatch.ai/docs/integration/python/tutorials/tracking-time-to-first-token
 Observability,Errors and volume,Error count / rate,Arize Phoenix,built-in,LLM spans with errors | Tool spans with errors,automatic telemetry,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Errors and volume,Error count / rate,Langfuse,not documented,,,
 Observability,Errors and volume,Error count / rate,LangSmith,built-in,"Trace count, latency and error rates (prebuilt dashboard)",dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
-Observability,Errors and volume,Error count / rate,DeepEval,not documented,,,
+Observability,Errors and volume,Error count / rate,DeepEval,built-in,"Drift overlay: Error rate | Alert aggregations: trace count, error rate, average latency, token cost | Widget aggregation measures (API): count, latency, error, cost and token measures",dashboard or query,https://www.confident-ai.com/docs/llm-tracing/features/monitors
 Observability,Errors and volume,Error count / rate,OpenTelemetry,not documented,,,
 Observability,Errors and volume,Error count / rate,Helicone,built-in,Alert metric: Error Rate,dashboard or query,https://docs.helicone.ai/features/alerts
 Observability,Errors and volume,Error count / rate,Braintrust,built-in,metrics.errors | metrics.llm_errors,dashboard or query,https://www.braintrust.dev/docs/reference/sql/query-structure.md
@@ -220,10 +252,13 @@ Observability,Errors and volume,Error count / rate,Opik,built-in,Trace count / e
 Observability,Errors and volume,Error count / rate,Galileo,not documented,,,
 Observability,Errors and volume,Error count / rate,OpenInference,not documented,,,
 Observability,Errors and volume,Error count / rate,Weights & Biases Weave,built-in,Errors (Call errors),automatic telemetry,https://docs.coreweave.com/products/wandb/weave/guides/tracking/tracing
+Observability,Errors and volume,Error count / rate,MLflow,not documented,,,
+Observability,Errors and volume,Error count / rate,Laminar,not documented,,,
+Observability,Errors and volume,Error count / rate,LangWatch,not documented,,,
 Observability,Errors and volume,Trace / span count,Arize Phoenix,built-in,Traces over time,dashboard or query,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Errors and volume,Trace / span count,Langfuse,not documented,,,
 Observability,Errors and volume,Trace / span count,LangSmith,built-in,"Trace count, latency and error rates (prebuilt dashboard)",dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
-Observability,Errors and volume,Trace / span count,DeepEval,not documented,,,
+Observability,Errors and volume,Trace / span count,DeepEval,built-in,"Dashboard aggregations: Count, Average latency, P95 latency | Alert aggregations: trace count, error rate, average latency, token cost | Widget aggregation measures (API): count, latency, error, cost and token measures",dashboard or query,https://www.confident-ai.com/docs/customizations/dashboards
 Observability,Errors and volume,Trace / span count,OpenTelemetry,not documented,,,
 Observability,Errors and volume,Trace / span count,Helicone,not documented,,,
 Observability,Errors and volume,Trace / span count,Braintrust,not documented,,,
@@ -233,6 +268,9 @@ Observability,Errors and volume,Trace / span count,Opik,built-in,Trace count / e
 Observability,Errors and volume,Trace / span count,Galileo,not documented,,,
 Observability,Errors and volume,Trace / span count,OpenInference,not documented,,,
 Observability,Errors and volume,Trace / span count,Weights & Biases Weave,not documented,,,
+Observability,Errors and volume,Trace / span count,MLflow,not documented,,,
+Observability,Errors and volume,Trace / span count,Laminar,built-in,Dashboard preset: Traces,dashboard or query,https://laminar.sh/docs/platform/dashboards
+Observability,Errors and volume,Trace / span count,LangWatch,not documented,,,
 Observability,Errors and volume,LLM call count,Arize Phoenix,built-in,LLM span counts,automatic telemetry,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Errors and volume,LLM call count,Langfuse,not documented,,,
 Observability,Errors and volume,LLM call count,LangSmith,built-in,LLM call count and latency (prebuilt dashboard),dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
@@ -246,6 +284,9 @@ Observability,Errors and volume,LLM call count,Opik,not documented,,,
 Observability,Errors and volume,LLM call count,Galileo,not documented,,,
 Observability,Errors and volume,LLM call count,OpenInference,not documented,,,
 Observability,Errors and volume,LLM call count,Weights & Biases Weave,not documented,,,
+Observability,Errors and volume,LLM call count,MLflow,not documented,,,
+Observability,Errors and volume,LLM call count,Laminar,not documented,,,
+Observability,Errors and volume,LLM call count,LangWatch,not documented,,,
 Evaluation,Tool use,Tool selection,Arize Phoenix,built-in,Tool Selection,built-in evaluator,https://arize.com/docs/phoenix/evaluation/pre-built-metrics
 Evaluation,Tool use,Tool selection,Langfuse,generic custom,,,
 Evaluation,Tool use,Tool selection,LangSmith,built-in,Tool Selection,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -254,11 +295,14 @@ Evaluation,Tool use,Tool selection,OpenTelemetry,records scores,,,
 Evaluation,Tool use,Tool selection,Helicone,records scores,,,
 Evaluation,Tool use,Tool selection,Braintrust,generic custom,,,
 Evaluation,Tool use,Tool selection,promptfoo,generic custom,,,
-Evaluation,Tool use,Tool selection,OpenLLMetry,generic custom,,,
+Evaluation,Tool use,Tool selection,OpenLLMetry,not documented,,,
 Evaluation,Tool use,Tool selection,Opik,generic custom,,,
 Evaluation,Tool use,Tool selection,Galileo,built-in,Tool Selection Quality,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Tool use,Tool selection,OpenInference,records scores,,,
 Evaluation,Tool use,Tool selection,Weights & Biases Weave,generic custom,,,
+Evaluation,Tool use,Tool selection,MLflow,generic custom,,,
+Evaluation,Tool use,Tool selection,Laminar,generic custom,,,
+Evaluation,Tool use,Tool selection,LangWatch,generic custom,,,
 Evaluation,Tool use,Tool argument validity,Arize Phoenix,built-in,Tool Invocation,built-in evaluator,https://arize.com/docs/phoenix/evaluation/pre-built-metrics
 Evaluation,Tool use,Tool argument validity,Langfuse,generic custom,,,
 Evaluation,Tool use,Tool argument validity,LangSmith,generic custom,,,
@@ -267,11 +311,14 @@ Evaluation,Tool use,Tool argument validity,OpenTelemetry,records scores,,,
 Evaluation,Tool use,Tool argument validity,Helicone,records scores,,,
 Evaluation,Tool use,Tool argument validity,Braintrust,generic custom,,,
 Evaluation,Tool use,Tool argument validity,promptfoo,built-in,is-valid-function-call | is-valid-openai-tools-call | trajectory:tool-args-match,built-in evaluator,https://www.promptfoo.dev/docs/configuration/expected-outputs/deterministic/
-Evaluation,Tool use,Tool argument validity,OpenLLMetry,generic custom,,,
+Evaluation,Tool use,Tool argument validity,OpenLLMetry,not documented,,,
 Evaluation,Tool use,Tool argument validity,Opik,generic custom,,,
 Evaluation,Tool use,Tool argument validity,Galileo,generic custom,,,
 Evaluation,Tool use,Tool argument validity,OpenInference,records scores,,,
 Evaluation,Tool use,Tool argument validity,Weights & Biases Weave,generic custom,,,
+Evaluation,Tool use,Tool argument validity,MLflow,built-in,ToolCallCorrectness,built-in evaluator,https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined
+Evaluation,Tool use,Tool argument validity,Laminar,generic custom,,,
+Evaluation,Tool use,Tool argument validity,LangWatch,generic custom,,,
 Evaluation,Tool use,Tool call correctness,Arize Phoenix,generic custom,,,
 Evaluation,Tool use,Tool call correctness,Langfuse,generic custom,,,
 Evaluation,Tool use,Tool call correctness,LangSmith,generic custom,,,
@@ -280,11 +327,14 @@ Evaluation,Tool use,Tool call correctness,OpenTelemetry,records scores,,,
 Evaluation,Tool use,Tool call correctness,Helicone,records scores,,,
 Evaluation,Tool use,Tool call correctness,Braintrust,generic custom,,,
 Evaluation,Tool use,Tool call correctness,promptfoo,built-in,skill-used | tool-call-f1 | trajectory:tool-used,built-in evaluator,https://www.promptfoo.dev/docs/configuration/expected-outputs/deterministic/
-Evaluation,Tool use,Tool call correctness,OpenLLMetry,generic custom,,,
+Evaluation,Tool use,Tool call correctness,OpenLLMetry,not documented,,,
 Evaluation,Tool use,Tool call correctness,Opik,built-in,Agent Tool Correctness Judge,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/overview
 Evaluation,Tool use,Tool call correctness,Galileo,generic custom,,,
 Evaluation,Tool use,Tool call correctness,OpenInference,records scores,,,
 Evaluation,Tool use,Tool call correctness,Weights & Biases Weave,generic custom,,,
+Evaluation,Tool use,Tool call correctness,MLflow,built-in,ToolCallCorrectness,built-in evaluator,https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined
+Evaluation,Tool use,Tool call correctness,Laminar,generic custom,,,
+Evaluation,Tool use,Tool call correctness,LangWatch,generic custom,,,
 Evaluation,Tool use,Tool call efficiency,Arize Phoenix,generic custom,,,
 Evaluation,Tool use,Tool call efficiency,Langfuse,generic custom,,,
 Evaluation,Tool use,Tool call efficiency,LangSmith,built-in,Tool Selection,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -293,11 +343,14 @@ Evaluation,Tool use,Tool call efficiency,OpenTelemetry,records scores,,,
 Evaluation,Tool use,Tool call efficiency,Helicone,records scores,,,
 Evaluation,Tool use,Tool call efficiency,Braintrust,generic custom,,,
 Evaluation,Tool use,Tool call efficiency,promptfoo,generic custom,,,
-Evaluation,Tool use,Tool call efficiency,OpenLLMetry,generic custom,,,
+Evaluation,Tool use,Tool call efficiency,OpenLLMetry,not documented,,,
 Evaluation,Tool use,Tool call efficiency,Opik,generic custom,,,
 Evaluation,Tool use,Tool call efficiency,Galileo,generic custom,,,
 Evaluation,Tool use,Tool call efficiency,OpenInference,records scores,,,
 Evaluation,Tool use,Tool call efficiency,Weights & Biases Weave,generic custom,,,
+Evaluation,Tool use,Tool call efficiency,MLflow,built-in,ConversationalToolCallEfficiency | ToolCallEfficiency,built-in evaluator,https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined
+Evaluation,Tool use,Tool call efficiency,Laminar,generic custom,,,
+Evaluation,Tool use,Tool call efficiency,LangWatch,generic custom,,,
 Evaluation,Tool use,Tool response handling,Arize Phoenix,built-in,Tool Response Handling,built-in evaluator,https://arize.com/docs/phoenix/evaluation/pre-built-metrics
 Evaluation,Tool use,Tool response handling,Langfuse,generic custom,,,
 Evaluation,Tool use,Tool response handling,LangSmith,generic custom,,,
@@ -306,11 +359,14 @@ Evaluation,Tool use,Tool response handling,OpenTelemetry,records scores,,,
 Evaluation,Tool use,Tool response handling,Helicone,records scores,,,
 Evaluation,Tool use,Tool response handling,Braintrust,generic custom,,,
 Evaluation,Tool use,Tool response handling,promptfoo,generic custom,,,
-Evaluation,Tool use,Tool response handling,OpenLLMetry,generic custom,,,
+Evaluation,Tool use,Tool response handling,OpenLLMetry,not documented,,,
 Evaluation,Tool use,Tool response handling,Opik,generic custom,,,
 Evaluation,Tool use,Tool response handling,Galileo,generic custom,,,
 Evaluation,Tool use,Tool response handling,OpenInference,records scores,,,
 Evaluation,Tool use,Tool response handling,Weights & Biases Weave,generic custom,,,
+Evaluation,Tool use,Tool response handling,MLflow,generic custom,,,
+Evaluation,Tool use,Tool response handling,Laminar,generic custom,,,
+Evaluation,Tool use,Tool response handling,LangWatch,generic custom,,,
 Evaluation,Task and goal,Task / goal completion,Arize Phoenix,built-in,Completeness,built-in evaluator,https://arize.com/docs/phoenix/evaluation/pre-built-metrics
 Evaluation,Task and goal,Task / goal completion,Langfuse,generic custom,,,
 Evaluation,Task and goal,Task / goal completion,LangSmith,built-in,Task Completion,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -319,11 +375,14 @@ Evaluation,Task and goal,Task / goal completion,OpenTelemetry,records scores,,,
 Evaluation,Task and goal,Task / goal completion,Helicone,records scores,,,
 Evaluation,Task and goal,Task / goal completion,Braintrust,generic custom,,,
 Evaluation,Task and goal,Task / goal completion,promptfoo,built-in,trajectory:goal-success,built-in evaluator,https://www.promptfoo.dev/docs/configuration/expected-outputs/
-Evaluation,Task and goal,Task / goal completion,OpenLLMetry,built-in,Agent Goal Accuracy | Agent Goal Completeness | Answer Completeness,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Evaluation,Task and goal,Task / goal completion,OpenLLMetry,not documented,,,
 Evaluation,Task and goal,Task / goal completion,Opik,built-in,Agent Task Completion Judge | SessionCompletenessQuality,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/overview
 Evaluation,Task and goal,Task / goal completion,Galileo,built-in,Action Completion | Completeness,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Task and goal,Task / goal completion,OpenInference,records scores,,,
 Evaluation,Task and goal,Task / goal completion,Weights & Biases Weave,generic custom,,,
+Evaluation,Task and goal,Task / goal completion,MLflow,built-in,Completeness | ConversationCompleteness,built-in evaluator,https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined
+Evaluation,Task and goal,Task / goal completion,Laminar,generic custom,,,
+Evaluation,Task and goal,Task / goal completion,LangWatch,built-in,Query Resolution,built-in evaluator,https://langwatch.ai/docs/evaluations/evaluators/list
 Evaluation,Plan and trajectory,Plan quality,Arize Phoenix,generic custom,,,
 Evaluation,Plan and trajectory,Plan quality,Langfuse,generic custom,,,
 Evaluation,Plan and trajectory,Plan quality,LangSmith,generic custom,,,
@@ -332,11 +391,14 @@ Evaluation,Plan and trajectory,Plan quality,OpenTelemetry,records scores,,,
 Evaluation,Plan and trajectory,Plan quality,Helicone,records scores,,,
 Evaluation,Plan and trajectory,Plan quality,Braintrust,generic custom,,,
 Evaluation,Plan and trajectory,Plan quality,promptfoo,generic custom,,,
-Evaluation,Plan and trajectory,Plan quality,OpenLLMetry,generic custom,,,
+Evaluation,Plan and trajectory,Plan quality,OpenLLMetry,not documented,,,
 Evaluation,Plan and trajectory,Plan quality,Opik,generic custom,,,
 Evaluation,Plan and trajectory,Plan quality,Galileo,generic custom,,,
 Evaluation,Plan and trajectory,Plan quality,OpenInference,records scores,,,
 Evaluation,Plan and trajectory,Plan quality,Weights & Biases Weave,generic custom,,,
+Evaluation,Plan and trajectory,Plan quality,MLflow,generic custom,,,
+Evaluation,Plan and trajectory,Plan quality,Laminar,generic custom,,,
+Evaluation,Plan and trajectory,Plan quality,LangWatch,generic custom,,,
 Evaluation,Plan and trajectory,Plan adherence,Arize Phoenix,generic custom,,,
 Evaluation,Plan and trajectory,Plan adherence,Langfuse,generic custom,,,
 Evaluation,Plan and trajectory,Plan adherence,LangSmith,built-in,Plan Adherence,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -345,11 +407,14 @@ Evaluation,Plan and trajectory,Plan adherence,OpenTelemetry,records scores,,,
 Evaluation,Plan and trajectory,Plan adherence,Helicone,records scores,,,
 Evaluation,Plan and trajectory,Plan adherence,Braintrust,generic custom,,,
 Evaluation,Plan and trajectory,Plan adherence,promptfoo,generic custom,,,
-Evaluation,Plan and trajectory,Plan adherence,OpenLLMetry,generic custom,,,
+Evaluation,Plan and trajectory,Plan adherence,OpenLLMetry,not documented,,,
 Evaluation,Plan and trajectory,Plan adherence,Opik,generic custom,,,
 Evaluation,Plan and trajectory,Plan adherence,Galileo,generic custom,,,
 Evaluation,Plan and trajectory,Plan adherence,OpenInference,records scores,,,
 Evaluation,Plan and trajectory,Plan adherence,Weights & Biases Weave,generic custom,,,
+Evaluation,Plan and trajectory,Plan adherence,MLflow,generic custom,,,
+Evaluation,Plan and trajectory,Plan adherence,Laminar,generic custom,,,
+Evaluation,Plan and trajectory,Plan adherence,LangWatch,generic custom,,,
 Evaluation,Plan and trajectory,Trajectory accuracy,Arize Phoenix,generic custom,,,
 Evaluation,Plan and trajectory,Trajectory accuracy,Langfuse,template,Trajectory Evaluation (guide example),,https://langfuse.com/guides/cookbook/example_pydantic_ai_mcp_agent_evaluation
 Evaluation,Plan and trajectory,Trajectory accuracy,LangSmith,built-in,Trajectory Accuracy | openevals trajectory match,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -358,11 +423,14 @@ Evaluation,Plan and trajectory,Trajectory accuracy,OpenTelemetry,records scores,
 Evaluation,Plan and trajectory,Trajectory accuracy,Helicone,records scores,,,
 Evaluation,Plan and trajectory,Trajectory accuracy,Braintrust,generic custom,,,
 Evaluation,Plan and trajectory,Trajectory accuracy,promptfoo,built-in,trajectory:tool-sequence,built-in evaluator,https://www.promptfoo.dev/docs/configuration/expected-outputs/deterministic/
-Evaluation,Plan and trajectory,Trajectory accuracy,OpenLLMetry,built-in,Agent Tool Trajectory,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Evaluation,Plan and trajectory,Trajectory accuracy,OpenLLMetry,not documented,,,
 Evaluation,Plan and trajectory,Trajectory accuracy,Opik,built-in,Trajectory Accuracy,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/overview
 Evaluation,Plan and trajectory,Trajectory accuracy,Galileo,generic custom,,,
 Evaluation,Plan and trajectory,Trajectory accuracy,OpenInference,records scores,,,
 Evaluation,Plan and trajectory,Trajectory accuracy,Weights & Biases Weave,generic custom,,,
+Evaluation,Plan and trajectory,Trajectory accuracy,MLflow,generic custom,,,
+Evaluation,Plan and trajectory,Trajectory accuracy,Laminar,generic custom,,,
+Evaluation,Plan and trajectory,Trajectory accuracy,LangWatch,generic custom,,,
 Evaluation,Plan and trajectory,Step / action efficiency,Arize Phoenix,generic custom,,,
 Evaluation,Plan and trajectory,Step / action efficiency,Langfuse,generic custom,,,
 Evaluation,Plan and trajectory,Step / action efficiency,LangSmith,generic custom,,,
@@ -371,11 +439,14 @@ Evaluation,Plan and trajectory,Step / action efficiency,OpenTelemetry,records sc
 Evaluation,Plan and trajectory,Step / action efficiency,Helicone,records scores,,,
 Evaluation,Plan and trajectory,Step / action efficiency,Braintrust,generic custom,,,
 Evaluation,Plan and trajectory,Step / action efficiency,promptfoo,generic custom,,,
-Evaluation,Plan and trajectory,Step / action efficiency,OpenLLMetry,built-in,Agent Efficiency,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Evaluation,Plan and trajectory,Step / action efficiency,OpenLLMetry,not documented,,,
 Evaluation,Plan and trajectory,Step / action efficiency,Opik,generic custom,,,
 Evaluation,Plan and trajectory,Step / action efficiency,Galileo,built-in,Agent Efficiency,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Plan and trajectory,Step / action efficiency,OpenInference,records scores,,,
 Evaluation,Plan and trajectory,Step / action efficiency,Weights & Biases Weave,generic custom,,,
+Evaluation,Plan and trajectory,Step / action efficiency,MLflow,generic custom,,,
+Evaluation,Plan and trajectory,Step / action efficiency,Laminar,generic custom,,,
+Evaluation,Plan and trajectory,Step / action efficiency,LangWatch,generic custom,,,
 Evaluation,Plan and trajectory,Action progress toward goal,Arize Phoenix,generic custom,,,
 Evaluation,Plan and trajectory,Action progress toward goal,Langfuse,generic custom,,,
 Evaluation,Plan and trajectory,Action progress toward goal,LangSmith,generic custom,,,
@@ -384,11 +455,14 @@ Evaluation,Plan and trajectory,Action progress toward goal,OpenTelemetry,records
 Evaluation,Plan and trajectory,Action progress toward goal,Helicone,records scores,,,
 Evaluation,Plan and trajectory,Action progress toward goal,Braintrust,generic custom,,,
 Evaluation,Plan and trajectory,Action progress toward goal,promptfoo,generic custom,,,
-Evaluation,Plan and trajectory,Action progress toward goal,OpenLLMetry,generic custom,,,
+Evaluation,Plan and trajectory,Action progress toward goal,OpenLLMetry,not documented,,,
 Evaluation,Plan and trajectory,Action progress toward goal,Opik,generic custom,,,
 Evaluation,Plan and trajectory,Action progress toward goal,Galileo,built-in,Action Advancement,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Plan and trajectory,Action progress toward goal,OpenInference,records scores,,,
 Evaluation,Plan and trajectory,Action progress toward goal,Weights & Biases Weave,generic custom,,,
+Evaluation,Plan and trajectory,Action progress toward goal,MLflow,generic custom,,,
+Evaluation,Plan and trajectory,Action progress toward goal,Laminar,generic custom,,,
+Evaluation,Plan and trajectory,Action progress toward goal,LangWatch,generic custom,,,
 Evaluation,Plan and trajectory,Flow and reasoning coherence,Arize Phoenix,generic custom,,,
 Evaluation,Plan and trajectory,Flow and reasoning coherence,Langfuse,generic custom,,,
 Evaluation,Plan and trajectory,Flow and reasoning coherence,LangSmith,generic custom,,,
@@ -397,11 +471,14 @@ Evaluation,Plan and trajectory,Flow and reasoning coherence,OpenTelemetry,record
 Evaluation,Plan and trajectory,Flow and reasoning coherence,Helicone,records scores,,,
 Evaluation,Plan and trajectory,Flow and reasoning coherence,Braintrust,generic custom,,,
 Evaluation,Plan and trajectory,Flow and reasoning coherence,promptfoo,generic custom,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,OpenLLMetry,built-in,Agent Flow Quality,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Evaluation,Plan and trajectory,Flow and reasoning coherence,OpenLLMetry,not documented,,,
 Evaluation,Plan and trajectory,Flow and reasoning coherence,Opik,generic custom,,,
 Evaluation,Plan and trajectory,Flow and reasoning coherence,Galileo,built-in,Agent Flow | Reasoning Coherence,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Plan and trajectory,Flow and reasoning coherence,OpenInference,records scores,,,
 Evaluation,Plan and trajectory,Flow and reasoning coherence,Weights & Biases Weave,generic custom,,,
+Evaluation,Plan and trajectory,Flow and reasoning coherence,MLflow,generic custom,,,
+Evaluation,Plan and trajectory,Flow and reasoning coherence,Laminar,generic custom,,,
+Evaluation,Plan and trajectory,Flow and reasoning coherence,LangWatch,generic custom,,,
 Evaluation,Answer quality,Answer correctness,Arize Phoenix,built-in,Correctness,built-in evaluator,https://arize.com/docs/phoenix/evaluation/pre-built-metrics
 Evaluation,Answer quality,Answer correctness,Langfuse,generic custom,,,
 Evaluation,Answer quality,Answer correctness,LangSmith,built-in,Correctness,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -410,11 +487,14 @@ Evaluation,Answer quality,Answer correctness,OpenTelemetry,records scores,,,
 Evaluation,Answer quality,Answer correctness,Helicone,records scores,,,
 Evaluation,Answer quality,Answer correctness,Braintrust,built-in,AnswerCorrectness | ClosedQA | Factuality,built-in evaluator,https://raw.githubusercontent.com/braintrustdata/autoevals/main/SCORERS.md
 Evaluation,Answer quality,Answer correctness,promptfoo,built-in,factuality,built-in evaluator,https://www.promptfoo.dev/docs/configuration/expected-outputs/
-Evaluation,Answer quality,Answer correctness,OpenLLMetry,built-in,Answer Correctness,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Evaluation,Answer quality,Answer correctness,OpenLLMetry,not documented,,,
 Evaluation,Answer quality,Answer correctness,Opik,built-in,Meaning Match,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/overview
 Evaluation,Answer quality,Answer correctness,Galileo,built-in,Correctness (factuality) | Ground Truth Adherence,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Answer quality,Answer correctness,OpenInference,records scores,,,
 Evaluation,Answer quality,Answer correctness,Weights & Biases Weave,generic custom,,,
+Evaluation,Answer quality,Answer correctness,MLflow,built-in,Correctness,built-in evaluator,https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined
+Evaluation,Answer quality,Answer correctness,Laminar,generic custom,,,
+Evaluation,Answer quality,Answer correctness,LangWatch,built-in,LLM Answer Match | LLM Factual Match,built-in evaluator,https://langwatch.ai/docs/evaluations/evaluators/list
 Evaluation,Answer quality,Answer relevance,Arize Phoenix,generic custom,,,
 Evaluation,Answer quality,Answer relevance,Langfuse,integration,ResponseRelevancy,,https://langfuse.com/integrations/frameworks/ragas
 Evaluation,Answer quality,Answer relevance,LangSmith,built-in,Answer Relevance,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -423,11 +503,14 @@ Evaluation,Answer quality,Answer relevance,OpenTelemetry,records scores,,,
 Evaluation,Answer quality,Answer relevance,Helicone,records scores,,,
 Evaluation,Answer quality,Answer relevance,Braintrust,built-in,AnswerRelevancy,built-in evaluator,https://raw.githubusercontent.com/braintrustdata/autoevals/main/SCORERS.md
 Evaluation,Answer quality,Answer relevance,promptfoo,built-in,answer-relevance | conversation-relevance,built-in evaluator,https://www.promptfoo.dev/docs/configuration/expected-outputs/
-Evaluation,Answer quality,Answer relevance,OpenLLMetry,built-in,Answer Relevancy,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Evaluation,Answer quality,Answer relevance,OpenLLMetry,not documented,,,
 Evaluation,Answer quality,Answer relevance,Opik,built-in,Answer Relevance | ConversationQARelevanceMetric | QA Relevance Judge,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/overview
 Evaluation,Answer quality,Answer relevance,Galileo,generic custom,,,
 Evaluation,Answer quality,Answer relevance,OpenInference,records scores,,,
 Evaluation,Answer quality,Answer relevance,Weights & Biases Weave,generic custom,,,
+Evaluation,Answer quality,Answer relevance,MLflow,built-in,RelevanceToQuery,built-in evaluator,https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined
+Evaluation,Answer quality,Answer relevance,Laminar,generic custom,,,
+Evaluation,Answer quality,Answer relevance,LangWatch,built-in,Ragas Response Relevancy,built-in evaluator,https://langwatch.ai/docs/evaluations/evaluators/list
 Evaluation,Answer quality,Helpfulness,Arize Phoenix,generic custom,,,
 Evaluation,Answer quality,Helpfulness,Langfuse,built-in,Managed evaluator catalog,built-in evaluator,https://langfuse.com/resources/engineering/ai-agent-evaluation
 Evaluation,Answer quality,Helpfulness,LangSmith,built-in,openevals Helpfulness (RAG),built-in evaluator,https://github.com/langchain-ai/openevals
@@ -436,11 +519,14 @@ Evaluation,Answer quality,Helpfulness,OpenTelemetry,records scores,,,
 Evaluation,Answer quality,Helpfulness,Helicone,records scores,,,
 Evaluation,Answer quality,Helpfulness,Braintrust,generic custom,,,
 Evaluation,Answer quality,Helpfulness,promptfoo,generic custom,,,
-Evaluation,Answer quality,Helpfulness,OpenLLMetry,generic custom,,,
+Evaluation,Answer quality,Helpfulness,OpenLLMetry,not documented,,,
 Evaluation,Answer quality,Helpfulness,Opik,built-in,ConversationDialogueHelpfulnessMetric | Dialogue Helpfulness Judge | Usefulness,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/conversation_threads_metrics
 Evaluation,Answer quality,Helpfulness,Galileo,generic custom,,,
 Evaluation,Answer quality,Helpfulness,OpenInference,records scores,,,
 Evaluation,Answer quality,Helpfulness,Weights & Biases Weave,generic custom,,,
+Evaluation,Answer quality,Helpfulness,MLflow,generic custom,,,
+Evaluation,Answer quality,Helpfulness,Laminar,generic custom,,,
+Evaluation,Answer quality,Helpfulness,LangWatch,generic custom,,,
 Evaluation,Answer quality,Conciseness,Arize Phoenix,built-in,Conciseness,built-in evaluator,https://arize.com/docs/phoenix/evaluation/pre-built-metrics
 Evaluation,Answer quality,Conciseness,Langfuse,generic custom,,,
 Evaluation,Answer quality,Conciseness,LangSmith,built-in,Conciseness,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -449,11 +535,14 @@ Evaluation,Answer quality,Conciseness,OpenTelemetry,records scores,,,
 Evaluation,Answer quality,Conciseness,Helicone,records scores,,,
 Evaluation,Answer quality,Conciseness,Braintrust,generic custom,,,
 Evaluation,Answer quality,Conciseness,promptfoo,generic custom,,,
-Evaluation,Answer quality,Conciseness,OpenLLMetry,generic custom,,,
+Evaluation,Answer quality,Conciseness,OpenLLMetry,not documented,,,
 Evaluation,Answer quality,Conciseness,Opik,generic custom,,,
 Evaluation,Answer quality,Conciseness,Galileo,generic custom,,,
 Evaluation,Answer quality,Conciseness,OpenInference,records scores,,,
 Evaluation,Answer quality,Conciseness,Weights & Biases Weave,generic custom,,,
+Evaluation,Answer quality,Conciseness,MLflow,generic custom,,,
+Evaluation,Answer quality,Conciseness,Laminar,generic custom,,,
+Evaluation,Answer quality,Conciseness,LangWatch,generic custom,,,
 Evaluation,Answer quality,Tone appropriateness,Arize Phoenix,generic custom,,,
 Evaluation,Answer quality,Tone appropriateness,Langfuse,generic custom,,,
 Evaluation,Answer quality,Tone appropriateness,LangSmith,built-in,Tone,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -462,11 +551,30 @@ Evaluation,Answer quality,Tone appropriateness,OpenTelemetry,records scores,,,
 Evaluation,Answer quality,Tone appropriateness,Helicone,records scores,,,
 Evaluation,Answer quality,Tone appropriateness,Braintrust,generic custom,,,
 Evaluation,Answer quality,Tone appropriateness,promptfoo,generic custom,,,
-Evaluation,Answer quality,Tone appropriateness,OpenLLMetry,built-in,Tone Detection,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Evaluation,Answer quality,Tone appropriateness,OpenLLMetry,not documented,,,
 Evaluation,Answer quality,Tone appropriateness,Opik,built-in,Tone,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/overview
 Evaluation,Answer quality,Tone appropriateness,Galileo,built-in,Tone,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Answer quality,Tone appropriateness,OpenInference,records scores,,,
 Evaluation,Answer quality,Tone appropriateness,Weights & Biases Weave,generic custom,,,
+Evaluation,Answer quality,Tone appropriateness,MLflow,generic custom,,,
+Evaluation,Answer quality,Tone appropriateness,Laminar,generic custom,,,
+Evaluation,Answer quality,Tone appropriateness,LangWatch,generic custom,,,
+Evaluation,Answer quality,Fluency,Arize Phoenix,generic custom,,,
+Evaluation,Answer quality,Fluency,Langfuse,generic custom,,,
+Evaluation,Answer quality,Fluency,LangSmith,generic custom,,,
+Evaluation,Answer quality,Fluency,DeepEval,generic custom,,,
+Evaluation,Answer quality,Fluency,OpenTelemetry,records scores,,,
+Evaluation,Answer quality,Fluency,Helicone,records scores,,,
+Evaluation,Answer quality,Fluency,Braintrust,generic custom,,,
+Evaluation,Answer quality,Fluency,promptfoo,generic custom,,,
+Evaluation,Answer quality,Fluency,OpenLLMetry,not documented,,,
+Evaluation,Answer quality,Fluency,Opik,generic custom,,,
+Evaluation,Answer quality,Fluency,Galileo,generic custom,,,
+Evaluation,Answer quality,Fluency,OpenInference,records scores,,,
+Evaluation,Answer quality,Fluency,Weights & Biases Weave,generic custom,,,
+Evaluation,Answer quality,Fluency,MLflow,built-in,Fluency,built-in evaluator,https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined
+Evaluation,Answer quality,Fluency,Laminar,generic custom,,,
+Evaluation,Answer quality,Fluency,LangWatch,generic custom,,,
 Evaluation,Grounding,Faithfulness to context,Arize Phoenix,built-in,Faithfulness | Hallucination,built-in evaluator,https://arize.com/docs/phoenix/evaluation/pre-built-metrics
 Evaluation,Grounding,Faithfulness to context,Langfuse,built-in,Managed evaluator catalog,built-in evaluator,https://langfuse.com/resources/engineering/ai-agent-evaluation
 Evaluation,Grounding,Faithfulness to context,LangSmith,built-in,Hallucination,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -475,11 +583,14 @@ Evaluation,Grounding,Faithfulness to context,OpenTelemetry,records scores,,,
 Evaluation,Grounding,Faithfulness to context,Helicone,records scores,,,
 Evaluation,Grounding,Faithfulness to context,Braintrust,built-in,Faithfulness,built-in evaluator,https://raw.githubusercontent.com/braintrustdata/autoevals/main/SCORERS.md
 Evaluation,Grounding,Faithfulness to context,promptfoo,built-in,context-faithfulness,built-in evaluator,https://www.promptfoo.dev/docs/configuration/expected-outputs/
-Evaluation,Grounding,Faithfulness to context,OpenLLMetry,built-in,Faithfulness,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Evaluation,Grounding,Faithfulness to context,OpenLLMetry,not documented,,,
 Evaluation,Grounding,Faithfulness to context,Opik,built-in,Hallucination,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/overview
 Evaluation,Grounding,Faithfulness to context,Galileo,built-in,Context Adherence,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Grounding,Faithfulness to context,OpenInference,records scores,,,
 Evaluation,Grounding,Faithfulness to context,Weights & Biases Weave,built-in,HallucinationFreeScorer,built-in evaluator,https://docs.coreweave.com/products/wandb/weave/guides/evaluation/builtin_scorers
+Evaluation,Grounding,Faithfulness to context,MLflow,built-in,RetrievalGroundedness,built-in evaluator,https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined
+Evaluation,Grounding,Faithfulness to context,Laminar,generic custom,,,
+Evaluation,Grounding,Faithfulness to context,LangWatch,built-in,Ragas Faithfulness,built-in evaluator,https://langwatch.ai/docs/evaluations/evaluators/list
 Evaluation,Safety and policy,Toxicity,Arize Phoenix,built-in,Toxicity,built-in evaluator,https://arize.com/docs/phoenix/evaluation/pre-built-metrics
 Evaluation,Safety and policy,Toxicity,Langfuse,built-in,Managed evaluator catalog,built-in evaluator,https://langfuse.com/resources/engineering/ai-agent-evaluation
 Evaluation,Safety and policy,Toxicity,LangSmith,built-in,Toxicity,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -488,11 +599,14 @@ Evaluation,Safety and policy,Toxicity,OpenTelemetry,records scores,,,
 Evaluation,Safety and policy,Toxicity,Helicone,records scores,,,
 Evaluation,Safety and policy,Toxicity,Braintrust,generic custom,,,
 Evaluation,Safety and policy,Toxicity,promptfoo,generic custom,,,
-Evaluation,Safety and policy,Toxicity,OpenLLMetry,built-in,Profanity Detection | Toxicity Detection,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Evaluation,Safety and policy,Toxicity,OpenLLMetry,not documented,,,
 Evaluation,Safety and policy,Toxicity,Opik,generic custom,,,
 Evaluation,Safety and policy,Toxicity,Galileo,built-in,Toxicity,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Safety and policy,Toxicity,OpenInference,records scores,,,
 Evaluation,Safety and policy,Toxicity,Weights & Biases Weave,generic custom,,,
+Evaluation,Safety and policy,Toxicity,MLflow,built-in,ConversationalSafety | Safety,built-in evaluator,https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined
+Evaluation,Safety and policy,Toxicity,Laminar,generic custom,,,
+Evaluation,Safety and policy,Toxicity,LangWatch,built-in,Content Safety,built-in evaluator,https://langwatch.ai/docs/evaluations/evaluators/list
 Evaluation,Safety and policy,Bias and fairness,Arize Phoenix,generic custom,,,
 Evaluation,Safety and policy,Bias and fairness,Langfuse,generic custom,,,
 Evaluation,Safety and policy,Bias and fairness,LangSmith,built-in,Bias & Fairness,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -501,11 +615,14 @@ Evaluation,Safety and policy,Bias and fairness,OpenTelemetry,records scores,,,
 Evaluation,Safety and policy,Bias and fairness,Helicone,records scores,,,
 Evaluation,Safety and policy,Bias and fairness,Braintrust,generic custom,,,
 Evaluation,Safety and policy,Bias and fairness,promptfoo,generic custom,,,
-Evaluation,Safety and policy,Bias and fairness,OpenLLMetry,built-in,Sexism Detection,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Evaluation,Safety and policy,Bias and fairness,OpenLLMetry,not documented,,,
 Evaluation,Safety and policy,Bias and fairness,Opik,generic custom,,,
 Evaluation,Safety and policy,Bias and fairness,Galileo,built-in,Sexism / Bias,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Safety and policy,Bias and fairness,OpenInference,records scores,,,
 Evaluation,Safety and policy,Bias and fairness,Weights & Biases Weave,generic custom,,,
+Evaluation,Safety and policy,Bias and fairness,MLflow,generic custom,,,
+Evaluation,Safety and policy,Bias and fairness,Laminar,generic custom,,,
+Evaluation,Safety and policy,Bias and fairness,LangWatch,generic custom,,,
 Evaluation,Safety and policy,Sensitive data leakage,Arize Phoenix,built-in,PII Detection,built-in evaluator,https://arize.com/docs/phoenix/evaluation/pre-built-metrics
 Evaluation,Safety and policy,Sensitive data leakage,Langfuse,generic custom,,,
 Evaluation,Safety and policy,Sensitive data leakage,LangSmith,built-in,PII Leakage,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -514,11 +631,14 @@ Evaluation,Safety and policy,Sensitive data leakage,OpenTelemetry,records scores
 Evaluation,Safety and policy,Sensitive data leakage,Helicone,records scores,,,
 Evaluation,Safety and policy,Sensitive data leakage,Braintrust,generic custom,,,
 Evaluation,Safety and policy,Sensitive data leakage,promptfoo,generic custom,,,
-Evaluation,Safety and policy,Sensitive data leakage,OpenLLMetry,built-in,PII Detection | Secrets Detection,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Evaluation,Safety and policy,Sensitive data leakage,OpenLLMetry,not documented,,,
 Evaluation,Safety and policy,Sensitive data leakage,Opik,generic custom,,,
 Evaluation,Safety and policy,Sensitive data leakage,Galileo,built-in,PII / CPNI / PHI,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Safety and policy,Sensitive data leakage,OpenInference,records scores,,,
 Evaluation,Safety and policy,Sensitive data leakage,Weights & Biases Weave,generic custom,,,
+Evaluation,Safety and policy,Sensitive data leakage,MLflow,generic custom,,,
+Evaluation,Safety and policy,Sensitive data leakage,Laminar,generic custom,,,
+Evaluation,Safety and policy,Sensitive data leakage,LangWatch,built-in,PII Detection,built-in evaluator,https://langwatch.ai/docs/evaluations/evaluators/list
 Evaluation,Safety and policy,Injection detection,Arize Phoenix,generic custom,,,
 Evaluation,Safety and policy,Injection detection,Langfuse,generic custom,,,
 Evaluation,Safety and policy,Injection detection,LangSmith,built-in,Code Injection | Prompt Injection,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -527,11 +647,14 @@ Evaluation,Safety and policy,Injection detection,OpenTelemetry,records scores,,,
 Evaluation,Safety and policy,Injection detection,Helicone,records scores,,,
 Evaluation,Safety and policy,Injection detection,Braintrust,generic custom,,,
 Evaluation,Safety and policy,Injection detection,promptfoo,generic custom,,,
-Evaluation,Safety and policy,Injection detection,OpenLLMetry,built-in,Prompt Injection Detection,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Evaluation,Safety and policy,Injection detection,OpenLLMetry,not documented,,,
 Evaluation,Safety and policy,Injection detection,Opik,generic custom,,,
 Evaluation,Safety and policy,Injection detection,Galileo,built-in,Prompt Injection | SQL Injection,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Safety and policy,Injection detection,OpenInference,records scores,,,
 Evaluation,Safety and policy,Injection detection,Weights & Biases Weave,generic custom,,,
+Evaluation,Safety and policy,Injection detection,MLflow,generic custom,,,
+Evaluation,Safety and policy,Injection detection,Laminar,generic custom,,,
+Evaluation,Safety and policy,Injection detection,LangWatch,built-in,Prompt Injection Detection | Jailbreak Detection,built-in evaluator,https://langwatch.ai/docs/evaluations/evaluators/list
 Evaluation,Safety and policy,Refusal detection,Arize Phoenix,built-in,Refusal,built-in evaluator,https://arize.com/docs/phoenix/evaluation/pre-built-metrics
 Evaluation,Safety and policy,Refusal detection,Langfuse,generic custom,,,
 Evaluation,Safety and policy,Refusal detection,LangSmith,generic custom,,,
@@ -540,11 +663,14 @@ Evaluation,Safety and policy,Refusal detection,OpenTelemetry,records scores,,,
 Evaluation,Safety and policy,Refusal detection,Helicone,records scores,,,
 Evaluation,Safety and policy,Refusal detection,Braintrust,generic custom,,,
 Evaluation,Safety and policy,Refusal detection,promptfoo,built-in,is-refusal,built-in evaluator,https://www.promptfoo.dev/docs/configuration/expected-outputs/
-Evaluation,Safety and policy,Refusal detection,OpenLLMetry,generic custom,,,
+Evaluation,Safety and policy,Refusal detection,OpenLLMetry,not documented,,,
 Evaluation,Safety and policy,Refusal detection,Opik,generic custom,,,
 Evaluation,Safety and policy,Refusal detection,Galileo,generic custom,,,
 Evaluation,Safety and policy,Refusal detection,OpenInference,records scores,,,
 Evaluation,Safety and policy,Refusal detection,Weights & Biases Weave,generic custom,,,
+Evaluation,Safety and policy,Refusal detection,MLflow,generic custom,,,
+Evaluation,Safety and policy,Refusal detection,Laminar,generic custom,,,
+Evaluation,Safety and policy,Refusal detection,LangWatch,generic custom,,,
 Evaluation,Safety and policy,Policy and moderation violations,Arize Phoenix,generic custom,,,
 Evaluation,Safety and policy,Policy and moderation violations,Langfuse,generic custom,,,
 Evaluation,Safety and policy,Policy and moderation violations,LangSmith,built-in,openevals EXPLICIT_CONTENT_PROMPT,built-in evaluator,https://github.com/langchain-ai/openevals
@@ -553,11 +679,14 @@ Evaluation,Safety and policy,Policy and moderation violations,OpenTelemetry,reco
 Evaluation,Safety and policy,Policy and moderation violations,Helicone,records scores,,,
 Evaluation,Safety and policy,Policy and moderation violations,Braintrust,built-in,Moderation | Security,built-in evaluator,https://raw.githubusercontent.com/braintrustdata/autoevals/main/SCORERS.md
 Evaluation,Safety and policy,Policy and moderation violations,promptfoo,integration,moderation | guardrails,,https://www.promptfoo.dev/docs/configuration/expected-outputs/
-Evaluation,Safety and policy,Policy and moderation violations,OpenLLMetry,generic custom,,,
+Evaluation,Safety and policy,Policy and moderation violations,OpenLLMetry,not documented,,,
 Evaluation,Safety and policy,Policy and moderation violations,Opik,built-in,Compliance Risk Judge | ConversationComplianceRiskMetric | Moderation,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/overview
 Evaluation,Safety and policy,Policy and moderation violations,Galileo,built-in,Unsafe Output,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Safety and policy,Policy and moderation violations,OpenInference,records scores,,,
 Evaluation,Safety and policy,Policy and moderation violations,Weights & Biases Weave,built-in,OpenAIModerationScorer,built-in evaluator,https://docs.coreweave.com/products/wandb/weave/guides/evaluation/builtin_scorers
+Evaluation,Safety and policy,Policy and moderation violations,MLflow,generic custom,,,
+Evaluation,Safety and policy,Policy and moderation violations,Laminar,generic custom,,,
+Evaluation,Safety and policy,Policy and moderation violations,LangWatch,built-in,Content Safety | Moderation,built-in evaluator,https://langwatch.ai/docs/evaluations/evaluators/list
 Evaluation,Conversation,Knowledge retention,Arize Phoenix,generic custom,,,
 Evaluation,Conversation,Knowledge retention,Langfuse,generic custom,,,
 Evaluation,Conversation,Knowledge retention,LangSmith,built-in,Knowledge Retention,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -566,11 +695,14 @@ Evaluation,Conversation,Knowledge retention,OpenTelemetry,records scores,,,
 Evaluation,Conversation,Knowledge retention,Helicone,records scores,,,
 Evaluation,Conversation,Knowledge retention,Braintrust,generic custom,,,
 Evaluation,Conversation,Knowledge retention,promptfoo,generic custom,,,
-Evaluation,Conversation,Knowledge retention,OpenLLMetry,generic custom,,,
+Evaluation,Conversation,Knowledge retention,OpenLLMetry,not documented,,,
 Evaluation,Conversation,Knowledge retention,Opik,built-in,KnowledgeRetentionMetric,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/conversation_threads_metrics
 Evaluation,Conversation,Knowledge retention,Galileo,generic custom,,,
 Evaluation,Conversation,Knowledge retention,OpenInference,records scores,,,
 Evaluation,Conversation,Knowledge retention,Weights & Biases Weave,generic custom,,,
+Evaluation,Conversation,Knowledge retention,MLflow,built-in,KnowledgeRetention,built-in evaluator,https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined
+Evaluation,Conversation,Knowledge retention,Laminar,generic custom,,,
+Evaluation,Conversation,Knowledge retention,LangWatch,generic custom,,,
 Evaluation,Conversation,User satisfaction or frustration,Arize Phoenix,built-in,User Friction,built-in evaluator,https://arize.com/docs/phoenix/evaluation/pre-built-metrics
 Evaluation,Conversation,User satisfaction or frustration,Langfuse,generic custom,,,
 Evaluation,Conversation,User satisfaction or frustration,LangSmith,built-in,Perceived Error | Perceived Error (Tuned) | User Satisfaction,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md
@@ -579,11 +711,14 @@ Evaluation,Conversation,User satisfaction or frustration,OpenTelemetry,records s
 Evaluation,Conversation,User satisfaction or frustration,Helicone,records scores,,,
 Evaluation,Conversation,User satisfaction or frustration,Braintrust,generic custom,,,
 Evaluation,Conversation,User satisfaction or frustration,promptfoo,generic custom,,,
-Evaluation,Conversation,User satisfaction or frustration,OpenLLMetry,generic custom,,,
+Evaluation,Conversation,User satisfaction or frustration,OpenLLMetry,not documented,,,
 Evaluation,Conversation,User satisfaction or frustration,Opik,built-in,UserFrustrationMetric,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/conversation_threads_metrics
 Evaluation,Conversation,User satisfaction or frustration,Galileo,generic custom,,,
 Evaluation,Conversation,User satisfaction or frustration,OpenInference,records scores,,,
 Evaluation,Conversation,User satisfaction or frustration,Weights & Biases Weave,generic custom,,,
+Evaluation,Conversation,User satisfaction or frustration,MLflow,built-in,UserFrustration,built-in evaluator,https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined
+Evaluation,Conversation,User satisfaction or frustration,Laminar,generic custom,,,
+Evaluation,Conversation,User satisfaction or frustration,LangWatch,generic custom,,,
 Evaluation,Conversation,Conversation coherence,Arize Phoenix,generic custom,,,
 Evaluation,Conversation,Conversation coherence,Langfuse,generic custom,,,
 Evaluation,Conversation,Conversation coherence,LangSmith,generic custom,,,
@@ -592,8 +727,11 @@ Evaluation,Conversation,Conversation coherence,OpenTelemetry,records scores,,,
 Evaluation,Conversation,Conversation coherence,Helicone,records scores,,,
 Evaluation,Conversation,Conversation coherence,Braintrust,generic custom,,,
 Evaluation,Conversation,Conversation coherence,promptfoo,generic custom,,,
-Evaluation,Conversation,Conversation coherence,OpenLLMetry,built-in,Conversation Quality,built-in evaluator,https://www.traceloop.com/docs/evaluators/evaluator-slugs.md
+Evaluation,Conversation,Conversation coherence,OpenLLMetry,not documented,,,
 Evaluation,Conversation,Conversation coherence,Opik,built-in,ConversationDegenerationMetric | ConversationalCoherenceMetric,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/conversation_threads_metrics
 Evaluation,Conversation,Conversation coherence,Galileo,built-in,Conversation Quality,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Conversation,Conversation coherence,OpenInference,records scores,,,
 Evaluation,Conversation,Conversation coherence,Weights & Biases Weave,generic custom,,,
+Evaluation,Conversation,Conversation coherence,MLflow,generic custom,,,
+Evaluation,Conversation,Conversation coherence,Laminar,generic custom,,,
+Evaluation,Conversation,Conversation coherence,LangWatch,generic custom,,,
