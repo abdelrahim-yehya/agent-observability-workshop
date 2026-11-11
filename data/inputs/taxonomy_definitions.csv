@@ -35,6 +35,7 @@ Evaluation,Answer quality,Answer relevance,"Whether a response addresses the use
 Evaluation,Answer quality,Helpfulness,How useful or helpful the answer is to the user.
 Evaluation,Answer quality,Conciseness,Whether the answer gives the requested information without unnecessary or padded content.
 Evaluation,Answer quality,Tone appropriateness,Whether the tone of the response is appropriate for the context.
+Evaluation,Answer quality,Fluency,Whether the response is grammatically correct and reads naturally.
 Evaluation,Grounding,Faithfulness to context,Whether the claims in the answer are supported by the provided context. Unsupported or contradicted claims count as hallucination.
 Evaluation,Safety and policy,Toxicity,"Whether the output contains toxic, abusive, hateful or profane language."
 Evaluation,Safety and policy,Bias and fairness,"Whether the output contains bias, stereotyping or discrimination against a person or group."

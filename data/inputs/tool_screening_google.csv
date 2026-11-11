@@ -12,9 +12,9 @@ Galileo,3,5,include,"I1,I3","closed source; 3 independent sources in 5 queries; 
 Opik,3,4,include,"I1,I2","open source (22.8k stars), Comet"
 Weights & Biases,2,3,include,"I1,I3","include the Weave toolkit only (LLM tracing and evaluation), not the general W&B platform; 2 independent sources"
 OpenInference,2,1,include,"I1,I2","open source (1.3k stars), instrumentation conventions"
-GAIA,1,1,pending,I4,benchmark: enters only through the literature channel
-Inspect AI,1,1,pending,literature,"open source, not returned by GitHub queries, 1 Google source; check the literature channel"
-WebShop,1,1,pending,I4,benchmark: enters only through the literature channel
+GAIA,1,1,exclude,S1,benchmark: out of scope; the literature channel that would admit benchmarks was dropped
+Inspect AI,1,1,exclude,S1,"evaluation harness / benchmark runner: out of scope; 1 Google source; literature channel dropped"
+WebShop,1,1,exclude,S1,benchmark: out of scope; the literature channel that would admit benchmarks was dropped
 MLflow,0,5,exclude,C1,"fewer than 2 independent sources (all 8 Google results naming it are on mlflow.org, its own site)"
 Ragas,5,2,exclude,I2,"open source and widely named (5 sources) but last push 2026-02-24, outside the six-month activity window"
 Datadog,2,5,exclude,E6,"E6 general-purpose observability, data, security or ML platform with an LLM module"

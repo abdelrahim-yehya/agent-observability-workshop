@@ -1,0 +1,9 @@
+tool,excluded_by,google_independent_sources,github_repo,stars_2026-10-22,stars_2026-11-05,last_push_2026-11-05,archived,pypi_package,pypi_downloads_last_month,pypi_package_check,access_date,reason,status_2026-11-09
+Ragas,I2,5,vibrantlabsai/ragas,,16247,2026-02-24,False,ragas,1052531,PyPI project URLs link the GitHub repository,2026-11-05,"open source and widely named (5 sources) but last push 2026-02-24, outside the six-month activity window; latest GitHub release v0.4.3 on 2026-01-13, latest PyPI upload 2026-01-13, latest commit 2026-02-24 (read 2026-11-05)",still out
+MLflow,C1,0,mlflow/mlflow,28494,28693,2026-11-05,False,mlflow,19887934,PyPI project URLs link the GitHub repository,2026-11-05,"fewer than 2 independent sources (all 8 Google results naming it are on mlflow.org, its own site)",added under C2
+Laminar,C1,0,lmnr-ai/lmnr,3429,3474,2026-11-05,False,lmnr,5952916,"PyPI summary: ""Python SDK for Laminar""",2026-11-05,fewer than 2 independent sources,added under C2
+Evidently,C1,0,evidentlyai/evidently,8000,8043,2026-09-29,False,evidently,823148,PyPI project URLs link the GitHub repository,2026-11-05,fewer than 2 independent sources,still out
+LangWatch,C1,1,langwatch/langwatch,4987,5014,2026-11-05,False,langwatch,346078,"PyPI summary: ""LangWatch Python SDK, for monitoring your LLMs""",2026-11-05,fewer than 2 independent sources,added under C2
+OpenLIT,C1,0,openlit/openlit,2870,2938,2026-11-05,False,openlit,277906,PyPI project URLs link the GitHub repository,2026-11-05,fewer than 2 independent sources,still out
+AgentOps,C1,1,AgentOps-AI/agentops,5908,5949,2026-06-25,False,agentops,94654,PyPI project URLs link the GitHub repository,2026-11-05,fewer than 2 independent sources,still out
+TruLens,C1,1,truera/trulens,3608,3628,2026-11-05,False,trulens-core,26670,PyPI project URLs link the GitHub repository,2026-11-05,fewer than 2 independent sources,still out

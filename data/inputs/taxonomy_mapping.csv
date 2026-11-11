@@ -112,12 +112,6 @@ promptfoo,TokenUsage,Cached tokens
 promptfoo,TokenUsage,Total tokens
 promptfoo,cost,Estimated cost
 promptfoo,latency,LLM call latency
-OpenLLMetry,Agent Efficiency,Step / action efficiency
-OpenLLMetry,Agent Flow Quality,Flow and reasoning coherence
-OpenLLMetry,Agent Goal Accuracy,Task / goal completion
-OpenLLMetry,Agent Goal Completeness,Task / goal completion
-OpenLLMetry,Agent Tool Trajectory,Trajectory accuracy
-OpenLLMetry,Tool Error,Tool execution errors
 OpenLLMetry,gen_ai.client.operation.duration,LLM call latency
 OpenLLMetry,gen_ai.client.token.usage,Input tokens
 OpenLLMetry,gen_ai.client.token.usage,Output tokens
@@ -189,6 +183,27 @@ DeepEval,PII Leakage,Sensitive data leakage
 DeepEval,Toxicity,Toxicity
 DeepEval,Turn Faithfulness,Faithfulness to context
 DeepEval,Turn Relevancy,Answer relevance
+DeepEval,Drift overlay: Error rate,Error count / rate
+DeepEval,Drift overlay: Latency,Trace / run latency
+DeepEval,Drift overlay: Cost,Estimated cost
+DeepEval,"Dashboard aggregations: Count, Average latency, P95 latency",Trace / span count
+DeepEval,"Dashboard aggregations: Count, Average latency, P95 latency",Trace / run latency
+DeepEval,"Alert aggregations: trace count, error rate, average latency, token cost",Trace / span count
+DeepEval,"Alert aggregations: trace count, error rate, average latency, token cost",Error count / rate
+DeepEval,"Alert aggregations: trace count, error rate, average latency, token cost",Trace / run latency
+DeepEval,"Alert aggregations: trace count, error rate, average latency, token cost",Estimated cost
+DeepEval,"Token usage: input_token_count, output_token_count",Input tokens
+DeepEval,"Token usage: input_token_count, output_token_count",Output tokens
+DeepEval,"LLM span cost: per-token, model and inferred cost",Estimated cost
+DeepEval,"LLM span cost: per-token, model and inferred cost",Cost breakdown by token type
+DeepEval,"Widget aggregation measures (API): count, latency, error, cost and token measures",Input tokens
+DeepEval,"Widget aggregation measures (API): count, latency, error, cost and token measures",Output tokens
+DeepEval,"Widget aggregation measures (API): count, latency, error, cost and token measures",Total tokens
+DeepEval,"Widget aggregation measures (API): count, latency, error, cost and token measures",Estimated cost
+DeepEval,"Widget aggregation measures (API): count, latency, error, cost and token measures",Cost breakdown by token type
+DeepEval,"Widget aggregation measures (API): count, latency, error, cost and token measures",Trace / run latency
+DeepEval,"Widget aggregation measures (API): count, latency, error, cost and token measures",Error count / rate
+DeepEval,"Widget aggregation measures (API): count, latency, error, cost and token measures",Trace / span count
 Braintrust,AnswerCorrectness,Answer correctness
 Braintrust,AnswerRelevancy,Answer relevance
 Braintrust,ClosedQA,Answer correctness
@@ -201,18 +216,6 @@ promptfoo,context-faithfulness,Faithfulness to context
 promptfoo,conversation-relevance,Answer relevance
 promptfoo,factuality,Answer correctness
 promptfoo,is-refusal,Refusal detection
-OpenLLMetry,Answer Completeness,Task / goal completion
-OpenLLMetry,Answer Correctness,Answer correctness
-OpenLLMetry,Answer Relevancy,Answer relevance
-OpenLLMetry,Conversation Quality,Conversation coherence
-OpenLLMetry,Faithfulness,Faithfulness to context
-OpenLLMetry,PII Detection,Sensitive data leakage
-OpenLLMetry,Profanity Detection,Toxicity
-OpenLLMetry,Prompt Injection Detection,Injection detection
-OpenLLMetry,Secrets Detection,Sensitive data leakage
-OpenLLMetry,Sexism Detection,Bias and fairness
-OpenLLMetry,Tone Detection,Tone appropriateness
-OpenLLMetry,Toxicity Detection,Toxicity
 Opik,Answer Relevance,Answer relevance
 Opik,Compliance Risk Judge,Policy and moderation violations
 Opik,ConversationComplianceRiskMetric,Policy and moderation violations
@@ -273,3 +276,52 @@ Braintrust,metrics.tool_errors,Tool execution errors
 Braintrust,metrics.duration,Trace / run latency
 Braintrust,metrics.llm_duration,LLM call latency
 Arize Phoenix,Traces over time,Trace / span count
+Laminar,LLM span token usage and cost,Input tokens
+Laminar,LLM span token usage and cost,Output tokens
+Laminar,LLM span token usage and cost,Estimated cost
+Laminar,"Per-kind token pricing (input, output, cache read, cache write, reasoning)",Cost breakdown by token type
+Laminar,"Per-kind token pricing (input, output, cache read, cache write, reasoning)",Cached tokens
+Laminar,"Per-kind token pricing (input, output, cache read, cache write, reasoning)",Reasoning tokens
+Laminar,Dashboard preset: Traces,Trace / run latency
+Laminar,Dashboard preset: Traces,Estimated cost
+Laminar,Dashboard preset: Traces,Trace / span count
+Laminar,Dashboard preset: Spans,Estimated cost
+Laminar,Dashboard preset: Spans,Total tokens
+Laminar,Dashboard preset: Spans,Span duration
+LangWatch,LLM Answer Match,Answer correctness
+LangWatch,LLM Factual Match,Answer correctness
+LangWatch,Ragas Faithfulness,Faithfulness to context
+LangWatch,Ragas Response Relevancy,Answer relevance
+LangWatch,Query Resolution,Task / goal completion
+LangWatch,PII Detection,Sensitive data leakage
+LangWatch,Prompt Injection Detection,Injection detection
+LangWatch,Jailbreak Detection,Injection detection
+LangWatch,Content Safety,Toxicity
+LangWatch,Content Safety,Policy and moderation violations
+LangWatch,Moderation,Policy and moderation violations
+LangWatch,"Token usage (input, output, cached, reasoning)",Input tokens
+LangWatch,"Token usage (input, output, cached, reasoning)",Output tokens
+LangWatch,"Token usage (input, output, cached, reasoning)",Cached tokens
+LangWatch,"Token usage (input, output, cached, reasoning)",Reasoning tokens
+LangWatch,LLM cost from the model price registry,Estimated cost
+LangWatch,LLM cost from the model price registry,Cost breakdown by token type
+LangWatch,Time to first token (TTFT),Time to first token
+MLflow,ConversationalToolCallEfficiency,Tool call efficiency
+MLflow,ToolCallCorrectness,Tool call correctness
+MLflow,ToolCallCorrectness,Tool argument validity
+MLflow,ToolCallEfficiency,Tool call efficiency
+MLflow,Cost,Estimated cost
+MLflow,Latency,Span duration
+MLflow,Token usage,Input tokens
+MLflow,Token usage,Output tokens
+MLflow,Token usage,Total tokens
+MLflow,Completeness,Task / goal completion
+MLflow,ConversationCompleteness,Task / goal completion
+MLflow,ConversationalSafety,Toxicity
+MLflow,Correctness,Answer correctness
+MLflow,Fluency,Fluency
+MLflow,KnowledgeRetention,Knowledge retention
+MLflow,RelevanceToQuery,Answer relevance
+MLflow,RetrievalGroundedness,Faithfulness to context
+MLflow,Safety,Toxicity
+MLflow,UserFrustration,User satisfaction or frustration

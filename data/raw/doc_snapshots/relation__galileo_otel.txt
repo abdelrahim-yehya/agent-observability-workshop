@@ -1,0 +1,215 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.galileo.ai/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# OpenTelemetry Integration Recommendations
+
+> Guidelines for instrumenting your spans to ensure they are valid and properly processed by Galileo's OTLP provider.
+
+Galileo's OTLP provider conforms to [OpenTelemetry](https://opentelemetry.io/) and [OpenInference](https://github.com/Arize-ai/openinference) semantic conventions. To ensure your spans are valid and properly processed, follow these guidelines.
+
+## Semantic Conventions
+
+Galileo supports two complementary semantic convention standards:
+
+1. **OpenTelemetry GenAI Semantic Conventions** — [Semantic Conventions for GenAI agent and framework spans](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/)
+2. **OpenInference** — [OpenInference Semantic Conventions](https://github.com/Arize-ai/openinference/blob/main/python/openinference-semantic-conventions/src/openinference/semconv/trace/__init__.py)
+
+When using automatic instrumentation libraries (like Traceloop/OpenLLMetry), these requirements are typically handled automatically. When creating custom spans, ensure you follow both the OpenTelemetry GenAI conventions and any framework-specific guidelines.
+
+## Minimum Requirements for Valid Spans
+
+For a span to be considered valid, it must include certain **required** attributes depending on the span type.
+
+### Agent Spans
+
+| Attribute | Requirement Level | Description | Example |
+| - | - | - | - |
+| `gen_ai.operation.name` | **Required** | The name of the operation being performed | `invoke_agent`, `create_agent` |
+| `gen_ai.provider.name` | **Required** | The Generative AI provider | `openai`, `anthropic`, `gcp.vertex_ai` |
+| Span name | **Required** | Should follow format: `invoke_agent {gen_ai.agent.name}` or `invoke_agent` | `invoke_agent Math Tutor` |
+| Span kind | **Required** | Should be `CLIENT` for remote agents or `INTERNAL` for in-process agents | `CLIENT`, `INTERNAL` |
+| **Input** | **Required** | Input messages or data. Use `gen_ai.input.messages` (OpenTelemetry) or `input.value` (OpenInference) | `[{"role": "user", "content": "..."}]` |
+| **Output** | **Required** | Output messages or data. Use `gen_ai.output.messages` (OpenTelemetry) or `output.value` (OpenInference) | `[{"role": "assistant", "content": "..."}]` |
+
+### LLM Spans
+
+| Attribute | Requirement Level | Description | Example |
+| - | - | - | - |
+| `gen_ai.operation.name` | **Required** | The name of the operation | `chat`, `text_completion`, `embeddings` |
+| `gen_ai.provider.name` | **Required** | The Generative AI provider | `openai`, `anthropic` |
+| `gen_ai.request.model` | Conditionally Required | The name of the GenAI model | `gpt-4`, `claude-3-opus` |
+| **Input** | **Required** | Input messages or prompts. Use `gen_ai.input.messages` (OpenTelemetry) or `llm.input_messages` (OpenInference) | `[{"role": "user", "content": "..."}]` |
+| **Output** | **Required** | Output messages or completions. Use `gen_ai.output.messages` (OpenTelemetry) or `llm.output_messages` (OpenInference) | `[{"role": "assistant", "content": "..."}]` |
+
+### Tool Execution Spans
+
+| Attribute | Requirement Level | Description | Example |
+| - | - | - | - |
+| `gen_ai.operation.name` | **Required** | Should be `execute_tool` | `execute_tool` |
+| `gen_ai.tool.name` | **Required** | Name of the tool being used | `get_weather`, `calculate` |
+| `gen_ai.tool.call.id` | Recommended | Unique identifier for the tool call | `call_abc123` |
+| **Input** | **Required** | Tool call arguments. Use `gen_ai.tool.call.arguments` and `gen_ai.input.messages` (OpenTelemetry) or `input.value` (OpenInference) | `{"location": "NYC", "unit": "fahrenheit"}` |
+| **Output** | **Required** | Tool call result. Use `gen_ai.tool.call.result` and `gen_ai.output.messages` (OpenTelemetry) or `output.value` (OpenInference) | `{"temperature": 72, "condition": "sunny"}` |
+
+### Retriever Spans
+
+| Attribute | Requirement Level | Description | Example |
+| - | - | - | - |
+| `db.operation` | **Required** | Database operation type. Should be `query` or `search` | `query`, `search` |
+| `openinference.span.kind` (OpenInference) | Conditionally Required | Should be `retriever` when using OpenInference | `retriever` |
+| **Input** | **Required** | Query string or search input. Use `gen_ai.input.messages` (OpenTelemetry) or `input.value` (OpenInference) | `"What is machine learning?"` |
+| **Output** | **Required** | Retrieved documents. Use `gen_ai.output.messages` with document list (OpenTelemetry) or `retrieval.documents` (OpenInference) | `[{"id": "doc1", "content": "..."}, {"id": "doc2", "content": "..."}]` |
+
+> [!NOTE]
+>
+> Retriever spans are typically detected automatically when `db.operation` is set to `query` or `search`. The output should be a list of documents, which will be formatted appropriately by Galileo's OTLP provider.
+
+### Workflow Spans
+
+Workflow spans represent higher-level orchestration units that coordinate multiple sub-operations, such as chains, pipelines, or multi-step processes.
+
+| Attribute | Requirement Level | Description | Example |
+| - | - | - | - |
+| Span name | **Required** | Descriptive name of the workflow | `document_processing_pipeline` |
+| **Input** | **Required** | Input data to the workflow. Use `gen_ai.input.messages` with user message format | `[{"role": "user", "content": "Process this document"}]` |
+| **Output** | **Required** | Output from the workflow. Use `gen_ai.output.messages` with assistant message or document list format | `[{"role": "assistant", "content": "Processing complete"}]` |
+
+> [!NOTE]
+>
+> Workflow spans are useful for grouping related operations together. When using the Galileo SDK's `start_galileo_span` helper, workflow spans can contain nested child spans for LLM calls, tool executions, and retriever operations.
+
+## Error Handling
+
+For spans that end in an error, you **must** include:
+
+* **`error.type`** — Describes the class of error (e.g., `timeout`, `500`, exception name)
+* **Span status** — Should be set to `ERROR` with an appropriate error description
+
+```python Python theme={null}
+from opentelemetry.trace import StatusCode
+
+span.set_status(StatusCode.ERROR, "Connection timed out")
+span.set_attribute("error.type", "timeout")
+```
+
+## Direct POST Calls to the OTLP Endpoint
+
+You can make direct POST calls to the Galileo OTLP endpoint to send OTLP packets. This is useful for custom integrations or when you need to send pre-generated OTLP data.
+
+### Endpoint
+
+```sh theme={null}
+POST https://api.galileo.ai/otel/v1/traces
+```
+
+### Headers
+
+The following headers are required:
+
+| Header | Description |
+| - | - |
+| `Galileo-API-Key` | Your Galileo API key |
+| `project` or `projectid` | Project name or project ID (at least one required) |
+| `logstream` or `logstreamid` | Log stream name or Log stream ID (required for logging, omit when using `experimentid`) |
+| `experimentid` | Experiment ID. Routes traces to an experiment instead of a Log stream. Mutually exclusive with `logstream`/`logstreamid` |
+| `Content-Type` | Must be `application/x-protobuf` |
+
+### Resource Attributes
+
+When sending spans for experiments, you can attach Galileo-specific resource attributes to the spans in the protobuf payload. These attributes are used by the backend to route traces and attach ground truth data for metric evaluation.
+
+> [!NOTE]
+>
+> If you are using the `GalileoSpanProcessor` from the Galileo SDK, these attributes are set automatically. You only need to set them manually when making direct POST calls.
+
+| Attribute | Required | Description |
+| - | - | - |
+| `galileo.project.name` | No | Project name. Overrides the `project` header if set |
+| `galileo.experiment.id` | No | Experiment ID. Routes the trace to an experiment |
+| `galileo.logstream.name` | No | Log stream name. Ignored when `galileo.experiment.id` is set |
+| `galileo.session.id` | No | Session ID for grouping related traces |
+| `galileo.dataset.input` | No | Ground truth input for the dataset row (JSON string). Used by metrics like [Ground Truth Adherence](https://docs.galileo.ai/concepts/metrics/response-quality/ground-truth-adherence.md) |
+| `galileo.dataset.output` | No | Ground truth for the dataset row (JSON string). Maps to the `ground_truth` dataset field. Used by metrics like [Ground Truth Adherence](https://docs.galileo.ai/concepts/metrics/response-quality/ground-truth-adherence.md) |
+| `galileo.dataset.metadata` | No | Additional metadata for the dataset row (JSON string) |
+
+### Request Body
+
+The request body should contain OTLP packets in protobuf format (binary). The payload should be an `ExportTraceServiceRequest` message as defined in the [OpenTelemetry Protocol specification](https://opentelemetry.io/docs/specs/otlp/).
+
+### Response Codes
+
+> **200 OK**
+>
+> The request was successfully processed. The response body contains an `ExportTraceServiceResponse` in JSON format.
+>
+> If some spans were rejected, the response includes partial success information:
+>
+> ```json theme={null}
+> {
+>   "partialSuccess": {
+>     "rejectedSpans": 5,
+>     "errorMessage": "Group 0: Run not found for logstream ..."
+>   }
+> }
+> ```
+>
+> Even when the HTTP status is 200, check for `partialSuccess` in the response to determine if all spans were successfully processed.
+
+> **401 Unauthorized**
+>
+> The API key is missing or invalid.
+>
+> ```json theme={null}
+> {
+>   "detail": "API Key is missing"
+> }
+> ```
+
+> **404 Not Found**
+>
+> The specified project was not found and could not be created.
+>
+> ```json theme={null}
+> {
+>   "detail": "Project not found."
+> }
+> ```
+
+> **415 Unsupported Media Type**
+>
+> The `Content-Type` header is not `application/x-protobuf`.
+>
+> ```json theme={null}
+> {
+>   "detail": "<content-type> is not supported, content_type needs to be: 'application/x-protobuf'"
+> }
+> ```
+
+> **422 Unprocessable Entity**
+>
+> The request could not be processed. Common reasons include no spans found, trace processing failure, or missing Log stream ID.
+>
+> ```json theme={null}
+> {
+>   "detail": "No spans found in request."
+> }
+> ```
+
+## Additional Resources
+
+> **[OpenTelemetry GenAI Conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/)**
+>
+> Official OpenTelemetry semantic conventions for GenAI agent spans.
+
+> **[OpenInference Conventions](https://github.com/Arize-ai/openinference/tree/main/python/openinference-semantic-conventions/src/openinference/semconv)**
+>
+> OpenInference semantic conventions reference.
+
+> **[OpenTelemetry Integration](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference.md)**
+>
+> Set up OpenTelemetry and OpenInference with Galileo.
+
+> **[Log with OTel and LangGraph](https://docs.galileo.ai/how-to-guides/third-party-integrations/otel.md)**
+>
+> Step-by-step guide using OpenTelemetry with LangGraph and OpenAI.

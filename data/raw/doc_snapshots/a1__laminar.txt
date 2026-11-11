@@ -1,0 +1,50 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://laminar.sh/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Laminar
+
+Laminar is an [**open-source**](https://github.com/lmnr-ai/lmnr) observability platform for AI agents that proactively analyzes every trace and alerts you when a run goes wrong. Our fine-tuned model [**flow-1**](https://laminar.sh/blog/flow-1) delivers frontier-level trace analysis at a cost that makes it practical to monitor every run without sampling.
+
+These findings help you turn real failures into eval cases, discover unknown failure modes, and prioritize improvements based on where users struggle.
+
+Get started with Laminar Cloud or [self-host](https://laminar.sh/docs/self-hosting/overview.md) Laminar on your own infrastructure.
+
+![Traces stream from your agent in production into flow-1, which reads every one of them; the count of traces read goes up with each. Most traces have no issue. Failing ones turn orange and land in Issues: Wrong refund amount grows from 3 to 5, Report contradicts tests from 1 to 2, and a new issue, Stuck retrying login, is discovered. The top issue then goes round the improvement loop: its traces are turned into eval cases, the fix is shipped to the agent, and the issue is marked fixed.](https://mintcdn.com/laminarai/epigMNHnrHWhbnrC/images/overview-every-trace.svg?fit=max\&auto=format\&n=epigMNHnrHWhbnrC\&q=85\&s=85dd7a59212bd7ba264d4f97cd1c4e83)
+
+flow-1 reads every trace your agent produces. Failures collect into issues, including ones you didn't know about, and the top issue goes back to the agent through eval cases and a fix.
+
+> [card] [Tracing](https://laminar.sh/docs/tracing/introduction.md)
+>
+> Set up comprehensive tracing for your agents in minutes. First-class support for **AI SDK, Claude Agent SDK, LangChain, Browser Use**, and much more.
+
+> [card] [Signals](https://laminar.sh/docs/signals/introduction.md)
+>
+> Set up Signals to automatically catch errors in your agent runs. Describe what to flag in plain language,  spot recurring issues and get notified in Slack or email.
+
+> [card] [Debugger](https://laminar.sh/docs/debugger/introduction.md)
+>
+> Record a run, replay it from cache up to the point you're testing, and prove the fix with an eval. Built for a coding agent to run.
+
+> [card] [Agent evaluations](https://laminar.sh/docs/agent-evaluations/introduction.md)
+>
+> Run your agent end to end in an isolated copy of its environment and score the outcome and the whole trajectory.
+
+> [card] [LLM evaluations](https://laminar.sh/docs/evaluations/introduction.md)
+>
+> Score outputs against target data with `evaluate()`, locally or in CI. Catch regressions before they ship.
+
+> [card] [Datasets & Labeling](https://laminar.sh/docs/datasets/introduction.md)
+>
+> Build evaluation datasets from production traces.
+
+> [card] [Playground](https://laminar.sh/docs/playground.md)
+>
+> Replay any traced span. Swap prompts or models and compare results side by side.
+
+> [card] [Platform](https://laminar.sh/docs/platform.md)
+>
+> Realtime traces, full-text search, raw SQL access from the UI, CLI, or MCP, and custom dashboards.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

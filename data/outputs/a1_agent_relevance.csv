@@ -4,7 +4,7 @@ Any Agent,framework,PASS,https://mozilla-ai.github.io/any-agent/evaluation/,The 
 Arize Phoenix,platform,PASS,https://arize.com/docs/phoenix,"A trace captures model calls, retrieval, tool use, and custom logic",2026-10-25,
 Braintrust,platform,PASS,https://www.braintrust.dev/docs,"Braintrust is the active observability platform for instrumenting, understanding, and improving agents.",2026-10-25,
 Coze Loop,platform,PASS,https://github.com/coze-dev/coze-loop,"including key stages such as prompt parsing, model invocation, and tool execution.",2026-10-25,
-DeepEval,framework,PASS,https://deepeval.com/docs/getting-started-agents,"Learn how to evaluate AI Agents using deepeval, including multi-agent systems and tool-using agents.",2026-10-25,
+DeepEval,platform,PASS,https://deepeval.com/docs/getting-started-agents,"Learn how to evaluate AI Agents using deepeval, including multi-agent systems and tool-using agents.",2026-10-25,
 Evalite,framework,FAIL,https://www.evalite.dev/,Evals are hard. Evalite makes them simple. Test your AI-powered apps with a local dev server.,2026-10-25,"only the GitHub README and evalite.dev were read; other docs pages not checked (ranks 29th, outside the cut either way)"
 Evidently,framework,PASS (weak),https://docs.evidentlyai.com/docs/platform/tracing_overview,"including inputs, outputs and any intermediate steps and events (e.g., function calls).",2026-10-25,"docs say tracing captures 'intermediate steps and events (e.g., function calls)'; no explicit mention of agents"
 FailproofAI,platform,PASS,https://github.com/FailproofAI/failproofai,capturing every run and blocking dangerous tool calls before they execute.,2026-10-25,
@@ -14,12 +14,12 @@ Giskard,framework,PASS,https://github.com/Giskard-AI/giskard-oss,"Giskard v3 is 
 Harbor,framework,PASS,https://docs.harborframework.com/,Harbor is a framework for running any agent with any model on any task in any sandbox in parallel.,2026-10-25,
 Helicone,platform,PASS,https://docs.helicone.ai/features/sessions,"This gives you a complete view of your AI agent's behavior, not just the LLM interactions.",2026-10-25,
 Judgeval,platform,PASS,https://github.com/JudgmentLabs/judgeval,Judgeval is an open-source Python SDK for agent improvement.,2026-10-25,
-Laminar,platform,PASS,https://laminar.sh/docs/,flow-1 reads every trace your agent produces.,2026-10-25,
+Laminar,platform,PASS,https://laminar.sh/docs/,flow-1 reads every trace your agent produces.,2026-11-09,page saved as a1__laminar.txt on 2026-11-09
 LangSmith,platform,PASS,https://docs.langchain.com/langsmith/observability-concepts,"LangSmith Observability lets you record, inspect, and analyze every step your AI agent takes.",2026-10-25,
-LangWatch,platform,PASS,https://langwatch.ai/docs/,"every LLM call, tool call and user interaction as a trace.",2026-10-25,
+LangWatch,platform,PASS,https://langwatch.ai/docs/introduction,"Every LLM call, tool usage, and user interaction is automatically tracked with detailed traces, spans, and metadata.",2026-11-09,page saved as a1__langwatch.txt on 2026-11-09
 Langfuse,platform,PASS,https://langfuse.com/docs/observability/features/agent-graphs,"It's the fastest way to answer ""what does this agent do, and how complex is it?""",2026-10-25,
 Latitude,platform,PASS,https://docs.latitude.so,"Each interaction becomes a trace made of spans for LLM calls, tool calls, retrieval steps, and other instrumented work.",2026-10-25,
-MLflow,platform,PASS,https://mlflow.org/docs/latest/genai/tracing/,"MLflow Tracing gives you complete visibility into your agents and LLM applications,",2026-10-25,
+MLflow,platform,PASS,https://mlflow.org/docs/latest/genai/tracing/,"MLflow Tracing gives you complete visibility into your agents and LLM applications,",2026-11-09,page saved as a1__mlflow.txt on 2026-11-09
 OpenInference,standard,PASS,https://arize-ai.github.io/openinference/spec/semantic_conventions.html,An agent describes a reasoning block that acts on tools using the guidance of an LLM.,2026-10-25,
 OpenLIT,platform,PASS,https://docs.openlit.io/,"so every agent failure can be traced, scored, and turned into a harness fix.",2026-10-25,
 OpenLLMetry,standard,PASS,https://www.traceloop.com/docs/openllmetry/tracing/annotations,"Similarily, if you use autonomous agents, you can use the `@agent` decorator to trace them as a single unit.",2026-10-25,

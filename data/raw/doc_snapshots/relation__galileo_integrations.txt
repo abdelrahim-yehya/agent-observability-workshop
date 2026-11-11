@@ -1,0 +1,89 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.galileo.ai/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Integrations Overview
+
+> Learn about the Galileo integrations with third-party SDKs to automatically log your applications
+
+Galileo's third-party SDK integrations automatically capture prompts, responses, and performance metrics without requiring you to add explicit logging code throughout your application.
+
+## Supported frameworks
+
+Galileo supports a range of LLM and agentic frameworks, either with a direct integration, using [OpenTelemetry](https://opentelemetry.io/), or using [OpenInference](https://github.com/Arize-ai/openinference).
+
+| Framework | Supported integrations |
+| :- | :- |
+| A2A Protocol | [`galileo-a2a`](https://docs.galileo.ai/sdk-api/third-party-integrations/a2a) |
+| CrewAI | [CrewAI Event Listener](https://docs.galileo.ai/sdk-api/third-party-integrations/crewai/crewai.md) [OpenInference](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference.md) |
+| Google ADK | [OpenInference](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/google-adk.md) |
+| LangChain/LangGraph | [LangChain callback](https://docs.galileo.ai/sdk-api/third-party-integrations/langchain/langchain.md) [OpenInference](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference.md) |
+| OpenAI | [OpenAI SDK wrapper](https://docs.galileo.ai/sdk-api/third-party-integrations/openai/openai.md) |
+| OpenAI Agents SDK | [OpenAI Agents trace processor](https://docs.galileo.ai/sdk-api/third-party-integrations/openai-agents/openai-agents.md) |
+| Microsoft Agent Framework | [OpenTelemetry](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/microsoft-agent-framework.md) |
+| Strands Agents | [OpenTelemetry](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/strands-agents.md) |
+| Vercel AI SDK | [OpenTelemetry](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/vercel-ai.md) |
+
+These frameworks have been tested and are fully supported. Galileo also supports any framework that supports the [OpenInference](https://github.com/Arize-ai/openinference) standard.
+
+## Next steps
+
+### OpenTelemetry and OpenInference
+
+> **[OpenTelemetry and OpenInference](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference.md)**
+>
+> Learn how to integrate Galileo with OpenTelemetry and OpenInference for comprehensive observability and tracing.
+
+> **[Google ADK](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/google-adk.md)**
+>
+> Learn how to integrate a Google ADK project with Galileo using OpenTelemetry and OpenInference.
+
+> **[Strands Agents](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/strands-agents.md)**
+>
+> Learn how to integrate a Strands Agents project with Galileo using OpenTelemetry.
+
+> **[Microsoft Agent Framework](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/microsoft-agent-framework.md)**
+>
+> Learn how to integrate a Microsoft Agent Framework project with Galileo using OpenTelemetry.
+
+> **[Vercel AI SDK](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/vercel-ai.md)**
+>
+> Learn how to integrate a Vercel AI SDK project with Galileo using OpenTelemetry.
+
+### Model provider integrations
+
+> **[AWS Bedrock Inference Profiles](https://docs.galileo.ai/sdk-api/third-party-integrations/model-integrations/aws-bedrock/awsbedrock.md)**
+>
+> Map Galileo models to AWS Bedrock Inference Profile ARNs.
+
+> **[Custom model integrations](https://docs.galileo.ai/sdk-api/third-party-integrations/model-integrations/custom-model-integrations/custom-model-integrations.md)**
+>
+> Configure custom LLM providers with JSON in the Galileo console.
+
+> **[Gemini Enterprise credentials](https://docs.galileo.ai/sdk-api/third-party-integrations/model-integrations/gemini-enterprise/gemini-enterprise-credentials.md)**
+>
+> Create a Google Cloud service account JSON key and connect Gemini Enterprise to Galileo.
+
+### LLM SDK integrations
+
+> **[OpenAI wrapper](https://docs.galileo.ai/sdk-api/third-party-integrations/openai/openai.md)**
+>
+> Automatically log calls to the OpenAI SDK with a wrapper.
+
+### Agent framework integrations
+
+> **[A2A Protocol](https://docs.galileo.ai/sdk-api/third-party-integrations/a2a.md)**
+>
+> Add end-to-end distributed tracing to multi-agent systems using the Google A2A protocol.
+
+> **[CrewAI event listener](https://docs.galileo.ai/sdk-api/third-party-integrations/crewai/crewai.md)**
+>
+> Automatically log all the steps in your CrewAI application with the Galileo event listener.
+
+> **[LangChain/LangGraph callback](https://docs.galileo.ai/sdk-api/third-party-integrations/langchain/langchain.md)**
+>
+> Automatically log all the steps in your LangChain or LangGraph application with the Galileo callback.
+
+> **[OpenAI Agents trace processor](https://docs.galileo.ai/sdk-api/third-party-integrations/openai-agents/openai-agents.md)**
+>
+> Automatically log all the steps in your OpenAI Agent SDK apps using the Galileo trace processor.

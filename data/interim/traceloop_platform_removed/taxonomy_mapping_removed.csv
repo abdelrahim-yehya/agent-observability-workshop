@@ -1,0 +1,19 @@
+tool,metric_name,taxonomy_metric
+OpenLLMetry,Agent Efficiency,Step / action efficiency
+OpenLLMetry,Agent Flow Quality,Flow and reasoning coherence
+OpenLLMetry,Agent Goal Accuracy,Task / goal completion
+OpenLLMetry,Agent Goal Completeness,Task / goal completion
+OpenLLMetry,Agent Tool Trajectory,Trajectory accuracy
+OpenLLMetry,Tool Error,Tool execution errors
+OpenLLMetry,Answer Completeness,Task / goal completion
+OpenLLMetry,Answer Correctness,Answer correctness
+OpenLLMetry,Answer Relevancy,Answer relevance
+OpenLLMetry,Conversation Quality,Conversation coherence
+OpenLLMetry,Faithfulness,Faithfulness to context
+OpenLLMetry,PII Detection,Sensitive data leakage
+OpenLLMetry,Profanity Detection,Toxicity
+OpenLLMetry,Prompt Injection Detection,Injection detection
+OpenLLMetry,Secrets Detection,Sensitive data leakage
+OpenLLMetry,Sexism Detection,Bias and fairness
+OpenLLMetry,Tone Detection,Tone appropriateness
+OpenLLMetry,Toxicity Detection,Toxicity

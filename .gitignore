@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 .claude/
 .code-review-graph/
+paper/build/

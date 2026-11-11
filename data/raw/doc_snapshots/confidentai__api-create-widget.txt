@@ -1,0 +1,129 @@
+# Create Widget
+
+`POST https://api.confident-ai.com/v2/dashboards/{dashboardId}/widgets`
+
+Adds a widget to a dashboard and returns its id. Send `layout` to place it yourself, or leave it out and Confident AI puts it on the first free row below the widgets already there.
+
+## Headers
+
+- `CONFIDENT_API_KEY` (string, required) — The API key of your Confident AI project.
+
+## Path parameters
+
+- `dashboardId` (string, required) — The id of the dashboard.
+
+## Request body
+
+- `name` (string, required) — The name shown as the widget's title.
+- `description` (string | null) — What the widget shows. Send `null` to leave it unset.
+- `type` (enum | null) — The visualization to draw the widget as.
+- `unit` (enum | null) — The unit the widget's values are labelled with.
+- `mode` (enum | null) — How the widget aggregates its lines. `DIMENSION_SERIES` requires `dimension`.
+- `bucketMode` (enum | null) — How the query range is bucketed. Defaults to `SERIES` when omitted.
+- `dimension` (enum | null) — The property to break the widget's data down by. Required when `mode` is `DIMENSION_SERIES`.
+- `topK` (object | null) — Caps a dimension breakdown at its top values. Send `null`, or omit it, to plot every value.
+  - `limit` (integer) — The number of series or rows to keep, taking the highest or lowest by `orderBy`. Defaults to 10.
+  - `orderBy` (enum | enum) — The metric or column the dimension values are ranked by. Defaults to `count`.
+    - (enum) — One of `count`, `avg_latency`, `p50_latency`, `p90_latency`, `p99_latency`, `error_rate`, `pass_rate`, `failure_rate`, `input_cost`, `output_cost`, `total_cost`, `avg_cost`, `input_tokens`, `output_tokens`, `total_tokens`, `count_distinct_endUserId`, `count_distinct_threadId`, `count_distinct_model`, `count_distinct_projectId`, `count_distinct_error`, `count_distinct_metadata`, `error_count`, `pass_count`, `avg_score`, `stddev_score`, `median_score`, `avg_rating`, `avg_value`, `score_histogram`.
+    - (enum) — One of `created_at`, `start_time`, `dimension`.
+  - `direction` (enum) — Whether to keep the highest ranked values or the lowest. Defaults to `desc`. One of `asc`, `desc`.
+- `startTime` (string | null) — The start of the widget's own time range, as an ISO 8601 datetime. Send `null` to let the query decide the range.
+- `endTime` (string | null) — The end of the widget's own time range, as an ISO 8601 datetime. Send `null` to let the query decide the range.
+- `layout` (object | null) — Where the widget sits on the dashboard grid. Omit it, or send `null`, and Confident AI packs the widget into the first free space.
+  - `x` (number, required) — The widget's left edge, as a column index on the 12-column grid.
+  - `y` (number, required) — The widget's top edge, as a row index on the grid.
+  - `w` (number, required) — The widget's width in grid columns.
+  - `h` (number, required) — The widget's height in grid rows.
+- `lines` (array | null) — The series the widget plots.
+  - `name` (string, required) — The name the line is labelled with in the legend.
+  - `color` (enum | null) — The colour to draw the line in. Omit it, or send `null`, to take the next colour in the palette.
+  - `dataModel` (enum | null) — The entity the line aggregates over. Required whenever `aggregation` is set; a line without one plots nothing.
+  - `aggregation` (enum | null) — The aggregation the line computes over `dataModel`. Must be one of the tokens that data model accepts.
+  - `filters` (object | null) — The filters an entity must match to be counted by this line. Send `null`, or omit it, to aggregate over everything the data model holds.
+    - `operator` (enum, required) — How the groups combine: `AND` matches a record only when every group matches it, and `OR` matches it when any one group does. One of `AND`, `OR`.
+    - `groups` (list of objects, required) — The groups of filters to apply, each combining its own filters with its own operator.
+      - `operator` (enum, required) — One of `AND`, `OR`.
+      - `filters` (list of objects, required)
+        - `category` (enum, required) — One of `User Id`, `Customer Id`, `Customer Name`, `Thread Id`, `Trace UUID`, `Trace Name`, `Trace Version`, `Trace Status`, `Trace Tags`, `Trace`, `Span UUID`, `Name`, `Span Name`, `Span Type`, `Span Status`, `Metrics Status`, `Error Status`, `Called tool`, `Handed off to`, `Handed off by`, `Nearest parent of type`, `Anywhere under`, `Top level`, `Name`, `Model`, `Provider`, `Integration`, `Input argument`, `Embedder`, `Chunk Size`, `Top-K`, `Hyperparameter`, `Dataset`, `Dataset Name`, `Test Run ID`, `Identifier`, `Test File`, `Status`, `Official`, `Evals Mode`, `Tests Passed`, `Tests Failed`, `Pass Rate`, `Fail Rate`, `Star Rating`, `Thumbs Rating`, `Explanation`, `Expected Output`, `Expected Outcome`, `Annotator`, `End User`, `Annotation Type`, `Annotation Name`, `Annotation Date`, `Annotation Rating`, `Annotation Thumbs`, `Annotation Choice`, `Annotation Yes / No`, `Annotation Text`, `Metric Score`, `Metric Status`, `Metric Version`, `Name`, `Metadata`, `Classifier`, `Classifier Version`, `Metric`, `Metric Name`, `Trace Count`, `Test Case ID`, `Requested review from`, `Assigned to`, `Tags`, `Labels`, `Tools Called`, `Finalized`, `Golden ID`, `Ingestion Task`, `Latency`, `Environment`, `Review flag`, `Vulnerability`, `Vulnerability Type`, `Attack Method`, `Risk Category`, `Framework`, `Assessment ID`, `Prompt Alias`, `Prompt Version`, `Prompt Label`, `Prompt Commit Hash`, `Prompt`, `Annotations`, `Failure Mode`, `Recommended`, `Sub-mode Name`, `Sub-mode Recommended`, `Sub-mode Certainty`, `Status Code`, `Actor Type`.
+        - `condition` (enum | enum | enum | enum | enum | enum | enum | enum | enum | enum, required)
+        - `value` (string | number | list of strings, required)
+        - `key` (string)
+  - `extraQueryParams` (object | null) — Advanced query parameters for the line's data model. Send `null`, or omit it, when the data model needs none.
+
+## Response
+
+Create Widget succeeded.
+
+- `success` (boolean) — Indicates if the request was successful.
+- `data` (object) — A reference to a widget by its id.
+  - `id` (string) — The id of the widget, generated by Confident AI.
+- `deprecated` (boolean) — Indicates if this endpoint is deprecated.
+
+## Request example
+
+```bash
+curl -X POST "https://api.confident-ai.com/v2/dashboards/{dashboardId}/widgets" \
+  -H "CONFIDENT_API_KEY: <PROJECT-API-KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+  "name": "Trace volume",
+  "description": "Traces served per day across production.",
+  "type": "LINE",
+  "unit": "COUNT",
+  "mode": "TIME_SERIES",
+  "bucketMode": "SERIES",
+  "dimension": "model",
+  "topK": {
+    "limit": 10,
+    "orderBy": "p90_latency",
+    "direction": "desc"
+  },
+  "startTime": "2025-01-01T00:00:00.000Z",
+  "endTime": "2025-01-31T23:59:59.999Z",
+  "layout": {
+    "x": 0,
+    "y": 0,
+    "w": 6,
+    "h": 2
+  },
+  "lines": [
+    {
+      "name": "Traces",
+      "color": "BLUE",
+      "dataModel": "TRACE",
+      "aggregation": "COUNT",
+      "filters": {
+        "operator": "AND",
+        "groups": [
+          {
+            "operator": "AND",
+            "filters": [
+              {
+                "category": "User Id",
+                "condition": "Is less than",
+                "value": "string",
+                "key": "string"
+              }
+            ]
+          }
+        ]
+      },
+      "extraQueryParams": {
+        "metricMetadataKey": "tokenCount"
+      }
+    }
+  ]
+}'
+```
+
+## Response example
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "<WIDGET-ID>"
+  },
+  "deprecated": false
+}
+```

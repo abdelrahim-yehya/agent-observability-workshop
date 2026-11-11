@@ -1,0 +1,303 @@
+# OpenTelemetry
+
+How Confident AI's OTEL server ingests traces, and the gen_ai, confident, OpenInference, and OpenLLMetry conventions it understands
+
+[OpenTelemetry](https://opentelemetry.io/docs/what-is-opentelemetry/) (OTEL) is the open, vendor-neutral standard for traces, metrics, and logs. Confident AI's LLM tracing is OpenTelemetry-native: every trace arrives as OTLP, whether it came from [`confident-trace`](https://github.com/confident-ai/confident-trace), a third-party instrumentor, or a raw OpenTelemetry SDK.
+
+## Overview
+
+Confident AI's OpenTelemetry server (OTEL server) is the OTLP/HTTP ingestion endpoint for all tracing data, hosted at `https://(eu.)otel.confident-ai.com`. All spans enter through this endpoint, whether produced by the `confident-trace` SDKs, a [third-party integration](/docs/integrations), a [cloud runtime](/docs/integrations/cloud-runtimes/agentcore), or an OpenTelemetry Collector.
+
+> The OTEL server should not be confused with
+> [`confident-trace`](https://github.com/confident-ai/confident-trace). Both follow
+> OpenTelemetry conventions, but `confident-trace` is a **client** that instruments
+> your application (with 25+ built-in integrations) and exports spans *to* the OTEL
+> server. The OTEL server is the **receiver**.
+
+The OTEL server accepts standard OTLP, so `confident-trace` is not required. **However, `confident-trace` is still highly recommended** even if you are using frameworks that are OTel native such as Google ADK, Pydantic AI, or AgentCore because of `confident-trace`'s native integration with 25+ AI providers, frameworks, gateays, all at once.
+
+> Anything that already emits OpenTelemetry spans can point its exporter at the OTEL server and traces appear in Confident AI, typed and ready for evaluation:
+>
+> - **Managed cloud runtimes** — [Amazon Bedrock AgentCore](/docs/integrations/cloud-runtimes/agentcore), [Microsoft Foundry](/docs/integrations/cloud-runtimes/microsoft-foundry), and [Google Gemini Enterprise](/docs/integrations/cloud-runtimes/google-gemini-enterprise), where you can only set `OTEL_EXPORTER_OTLP_*` environment variables
+> - **Existing OpenTelemetry instrumentors** — [OpenInference](/docs/integrations/third-party/openinference), [OpenLLMetry](#openllmetry), [Google ADK](/docs/integrations/third-party/google-adk), or any framework that emits `gen_ai.*` attributes
+> - **Languages without a Confident AI SDK** — Go, Ruby, C#, Java, Rust, via [manual instrumentation](/docs/integrations/opentelemetry/manual-instrumentation)
+> - **Existing observability pipelines** — an OpenTelemetry Collector gains one more `otlphttp` exporter ([trace broadcasting](/docs/integrations/opentelemetry/trace-broadcasting))
+>
+> Spans from these sources are rendered as LLM, tool, agent, and retriever spans with model, token usage, cost, and messages populated, and flow into [online evals](/docs/llm-tracing/online-evals), [threads](/docs/llm-tracing/features/threads), and [trace forwarding](/docs/integrations/opentelemetry/trace-forwarding) exactly like `confident-trace` traces do.
+
+## The OTEL Server
+
+```mermaid
+flowchart LR
+    subgraph App["Your application"]
+        direction TB
+        A[confident-trace<br/>25+ auto-instrumentations]
+        B[OpenInference / OpenLLMetry<br/>instrumentors]
+        C[Raw OpenTelemetry SDK<br/>Go, Ruby, C#, Java...]
+        D[Cloud runtime<br/>AgentCore, Foundry, Gemini Enterprise]
+    end
+    subgraph Export["Export (OTLP/HTTP)"]
+        direction TB
+        X[OTLP exporter<br/>in-process]
+        Y[OpenTelemetry Collector<br/>optional, fan-out to other backends]
+    end
+    A --> X
+    B --> X
+    C --> X
+    D --> X
+    X -.-> Y
+    X --> S
+    Y --> S
+    S[Confident AI OTEL server<br/>otel.confident-ai.com] --> O[Confident AI]
+    O --> E[Online evals]
+    O --> T[Trace forwarding]
+```
+
+Spans reach Confident AI in one of two ways:
+
+- **Directly from the process.** The SDK's OTLP exporter (which `confident-trace` configures for you) batches spans and POSTs them with your project API key in the `x-confident-api-key` header.
+- **Through an OpenTelemetry Collector.** Your services export to a Collector you run, and its `otlphttp` exporter sends a copy to Confident AI alongside your other backends. See [trace broadcasting](/docs/integrations/opentelemetry/trace-broadcasting).
+
+On receipt, Confident AI authenticates the request, reads attributes from every [namespace it understands](#supported-attribute-namespaces), and reconstructs traces from the OpenTelemetry `trace_id` and parent span IDs. Spans from different services and languages therefore land in the same trace as long as they share W3C trace context — the basis of [distributed tracing](/docs/integrations/opentelemetry/distributed-tracing).
+
+### Regions and endpoints
+
+| Region       | Base endpoint                      | Traces endpoint                              | API key prefix    |
+| ------------ | ---------------------------------- | -------------------------------------------- | ----------------- |
+| US (default) | `https://otel.confident-ai.com`    | `https://otel.confident-ai.com/v1/traces`    | `confident_us_`   |
+| EU           | `https://eu.otel.confident-ai.com` | `https://eu.otel.confident-ai.com/v1/traces` | `confident_eu_`   |
+| Self-hosted  | Your own `otel.` host              | `https://otel.<your-domain>/v1/traces`       | Deployment-issued |
+
+Use the base endpoint for `OTEL_EXPORTER_OTLP_ENDPOINT` (the SDK appends `/v1/traces`) and the traces endpoint for `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` or `CONFIDENT_OTEL_ENDPOINT`. See [data residency](/docs/settings/data-residency) and [self-hosting](/docs/self-hosting/poc-environments#set-base-url-to-your-deployment).
+
+### Protocol support
+
+| Capability             | Supported                                                                        |
+| ---------------------- | -------------------------------------------------------------------------------- |
+| OTLP/HTTP protobuf     | Yes — recommended (`Content-Type: application/x-protobuf`)                       |
+| OTLP/HTTP JSON         | Yes (`Content-Type: application/json`)                                           |
+| OTLP/gRPC              | **No** — use `otlphttp` in the Collector and the `*-proto-http` exporter in SDKs |
+| Metrics / logs signals | Not yet — accepted and dropped so mixed pipelines don't error                    |
+| Gzip request bodies    | Yes                                                                              |
+| Authentication         | `x-confident-api-key: <project api key>` header                                  |
+| Batch size             | Up to 4 MB per request                                                           |
+
+> gRPC is the default in several OpenTelemetry SDKs. Connection resets or HTTP 415
+> errors almost always mean you're exporting over gRPC — switch to the HTTP/protobuf
+> exporter. See [troubleshooting](/docs/llm-tracing/troubleshooting#youre-exporting-over-grpc)
+> for the correct exporter package per language.
+
+### Limits and responses
+
+The OTEL server isn't subject to the API's [rate limit](/docs/reference/api/api-conventions#rate-limits), so exporters can send as fast as their batching produces spans. What it does enforce is your project's **Trace Storage** [usage limit](/docs/settings/project/data-usage#usage-limits): the size of every request, after decompression, counts toward it. Once the project reaches the limit, every request returns `429` until the next billing cycle starts or the limit is raised. On the Free plan and during a trial, the limit is 1 GB-month.
+
+| Status | Meaning                                                                                   | What the exporter does                     |
+| ------ | ----------------------------------------------------------------------------------------- | ------------------------------------------ |
+| `200`  | Spans accepted. If some were rejected, `partialSuccess` in the body says how many and why | Moves on                                   |
+| `400`  | The body couldn't be decoded as OTLP                                                      | Drops the batch                            |
+| `401`  | `x-confident-api-key` is missing or invalid                                               | Drops the batch                            |
+| `429`  | The project reached its trace storage limit                                               | Retries with backoff, then drops the batch |
+| `503`  | Ingestion is temporarily unavailable. Sent with `Retry-After: 5`                          | Retries after 5 seconds                    |
+
+> The `429` body is JSON (`{"error": "...", "usage": "1", "limit": "1"}`, in GB)
+> rather than an OTLP `Status` message, so most exporters and Collectors log only
+> the status code, for example `responded with HTTP Status Code 429`. If you see
+> `429`s, check the Usage Limits tab under **Project Settings →
+> [Data Usage](/docs/settings/project/data-usage#usage-limits)**.
+
+## How `confident-trace` Works
+
+[`confident-trace`](https://github.com/confident-ai/confident-trace) is the OpenTelemetry SDK pre-configured for Confident AI, not a proprietary SDK with an exporter bolted on. Every span it creates — from an automatic integration, the `@span` decorator or `span()` context manager in Python, or `withSpan()` in TypeScript — is a real OpenTelemetry span carrying the same `gen_ai.*` and `confident.*` attributes you would set by hand.
+
+`init()` does the following once at startup:
+
+| Step                | What `init()` does                                                                                                                                                                                                                                                                                                                                                                                                             | OpenTelemetry equivalent                        |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- |
+| **Provider**        | Creates a global `TracerProvider`, or attaches to the one passed via `init(tracer_provider=...)`                                                                                                                                                                                                                                                                                                                               | `TracerProvider`, `trace.set_tracer_provider()` |
+| **Exporter**        | Configures an OTLP/HTTP exporter to the OTEL server using `CONFIDENT_API_KEY` and, optionally, `CONFIDENT_OTEL_ENDPOINT`                                                                                                                                                                                                                                                                                                       | `OTLPSpanExporter` + `BatchSpanProcessor`       |
+| **Instrumentation** | Detects and instruments installed SDKs — [OpenAI](/docs/integrations/third-party/openai), [LangChain](/docs/integrations/third-party/langchain), [LangGraph](/docs/integrations/third-party/langgraph), [LlamaIndex](/docs/integrations/third-party/llama-index), [Pydantic AI](/docs/integrations/third-party/pydantic-ai), [Vercel AI SDK](/docs/integrations/third-party/vercel-ai-sdk), and [20+ more](/docs/integrations) | `opentelemetry-instrumentation-*` packages      |
+| **Sampling**        | Applies `CONFIDENT_SAMPLE_RATE` or `init(sample_rate=...)`                                                                                                                                                                                                                                                                                                                                                                     | `TraceIdRatioBased` sampler                     |
+| **Environment**     | Stamps traces with `CONFIDENT_ENVIRONMENT` or `init(environment=...)`                                                                                                                                                                                                                                                                                                                                                          | Resource attribute                              |
+
+Its helpers write `confident.*` attributes so you never touch attribute names directly:
+
+| Helper                               | Sets                                                                                   |
+| ------------------------------------ | -------------------------------------------------------------------------------------- |
+| `@span` / `span()` / `withSpan()`    | `confident.span.type`, span name, and type-specific fields such as `model`, `provider` |
+| `update_span()` / `updateSpan()`     | Span input, output, metadata, and test-case fields                                     |
+| `update_trace()` / `updateTrace()`   | Trace name, tags, metadata, user, customer, thread, and trace-level input/output       |
+| `trace_context()` / `traceContext()` | The same trace-level fields, scoped to a block                                         |
+| `turn()`                             | Thread ID and per-turn input/output for multi-turn conversations                       |
+
+Because it is plain OpenTelemetry underneath:
+
+- Spans from `tracer.start_as_current_span(...)` and `confident-trace` nest in the same trace with no glue code.
+- An existing `TracerProvider` can be reused — `init(tracer_provider=provider)` in Python, `createSpanProcessor()` from `confident-trace/otel` in TypeScript. See [existing OpenTelemetry provider](/docs/integrations/opentelemetry/manual-instrumentation#existing-opentelemetry-provider).
+- `OTEL_RESOURCE_ATTRIBUTES`, `OTEL_SERVICE_NAME`, and W3C propagation apply unchanged.
+
+> In Python or TypeScript, use `confident-trace` even for hand-written spans:
+> `init()` handles the exporter, and `init(instrumentations=())` /
+> `init({ instrumentations: [] })` disables automatic instrumentation.
+
+### Which Spans Are Exported
+
+By default, `confident-trace` exports only AI spans, meaning spans with `confident.*` or `gen_ai.*` data, plus their parent spans. Other spans, such as HTTP requests or database queries, are exported only when they are a parent of an AI span.
+
+To export every span:
+
+#### Python
+
+```python
+from confident_trace import init
+
+init(export_non_ai_spans=True)
+```
+
+#### TypeScript
+
+```typescript
+import { init } from "confident-trace";
+
+init({ exportNonAiSpans: true });
+```
+
+## GenAI Semantic Conventions
+
+The OpenTelemetry [GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) define the `gen_ai.*` vocabulary for model calls, tool executions, and agent invocations. Confident AI adopts them as its baseline, so any conforming instrumentor produces typed traces without Confident-specific attributes.
+
+### Span types
+
+When no `confident.span.type` is present, the [span type](/docs/llm-tracing/features/span-types) is inferred from `gen_ai.operation.name`:
+
+| `gen_ai.operation.name`                       | Span type   | Notes                                                                         |
+| --------------------------------------------- | ----------- | ----------------------------------------------------------------------------- |
+| `chat`, `text_completion`, `generate_content` | `llm`       | Model, tokens, and messages read from `gen_ai.*`                              |
+| `embeddings`                                  | `llm`       | No output messages                                                            |
+| `execute_tool`                                | `tool`      | Name from `gen_ai.tool.name`, arguments from `gen_ai.tool.call.arguments`     |
+| `invoke_agent`, `create_agent`                | `agent`     | Name from `gen_ai.agent.name`                                                 |
+| *(no standard retrieval op)*                  | `retriever` | Set `confident.span.type: retriever` or use an OpenInference `RETRIEVER` span |
+| *(anything else)*                             | `custom`    |                                                                               |
+
+### Attributes
+
+| Concept            | `gen_ai.*` attribute(s)                                                           | Where it shows up                                                    |
+| ------------------ | --------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Provider           | `gen_ai.provider.name` (legacy `gen_ai.system`)                                   | LLM span header, cost lookup                                         |
+| Model              | `gen_ai.request.model`, `gen_ai.response.model`                                   | LLM span header, [cost](/docs/llm-tracing/features/token-usage-cost) |
+| Token usage        | `gen_ai.usage.input_tokens`, `gen_ai.usage.output_tokens`                         | Token usage and cost                                                 |
+| Cached / reasoning | `gen_ai.usage.cache_read.input_tokens`, `gen_ai.usage.reasoning.output_tokens`    | Token breakdown                                                      |
+| Request params     | `gen_ai.request.temperature`, `gen_ai.request.max_tokens`, `gen_ai.request.top_p` | Span metadata                                                        |
+| Messages           | `gen_ai.input.messages`, `gen_ai.output.messages`, `gen_ai.system_instructions`   | LLM span [input/output](/docs/llm-tracing/features/input-output)     |
+| Tool               | `gen_ai.tool.name`, `gen_ai.tool.call.arguments`, `gen_ai.tool.call.result`       | Tool span name, input, output                                        |
+| Agent              | `gen_ai.agent.name`, `gen_ai.agent.description`                                   | Agent span name and metadata                                         |
+| Conversation       | `gen_ai.conversation.id`                                                          | [Thread](/docs/llm-tracing/features/threads) ID                      |
+| Finish reason      | `gen_ai.response.finish_reasons`                                                  | Span metadata                                                        |
+
+Message content is accepted in every form the conventions have used, so older instrumentors keep working:
+
+- **Span attributes (current)** — `gen_ai.input.messages` / `gen_ai.output.messages` as JSON arrays
+- **Span events (legacy)** — `gen_ai.content.prompt`, `gen_ai.content.completion`, and per-message `gen_ai.*.message` events
+- **Indexed attributes (OpenLLMetry-style)** — `gen_ai.prompt.{n}.*` / `gen_ai.completion.{n}.*`
+
+> The GenAI conventions are still in *development* status and have had breaking
+> renames (e.g. `gen_ai.system` → `gen_ai.provider.name`). Confident AI reads the
+> deprecated names too, but prefer the current ones.
+
+## Supported Attribute Namespaces
+
+Beyond `gen_ai.*`, the OTEL server recognizes the vocabularies of the most common LLM instrumentation ecosystems. Spans from any of these render as typed spans with input, output, model, and token usage populated.
+
+| Namespace                                                                  | Origin                                                                             | Typical producers                                                                                                                                                                                                                                                                                                              | Support                                                                                             |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| `confident.*`                                                              | Confident AI                                                                       | `confident-trace`, manual instrumentation, [Agent Skills](/docs/coding-agents/skills/confident-otel)                                                                                                                                                                                                                           | Full — the only namespace that sets every field in the [data model](/docs/llm-tracing/introduction) |
+| `gen_ai.*`                                                                 | [OpenTelemetry GenAI semconv](https://opentelemetry.io/docs/specs/semconv/gen-ai/) | `confident-trace`, [Google ADK](/docs/integrations/third-party/google-adk), [Strands](/docs/integrations/third-party/strands), [Bedrock AgentCore](/docs/integrations/cloud-runtimes/agentcore), [Microsoft Foundry](/docs/integrations/cloud-runtimes/microsoft-foundry), official `opentelemetry-instrumentation-*` packages | Full                                                                                                |
+| `openinference.*`, `llm.*`, `input.*`, `output.*`, `retrieval.*`, `tool.*` | [OpenInference](https://openinference.io/) (Arize)                                 | `openinference-instrumentation-*`, `@arizeai/openinference-instrumentation-*`, Arize Phoenix pipelines                                                                                                                                                                                                                         | Full — see [OpenInference](/docs/integrations/third-party/openinference)                            |
+| `traceloop.*`, `llm.*`                                                     | [OpenLLMetry](https://github.com/traceloop/openllmetry) (Traceloop)                | `traceloop-sdk`, Traceloop's `opentelemetry-instrumentation-*` forks                                                                                                                                                                                                                                                           | Full                                                                                                |
+| `ai.*`                                                                     | Vercel AI SDK telemetry                                                            | `experimental_telemetry`                                                                                                                                                                                                                                                                                                       | Full — see [Vercel AI SDK](/docs/integrations/third-party/vercel-ai-sdk)                            |
+| `mastra.*`, `agent.*`                                                      | Framework-specific                                                                 | [Mastra](/docs/integrations/third-party/mastra), [Claude Agent SDK](/docs/integrations/third-party/claude-agent-sdk)                                                                                                                                                                                                           | Mapped onto agent and tool spans                                                                    |
+| Everything else                                                            | —                                                                                  | Any OpenTelemetry-instrumented service                                                                                                                                                                                                                                                                                         | Preserved as span [metadata](/docs/llm-tracing/features/metadata), not typed                        |
+
+### OpenInference
+
+| OpenInference                                          | Confident AI                                                                              |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| `openinference.span.kind = LLM`                        | `llm` span                                                                                |
+| `openinference.span.kind = TOOL`                       | `tool` span, name from `tool.name`                                                        |
+| `openinference.span.kind = AGENT`                      | `agent` span                                                                              |
+| `openinference.span.kind = RETRIEVER`                  | `retriever` span, `retrieval.documents.*.document.content` → retrieval context            |
+| `openinference.span.kind = CHAIN`, `EMBEDDING`, others | `custom` span                                                                             |
+| `llm.model_name`, `llm.provider`, `llm.system`         | Model and provider                                                                        |
+| `llm.token_count.prompt`, `llm.token_count.completion` | Input / output tokens                                                                     |
+| `llm.input_messages.*`, `llm.output_messages.*`        | LLM messages                                                                              |
+| `input.value`, `output.value`                          | Span input / output                                                                       |
+| `session.id`, `user.id`                                | [Thread](/docs/llm-tracing/features/threads) and [user](/docs/llm-tracing/features/users) |
+| `metadata`                                             | Span [metadata](/docs/llm-tracing/features/metadata)                                      |
+
+Setup with `confident-trace` as the exporter is on the [OpenInference integration](/docs/integrations/third-party/openinference) page.
+
+### OpenLLMetry
+
+| OpenLLMetry                                                    | Confident AI                                              |
+| -------------------------------------------------------------- | --------------------------------------------------------- |
+| `traceloop.span.kind = workflow`                               | Root `agent` span; `traceloop.workflow.name` → trace name |
+| `traceloop.span.kind = agent`                                  | `agent` span                                              |
+| `traceloop.span.kind = task`                                   | `custom` span                                             |
+| `traceloop.span.kind = tool`                                   | `tool` span                                               |
+| `llm.request.type`, `gen_ai.system` + `gen_ai.request.model`   | `llm` span, model, and provider                           |
+| `gen_ai.prompt.{n}.*`, `gen_ai.completion.{n}.*`               | LLM messages                                              |
+| `gen_ai.usage.prompt_tokens`, `gen_ai.usage.completion_tokens` | Input / output tokens                                     |
+| `traceloop.entity.input`, `traceloop.entity.output`            | Span input / output                                       |
+| `traceloop.association.properties.*`                           | Span metadata; `session_id` / `user_id` → thread and user |
+
+Point the Traceloop SDK at Confident AI with its standard exporter settings:
+
+```bash
+export TRACELOOP_BASE_URL="https://otel.confident-ai.com"
+export TRACELOOP_HEADERS="x-confident-api-key=confident_us..."
+```
+
+### Attribute precedence
+
+When a span carries the same concept in several namespaces, Confident AI resolves it in this order:
+
+1. `confident.*` — always wins, so you can override anything an instrumentor set
+2. `gen_ai.*` — current names, then deprecated aliases
+3. OpenInference (`openinference.*`, `llm.*`)
+4. OpenLLMetry (`traceloop.*`, `llm.*`)
+5. Framework-specific namespaces (`ai.*`, `mastra.*`, …)
+6. Inference from span name and structure
+
+Unconsumed attributes are kept verbatim as span metadata.
+
+> Trace-level fields — name, tags, thread, user, customer, environment, test-case fields —
+> have no `gen_ai.*` equivalent. Set them with `update_trace()` / `trace_context()`
+> in `confident-trace`, or `confident.trace.*` attributes with a raw SDK. See the
+> [attribute reference](/docs/integrations/opentelemetry/manual-instrumentation#trace-level-attribute-mappings).
+
+## Choosing an Approach
+
+| If you...                                                  | Use                                                                                                          |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Write Python or TypeScript                                 | [`confident-trace`](/docs/llm-tracing/quickstart) with automatic integrations                                |
+| Use a framework with an OpenInference instrumentor         | [OpenInference](/docs/integrations/third-party/openinference) + `confident-trace` as exporter                |
+| Already run OpenLLMetry / Traceloop                        | Point `TRACELOOP_BASE_URL` at the OTEL server                                                                |
+| Run agents on AWS, Azure, or Google Cloud managed runtimes | [Cloud runtime](/docs/integrations/cloud-runtimes/agentcore) guides                                          |
+| Already have an OpenTelemetry Collector                    | [Trace broadcasting](/docs/integrations/opentelemetry/trace-broadcasting)                                    |
+| Write Go, Ruby, C#, Java, Rust, or anything else           | [Manual instrumentation](/docs/integrations/opentelemetry/manual-instrumentation) with the OpenTelemetry SDK |
+
+#### [Distributed Tracing](/docs/integrations/opentelemetry/distributed-tracing)
+
+Propagate W3C trace context across services so one request becomes one trace.
+
+#### [Trace Broadcasting](/docs/integrations/opentelemetry/trace-broadcasting)
+
+Send the same spans to Confident AI and your existing observability backend.
+
+#### [Trace Forwarding](/docs/integrations/opentelemetry/trace-forwarding)
+
+Have Confident AI push evaluated, cost-annotated traces to your OTLP collector.
+
+#### [Manual Instrumentation](/docs/integrations/opentelemetry/manual-instrumentation)
+
+Quickstarts for raw OpenTelemetry SDKs in five languages, plus the full
+`confident.*` attribute reference.

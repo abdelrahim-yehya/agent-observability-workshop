@@ -1,0 +1,68 @@
+# Production Alerts
+
+Monitor traces, spans, and threads with threshold-based alert rules.
+
+Alerts let you define threshold-based rules that run on a recurring schedule and notify your team when a metric on your traces, spans, or threads crosses a configured value. Every rule appears on the **Alerts** page (under **Configure** in the Observatory's side navigation) with its severity, what it watches, how often it runs, when it last triggered, and a status strip showing how often it has triggered over the last 30 runs.
+
+Product preview: Alerts page listing six alert rules, such as Error rate above 5% (Critical) and support\_agent regressions, each with its schedule, last trigger and a status strip of its last 30 runs
+
+*Alerts in the Observatory*
+
+Besides threshold rules, the page lists rules that fire on what [Drift](/docs/llm-tracing/features/monitors) detects: a **Regression** or **Anomaly** on a trace's versions, or a **Signal spike** in a classifier's labels. Search, filter by severity, or sort by severity, name, or last triggered from the toolbar.
+
+For a voice agent, the same rules watch its calls: a signal spike on an [audio classifier](/docs/metrics/custom-classifiers#audio-classifiers) catches dead air, an error-rate threshold catches dropped calls, and a regression rule catches a new version that sounds worse.
+
+Product preview: Alerts for a voice booking line, such as Dropped calls above 2% (Critical), Dead air spikes and booking\_agent regressions, each with its schedule, last trigger and a status strip of its last 30 runs
+
+*Alerts for a voice agent*
+
+> Alerts deliver notifications via your connected channels. Set up at least one notification integration under **Project Settings** → **[Integrations](/docs/settings/project/integrations)** before enabling alerts.
+
+## Create an Alert
+
+1. Navigate to **Alerts**
+2. Click **New Alert**
+3. Enter a **Name** and an optional **Description**
+4. Click **Create** — the alert is saved in a disabled state and you land on the alert detail page to finish configuring it
+
+## Configure an Alert
+
+Open an alert to see its settings beside a preview of what it measures: a chart of the measure against its threshold, its status strip, and a log of every run with its value.
+
+Product preview: The Dropped calls above 2% alert: what it watches (error rate of traces), its threshold and schedule, a 30-day chart crossing the 2% line on Sep 26, its status strip and a log of runs with each value against the threshold
+
+*An alert's page*
+
+#### Configure the alert event
+
+Choose what to measure:
+
+- **Data Model** — **Trace**, **Span**, or **Thread**
+- **Aggregation** — the metric to evaluate; options depend on the data model (e.g. trace count, error rate, average latency, token cost)
+
+#### Customize advanced filters (optional)
+
+Narrow the data the alert evaluates using the same filter controls available in the Observatory — environment, tags, metadata, and more. Leave empty to monitor all data for the selected model.
+
+#### Set alert conditions
+
+- **Threshold** — a direction (**Above** or **Below**) and a numeric value; the alert fires when the aggregated metric crosses this boundary during a scheduled run
+- **Frequency** — how often the rule evaluates
+
+| Frequency        | Interval covered    |
+| ---------------- | ------------------- |
+| Every 30 minutes | Previous 30 minutes |
+| Hourly           | Previous hour       |
+| Daily            | Previous day        |
+| Weekly           | Previous week       |
+| Monthly          | Previous month      |
+
+## Alert Status
+
+Each alert row shows a **status strip** — a series of bars representing the last 30 evaluation runs, colored to show whether each run triggered. The row header shows the overall triggered percentage and the timestamps of the first and last run in the strip. Click the strip to open the full alert log with per-run details.
+
+## Test, Pause, and Delete
+
+- **Try alert** — immediately evaluates the rule against current data without waiting for the next scheduled run. Useful for verifying your configuration before enabling.
+- **Pause / Resume** — toggle an alert between active and paused. Paused alerts skip notifications but retain their configuration.
+- **Delete** — permanently removes the alert rule and its history.
