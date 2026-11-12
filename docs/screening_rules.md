@@ -87,6 +87,11 @@ The first selection took the top 15 and let MLflow and Evidently in with 0
 independent sources. C1 was applied on 2026-10-26 and both were removed (their
 rows are in `data/interim/c1_removed/`).
 
+**Revised 2026-11-09:** C1 now applies to closed-source tools only and open-source tools must pass C2 (adoption: stars, downloads,
+activity); see `search_protocol.md`. The statement above that the order was fixed before download counts were looked at
+holds for the first selection only; the revision was made after the adoption data were read. The 13-entry C1 selection is
+kept as a sensitivity comparison.
+
 The original S4 plan was a coverage rule (keep a tool only if it adds a
 built-in metric that no earlier tool provides). It was not applied, because the
 study reports every selected tool's metrics, including overlaps.
@@ -99,8 +104,8 @@ Columns `s3_builtin_metric_count`, `s3_decision`, `s4_decision` and
 |---|---|
 | S1 | applied to all 42 (descriptions only): 31 in, 10 out, 1 verify (treated as out) |
 | S2 | applied to the 31 S1 tools |
-| S3 | applied to the 13 selected tools through the metric collection (see above) |
-| S4 | applied as C1 then ranking, 13 tools (see above); the original coverage rule was not used |
+| S3 | applied to the 16 selected entries through the metric collection (see above) |
+| S4 | first selection: C1 then ranking, 13 entries; revised 2026-11-09: C1 for closed-source tools, C2 for open-source tools, 16 entries (see above); the original coverage rule was not used |
 
 ## Change log
 - 2026-10-23: rules written. They supersede the tool-screening rules of earlier drafts.
@@ -112,3 +117,20 @@ Columns `s3_builtin_metric_count`, `s3_decision`, `s4_decision` and
   repository and are no longer referenced.
 - 2026-10-26: C1 applied to the selection. MLflow and Evidently removed, list is 13 tools. A1 snapshots added.
   Stale scanner columns removed from `tools_scope_screening.csv`.
+- 2026-11-05: the paper reports the 13 entries that passed C1 as ten tools (platforms and frameworks) plus three
+  standards (role `standard`). The data and the ranking are unchanged; only the wording and the tool table's grouping changed.
+- 2026-11-09: MLflow, Laminar and LangWatch added (C2; MLflow through an E6 exception); Evidently and Harbor left out. 33 built-in rows collected;
+  Fluency added as a unique metric. `data/interim/c1_removed/` now holds only Evidently's rows.
+- 2026-11-09: search strategy changed (post-hoc): open-source tools by adoption (C2), Google for closed-source tools (C1
+  revised), E1 to E6, S1, A1 unchanged. Candidates, adoption data and E-rule verdicts are in
+  `data/outputs/open_source_adoption_candidates.csv`.
+- 2026-11-05: rules audited and kept (user's decision, option 1). No tool outside the 13 passes them; Ragas fails I2 on activity.
+  The selection is described as "most widely named", not "most important". Excluded high-adoption tools (MLflow, Laminar,
+  Evidently, LangWatch, OpenLIT) and Ragas are in `data/outputs/excluded_tools_sensitivity.csv` and in the paper's Limitations.
+- 2026-11-05: DeepEval and its cloud platform Confident AI stay one entry under E5, now with role platform and
+  metrics from both sets of docs (23 evaluator rows from deepeval.com, 8 observability rows from the Confident AI docs).
+  3 of its 12 independent sources name only Confident AI (9 name DeepEval).
+- 2026-11-05: OpenLLMetry stays in the list as a standard, library only. Its 18 evaluator rows were Traceloop
+  platform pages, not the library, and Traceloop is not added as a tool (it has no independent Google sources, so it
+  would also fail C1). Rows, mappings and page snapshots moved to `data/interim/traceloop_platform_removed/`;
+  `s3_builtin_metric_count` for OpenLLMetry is now 10.

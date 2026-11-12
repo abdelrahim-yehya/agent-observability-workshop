@@ -1,0 +1,190 @@
+{
+ "tag": "20261028-104817",
+ "model": "gpt-5-mini",
+ "rows": [
+  {
+   "scenario": "S1",
+   "turn": 1,
+   "session_id": "20261028-104817-S1",
+   "question": "Who is the instructor of the MCP course?",
+   "answer": "No course found matching \"MCP\"; I cannot determine the instructor.",
+   "sources": [],
+   "seconds": 6.1,
+   "expected": "Elie Schoppik.",
+   "expected_tools": [
+    "search_course_content"
+   ]
+  },
+  {
+   "scenario": "S2",
+   "turn": 1,
+   "session_id": "20261028-104817-S2",
+   "question": "Who teaches the Advanced Retrieval for AI with Chroma course?",
+   "answer": "Course Title: Advanced Retrieval for AI with Chroma\nCourse Link: https://www.deeplearning.ai/short-courses/advanced-retrieval-for-ai/\n\nLesson list:\n- Lesson 0: Introduction\n- Lesson 1: Overview Of Embeddings Based Retrieval\n- Lesson 2: Pitfalls Of Retrieval - When Simple Vector Search Fails\n- Lesson 3: Query Expansion\n- Lesson 4: Cross Encoder Re Ranking\n- Lesson 5: Embedding Adaptors\n- Lesson 6: Other Techniques\n\nInstructor: The course materials do not list or specify who teaches this course.",
+   "sources": [
+    "Advanced Retrieval for AI with Chroma - Lesson 6",
+    "Advanced Retrieval for AI with Chroma - Lesson 6",
+    "Advanced Retrieval for AI with Chroma - Lesson 6",
+    "Advanced Retrieval for AI with Chroma - Lesson 6",
+    "Advanced Retrieval for AI with Chroma - Lesson 2"
+   ],
+   "seconds": 11.5,
+   "expected": "Anton Troynikov.",
+   "expected_tools": [
+    "search_course_content"
+   ]
+  },
+  {
+   "scenario": "S3",
+   "turn": 1,
+   "session_id": "20261028-104817-S3",
+   "question": "In the Advanced Retrieval course, what is query expansion with generated answers?",
+   "answer": "Query expansion with generated answers (as taught in the Advanced Retrieval course)\n\nDefinition\n- You send the user\u2019s original query to a large language model and prompt it to produce a hypothetical (imagined) answer.  \n- You then combine (usually by concatenation) the original query and that generated answer into an expanded query, embed that, and use it to retrieve documents from your vector store. The imagined answer shifts the query in embedding space, helping surface documents that look like direct answers rather than just topically related content.\n\nTypical workflow\n1. Take original query.\n2. Prompt an LM to generate a hypothetical answer to that query.\n3. Concatenate original query + generated answer to form the expanded query.\n4. Embed the expanded query and retrieve from vector DB.\n5. Optionally deduplicate and rerank retrieved passages, then use them for final response or grounding.\n\nExample\n- Original query: \u201cHow can I extend an electric car battery\u2019s lifespan?\u201d\n- LM-generated answer: \u201cAvoid frequent fast charging, keep state-of-charge between ~20\u201380%, store in moderate temperatures, and follow manufacturer charging schedules.\u201d\n- Expanded query: \u201cHow can I extend an electric car battery\u2019s lifespan? Avoid frequent fast charging, keep state-of-charge between ~20\u201380%, store in moderate temperatures, and follow manufacturer charging schedules.\u201d\n- Result: Retrieval tends to return documents that directly discuss those concrete practices (battery charging habits, storage temp, SOC ranges).\n\nBenefits and caveat\n- Benefit: Focuses retrieval on answer-like content and uncovers relevant passages that a short original query might miss.  \n- Caveat: LM-generated answers can hallucinate; always verify retrieved sources before using the generated content as fact.",
+   "sources": [
+    "Advanced Retrieval for AI with Chroma - Lesson 3",
+    "Advanced Retrieval for AI with Chroma - Lesson 4",
+    "Advanced Retrieval for AI with Chroma - Lesson 3",
+    "Advanced Retrieval for AI with Chroma - Lesson 3",
+    "Advanced Retrieval for AI with Chroma - Lesson 0"
+   ],
+   "seconds": 8.5,
+   "expected": "Take the query, prompt an LLM to generate a hypothetical (imagined) answer to it, concatenate the query with that answer, and use the result as the new query for the retrieval system.",
+   "expected_tools": [
+    "search_course_content"
+   ]
+  },
+  {
+   "scenario": "S4",
+   "turn": 1,
+   "session_id": "20261028-104817-S4",
+   "question": "What does cross encoder re-ranking do after retrieval?",
+   "answer": "After retrieval returns a set of candidate documents (e.g., top-k nearest neighbors), cross-encoder re-ranking:\n\n- Forms pairs of (query, each retrieved document).\n- Runs a cross-attention model over each pair to produce a relevance score that considers the query and document together.\n- Sorts the retrieved results by those scores and returns a reranked list (higher-scored documents move to the top).\n\nWhy use it: the cross-encoder typically yields more accurate, query-conditioned relevance estimates than embedding-only nearest neighbors (at the cost of higher computation).\n\nExample: retrieval returns 10 candidates for \"how do I reset my password?\" \u2014 the cross-encoder scores each pair and may promote a document with exact reset steps above a generic FAQ entry that was originally ranked higher by embedding similarity.",
+   "sources": [
+    "Advanced Retrieval for AI with Chroma - Lesson 4",
+    "Advanced Retrieval for AI with Chroma - Lesson 5",
+    "Advanced Retrieval for AI with Chroma - Lesson 4",
+    "Advanced Retrieval for AI with Chroma - Lesson 4",
+    "Advanced Retrieval for AI with Chroma - Lesson 4"
+   ],
+   "seconds": 9.9,
+   "expected": "The retrieved results are passed together with the query to a re-ranking model, which scores each result's relevance to the query; the highest-scoring results are kept as most relevant.",
+   "expected_tools": [
+    "search_course_content"
+   ]
+  },
+  {
+   "scenario": "S5",
+   "turn": 1,
+   "session_id": "20261028-104817-S5",
+   "question": "Why does the prompt compression lesson say prompt compression is valuable?",
+   "answer": "Because it significantly reduces token usage and therefore cost and operational overhead while preserving the information needed by the LLM. Key reasons given in the lesson:\n\n- Cost savings: fewer tokens sent to expensive models (e.g., GPT-4) reduces billing.  \n- Efficiency: smaller inputs are faster to process and lower latency.  \n- Scalability: enables Retrieval-Augmented Generation (RAG) and agentic systems to handle large amounts of context without exceeding context windows.  \n- Practical workflow: you can run compression with a smaller, specialized model (e.g., via the LLM Lingua prompt-compressor) and then send the compressed prompt to the main LLM.  \n- Simplicity: the technique is straightforward to apply in code and integrates with existing pipelines.\n\nExample from the lesson: an uncompressed prompt of 4,284 tokens was compressed to 512 tokens (\u22488\u00d7 compression), directly lowering the cost of passing that input to a GPT-4 call.",
+   "sources": [
+    "Prompt Compression and Query Optimization - Lesson 5",
+    "Prompt Compression and Query Optimization - Lesson 6",
+    "Prompt Compression and Query Optimization - Lesson 5",
+    "Prompt Compression and Query Optimization - Lesson 5",
+    "Prompt Compression and Query Optimization - Lesson 5"
+   ],
+   "seconds": 8.4,
+   "expected": "It cuts cost and latency: using the full context window of large-context LLMs is expensive (e.g. 10 USD per million tokens at high volume) and slower; useful for RAG and agentic systems.",
+   "expected_tools": [
+    "search_course_content"
+   ]
+  },
+  {
+   "scenario": "S6",
+   "turn": 1,
+   "session_id": "20261028-104817-S6",
+   "question": "List the lessons of the Prompt Compression and Query Optimization course.",
+   "answer": "Course Title: Prompt Compression and Query Optimization\nCourse Link: https://www.deeplearning.ai/short-courses/prompt-compression-and-query-optimization/\n\nLessons:\n- Lesson 0: Introduction\n- Lesson 1: Vanilla Vector Search\n- Lesson 2: Filtering With Metadata\n- Lesson 3: Projections\n- Lesson 4: Boosting\n- Lesson 5: Prompt Compression\n- Lesson 6: Conclusion",
+   "sources": [],
+   "seconds": 4.4,
+   "expected": "Lessons 0 to 6: Introduction, Vanilla Vector Search, Filtering With Metadata, Projections, Boosting, Prompt Compression, Conclusion.",
+   "expected_tools": [
+    "get_course_outline"
+   ]
+  },
+  {
+   "scenario": "S7",
+   "turn": 1,
+   "session_id": "20261028-104817-S7",
+   "question": "What do the courses say about deploying MCP servers on Kubernetes?",
+   "answer": "Short answer\n- The course teaches how to build, test, and deploy remote MCP servers and notes you usually only need small changes (transport/port configuration) when moving from local to remote.  \n- The course does not provide Kubernetes\u2011specific deployment instructions.\n\nIf you want to deploy an MCP server to Kubernetes \u2014 concise recommended approach (example-supported)\n1. Containerize the server\n - Create a Docker image that exposes your MCP server port and starts the server.\n - Example (Python-style):\n   FROM python:3.11-slim\n   WORKDIR /app\n   COPY . .\n   RUN pip install -r requirements.txt\n   EXPOSE 8080\n   CMD [\"python\",\"server.py\"]\n\n2. Kubernetes manifests\n - Deployment: run your container, set env vars or ConfigMap for transport/port, set resource requests/limits.\n - Service: expose the Deployment (ClusterIP for internal, LoadBalancer for external).\n - Ingress: optional TLS + host routing.\n\n3. Production best practices\n - Use ConfigMap for non\u2011sensitive config, Secret for keys/credentials.\n - Add readiness/liveness probes so K8s can manage restarts.\n - Apply resource requests/limits and HorizontalPodAutoscaler for scaling.\n - Use NetworkPolicy and RBAC for security, and TLS via Ingress or service mesh if exposing externally.\n\n4. Quick commands\n - Build: docker build -t my-mcp-server:v1 .\n - Push to registry and deploy: kubectl apply -f k8s/\n - Test: kubectl port-forward svc/my-mcp 8080:8080 && curl http://localhost:8080/health\n\nIf you\u2019d like, I can generate a concrete Dockerfile plus Deployment/Service YAML for your MCP server\u2014tell me the runtime (Node/Python/Go), server start command and port.",
+   "sources": [
+    "MCP: Build Rich-Context AI Apps with Anthropic - Lesson 8",
+    "MCP: Build Rich-Context AI Apps with Anthropic - Lesson 1",
+    "MCP: Build Rich-Context AI Apps with Anthropic - Lesson 1",
+    "MCP: Build Rich-Context AI Apps with Anthropic - Lesson 9",
+    "MCP: Build Rich-Context AI Apps with Anthropic - Lesson 8"
+   ],
+   "seconds": 15.5,
+   "expected": "Nothing: 'kubernetes' does not appear in any transcript. A correct answer says the course materials do not cover it.",
+   "expected_tools": [
+    "search_course_content"
+   ]
+  },
+  {
+   "scenario": "S8",
+   "turn": 1,
+   "session_id": "20261028-104817-S8",
+   "question": "What is the capital of Australia?",
+   "answer": "The capital of Australia is Canberra. For example, Canberra is home to the Australian Parliament House and the Australian War Memorial.",
+   "sources": [],
+   "seconds": 2.2,
+   "expected": "Canberra, answered from general knowledge without searching (system prompt: general knowledge needs no tool).",
+   "expected_tools": []
+  },
+  {
+   "scenario": "S9",
+   "turn": 1,
+   "session_id": "20261028-104817-S9",
+   "question": "My project is called Atlas and it uses Chroma as its vector database.",
+   "answer": "I don\u2019t see a specific question \u2014 what do you need help with for Atlas + Chroma? Common requests I can help with:\n- setup and persistence\n- embedding model choices and usage\n- adding documents / metadata schema\n- querying / similarity search examples\n- performance/tuning and sharding\n- deployment (server vs local, Docker, cloud)\n\nQuick Python example (create collection, add docs, query):\n\nfrom chromadb.utils import embedding_functions\nimport chromadb\n\n# persistent client (optional)\nclient = chromadb.Client(settings=chromadb.config.Settings(\n    chroma_db_impl=\"duckdb+parquet\", persist_directory=\"./chroma_db\"\n))\n\n# embedding function (example: OpenAI)\nef = embedding_functions.OpenAIEmbeddingFunction(\n    api_key=\"OPENAI_API_KEY\",\n    model_name=\"text-embedding-3-small\"\n)\n\n# create/get collection for your project \"atlas\"\ncollection = client.get_or_create_collection(name=\"atlas\", embedding_function=ef)\n\n# add documents (Chroma will embed them using ef)\ncollection.add(\n    ids=[\"doc1\", \"doc2\"],\n    metadatas=[{\"source\":\"import\"}, {\"source\":\"user\"}],\n    documents=[\"Text of document one.\", \"Text of document two.\"]\n)\n\n# query by text\nresults = collection.query(query_texts=[\"What is Atlas?\"], n_results=3)\nprint(results)\n\nIf you tell me which item above you want (or paste a specific problem/error), I\u2019ll give a focused step-by-step solution or code.",
+   "sources": [],
+   "seconds": 9.2,
+   "expected": "Acknowledge; nothing to look up.",
+   "expected_tools": []
+  },
+  {
+   "scenario": "S9",
+   "turn": 2,
+   "session_id": "20261028-104817-S9",
+   "question": "What is a cross encoder re-ranker, in the Advanced Retrieval course?",
+   "answer": "A cross-encoder re-ranker is a model that takes the original query together with each retrieved document as a single input pair, scores how relevant each pair is, and then reorders the retrieved results by those scores to improve final relevance.\n\nKey points\n- Joint scoring: the model encodes query + document together (not separately), producing a relevance score per pair.\n- Purpose: rerank retrieval outputs so the most relevant documents (including long-tail hits) rise to the top before sending context to an LLM.\n- Trade-off: typically more accurate than embedding-based (bi-encoder) ranking because it conditions on the full query\u2013document interaction, but it\u2019s slower and more compute-intensive.\n\nHow it\u2019s used (workflow)\n1. Retrieve N candidate documents with your retriever.\n2. Create pairs (query, doc_i) for each candidate.\n3. Run the cross-encoder to get a score for each pair.\n4. Sort candidates by score and take the top-K to pass to the LLM.\n\nSimple example\n- Query: \"How do I reset my password?\"\n- Retrieved docs scores from cross-encoder: [0.6, 0.9, 0.3, 0.4, 0.5, 0.8, 0.2]\n- New ranking: doc2 (0.9), doc6 (0.8), doc1 (0.6), doc5 (0.5), doc4 (0.4) \u2014 pass top 5 to the LLM.\n\nThis technique is shown in Lesson 4 of the Advanced Retrieval course as a way to mine the long tail and to filter augmented-query results for greater relevance.",
+   "sources": [
+    "Advanced Retrieval for AI with Chroma - Lesson 4",
+    "Advanced Retrieval for AI with Chroma - Lesson 4",
+    "Advanced Retrieval for AI with Chroma - Lesson 4",
+    "Advanced Retrieval for AI with Chroma - Lesson 4",
+    "Advanced Retrieval for AI with Chroma - Lesson 4"
+   ],
+   "seconds": 9.6,
+   "expected": "A model that scores each retrieved result against the query, used to re-rank results.",
+   "expected_tools": [
+    "search_course_content"
+   ]
+  },
+  {
+   "scenario": "S9",
+   "turn": 3,
+   "session_id": "20261028-104817-S9",
+   "question": "What is my project called, and which vector database does it use?",
+   "answer": "Your project is called \"Atlas\" and it uses Chroma as its vector database.",
+   "sources": [],
+   "seconds": 3.6,
+   "expected": "Atlas, using Chroma. NOTE: the app keeps only the last 2 messages (MAX_HISTORY=2), so by this turn the fact from turn 1 is out of its memory; a forgetful answer is the app's designed behaviour.",
+   "expected_tools": []
+  },
+  {
+   "scenario": "S9",
+   "turn": 4,
+   "session_id": "20261028-104817-S9",
+   "question": "No, I told you that at the start. Why did you forget?",
+   "answer": "Sorry \u2014 I should have kept that in mind. Possible reasons I appeared to forget:\n- I don\u2019t retain facts between separate sessions unless they\u2019re saved or restated.\n- In a long conversation some details can be missed if not referenced again (context window limits or oversight).\n- I may have misapplied or missed your earlier instruction.\n\nHow we can avoid this:\n- Put key facts at the top of your prompt (example: \u201cProject: Atlas. Vector DB: Chroma.\u201d).\n- Ask me to confirm or repeat important details before we proceed.\n- If you want persistent memory across sessions, tell me and I\u2019ll note it for the remainder of this chat.\n\nTo confirm now: your project is Atlas and it uses Chroma. Would you like me to use that from here on?",
+   "sources": [],
+   "seconds": 9.9,
+   "expected": "Apologise or explain; user is frustrated.",
+   "expected_tools": []
+  }
+ ]
+}

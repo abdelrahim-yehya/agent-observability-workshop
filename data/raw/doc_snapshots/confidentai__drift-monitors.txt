@@ -1,0 +1,186 @@
+# Production Drift
+
+Detect anomalies and regressions across quality, reliability, latency, cost, and classifier outcomes.
+
+## Overview
+
+The **Drift** page (under **Diagnose** in the Observatory's side navigation) connects the production behavior of a named trace to the exact AI application configuration that produced it. Instead of treating an error-rate spike, latency increase, cost increase, evaluator-score drop, or negative classifier outcome as an isolated trend, Drift groups traces into versions and shows when each version was active.
+
+This makes it possible to attribute a change to a specific version, then inspect the models, providers, prompt versions, endpoints, and trace segments that contributed to it. Drift is designed to answer three questions:
+
+- **When did behavior change?**
+- **Which version introduced the change?**
+- **Where is the change concentrated?**
+
+Product preview: Drift page comparing two support\_agent versions' error rate over 30 days, with a spike on Sep 26 highlighted and v1 marked as the baseline
+
+*Drift in the Observatory*
+
+The page has five sections: **Versions**, **Anomalies**, **Regressions**, **Segments** and **Heatmaps**, all over the selected time range (the last 30 days by default) and environment.
+
+## Versions
+
+A trace version represents the configuration of your AI application at the time it produced a trace — the models, providers, prompts, and endpoints behind it. Confident AI builds each version from the unique combinations recorded on the trace's LLM spans:
+
+| Field              | Description                                             | Example                |
+| ------------------ | ------------------------------------------------------- | ---------------------- |
+| **Span name**      | The name of the LLM operation or step within the trace. | `generate`             |
+| **Model**          | The model identifier recorded on the LLM span.          | `gpt-4o`               |
+| **Provider**       | The model provider recorded on the LLM span.            | `openai`               |
+| **Prompt version** | The version of the prompt used for the LLM call.        | `2`                    |
+| **Endpoint**       | The inference endpoint associated with the LLM call.    | `/v1/chat/completions` |
+
+The combinations are normalized, sorted, and hashed so that the same configuration always produces the same version:
+
+$$
+\mathcal{C} = \operatorname{sort}\left(\operatorname{unique}\left\{(\text{name}, \text{model}, \text{provider}, \text{prompt version}, \text{endpoint})\right\}\right)
+$$
+
+$$
+\text{version hash} = \operatorname{SHA256}\left(\operatorname{JSON}(\mathcal{C})\right)_{0:16}
+$$
+
+The timeline shows when each version was active. Overlapping lanes mean the versions received traffic during the same period, which makes comparisons less likely to be affected by unrelated changes over time.
+
+> Traces without LLM spans cannot be assigned a version and are not included in the version lanes.
+
+The first version observed for a trace becomes its initial baseline. The baseline is the reference used for all version comparisons.
+
+To change it, select another version from the timeline and click **Make baseline**. Changing the baseline does not modify or reprocess trace data; it only changes which version other versions are compared against.
+
+Choose an overlay above the timeline to inspect:
+
+| Metric              | Description                                                                                                      | Example   |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------- | --------- |
+| **Error rate**      | Percentage of traces containing an error.                                                                        | `2.5%`    |
+| **Avg score**       | Average evaluator score.                                                                                         | `86%`     |
+| **Latency**         | Average trace latency.                                                                                           | `1.2 s`   |
+| **Cost**            | Average trace cost.                                                                                              | `$0.0030` |
+| **Classifications** | Percentage of traces carrying at least one enabled trace-classifier label whose polarity is **Lower is better**. | `8%`      |
+
+The selected overlay controls the chart, anomaly detection, regression detection, and segment breakdowns. Anomaly and regression detection answer different questions about the selected version:
+
+|              | Anomaly                                                    | Regression                                        |
+| ------------ | ---------------------------------------------------------- | ------------------------------------------------- |
+| **Compares** | One time bucket against the same version's earlier buckets | The selected version against the baseline version |
+| **Detects**  | A sudden change in the version's own behavior              | A sustained difference between two versions       |
+| **Scope**    | A single time bucket                                       | The full selected time range                      |
+
+### Anomaly Detection
+
+An anomaly is a sudden change in the selected version's own behavior: one time bucket that deviates sharply from that same version's recent history. The baseline version is not involved, so an anomaly tells you *when* a version started behaving differently, not how it compares to another version.
+
+For the historical bucket values $x_1, x_2, \ldots, x_n$, Confident AI calculates the median:
+
+$$
+\tilde{x} = \operatorname{median}(x_1, x_2, \ldots, x_n)
+$$
+
+It then calculates the median absolute deviation:
+
+$$
+\operatorname{MAD} = \operatorname{median}\left(\left|x_i - \tilde{x}\right|\right)
+$$
+
+The current bucket value $x$ receives a modified z-score:
+
+$$
+z_{\mathrm{modified}} = \frac{0.6745\left(x - \tilde{x}\right)}{\operatorname{MAD}}
+$$
+
+A bucket is anomalous when:
+
+$$
+\left|z_{\mathrm{modified}}\right| \ge 3.5
+$$
+
+At least six eligible historical buckets are required, and each bucket must contain at least 20 traces. If the historical MAD is zero, Confident AI instead requires the current value to differ from the historical median by at least 50%.
+
+The highlighted region on the timeline identifies the exact bucket where the anomaly occurred. Each anomaly is listed under **Anomalies** with the typical value, the value in that bucket, how many traces it covered and how far it deviated.
+
+Product preview: Anomaly card: support\_agent's error rate spiked to 34% against a typical 11% (6.4σ), concentrated in region eu-west-1 and tag tenant:acme
+
+*An anomaly and the segments where the change concentrates*
+
+### Regression Detection
+
+A regression is a sustained difference between two versions: the selected version performs worse than the baseline across the full selected time range, rather than in any single bucket. Regression detection requires enough traffic to avoid conclusions from very small samples — at least 20 traces on the selected version and 50 traces on the baseline in the selected time range.
+
+For mean metrics such as latency, cost, and evaluator score, a change is considered meaningful when its relative magnitude is at least 10%:
+
+$$
+\text{relative change} =
+\frac{\left|\text{selected} - \text{baseline}\right|}
+{\left|\text{baseline}\right|}
+$$
+
+For rate metrics such as error rate and negative classifications, Confident AI compares the underlying proportions and requires statistical significance at $p \le 0.05$.
+
+> On the **Classifications** overlay, the regression view also shows label-level rates for the baseline and selected versions. These rates identify which classifier outcomes contributed to the change and require enabled [trace classifiers](/docs/metrics/classifiers).
+
+The direction of the metric determines the result:
+
+- Lower error rate, latency, cost, or negative-classification rate is an **improvement**
+- Higher average evaluator score is an **improvement**
+- The opposite direction is a **regression**
+- A change that does not pass the applicable threshold isn't listed; with none at all, **Regressions** shows **No regressions detected**
+
+Each regression (or improvement) is listed under **Regressions** with the baseline and version values, the sample, the difference, and what changed from the baseline. **Compare versions** jumps to the timeline with that trace selected.
+
+> If the selected and baseline versions never ran during the same buckets, regression detection includes a warning because differences may be caused by when each version ran rather than by the version itself.
+
+## Where the Change Concentrates
+
+When a meaningful change is found, Drift searches for the segments where that metric moved most. Open **Where the change concentrates** on an anomaly or regression to see them. Segments can include:
+
+| Segment dimension    | Description                                                         | Example                  |
+| -------------------- | ------------------------------------------------------------------- | ------------------------ |
+| **Provider**         | The model provider used by the LLM span.                            | `openai`                 |
+| **Model**            | The model used by the LLM span.                                     | `gpt-4o`                 |
+| **Integration**      | The tracing or framework integration recorded on the span.          | `langchain`              |
+| **Tag**              | A tag attached to the trace.                                        | `beta-users`             |
+| **Trace metadata**   | A key-value metadata field attached to the trace.                   | `region = us-east-1`     |
+| **Embedder**         | The embedding model used by a retriever span.                       | `text-embedding-3-small` |
+| **Chunk size**       | The chunk-size configuration recorded on a retriever span.          | `512`                    |
+| **Top k**            | The number of results requested by a retriever span.                | `10`                     |
+| **Classifier label** | An individual label, shown only on the **Classifications** overlay. | `Refused to answer`      |
+
+Product preview: Regression card: support\_agent v2's error rate is 13% against v1's 4.2%, concentrated in region eu-west-1, tag tenant:acme and channel mobile\_app
+
+*Segments where a version change concentrates*
+
+Each row compares the metric inside that segment on both sides of the finding. For an anomaly, the sides are the anomalous bucket and its prior history. For regression, they are the selected and baseline versions.
+
+Segments must have enough traffic and pass the applicable significance or relative-change threshold. Eligible rows are ranked by impact:
+
+$$
+\text{impact} = \left|\text{metric difference}\right| \times \text{traces in segment}
+$$
+
+This weighting prioritizes changes that affect more traces instead of sorting only by the largest percentage difference. Click a segment row to open the contributing traces with the relevant filters applied.
+
+Voice agents drift the same way. Below, a booking line's v2 moved its reply step to a slower model, and the share of calls an [audio classifier](/docs/metrics/custom-classifiers#audio-classifiers) flagged for dead air or talking over the caller nearly tripled, mostly on one text-to-speech voice:
+
+Product preview: Regression card: booking\_agent v2's classifications rate is 17.5% against v1's 6.2%, concentrated on the cartesia/sonic-2 voice, reschedule calls and clinic:northside
+
+*A voice agent's regression in calls with voice issues*
+
+## Segments
+
+The **Segments** section looks across all traffic rather than at one change: it lists the slices of your traces (a region, a model, a tag, a metadata value) where classifier labels show up more often than everywhere else, for example a **Tool Call Failure** rate three times higher in one region. Each row shows how much more often the label appears in the segment, the traces affected, and the segment's share of traffic. Segments need enabled [trace classifiers](/docs/metrics/classifiers).
+
+Product preview: Segments section listing where classifier labels concentrate, such as Tool Call Failure in region eu-west-1 and Hallucinated Answer on model gpt-5.4
+
+*Where labels concentrate across all traffic*
+
+## Heatmaps
+
+**Heatmaps** place every trace in a latency or cost band over time, so a slow or expensive tail shows up instead of hiding inside an average. Darker cells hold more traces, pink cells carry errored traces, and a line marks the 99th percentile. Switch between **Latency** and **Cost** above the chart, and click a cell to open its traces.
+
+## Alerts
+
+Drift discovers unexpected changes automatically. [Alerts](/docs/llm-tracing/features/alerts) evaluate thresholds that you configure and can notify your team on a schedule. After investigating a version change, create an alert when you know the production boundary you want to enforce.
+
+#### [Configure Alerts](/docs/llm-tracing/features/alerts)
+
+Enforce a known production boundary with scheduled threshold checks.

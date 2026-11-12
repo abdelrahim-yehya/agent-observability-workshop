@@ -1,0 +1,141 @@
+# Introduction to LLM Observability & Tracing
+
+Detect anomalies and regressions across instrumented AI apps, then trace them to their root cause.
+
+## Overview
+
+Confident AI helps teams **detect anomalies, regressions, and emerging failure modes** across instrumented AI apps, from voice agents to assistant agents. It combines evaluation-driven observability with end-to-end tracing, so you can monitor quality, behavior, latency, and cost—and then inspect the exact execution behind a change.
+
+## Why LLM Observability?
+
+AI apps can regress even when the code and infrastructure stay healthy. Model behavior, retrieval quality, tool use, user inputs, latency, and cost can all change in production.
+
+Voice agents add failures that never show up in a transcript: speech-to-text mishearing a caller, the agent talking over them, or dead air before a reply.
+
+With Confident AI, you can:
+
+- **Continuously evaluate production traffic** using 50+ metrics and [online evaluations](/docs/llm-tracing/online-evals), including on the audio of voice calls.
+- **Detect anomalies and regressions** across quality, reliability, latency, cost, and classifier outcomes with [Drift](/docs/llm-tracing/features/monitors).
+- **Alert your team** when quality or operational metrics cross a threshold using [Alerts](/docs/llm-tracing/features/alerts).
+- **Find the segments driving a change** through breakdowns and [Signals](/docs/llm-tracing/features/signals).
+- **Investigate the root cause** by opening the traces behind a change and inspecting the responsible model call, retrieval, tool execution, or conversation, or by [listening to the call](/docs/llm-tracing/multimodal/audio) where it went wrong.
+
+## How LLM Tracing Works
+
+Tracing enables observability by capturing each execution of your AI app. When monitoring detects a change, traces provide the context needed to find its root cause—down to the model call, retrieval, tool execution, conversation, or turn of a voice call responsible.
+
+There are four ways to instrument and trace your app:
+
+| Approach                                                     | Best For                                                                                                                                                                                                                                                                    | Language Support                           |
+| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| **`span` decorator/wrapper**                                 | Full control over spans, attributes, and trace structure via `@span` / `span()` in Python and `withSpan()` in TypeScript                                                                                                                                                    | Python, TypeScript                         |
+| **Voice agent integrations**                                 | Auto-instrument voice frameworks ([LiveKit](/docs/integrations/third-party/livekit), [Pipecat](/docs/integrations/third-party/pipecat)), tracing every call, with optional call recordings                                                                                  | Python and/or Typescript                   |
+| **Agent framework integrations**                             | Auto-instrument popular frameworks ([OpenAI](/docs/integrations/third-party/openai), [LangChain](/docs/integrations/third-party/langchain), [Pydantic AI](/docs/integrations/third-party/pydantic-ai), [Vercel AI SDK](/docs/integrations/third-party/vercel-ai-sdk), etc.) | Python and/or Typescript                   |
+| [**OpenTelemetry (OTEL)**](/docs/integrations/opentelemetry) | Language-agnostic, standards-based instrumentation                                                                                                                                                                                                                          | Python, TypeScript, Go, Ruby, C#, and more |
+
+There are three core data types to be aware of:
+
+- **Traces** — a single end-to-end execution of your AI app, such as one chat reply or one voice call
+- **Spans** — individual components within a trace (e.g., LLM calls, retrievals, tool executions, speech-to-text, text-to-speech)
+- **Threads** — a group of traces representing a multi-turn conversation, such as a chat or a call traced one turn per trace
+
+By instrumenting your application, every execution is captured. Traces, spans, and threads can then be automatically evaluated against your metrics and monitored for changes over time.
+
+#### Traces
+
+![A LiveKit voice call's trace: the call recording's player at the top, the span tree of user and agent turns, and an audio player on the input and output messages](https://www.confident-ai.com/_product-previews/mock-data/traces/voiceCallWithAudioIssues/stills/trace/light.webp)
+
+*A voice call's trace, with its recording and a player on each message*
+
+#### Spans
+
+Product preview: Spans page listing LLM, retriever and tool spans across a support assistant's traces, with their names, inputs and outputs
+
+*Every span across your traces*
+
+#### Threads
+
+Product preview: Thread Details for a clinician chatbot conversation about lupus diagnostic criteria, rated 5/5 with Personalization 0.91 and Turn Relevancy 1.00
+
+*A thread with its conversation and metric scores*
+
+## Get started
+
+Instrument your LLM application with [`confident-trace`](https://github.com/confident-ai/confident-trace) automatic instrumentation in Python and TypeScript, or existing OpenTelemetry (OTEL) instrumentation. Voice agents on LiveKit or Pipecat take one line to trace every call, with its recording:
+
+#### [5 Min Quickstart](/docs/llm-tracing/quickstart)
+
+Instrument your LLM app and start tracing in minutes.
+
+#### [Integrations & OTEL](/docs/integrations)
+
+Auto-instrument with one-line integrations for OpenAI, LangChain, and more — or use OpenTelemetry for any language.
+
+#### [Voice Agents](/docs/llm-tracing/multimodal/audio#voice-framework-examples)
+
+Trace every LiveKit or Pipecat call with its recording, and play back each turn.
+
+## Key capabilities
+
+#### [Drift](/docs/llm-tracing/features/monitors)
+
+Detect anomalies and regressions across quality, reliability, latency, cost,
+and classifier outcomes.
+
+#### [Alerts](/docs/llm-tracing/features/alerts)
+
+Notify your team when monitored metrics cross a threshold so issues can be
+investigated quickly.
+
+#### Online Evals
+
+Run evaluations on traces, spans, and threads in real-time as they're
+ingested, or retrospectively.
+
+#### [Signals](/docs/llm-tracing/features/signals)
+
+Auto-classify traces and threads with LLM-driven labels you define, and
+surface spikes, breakdowns, and trends.
+
+#### Latency & Cost Monitoring
+
+Monitor execution time and token costs across your application and identify
+unexpected changes.
+
+#### Root-Cause Investigation
+
+Drill into the traces behind a regression to find the model call, retrieval,
+tool execution, or conversation responsible.
+
+#### [Audio Playback](/docs/llm-tracing/multimodal/audio)
+
+Listen to every turn of a voice call next to its transcript, spans, and
+evals.
+
+#### [Failure Modes](/docs/llm-tracing/features/failure-modes)
+
+Group calls and conversations that fail the same way, such as dead air or a
+misheard date, with the evidence behind each one.
+
+## Learn the fundamentals
+
+New to LLM observability and tracing? These concepts will help you get the most out of your setup:
+
+- [Audio](/docs/llm-tracing/multimodal/audio) — play back the audio of each message on a voice agent's traces
+- [Span Types](/docs/llm-tracing/features/span-types) — classify spans as LLM, retriever, tool, or agent
+- [Input/Output](/docs/llm-tracing/features/input-output) — control what data is captured on traces and spans
+- [Threads](/docs/llm-tracing/features/threads) — group traces into multi-turn conversations
+
+#### How will tracing affect my app?
+
+Confident AI tracing is designed to be completely non-intrusive to your application. It:
+
+- Can be disabled/enabled anytime through the `OTEL_SDK_DISABLED="true"/"false"` environment variable — handy for CI and local development.
+- Requires no rewrite of your existing code — call `init()` once and your installed LLM SDKs and frameworks are instrumented automatically.
+- Exports asynchronously in the background in batches, so it won't add latency to your LLM calls.
+- Fails silently if there are any issues, ensuring your app keeps running.
+- Works with any function signature — you can set input/output at runtime.
+
+#### What languages and frameworks are supported?
+
+`confident-trace` supports **Python** (3.10+) and **TypeScript** (Node.js 22+), and auto-instruments [OpenAI, Anthropic, LangChain, LangGraph, and many more](/docs/integrations) out of the box, including the [LiveKit](/docs/integrations/third-party/livekit) and [Pipecat](/docs/integrations/third-party/pipecat) voice frameworks. Via **OpenTelemetry**, you can instrument in any language — including Python, TypeScript, Go, Ruby, and C#. See the [Integrations & OTEL](/docs/integrations) page for the full list.

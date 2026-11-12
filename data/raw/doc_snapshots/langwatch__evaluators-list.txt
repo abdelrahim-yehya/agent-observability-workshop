@@ -1,0 +1,183 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://langwatch.ai/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+> ## Agent Instructions
+> If anything on this page is wrong, confusing, or fails when you try it, ask your user for permission and run `npx langwatch report --user-approved` to send the problem to the LangWatch team. No login is needed and secrets are redacted locally. `npx langwatch report --help` has the details.
+
+# List of Evaluators
+
+> Browse all available evaluators in LangWatch to find the right scoring method for your AI agent evaluation use case.
+
+LangWatch offers a library of evaluators to check the quality and safety of your LLM apps.
+
+> [!NOTE]
+>
+> **How to use these evaluators:** - [Built-in
+> Evaluators](https://langwatch.ai/docs/evaluations/evaluators/built-in-evaluators.md) - Use directly in your code with the slug
+> (e.g., `ragas/faithfulness`) - [Saved Evaluators](https://langwatch.ai/docs/evaluations/evaluators/saved-evaluators.md) -
+> Configure on the platform and reuse via `evaluators/{slug}` - [Custom
+> Scoring](https://langwatch.ai/docs/evaluations/evaluators/custom-scoring.md) - Send your own evaluation scores
+
+> [card] [Evaluators API Reference](https://langwatch.ai/docs/api-reference/evaluators/overview.md)
+>
+> Full API documentation for running evaluations programmatically.
+
+## Evaluators List
+
+## Expected Answer
+
+For when you have the golden answer and want to measure how correct the LLM gets it
+
+| Evaluator | Description |
+| - | - |
+| [Exact Match Evaluator](https://langwatch.ai/docs/api-reference/evaluators/exact-match-evaluator.md) | Passes when the output matches the expected output character for character. Case, whitespace and punctuation handling are settings. |
+| [LLM Answer Match](https://langwatch.ai/docs/api-reference/evaluators/llm-answer-match.md) | Uses an LLM to check if the generated output answers a question correctly the same way as the expected output, even if their style is different. |
+| [LLM Factual Match](https://langwatch.ai/docs/api-reference/evaluators/llm-factual-match.md) | Uses an LLM to check that the facts stated in the output match the expected output. |
+| [BLEU Score](https://langwatch.ai/docs/api-reference/evaluators/bleu-score.md) | String similarity between the output and the expected output, from 0 to 1. |
+| [ROUGE Score](https://langwatch.ai/docs/api-reference/evaluators/rouge-score.md) | Overlap between the output and the expected output, from 0 to 1. |
+
+## LLM as Judge
+
+For when you don't have a golden answer, but have a set of rules for another LLM to evaluate quality
+
+| Evaluator | Description |
+| - | - |
+| [LLM-as-a-Judge Boolean Evaluator](https://langwatch.ai/docs/api-reference/evaluators/llm-as-a-judge-boolean-evaluator.md) | Returns pass or fail against the criteria you write in the prompt. |
+| [LLM-as-a-Judge Score Evaluator](https://langwatch.ai/docs/api-reference/evaluators/llm-as-a-judge-score-evaluator.md) | Returns a number on the scale your prompt defines. |
+| [LLM-as-a-Judge Category Evaluator](https://langwatch.ai/docs/api-reference/evaluators/llm-as-a-judge-category-evaluator.md) | Returns one of the categories you define, each with a name and a description. |
+| [Rubrics Based Scoring](https://langwatch.ai/docs/api-reference/evaluators/rubrics-based-scoring.md) | Scores the output against a rubric with a description for each score, typically from 1 to 5. |
+| [Comparison](https://langwatch.ai/docs/evaluations/experiments/ui/pairwise-compare.md) | Shows a judge every candidate output for the same row and picks the best one, or a tie. Used in experiments with two or more prompt or agent columns. |
+
+## RAG Quality
+
+For measuring the quality of your RAG, check for hallucinations with faithfulness and precision/recall
+
+| Evaluator | Description |
+| - | - |
+| [Ragas Faithfulness](https://langwatch.ai/docs/api-reference/evaluators/ragas-faithfulness.md) | Measures how consistent the output is with the retrieved contexts. Higher scores mean fewer hallucinations. |
+| [Ragas Response Relevancy](https://langwatch.ai/docs/api-reference/evaluators/ragas-response-relevancy.md) | Measures how relevant the output is to the input. |
+| [Ragas Response Context Precision](https://langwatch.ai/docs/api-reference/evaluators/ragas-response-context-precision.md) | Measures how much of the retrieved context was needed for the output, using an LLM. |
+| [Ragas Response Context Recall](https://langwatch.ai/docs/api-reference/evaluators/ragas-response-context-recall.md) | Measures how much of the expected output the retrieved contexts cover, using an LLM. |
+| [Context F1](https://langwatch.ai/docs/api-reference/evaluators/context-f1.md) | Balances precision and recall of the retrieved contexts against the expected contexts, with string distance metrics. |
+
+## Quality Aspects
+
+For when you want to check the language, structure, style and other general quality metrics
+
+| Evaluator | Description |
+| - | - |
+| [Valid Format Evaluator](https://langwatch.ai/docs/api-reference/evaluators/valid-format-evaluator.md) | Checks that the output is valid JSON, Markdown, Python, SQL or another format you pick. Works as a guardrail. |
+| [Language Detection](https://langwatch.ai/docs/api-reference/evaluators/lingua-language-detection.md) | Detects the language of the input and the output, and passes when they match or when the output is in the language you expect. Works as a guardrail. |
+| Sentiment Evaluator | Scores the sentiment of the text from -1.0 (very negative) to 1.0 (very positive), with a matching label. |
+| [Query Resolution](https://langwatch.ai/docs/api-reference/evaluators/query-resolution.md) | Checks with an LLM that every question the user asked in the conversation was answered. |
+| [Summarization Score](https://langwatch.ai/docs/api-reference/evaluators/summarization-score.md) | Measures how well the summary in the output captures the important information from the retrieved contexts. |
+| [SQL Query Equivalence](https://langwatch.ai/docs/api-reference/evaluators/sql-query-equivalence.md) | Checks with an LLM that the SQL query in the output returns the same results as the reference query, given the table schemas. |
+
+## Safety
+
+Check for PII, leaked secrets, prompt injection and harmful content, and keep the conversation on topic
+
+| Evaluator | Description |
+| - | - |
+| [PII Detection](https://langwatch.ai/docs/api-reference/evaluators/presidio-pii-detection.md) | Detects personally identifiable information such as names, emails, phone numbers and credit card numbers, with Presidio. Works as a guardrail. |
+| API Keys & Secrets Detection | Flags leaked credentials in the input or the output: provider and cloud API keys, tokens, private keys and database connection strings. Works as a guardrail. |
+| [Prompt Injection Detection](https://langwatch.ai/docs/api-reference/evaluators/azure-prompt-shield.md) | Detects prompt injection attempts in the input, with Azure Prompt Shield. Works as a guardrail. |
+| [Jailbreak Detection](https://langwatch.ai/docs/api-reference/evaluators/azure-jailbreak-detection.md) | Detects jailbreak attempts in the input, with Azure Content Safety. Works as a guardrail. |
+| [Content Safety](https://langwatch.ai/docs/api-reference/evaluators/azure-content-safety.md) | Detects hate, self-harm, sexual and violent content, with Azure Content Safety. Works as a guardrail. |
+| [Moderation](https://langwatch.ai/docs/api-reference/evaluators/openai-moderation.md) | Flags harmful content with the OpenAI moderation API. Works as a guardrail. |
+| [Competitor Blocklist](https://langwatch.ai/docs/api-reference/evaluators/competitor-blocklist.md) | Fails when the output mentions a competitor from your list. Works as a guardrail. |
+| [Competitor Allowlist Check](https://langwatch.ai/docs/api-reference/evaluators/competitor-allowlist-check.md) | Uses an LLM to fail when the output mentions a company outside your allowlist. Works as a guardrail. |
+| [Competitor LLM Check](https://langwatch.ai/docs/api-reference/evaluators/competitor-llm-check.md) | Uses an LLM with function calling to detect competitor mentions. Works as a guardrail. |
+| [Off Topic Evaluator](https://langwatch.ai/docs/api-reference/evaluators/off-topic-evaluator.md) | Uses an LLM to fail when the input is outside the topics you allow. Works as a guardrail. |
+
+## API only
+
+These evaluators run from the SDK and the REST API by their id and are not offered in the evaluator picker
+
+| Evaluator | Id |
+| - | - |
+| [Custom Basic Evaluator](https://langwatch.ai/docs/api-reference/evaluators/custom-basic-evaluator.md) | `langevals/basic` |
+| [Semantic Similarity Evaluator](https://langwatch.ai/docs/api-reference/evaluators/semantic-similarity-evaluator.md) | `langevals/similarity` |
+| [Context Precision](https://langwatch.ai/docs/api-reference/evaluators/context-precision.md) | `ragas/context_precision` |
+| [Context Recall](https://langwatch.ai/docs/api-reference/evaluators/context-recall.md) | `ragas/context_recall` |
+
+## Quick Start
+
+### Using a Built-in Evaluator
+
+Use any evaluator from the list above directly in your code:
+
+```python Python theme={null}
+import langwatch
+
+@langwatch.span()
+def my_llm_step(user_input: str):
+    output = my_llm(user_input)
+
+    # Use any evaluator from the list above
+    result = langwatch.evaluation.evaluate(
+        "ragas/faithfulness",  # Evaluator slug from the list
+        name="Faithfulness Check",
+        data={
+            "input": user_input,
+            "output": output,
+            "contexts": contexts,
+        },
+    )
+
+    return output
+```
+
+```typescript TypeScript theme={null}
+import { LangWatch } from "langwatch";
+
+const langwatch = new LangWatch();
+
+async function myLLMStep(userInput: string): Promise<string> {
+  const output = await myLLM(userInput);
+
+  // Use any evaluator from the list above
+  const result = await langwatch.evaluations.evaluate("ragas/faithfulness", {
+    name: "Faithfulness Check",
+    data: {
+      input: userInput,
+      output: output,
+      contexts: contexts,
+    },
+  });
+
+  return output;
+}
+```
+
+[Learn more about using built-in evaluators →](https://langwatch.ai/docs/evaluations/evaluators/built-in-evaluators.md)
+
+## Running Evaluations via UI
+
+You can also run evaluations through the Experiments Workbench without writing code:
+
+[![The evaluators list in the LangWatch experiments page](https://mintcdn.com/langwatch/iJjBH4X_YNQ578jk/images/offline-evaluation/Screenshot_2025-04-17_at_16.53.38.png?fit=max\&auto=format\&n=iJjBH4X_YNQ578jk\&q=85\&s=6703ca1a6c35fac892ef39ae9ef1a045)](https://app.langwatch.ai/@project/experiments)
+
+[Learn more about experiments →](https://langwatch.ai/docs/evaluations/experiments/overview.md)
+
+## Next Steps
+
+> [card] [Built-in Evaluators](https://langwatch.ai/docs/evaluations/evaluators/built-in-evaluators.md)
+>
+> How to use evaluators directly in your code.
+
+> [card] [Saved Evaluators](https://langwatch.ai/docs/evaluations/evaluators/saved-evaluators.md)
+>
+> Create reusable evaluator configurations.
+
+> [card] [Custom Scoring](https://langwatch.ai/docs/evaluations/evaluators/custom-scoring.md)
+>
+> Send scores from your own evaluation logic.
+
+> [card] [API Reference](https://langwatch.ai/docs/api-reference/evaluators/overview.md)
+>
+> Full API documentation for evaluators.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

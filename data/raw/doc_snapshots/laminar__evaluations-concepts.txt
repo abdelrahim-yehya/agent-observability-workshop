@@ -1,0 +1,175 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://laminar.sh/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Evaluation concepts
+
+An evaluation in Laminar is one call to `evaluate()`. That call has a shape: datapoints in, an executor, a set of evaluators, a group. This page explains each part, the trace they produce, and how the scores are stored.
+
+## Datapoints
+
+A datapoint is the unit of work.
+
+```python theme={null}
+{
+    "data": { "country": "France" },
+    "target": "Paris",
+    "metadata": { "category": "europe" },
+}
+```
+
+* **`data`** is whatever the executor receives. It can be a primitive, a dict, or a deeply nested object. Whatever shape you put in, the executor's first parameter has to match.
+* **`target`** is optional. It's the reference value evaluators compare against. You can omit it entirely if your evaluators don't need it (for example if an evaluator only checks output format).
+* **`metadata`** is optional. Use it to filter or query datapoints later: model name, category, source dataset, anything you want on the row.
+
+An evaluation takes either a list of datapoints or a `LaminarDataset`. See [Datasets](https://laminar.sh/docs/evaluations/datasets.md) for dataset-backed runs.
+
+## Tasks and trials
+
+Each datapoint is a **Task**: one test case. Each execution of a Task in a run is a **Trial**. By default every Task runs once, so a run has one Trial per Task. Set `trials` to run each Task several times, which is useful when your agent is non-deterministic and one sample is too noisy to trust.
+
+Every Task has a string **task id**, and all of its Trials share it. Laminar uses the task id to match rows across runs, so set one explicitly when you want comparisons to stay stable as your datapoint list changes.
+
+> [tab] TypeScript
+>
+> ```typescript theme={null}
+> evaluate({
+>   data: [
+>     { data: { country: 'France' }, target: 'Paris', taskId: 'france' },
+>     { data: { country: 'Japan' }, target: 'Tokyo', taskId: 'japan' },
+>   ],
+>   executor: capitalOfCountry,
+>   evaluators: { accuracy },
+>   groupName: 'capitals',
+>   config: { trials: 3 },
+> });
+> ```
+
+> [tab] Python
+>
+> ```python theme={null}
+> from lmnr import Datapoint, evaluate
+>
+> evaluate(
+>     data=[
+>         Datapoint(data={"country": "France"}, target="Paris", task_id="france"),
+>         Datapoint(data={"country": "Japan"}, target="Tokyo", task_id="japan"),
+>     ],
+>     executor=capital_of_country,
+>     evaluators={"accuracy": accuracy},
+>     group_name="capitals",
+>     trials=3,
+> )
+> ```
+
+This run produces six Trials: three for `france`, three for `japan`. Each Trial gets its own trace and its own scores. In the run's datapoint table, Trials are grouped under their Task, oldest first, and the Task row shows the average of its Trials. The run's average score weighs every Task equally, however many Trials it has.
+
+The task id is resolved in this order:
+
+1. **Explicit** `taskId` / `task_id` on the datapoint.
+2. **The dataset row's task id**, when the datapoint comes from a [Laminar dataset](https://laminar.sh/docs/evaluations/datasets.md).
+3. **The datapoint's position in the source data**, as a string (`"0"`, `"1"`, ...). This is the position before any `take` / `select` / `shuffle`, so running a subset of the dataset keeps each datapoint's task id.
+
+If two different datapoints in one run ask for the same task id, the later ones are renamed `foo#2`, `foo#3`, and the SDK logs a warning. In Python, `Datapoint` accepts both `task_id` and `taskId`.
+
+## Executor
+
+The executor is the function under test. It takes `data` and returns anything.
+
+```python theme={null}
+def capital_of_country(data: dict) -> str:
+    response = client.chat.completions.create(
+        model="gpt-5-mini",
+        messages=[{"role": "user", "content": f"Capital of {data['country']}?"}],
+    )
+    return response.choices[0].message.content or ""
+```
+
+It can be sync or async, can make LLM calls, can call your production agent, can fan out into subagents. Everything it does is traced.
+
+> [!NOTE]
+>
+> The executor is your system boundary. Score what it returns, not what it does internally. If you want to score a tool call or an intermediate step, return that value from the executor.
+
+## Evaluators
+
+An evaluator takes the executor's output and (optionally) the target, and returns a score.
+
+```python theme={null}
+def accuracy(output: str, target: str) -> int:
+    return 1 if target.lower() in output.lower() else 0
+```
+
+An evaluator can return:
+
+* **A number**: one score dimension, named after the evaluator key.
+* **A dict of numbers**: many score dimensions from one function. Useful when one pass over the output produces multiple metrics (`{ "precision": 0.9, "recall": 0.8 }`).
+
+Evaluators run in parallel after the executor completes. Each evaluator gets a span (`span_type = 'EVALUATOR'`), so you can inspect the score alongside the input that produced it.
+
+### Two kinds of evaluator you'll actually write
+
+* **Code evaluators.** Pure functions. Exact match, regex, JSON schema check, string length. Fast, deterministic, free.
+* **LLM-as-a-judge evaluators.** A function that calls an LLM to score the output. Use when code can't capture the quality dimension (tone, helpfulness, faithfulness).
+
+## Groups
+
+A group is a name you give related runs. Laminar uses it for two things:
+
+* **The progression chart** on the evaluations page shows the average of each score dimension over time for the group. This is how you see regressions.
+* **Side-by-side comparison** between two runs is only enabled for runs in the same group.
+
+Pick one name for the thing under test and keep it stable across prompt, model, and code changes. For the capitals example, the group is `capitals` whether you're running `gpt-5-mini`, `gpt-5`, or a fine-tune.
+
+![Evaluations list filtered by the capitals group with a progression chart at the top](https://mintcdn.com/laminarai/O81ZcDOMmMmrw7-x/images/evaluations/eval-list.png?fit=max\&auto=format\&n=O81ZcDOMmMmrw7-x\&q=85\&s=aa8062432d14770edc6230319f3f6cae)
+
+Three runs in the capitals group. length\_ok regressed on the most recent run; accuracy stayed flat
+
+## The trace every trial produces
+
+Every Trial becomes a single trace with a known shape:
+
+* **Root span**: `EVALUATION` span covering the entire Trial.
+* **Executor child**: one `EXECUTOR` span with the executor's input and output.
+* **Any LLM / tool spans** your executor makes, auto-instrumented, nested under the executor.
+* **Evaluator children**: one `EVALUATOR` span per evaluator, each recording the score and the input it scored.
+
+These spans are queryable from the [SQL editor](https://laminar.sh/docs/platform/sql-editor.md) just like any other traces. For example, to pull every output that failed the `accuracy` check:
+
+```sql theme={null}
+SELECT trace_id, input, output
+FROM spans
+WHERE span_type = 'EXECUTOR'
+  AND evaluation_id = '<evaluation_id>'
+  AND trace_id IN (
+    SELECT trace_id FROM spans
+    WHERE span_type = 'EVALUATOR'
+      AND name = 'accuracy'
+      AND attributes['lmnr.span.output'] = '0'
+  )
+```
+
+## What gets stored where
+
+* **Postgres `evaluations`**: one row per run. Holds the name, group, and metadata.
+* **ClickHouse `evaluation_datapoints`**: one row per Trial per run. Holds `data`, `target`, `metadata`, executor output, scores, `task_id`, `trace_id`, duration, cost. The [SQL editor](https://laminar.sh/docs/platform/sql-editor.md#table-schemas) exposes it as `evaluation_trials` (`evaluation_datapoints` still works as an alias).
+* **ClickHouse `spans`**: the EVALUATION / EXECUTOR / EVALUATOR spans and everything nested under them.
+
+Scores are just numbers on a row. You can build [dashboards](https://laminar.sh/docs/platform/dashboards.md) off them, alert on them, or export them to a dataset. Same substrate as anything else in Laminar.
+
+## Next steps
+
+> [card] [Compare runs](https://laminar.sh/docs/evaluations/comparing-runs.md)
+>
+> How the progression chart and side-by-side comparison work.
+
+> [card] [Datasets](https://laminar.sh/docs/evaluations/datasets.md)
+>
+> Point `evaluate()` at a Laminar dataset instead of a hardcoded list.
+
+> [card] [Manual API](https://laminar.sh/docs/evaluations/manual-evaluation.md)
+>
+> When `evaluate()` is too opinionated: the lower-level `LaminarClient.evals` API.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

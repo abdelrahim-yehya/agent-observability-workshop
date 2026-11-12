@@ -1,0 +1,2 @@
+taxonomy_metric,reason
+Time per output token / generation time,"documented as built-in only by standards (OpenTelemetry, OpenLLMetry); no studied tool provides it"

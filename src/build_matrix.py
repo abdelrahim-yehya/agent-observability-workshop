@@ -5,6 +5,7 @@ Inputs:  results/best_tools.csv                         (tools in rank order)
          results/built_in_metrics.csv                   (built-in evidence rows)
          data/inputs/taxonomy_mapping.csv               (built-in row -> unique metric)
          data/inputs/taxonomy_definitions.csv           (type, category, unique metric)
+         data/inputs/taxonomy_standards_only.csv        (metrics only standards document: not rows of the matrix, see standards_only_metrics.csv)
          data/inputs/taxonomy_mapping_not_built_in.csv  (integration, community and template rows -> unique metric)
          data/interim/metrics_out_of_scope.csv          (evidence rows for the not-built-in mapping)
 Outputs: results/tool_metric_matrix.csv       one row per unique metric, one column per tool
@@ -20,7 +21,9 @@ Status of a cell, strongest first:
                    for user-defined evaluators, so the user could build it
   records scores   (Evaluation metrics only) the tool defines or stores fields for scores produced
                    elsewhere and has no evaluator mechanism of its own (OpenTelemetry, OpenInference, Helicone)
-  not documented   nothing found in the pages read (not proof that the tool lacks it)
+  not documented   nothing found in the pages read (not proof that the tool lacks it); this includes
+                   Evaluation metrics of OpenLLMetry, whose library pages document no evaluator mechanism
+                   (its evaluator pages belong to the Traceloop platform, which is not studied)
 """
 import csv
 
@@ -29,6 +32,9 @@ from paths import INPUTS, INTERIM, ROOT
 RESULTS = ROOT / "results"
 ORDER = ["built-in", "integration", "community", "template"]
 RECORD_ONLY = {"OpenTelemetry", "OpenInference", "Helicone"}
+# Standards-layer library with no evaluator mechanism in the pages read. Its former evaluator rows were Traceloop platform
+# pages and are in data/interim/traceloop_platform_removed/.
+NO_EVALUATOR_DOCS = {"OpenLLMetry"}
 
 
 def read(path):
@@ -43,6 +49,8 @@ def main():
     info = {(r["tool"], r["metric_name"]): r for r in built}
     definitions = sorted(read(INPUTS / "taxonomy_definitions.csv"), key=lambda d: d["type"] != "Observability")
     names = {d["taxonomy_metric"] for d in definitions}
+    standards_only = {r["taxonomy_metric"] for r in read(INPUTS / "taxonomy_standards_only.csv")}
+    definitions = [d for d in definitions if d["taxonomy_metric"] not in standards_only]
 
     cells = {}  # (tool, metric) -> {status: [evidence rows]}
     for m in read(INPUTS / "taxonomy_mapping.csv"):
@@ -55,8 +63,8 @@ def main():
         r = out_rows[(m["tool"], m["metric_name"])]
         cells.setdefault((m["tool"], m["taxonomy_metric"]), {}).setdefault(m["status"], []).append(r)
     custom = {t for (t, _), r in out_rows.items() if r["built_in"] == "custom-only"}
-    if set(tools) - custom:
-        raise ValueError(f"no custom-only evidence row for: {sorted(set(tools) - custom)}")
+    if set(tools) - custom - NO_EVALUATOR_DOCS:
+        raise ValueError(f"no custom-only evidence row for: {sorted(set(tools) - custom - NO_EVALUATOR_DOCS)}")
     unknown = {t for t, _ in cells} - set(tools)
     if unknown:
         raise ValueError(f"tools not in best_tools.csv: {sorted(unknown)}")
@@ -68,7 +76,9 @@ def main():
                 return s, found[s]
         if d["type"] != "Evaluation":
             return "not documented", []
-        return ("records scores" if tool in RECORD_ONLY else "generic custom"), []
+        if tool in RECORD_ONLY:
+            return "records scores", []
+        return ("not documented" if tool in NO_EVALUATOR_DOCS else "generic custom"), []
 
     wide, long = [], []
     for d in definitions:

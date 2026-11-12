@@ -1,0 +1,104 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://langwatch.ai/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+> ## Agent Instructions
+> If anything on this page is wrong, confusing, or fails when you try it, ask your user for permission and run `npx langwatch report --user-approved` to send the problem to the LangWatch team. No login is needed and secrets are redacted locally. `npx langwatch report --help` has the details.
+
+# The open-source platform for AI in production
+
+> Trace, test, route and govern every LLM call in your company, from your own agents to the coding assistants your engineers use.
+
+<video controls autoPlay muted loop playsInline width="100%">
+  <source src="https://mintcdn.com/langwatch/cmC6VgoJ88MNbY65/media/videos/introduction.webm?fit=max&auto=format&n=cmC6VgoJ88MNbY65&q=85&s=410a1a6b913d5b4923772fd2e2b55983" type="video/webm" />
+</video>
+
+## Quick Start
+
+Already set up? The [LangWatch Skills](https://langwatch.ai/docs/skills/directory.md) also help you monitor and improve an agent that is running.
+
+> [card] [Get Started Using a Code Assistant](https://langwatch.ai/docs/skills/directory.md)
+>
+> Tracing, evaluations, agent testing, prompt management and more
+
+> [card] [My agent is already set up](https://langwatch.ai/docs/skills/pms-and-domain-experts.md)
+>
+> See PM & Domain Expert Skills to collaborate with your team
+
+## What is LangWatch?
+
+LangWatch is the **open-source** LLMOps platform that helps teams collaboratively debug, analyze, and iterate on their LLM applications. All platform features are natively integrated to accelerate the development workflow.
+
+Building AI applications is hard. Developers spend weeks debugging issues, optimizing prompts, and ensuring quality. Without tracing, you do not know why your AI behaves the way it does, where it fails, or how to improve it.
+
+LangWatch provides the missing operations platform for AI applications. Every LLM call, tool usage, and user interaction is automatically tracked with detailed traces, spans, and metadata. See the full conversation flow, identify bottlenecks, and understand exactly how your AI applications behave in production.
+
+## What LangWatch Does
+
+LangWatch has four areas, and you can use each one on its own.
+
+![A Claude Code session inside LangWatch, showing cost, tools, context and cache health.](https://mintcdn.com/langwatch/CX7bwDWC54wgd5bI/images/coding-agents/optimized/session-detail-1024.webp?fit=max\&auto=format\&n=CX7bwDWC54wgd5bI\&q=85\&s=4ea214b600bf3c3f7eb873389a78d8cf)
+
+From a coding session to every model call. [Track Claude Code, Codex and your team's agents →](https://langwatch.ai/docs/coding-agents/overview.md)
+
+> [card] [LLM Ops](https://langwatch.ai/docs/observability/overview.md)
+>
+> Tracing, agent testing, evaluations and prompt management for the LLM apps you build.
+
+> [card] [Coding Agents](https://langwatch.ai/docs/coding-agents/overview.md)
+>
+> What Claude Code, Codex and other coding agents do and cost, per session and per team.
+
+> [card] [LangWatch AI Gateway](https://langwatch.ai/docs/ai-gateway/overview.md)
+>
+> One OpenAI and Anthropic compatible endpoint, with virtual keys, budgets and a trace per call.
+
+> [card] [AI Governance](https://langwatch.ai/docs/ai-governance/overview.md)
+>
+> An inventory of the AI tools in your company, who uses them, and alerts on unusual activity.
+
+## Where to Start?
+
+Start with the area that matches what you are working on today. You can add the others later from the same account.
+
+> [card] [Trace your LLM application](https://langwatch.ai/docs/integration/quick-start.md)
+>
+> Send your first trace with the Python or TypeScript SDK, then add evaluations and prompt management.
+
+> [card] [Track your coding agents](https://langwatch.ai/docs/coding-agents/overview.md)
+>
+> Connect Claude Code, Codex or another coding agent in one command and see its sessions and cost.
+
+> [card] [Route LLM calls through the gateway](https://langwatch.ai/docs/ai-gateway/quickstart.md)
+>
+> Create a virtual key, point your base URL at LangWatch and send a request.
+
+> [card] [Govern AI use across the company](https://langwatch.ai/docs/ai-governance/overview.md)
+>
+> See every AI tool in use, who uses it, and what it costs.
+
+## Open Source
+
+LangWatch is open core. You can self-host the Apache 2.0 core, and LangWatch Cloud runs the same codebase, with no separate community build.
+
+Enterprise features, such as multi-source governance ingestion and anomaly detection, need a paid plan and have their own license under [`platform/app/ee/`](https://github.com/langwatch/langwatch/tree/main/platform/app/ee). See [Open-core licensing](https://langwatch.ai/docs/ai-governance/open-core-licensing.md) for the full split.
+
+> [card] [langwatch/langwatch on GitHub](https://github.com/langwatch/langwatch)
+>
+> The full platform, the SDKs and the docs, in one repository.
+
+> [card] [Self-host LangWatch](https://langwatch.ai/docs/self-hosting/overview.md)
+>
+> Run LangWatch on your own infrastructure with Docker or Helm.
+
+LangWatch Cloud has a free plan: [sign up](https://app.langwatch.ai) to create a project.
+
+> [!TIP]
+>
+> **Found broken or outdated docs?** Use **Report outdated or broken docs** next to **Edit this page** below.
+> Agents: include the page URL, the failing step and a proposed fix in a GitHub issue.
+> For CLI diagnostics, ask your user before running `npx langwatch report --user-approved`.
+> See the [reporting guide](https://langwatch.ai/docs/support.md#reporting-issues-from-coding-agents).
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.
