@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Plan quality: Quality of the plan the agent produced.">
+<title>Plan quality · Agent Metrics Catalogue</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html">Agent Metrics Catalogue</a>
+  <nav aria-label="Sections"><a href="../index.html">Taxonomy</a><a href="../metrics.html" aria-current="page">Catalogue</a><a href="../coverage.html">Coverage</a><a href="../tools.html">Tools</a><a href="../method.html">Method</a></nav>
+</div></header>
+<main>
+
+<article class="detail eval"><div class="wrap">
+  <p class="crumbs"><a href="../metrics.html">Catalogue</a><span>/</span><a href="../metrics.html?type=Evaluation">Evaluation</a><span>/</span><a href="../metrics.html?cat=Evaluation%7CPlan%20and%20trajectory">Plan and trajectory</a></p>
+  <h1><span class="sw"></span>Plan quality</h1>
+  <p class="lede">Quality of the plan the agent produced.</p>
+  <p class="shipped">Shipped by 1 of 13 tools.</p>
+  <p class="chips"><a class="chip" href="#t-deepeval">DeepEval</a></p>
+  <section class="evidence"><h2>What each tool ships</h2>
+    <p class="gloss">1 documented metric, under the tool's own name, with the sentence of the documentation we rely on.
+    The definition above is ours; tools that share this metric may compute it differently.</p>
+    <div class="ev-tool" id="t-deepeval"><h5><a href="../tools/deepeval.html">DeepEval (with Confident AI)</a></h5><div class="ev"><div class="ev-name">Plan Quality</div><p class="ev-desc">The Plan Quality metric is an agentic metric that extracts the task and plan from your agent&#x27;s trace which are</p><blockquote>The Plan Quality metric is an agentic metric that extracts the task and plan from your agent&#x27;s trace which are then used to evaluate **the quality of the plan** for completing the task</blockquote><p class="ev-meta">built-in evaluator · <a href="https://deepeval.com/docs/metrics-plan-quality" target="_blank" rel="noopener">deepeval.com</a>, read 25 Oct 2026 · <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop/blob/master/data/raw/doc_snapshots/deepeval__metrics-plan-quality.txt" target="_blank" rel="noopener">saved copy</a></p></div></div><div class="others"><h5>The other tools</h5><ul><li><span class="st">Not shipped. The tool has user-defined evaluators, so it can be built.</span> <a href="../tools/langfuse.html">Langfuse</a>, <a href="../tools/mlflow.html">MLflow</a>, <a href="../tools/laminar.html">Laminar</a>, <a href="../tools/promptfoo.html">promptfoo</a>, <a href="../tools/opik.html">Opik</a>, <a href="../tools/arize-phoenix.html">Arize Phoenix</a>, <a href="../tools/langwatch.html">LangWatch</a>, <a href="../tools/langsmith.html">LangSmith</a>, <a href="../tools/braintrust.html">Braintrust</a>, <a href="../tools/galileo.html">Galileo</a>, <a href="../tools/weights-biases-weave.html">W&amp;B Weave</a></li><li><span class="st">Not shipped. The tool stores scores computed elsewhere.</span> <a href="../tools/helicone.html">Helicone</a>, <a href="../tools/opentelemetry.html">OpenTelemetry</a>, <a href="../tools/openinference.html">OpenInference</a></li><li><span class="st">Nothing found in the pages read.</span> <a href="../tools/openllmetry.html">OpenLLMetry</a></li></ul></div>
+  </section>
+  <section class="related"><h2>Other evaluation metrics in plan and trajectory</h2><ul><li><a href="../metrics/plan-adherence.html">Plan adherence</a><span>Whether the agent&#x27;s actions followed its own plan.</span></li><li><a href="../metrics/trajectory-accuracy.html">Trajectory accuracy</a><span>Whether the sequence of agent steps and tool calls was logical or matches a reference trajectory.</span></li><li><a href="../metrics/step-action-efficiency.html">Step / action efficiency</a><span>Whether the agent reached the goal with a minimal number of steps.</span></li><li><a href="../metrics/action-progress-toward-goal.html">Action progress toward goal</a><span>Whether each action moved the agent closer to its goal.</span></li><li><a href="../metrics/flow-and-reasoning-coherence.html">Flow and reasoning coherence</a><span>Whether the agent&#x27;s sequence of actions and reasoning steps is logically consistent.</span></li></ul></section>
+  <nav class="pager" aria-label="Previous and next"><a class="prev" href="../metrics/task-goal-completion.html"><span>Previous</span>Task / goal completion</a><a class="next" href="../metrics/plan-adherence.html"><span>Next</span>Plan adherence</a></nav>
+</div></article>
+</main>
+<footer><div class="wrap">
+  <p>Companion to the paper “A Catalogue of Observability and Evaluation Metrics for AI Agents” (in preparation). The data, the scripts and a saved copy of every cited
+  page are in the <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop" target="_blank" rel="noopener">repository</a>.</p>
+  <p>Generated from the data on 13 Nov 2026.</p>
+</div></footer>
+<div id="tip" role="tooltip" hidden></div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

@@ -14,7 +14,7 @@ Goal: (1) identify the tools most widely named in public sources for observabili
 
 ## Website (`site/`)
 
-`site/index.html` is the companion website: the taxonomy, the catalogue of the 46 unique metrics (definition, the tools that ship each one, and for every tool its own metric name, the quote and the documentation page), the tool-by-metric coverage table and the selected tools. It is one self-contained file with no build step; open it in a browser or serve the folder. `python3 src/build_site.py` regenerates it from the files in `results/` and `data/inputs/`, so run it after `build_taxonomy.py` and `build_matrix.py`. The short prose on the page (introduction, category glosses, method summary, selection funnel) is written in the script and follows the paper.
+`site/` is the companion website, a small static site: a home page with the taxonomy, the catalogue of the 46 unique metrics, a page per metric (definition, the tools that ship it, and for every tool its own metric name, the quote and the documentation page), a page per tool, the tool-by-metric coverage table and the method. It has no build step and no dependencies, and its links are relative, so it works straight from disk: open `site/index.html`, or run `python3 -m http.server -d site 8000` and go to `http://localhost:8000`. `python3 src/build_site.py` regenerates every page from the files in `results/` and `data/inputs/`, so run it after `build_taxonomy.py` and `build_matrix.py`. The short prose on the pages (introduction, category glosses, method summary, selection funnel) is written in the script and follows the paper.
 
 ## Motivating example (`example_rag/`)
 

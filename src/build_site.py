@@ -1,31 +1,36 @@
 #!/usr/bin/env python3
-"""Build the companion website: the taxonomy, the catalogue of unique metrics with definitions and evidence, the
-tool x metric coverage table and the selected tools, as one self-contained page.
+"""Build the companion website: a small static site with the taxonomy, the catalogue of unique metrics, one page per
+metric (definition, tools, evidence quotes), one page per tool, the tool x metric coverage table and the method.
 
 Inputs:  results/metric_taxonomy.csv           (the 46 unique metrics: type, category, definition)
-         results/standards_only_metrics.csv    (the metric only standards document)
+         results/standards_only_metrics.csv    (the metric only the telemetry conventions document)
          results/tool_metric_matrix_long.csv   (status of every tool x metric cell)
          results/built_in_metrics.csv          (evidence rows: tool-specific name, description, quote, URL, date)
          data/inputs/taxonomy_mapping.csv      (evidence row -> unique metric)
          results/best_tools.csv + data/outputs/open_source_adoption_candidates.csv  (through build_tool_table.grouped)
-Output:  site/index.html   (no build step and no dependencies; the only external request is the web font)
+Output:  site/   index.html (home and taxonomy), metrics.html (catalogue), coverage.html, tools.html, method.html,
+                 metrics/<metric>.html, tools/<tool>.html, assets/style.css, assets/site.js
+         No build step and no dependencies; the only external request is the web font. All links are relative, so
+         the site works opened from disk (open site/index.html) and from any web host.
 Run:     python3 src/build_taxonomy.py && python3 src/build_matrix.py && python3 src/build_site.py
+Preview: python3 -m http.server -d site 8000   (then http://localhost:8000)
 
-Everything on the page that is a count, a name, a definition, a quote or a link is read from the data. The prose
+Everything on a page that is a count, a name, a definition, a quote or a link is read from the data. The prose
 (introduction, category glosses, method summary and the selection funnel) is written here and follows the paper;
-update it when the paper changes. `render()` returns the page as (head, body) so it can also be embedded elsewhere.
+update it when the paper changes. The data's role key "standard" is shown as "telemetry conventions", as in the paper.
 """
 import csv
 import re
+import shutil
 from datetime import date
 from html import escape
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 from build_tool_table import OTEL, fmt_dl, grouped
 from paths import INPUTS, ROOT
 
 RESULTS = ROOT / "results"
-OUT = ROOT / "site" / "index.html"
+OUT = ROOT / "site"
 REPO_URL = "https://github.com/abdelrahim-yehya/agent-observability-workshop"
 SNAPSHOT_URL = REPO_URL + "/blob/master/data/raw/doc_snapshots/"
 TITLE = "Agent Metrics Catalogue"
@@ -35,7 +40,7 @@ ADOPTION_READ = "6 Nov 2026"  # stars and downloads, see build_tool_table.py
 LABEL = {"DeepEval": "DeepEval (with Confident AI)"}
 SHORT = {"Weights & Biases Weave": "W&B Weave"}
 GROUPS = [("Open-source tools", "open", "Open source"), ("Closed-source tools", "closed", "Closed source"),
-          ("Standards", "standard", "Standards")]
+          ("Standards", "standard", "Telemetry conventions")]
 GROUP_NOTE = {
     "open": "Selected by adoption: at least 5,000 GitHub stars or one million downloads in 30 days. Listed by downloads.",
     "closed": "Selected by corroboration: named by at least two independent sources in the search results. "
@@ -46,7 +51,7 @@ GROUP_NOTE = {
 ROLE = {
     "platform": "Platform: stores and shows traces, with evaluation or monitoring on top",
     "framework": "Framework: runs evaluations, with no trace storage of its own",
-    "standard": "Standard: telemetry conventions or a library that emits them",
+    "standard": "Conventions: telemetry conventions or a library that emits them",
 }
 OTEL_TEXT = {
     "built on": "built on it", "accepts": "accepts its traces", "optional": "optional tracing with it",
@@ -75,7 +80,7 @@ FUNNEL = [
     ("Candidates after screening and merging both lists", "42"),
     ("Primary purpose is observability or evaluation of LLM applications or agents", "31"),
     ("Documentation explicitly covers agents, tool calls or multi-step traces", "30"),
-    ("Selected by adoption (open source) or corroboration (closed source)", "13 tools, 3 standards"),
+    ("Selected by adoption (open source) or corroboration (closed source)", "13 tools, 3 sets of conventions"),
 ]
 STATUS_TEXT = {
     "built-in": "Built-in",
@@ -96,7 +101,15 @@ def read(path):
 
 
 def slug(s):
-    return "m-" + re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+    return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+
+
+def murl(m, root=""):
+    return f'{root}metrics/{m["id"]}.html'
+
+
+def turl(t, root=""):
+    return f'{root}tools/{t["id"]}.html'
 
 
 def nice_date(iso):
@@ -115,7 +128,7 @@ def load():
     tools = []
     for gname, key, _ in GROUPS:
         for t, b, stars, dl, sources in grouped()[gname]:
-            tools.append(dict(name=t, label=LABEL.get(t, t), short=SHORT.get(t, t), group=key, role=b["role"],
+            tools.append(dict(name=t, id=slug(t), label=LABEL.get(t, t), short=SHORT.get(t, t), group=key, role=b["role"],
                               stars=stars, downloads=dl, sources=sources, otel=OTEL[t], docs=b["a1_url"],
                               repo=b["github_repo"]))
     names = [t["name"] for t in tools]
@@ -166,15 +179,17 @@ def hero(d):
   <p class="kicker">Research catalogue. Documentation read between {nice_date(d['first'])} and {nice_date(d['last'])}.</p>
   <h1>{e(PAPER_TITLE)}</h1>
   <p class="lede">Tools that trace and evaluate AI agents each ship their own metrics, under their own names. We read the
-  documentation of {n_tools} tools and the {n_std} telemetry standards beneath them, recorded every metric they ship out of
+  documentation of {n_tools} tools and the {n_std} sets of telemetry conventions beneath them, recorded every metric they ship out of
   the box, and merged the equivalent ones into {len(d['metrics'])} unique metrics. Each one is defined here and linked to the
   pages that document it.</p>
   <dl class="facts">
     <div><dt>{len(d['metrics'])}</dt><dd>unique metrics: {n_obs} observability, {len(d['metrics']) - n_obs} evaluation</dd></div>
     <div><dt>{n_cat}</dt><dd>categories, by the part of the run a metric is about</dd></div>
-    <div><dt>{n_tools} + {n_std}</dt><dd>tools and the standards beneath them</dd></div>
+    <div><dt>{n_tools} + {n_std}</dt><dd>tools and the telemetry conventions beneath them</dd></div>
     <div><dt>{d['n_rows']}</dt><dd>built-in metrics found, each with a quote and a link</dd></div>
   </dl>
+  <p class="cta"><a class="btn" href="metrics.html">Browse the catalogue</a><a href="coverage.html">Coverage table</a>
+    <a href="tools.html">The tools</a><a href="method.html">How it was built</a></p>
 </div></section>"""
 
 
@@ -194,7 +209,7 @@ def taxonomy(d):
             for m in ms:
                 k = len(supporters(m, tools, False))
                 parts.append(
-                    f'<li><a href="#{m["id"]}">{e(m["name"])}</a>'
+                    f'<li><a href="{murl(m)}">{e(m["name"])}</a>'
                     f'<span class="bar" role="img" aria-label="{k} of {n_tools} tools"><i style="width:{100 * k / n_tools:.1f}%"></i></span>'
                     f'<span class="num">{k}</span></li>')
             parts.append("</ul></div>")
@@ -207,19 +222,19 @@ def taxonomy(d):
   either recorded during the run or assigned afterwards by a judge. The <em>category</em> says which part of the run it
   is about. Tool use and plan and trajectory appear under both types, because the same part of a run can be counted or
   judged.</p>
-  <p class="key">Bars show how many of the {n_tools} tools ship the metric (standards are not counted). Select a metric
-  to open its entry.</p>
+  <p class="key">Bars show how many of the {n_tools} tools ship the metric (the telemetry conventions are not counted). Select a
+  metric to open its page.</p>
   <div class="tax">{''.join(cols)}</div>
 </div></section>"""
 
 
-def evidence_block(m, tools):
+def evidence_block(m, tools, root):
     parts = []
     for t in tools:
         rows = m["evidence"].get(t["name"])
         if not rows:
             continue
-        parts.append(f'<div class="ev-tool"><h5>{e(t["label"])}</h5>')
+        parts.append(f'<div class="ev-tool" id="t-{t["id"]}"><h5><a href="{turl(t, root)}">{e(t["label"])}</a></h5>')
         for r in rows:
             meta = [e(r["delivery"])]
             if r["how_measured"] not in ("not stated", "telemetry"):
@@ -248,9 +263,9 @@ def evidence_block(m, tools):
         for t in other[s]:
             c = m["cells"][t["name"]] or {}
             if c.get("doc_url"):
-                items.append(f'{e(t["short"])} (<a href="{e(c["doc_url"])}" target="_blank" rel="noopener">{e(c["tool_specific_names"])}</a>)')
+                items.append(f'<a href="{turl(t, root)}">{e(t["short"])}</a> (<a href="{e(c["doc_url"])}" target="_blank" rel="noopener">{e(c["tool_specific_names"])}</a>)')
             else:
-                items.append(e(t["short"]))
+                items.append(f'<a href="{turl(t, root)}">{e(t["short"])}</a>')
         lines.append(f'<li><span class="st">{e(STATUS_TEXT[s])}</span> {", ".join(items)}</li>')
     if lines:
         parts.append(f'<div class="others"><h5>The other tools</h5><ul>{"".join(lines)}</ul></div>')
@@ -261,18 +276,17 @@ def entry(m, tools, n_tools):
     sup, std = supporters(m, tools, False), supporters(m, tools, True)
     cls = "obs" if m["type"] == "Observability" else "eval"
     chips = "".join(f'<span class="chip">{e(t["short"])}</span>' for t in sup)
-    chips += "".join(f'<span class="chip std" title="Standard">{e(t["short"])}</span>' for t in std)
-    count = "standards only" if m["standards_only"] else f"{len(sup)} of {n_tools} tools"
+    chips += "".join(f'<span class="chip std" title="Telemetry conventions">{e(t["short"])}</span>' for t in std)
+    count = "conventions only" if m["standards_only"] else f"{len(sup)} of {n_tools} tools"
     names = " ".join(r["metric_name"] for rows in m["evidence"].values() for r in rows)
     text = " ".join([m["name"], m["definition"], m["category"], m["type"], names] + [t["label"] for t in sup + std]).lower()
     return (
-        f'<details class="metric {cls}{" extra" if m["standards_only"] else ""}" id="{m["id"]}" data-type="{m["type"]}" '
+        f'<article class="metric {cls}{" extra" if m["standards_only"] else ""}" data-type="{m["type"]}" '
         f'data-cat="{e(m["type"] + "|" + m["category"])}" data-tools="{e("|".join(t["name"] for t in sup + std))}" '
         f'data-text="{e(text)}">'
-        f'<summary><span class="m-name">{e(m["name"])}</span>'
+        f'<a class="m-row" href="{murl(m)}"><span class="m-name">{e(m["name"])}</span>'
         f'<span class="m-main"><span class="m-def">{e(m["definition"])}</span><span class="chips">{chips}</span></span>'
-        f'<span class="m-n">{count}</span></summary>'
-        f'<div class="m-body">{evidence_block(m, tools)}</div></details>')
+        f'<span class="m-n">{count}</span></a></article>')
 
 
 def catalogue(d):
@@ -297,9 +311,9 @@ def catalogue(d):
     return f"""
 <section id="catalogue"><div class="wrap">
   <h2>Catalogue</h2>
-  <p class="intro">The {len(d['metrics'])} unique metrics, with our definition of each and the tools that ship it. Open an
-  entry to see what each tool calls the metric, what it measures there, the sentence of its documentation we rely on
-  and the page it comes from.</p>
+  <p class="intro">The {len(d['metrics'])} unique metrics, with our definition of each and the tools that ship it. Select a
+  metric to see what each tool calls it, what it measures there, the sentence of its documentation we rely on and the
+  page it comes from.</p>
   <form class="filters" id="filters" role="search" aria-label="Filter the catalogue">
     <div class="field grow"><label for="q">Search</label>
       <input type="search" id="q" placeholder="faithfulness, tokens, gen_ai.usage, tool call" autocomplete="off"></div>
@@ -312,14 +326,14 @@ def catalogue(d):
     <div class="field"><label for="f-cat">Category</label>
       <select id="f-cat"><option value="">All categories</option>{cat_options}</select></div>
     <div class="field"><label for="f-tool">Shipped by</label>
-      <select id="f-tool"><option value="">Any tool or standard</option>{tool_options}</select></div>
+      <select id="f-tool"><option value="">Any tool or conventions</option>{tool_options}</select></div>
   </form>
   <p class="result"><span id="count">All {len(d['metrics'])} metrics</span>
     <button type="button" class="link" id="clear" hidden>Clear filters</button></p>
   <p class="empty" id="none" hidden>No metric matches these filters.</p>
   {''.join(groups)}
-  <div class="type-group obs" id="standards-only"><h3><span class="sw"></span>Documented only by standards</h3>
-    <p class="gloss">Not one of the {len(d['metrics'])}: no studied tool ships it, but the standards define it.</p>
+  <div class="type-group obs" id="standards-only"><h3><span class="sw"></span>Documented only by telemetry conventions</h3>
+    <p class="gloss">Not one of the {len(d['metrics'])}: no studied tool ships it, but the conventions define it.</p>
     <div class="cat-group">{extra}</div></div>
 </div></section>"""
 
@@ -333,7 +347,7 @@ def matrix(d):
     g0 = set(first.values())
     spans = "".join(f'<th class="grp g0" colspan="{sum(t["group"] == key for t in tools)}" scope="colgroup">{label}</th>'
                     for _, key, label in GROUPS)
-    heads = "".join(f'<th class="col{" g0" if t["name"] in g0 else ""}" scope="col"><span>{e(t["short"])}</span></th>' for t in tools)
+    heads = "".join(f'<th class="col{" g0" if t["name"] in g0 else ""}" scope="col"><a href="{turl(t)}"><span>{e(t["short"])}</span></a></th>' for t in tools)
     body, counts = [], {}
     for typ, cats in by_type_and_category(d["metrics"]).items():
         cls = "obs" if typ == "Observability" else "eval"
@@ -349,7 +363,7 @@ def matrix(d):
                     tip = f'{t["label"]}: {m["name"]}\n{STATUS_TEXT[s]}' + (f": {names}" if names else "")
                     tds.append(f'<td class="{STATUS_CLASS[s]}{" g0" if t["name"] in g0 else ""}" data-tip="{e(tip)}">'
                                f'<span class="dot"></span><span class="sr">{e(STATUS_TEXT[s])}</span></td>')
-                body.append(f'<tr class="{cls}"><th class="row" scope="row"><a href="#{m["id"]}">{e(m["name"])}</a></th>'
+                body.append(f'<tr class="{cls}"><th class="row" scope="row"><a href="{murl(m)}">{e(m["name"])}</a></th>'
                             f'{"".join(tds)}<td class="n g0">{len(supporters(m, tools, False))}</td></tr>')
     total = sum(counts.values())
     via = counts.get("integration", 0) + counts.get("template", 0) + counts.get("community", 0)
@@ -357,7 +371,7 @@ def matrix(d):
     return f"""
 <section id="matrix"><div class="wrap">
   <h2>Coverage</h2>
-  <p class="intro">Every metric against every tool and standard. A filled dot means the tool's documentation presents
+  <p class="intro">Every metric against every tool and set of telemetry conventions. A filled dot means the tool's documentation presents
   the metric as shipped, with no code to write. Of the {total} cells, {counts.get('built-in', 0)} are built-in, {via} are
   reached through an integration or a template, {diy} can be built or stored but are not shipped, and for
   {counts.get('not documented', 0)} we found nothing.</p>
@@ -399,13 +413,13 @@ def tools_section(d):
             if t["repo"]:
                 links.append(f'<a href="https://github.com/{e(t["repo"])}" target="_blank" rel="noopener">GitHub</a>')
             cards.append(
-                f'<article class="tool"><div><h4>{e(t["label"])}</h4><p class="role">{e(ROLE[t["role"]])}</p></div>'
+                f'<article class="tool"><div><h4><a href="{turl(t)}">{e(t["label"])}</a></h4><p class="role">{e(ROLE[t["role"]])}</p></div>'
                 f'<div class="cov">'
                 f'<span>Observability</span><span class="bar obs" role="img" aria-label="{obs} of {n_obs}"><i style="width:{100 * obs / n_obs:.1f}%"></i></span><span class="num">{obs} of {n_obs}</span>'
                 f'<span>Evaluation</span><span class="bar eval" role="img" aria-label="{ev} of {n_eval}"><i style="width:{100 * ev / n_eval:.1f}%"></i></span><span class="num">{ev} of {n_eval}</span>'
                 f'</div>'
                 f'<dl>{"".join(f"<dt>{e(k)}</dt><dd>{e(v)}</dd>" for k, v in facts)}</dl>'
-                f'<p class="acts"><button type="button" class="link" data-show-tool="{e(t["name"])}">See its metrics</button>{"".join(links)}</p>'
+                f'<p class="acts"><a href="{turl(t)}">Its metrics</a>{"".join(links)}</p>'
                 f'</article>')
         out.append(f'<div class="tool-group"><h3>{label} <span class="count">{len(cards)}</span></h3>'
                    f'<p class="gloss">{GROUP_NOTE[key]}</p><div class="tools">{"".join(cards)}</div></div>')
@@ -430,7 +444,7 @@ def method(d):
       <h3>Choosing the tools</h3>
       <p>Most tools are documented in repositories, vendor pages and blogs, so we searched GitHub and Google with fixed
       queries on 22 Oct 2026 and screened the results by hand against written inclusion and exclusion rules. The
-      OpenTelemetry conventions for generative AI were added by hand, since a standard has no product page for such
+      OpenTelemetry conventions for generative AI were added by hand, since a specification has no product page for such
       queries to rank.</p>
       <table class="funnel"><tbody>{rows}</tbody></table>
     </div>
@@ -506,6 +520,7 @@ button.link{font:inherit; color:var(--link); background:none; border:0; padding:
 .top nav{display:flex; gap:22px; overflow-x:auto; min-width:0; font-size:14.5px; scrollbar-width:none}
 .top nav a{color:var(--ink-2); text-decoration:none; white-space:nowrap; padding:6px 0}
 .top nav a:hover{color:var(--ink)}
+.top nav a[aria-current]{color:var(--ink); font-weight:600; box-shadow:inset 0 -2px var(--ink)}
 
 .hero{padding-block:60px 44px}
 .kicker{font-size:14px; color:var(--ink-3); margin-bottom:14px}
@@ -515,8 +530,11 @@ button.link{font:inherit; color:var(--link); background:none; border:0; padding:
 .facts dt{font:500 32px/1.1 var(--display); font-variant-numeric:tabular-nums}
 .facts dd{margin:6px 0 0; font-size:14.5px; color:var(--ink-2); max-width:26ch}
 
-section:not(.hero){padding-block:52px; border-top:1px solid var(--rule)}
-h2{font:600 30px/1.2 var(--display); letter-spacing:-0.01em}
+main > section:not(.hero){padding-block:52px; border-top:1px solid var(--rule)}
+main > section:first-child:not(.hero){border-top:0; padding-top:44px}
+h2, main > section > .wrap > h1{font:600 30px/1.2 var(--display); letter-spacing:-0.01em}
+.cta{display:flex; flex-wrap:wrap; align-items:center; gap:10px 24px; margin-top:32px; font-size:15.5px}
+.btn{display:inline-block; padding:9px 18px; border-radius:6px; background:var(--ink); color:var(--bg); text-decoration:none; font-weight:500}
 .intro{max-width:70ch; color:var(--ink-2); margin-top:12px}
 .key{font-size:14px; color:var(--ink-3); margin-top:10px}
 .bar{display:block; height:6px; background:var(--rule-2); border-radius:3px; overflow:hidden}
@@ -551,13 +569,10 @@ input[type=search], select{font:inherit; font-size:15px; height:38px; padding:0 
 .type-group > .gloss{margin-top:4px}
 .cat-group{margin-top:22px}
 .cat-group > h4{padding-bottom:8px}
-.metric{border-top:1px solid var(--rule); scroll-margin-top:calc(64px + env(safe-area-inset-top, 0px))}
+.metric{border-top:1px solid var(--rule)}
+.m-row{display:grid; grid-template-columns:minmax(0, 1fr); gap:6px; padding:14px 0; color:inherit; text-decoration:none}
+.m-row:hover .m-name{text-decoration:underline; text-underline-offset:3px}
 .cat-group .metric:last-child{border-bottom:1px solid var(--rule)}
-.metric summary{position:relative; display:grid; grid-template-columns:minmax(0, 1fr); gap:6px; padding:14px 0 14px 24px; cursor:pointer; list-style:none}
-.metric summary::-webkit-details-marker{display:none}
-.metric summary::before{content:""; position:absolute; left:5px; top:21px; width:7px; height:7px; border-right:2px solid var(--ink-3); border-bottom:2px solid var(--ink-3); transform:rotate(-45deg)}
-.metric[open] summary::before{transform:rotate(45deg); top:19px}
-.metric summary:hover .m-name{text-decoration:underline; text-underline-offset:3px}
 .m-name{font-weight:600; font-size:16.5px; line-height:1.35}
 .m-main{display:flex; flex-direction:column; gap:9px; min-width:0}
 .m-def{color:var(--ink-2)}
@@ -565,11 +580,9 @@ input[type=search], select{font:inherit; font-size:15px; height:38px; padding:0 
 .chips{display:flex; flex-wrap:wrap; gap:6px}
 .chip{font-size:12.5px; line-height:1.5; padding:1px 9px; border-radius:999px; background:var(--t); color:var(--ink); white-space:nowrap; border:1px solid transparent}
 .chip.std{background:transparent; border:1px dashed var(--ink-3); color:var(--ink-2)}
-.m-body{display:grid; gap:20px; padding:2px 0 24px 24px; min-width:0}
 @media (min-width:820px){
-  .metric summary{grid-template-columns:minmax(0, 240px) minmax(0, 1fr) 118px; gap:6px 28px}
+  .m-row{grid-template-columns:minmax(0, 240px) minmax(0, 1fr) 118px; gap:6px 28px}
   .m-n{text-align:right; padding-top:2px}
-  .m-body{padding-left:calc(24px + 240px + 28px); padding-right:146px}
 }
 h5{font:600 15px var(--body)}
 .ev{border-left:2px solid var(--rule); padding-left:14px; margin-top:10px; min-width:0}
@@ -598,6 +611,8 @@ h5{font:600 15px var(--body)}
 .mx th.grp .of{display:block; text-align:right; padding:0 6px 10px}
 .mx th.grp[rowspan]{vertical-align:bottom; border-bottom:1px solid var(--rule-2); padding-right:8px}
 .mx th.col{vertical-align:bottom; height:128px; min-width:32px; padding:10px 0}
+.mx th.col a{color:inherit; text-decoration:none}
+.mx th.col a:hover{text-decoration:underline}
 .mx th.col span{display:inline-block; writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap; font-size:13.5px}
 .mx .g0{border-left:1px solid var(--rule)}
 .mx tr.cat th{text-align:left; padding:16px 14px 6px; font:600 11.5px var(--body); letter-spacing:.07em; text-transform:uppercase; color:var(--ink-2); background:var(--surface)}
@@ -616,6 +631,8 @@ h5{font:600 15px var(--body)}
 .tools{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 310px), 1fr)); gap:16px; margin-top:16px}
 .tool{display:flex; flex-direction:column; gap:14px; padding:18px 20px; background:var(--surface); border:1px solid var(--rule); border-radius:8px; min-width:0}
 .tool h4{font:600 17px/1.3 var(--body); letter-spacing:0; text-transform:none; color:var(--ink)}
+.tool h4 a{color:inherit; text-decoration:none}
+.tool h4 a:hover{text-decoration:underline}
 .role{font-size:13px; color:var(--ink-3); margin-top:3px}
 .cov{display:grid; grid-template-columns:auto minmax(0, 1fr) auto; gap:6px 12px; align-items:center; font-size:13.5px; color:var(--ink-2)}
 .tool dl{display:grid; grid-template-columns:auto minmax(0, 1fr); gap:3px 16px; font-size:13.5px}
@@ -630,6 +647,47 @@ h5{font:600 15px var(--body)}
 .funnel td{padding:7px 0; border-top:1px solid var(--rule-2); color:var(--ink-2); vertical-align:top}
 .funnel td.num{text-align:right; padding-left:14px; color:var(--ink)}
 .care{padding-left:18px; display:grid; gap:8px}
+
+/* Metric and tool pages */
+.detail{padding-block:36px 56px}
+.detail .wrap{max-width:900px}
+.crumbs{display:flex; flex-wrap:wrap; gap:8px; font-size:14px; color:var(--ink-3)}
+.crumbs a{color:var(--ink-2)}
+.detail h1{display:flex; align-items:baseline; gap:12px; font:600 clamp(28px, 4vw, 40px)/1.15 var(--display); letter-spacing:-0.012em; margin-top:14px}
+.detail h1 .sw{width:14px; height:14px; border-radius:3px}
+.detail .lede{font-size:19px; margin-top:14px; color:var(--ink)}
+.detail .lede + .gloss{margin-top:8px; max-width:70ch}
+.shipped{margin-top:18px; color:var(--ink-2)}
+.detail > .wrap > .chips{margin-top:10px}
+a.chip{text-decoration:none} a.chip:hover{border-color:var(--c, var(--ink-3))}
+.detail section{margin-top:44px; padding-top:28px; border-top:1px solid var(--rule)}
+.detail h2{font-size:24px}
+.detail h2 + .gloss{margin-top:6px; max-width:72ch}
+.ev-tool{margin-top:26px; scroll-margin-top:calc(72px + env(safe-area-inset-top, 0px))}
+.ev-tool h5{font-size:17px} .ev-tool h5 a{color:var(--ink); text-decoration:none} .ev-tool h5 a:hover{text-decoration:underline}
+.ev-tool:target h5 a{box-shadow:inset 0 -0.5em var(--t)}
+.detail .others{margin-top:44px} .detail .evidence .others{margin-top:30px}
+.others li{line-height:1.6}
+.related ul{list-style:none; padding:0; margin-top:10px}
+.related li{display:grid; grid-template-columns:minmax(0, 1fr); gap:2px 24px; padding:9px 0; border-top:1px solid var(--rule-2)}
+.related li span{color:var(--ink-2); font-size:14.5px}
+@media (min-width:720px){ .related li{grid-template-columns:minmax(0, 230px) minmax(0, 1fr)} }
+.pager{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:48px; padding-top:20px; border-top:1px solid var(--rule)}
+.pager a{text-decoration:none; font-weight:500} .pager a span{display:block; font-size:12.5px; font-weight:400; color:var(--ink-3)}
+.pager .next{text-align:right}
+.tool-facts{display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap:20px 48px; align-items:start; margin-top:26px; padding:18px 20px; background:var(--surface); border:1px solid var(--rule); border-radius:8px}
+.tool-facts dl{display:grid; grid-template-columns:auto minmax(0, 1fr); gap:4px 18px; font-size:14.5px}
+.tool-facts dt{color:var(--ink-3)} .tool-facts dd{margin:0}
+.detail .acts{margin-top:16px}
+.ship-cols{display:grid; gap:32px; margin-top:20px}
+.ship-cols h3{display:flex; align-items:baseline; gap:10px; font:600 20px var(--display)}
+.ship-cols h4{margin-top:18px; padding-bottom:6px}
+.ships{list-style:none; padding:0}
+.ships li{display:grid; grid-template-columns:minmax(0, 1fr); gap:4px 24px; padding:8px 0; border-top:1px solid var(--rule-2)}
+@media (min-width:720px){ .ships li{grid-template-columns:minmax(0, 250px) minmax(0, 1fr)} }
+.ships li > a{color:var(--ink); font-weight:500; text-decoration:none} .ships li > a:hover{text-decoration:underline}
+.names{display:flex; flex-wrap:wrap; gap:5px 8px}
+.names code{font:400 12.5px var(--mono); padding:1px 7px; border-radius:4px; background:var(--t, var(--rule-2)); overflow-wrap:anywhere}
 footer{border-top:1px solid var(--rule); padding-block:28px 40px; font-size:14px; color:var(--ink-3)}
 footer p + p{margin-top:6px}
 @media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth} }
@@ -639,55 +697,45 @@ JS = r"""
 (function () {
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-  var q = $('#q'), fTool = $('#f-tool'), fCat = $('#f-cat'), count = $('#count'), clear = $('#clear'), none = $('#none');
-  var entries = $$('.metric'), main = entries.filter(function (x) { return !x.classList.contains('extra'); });
-
-  function apply() {
-    var text = q.value.trim().toLowerCase(), type = $('input[name="f-type"]:checked').value, tool = fTool.value, cat = fCat.value, n = 0;
-    entries.forEach(function (x) {
-      var ok = (!text || x.dataset.text.indexOf(text) >= 0) && (!type || x.dataset.type === type) &&
-               (!cat || x.dataset.cat === cat) && (!tool || x.dataset.tools.split('|').indexOf(tool) >= 0);
-      x.hidden = !ok;
-      if (ok && main.indexOf(x) >= 0) n++;
+  var q = $('#q');
+  if (q) {
+    var fTool = $('#f-tool'), fCat = $('#f-cat'), count = $('#count'), clear = $('#clear'), none = $('#none');
+    var entries = $$('.metric'), main = entries.filter(function (x) { return !x.classList.contains('extra'); });
+    var apply = function () {
+      var text = q.value.trim().toLowerCase(), type = $('input[name="f-type"]:checked').value, tool = fTool.value, cat = fCat.value, n = 0;
+      entries.forEach(function (x) {
+        var ok = (!text || x.dataset.text.indexOf(text) >= 0) && (!type || x.dataset.type === type) &&
+                 (!cat || x.dataset.cat === cat) && (!tool || x.dataset.tools.split('|').indexOf(tool) >= 0);
+        x.hidden = !ok;
+        if (ok && main.indexOf(x) >= 0) n++;
+      });
+      $$('.cat-group, .type-group').forEach(function (g) {
+        g.hidden = !$$('.metric', g).some(function (x) { return !x.hidden; });
+      });
+      var filtered = !!(text || type || tool || cat);
+      count.textContent = filtered ? n + ' of ' + main.length + ' metrics' : 'All ' + main.length + ' metrics';
+      clear.hidden = !filtered;
+      none.hidden = entries.some(function (x) { return !x.hidden; });
+    };
+    // Links from other pages can preset the filters: metrics.html?tool=Langfuse, ?type=Evaluation, ?cat=..., ?q=...
+    var p = new URLSearchParams(location.search);
+    if (p.get('q')) q.value = p.get('q');
+    if (p.get('tool')) fTool.value = p.get('tool');
+    if (p.get('cat')) fCat.value = p.get('cat');
+    $$('input[name="f-type"]').forEach(function (r) { if (r.value && r.value === p.get('type')) r.checked = true; });
+    $('#filters').addEventListener('input', apply);
+    $('#filters').addEventListener('change', apply);
+    $('#filters').addEventListener('submit', function (ev) { ev.preventDefault(); });
+    clear.addEventListener('click', function () {
+      q.value = ''; fTool.value = ''; fCat.value = ''; $('#f-type-all').checked = true; apply();
+      history.replaceState(null, '', location.pathname);
     });
-    $$('.cat-group, .type-group').forEach(function (g) {
-      g.hidden = !$$('.metric', g).some(function (x) { return !x.hidden; });
-    });
-    var filtered = !!(text || type || tool || cat);
-    count.textContent = filtered ? n + ' of ' + main.length + ' metrics' : 'All ' + main.length + ' metrics';
-    clear.hidden = !filtered;
-    none.hidden = entries.some(function (x) { return !x.hidden; });
+    apply();
   }
-  function reset() {
-    q.value = ''; fTool.value = ''; fCat.value = ''; $('#f-type-all').checked = true; apply();
-  }
-  $('#filters').addEventListener('input', apply);
-  $('#filters').addEventListener('change', apply);
-  $('#filters').addEventListener('submit', function (ev) { ev.preventDefault(); });
-  clear.addEventListener('click', reset);
-
-  // A link to a metric opens its entry, clearing any filter that hides it.
-  function openFromHash() {
-    var id = location.hash.slice(1);
-    if (id.indexOf('m-') !== 0) return;
-    var el = document.getElementById(id);
-    if (!el) return;
-    if (el.hidden) reset();
-    el.open = true;
-    el.scrollIntoView();
-  }
-  window.addEventListener('hashchange', openFromHash);
-  document.addEventListener('click', function (ev) {
-    var a = ev.target.closest('a[href^="#m-"]');
-    if (a && a.getAttribute('href') === location.hash) openFromHash();
-    var b = ev.target.closest('[data-show-tool]');
-    if (b) { reset(); fTool.value = b.dataset.showTool; apply(); $('#catalogue').scrollIntoView(); }
-  });
-  apply();
-  openFromHash();
 
   // Hover text for the coverage table.
   var tip = $('#tip'), table = $('.mx');
+  if (!table) return;
   function show(ev) {
     var c = ev.target.closest('[data-tip]');
     if (!c) { tip.hidden = true; return; }
@@ -709,23 +757,148 @@ FONTS = ("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&fa
          "&family=IBM+Plex+Serif:wght@500;600&display=swap")
 
 
-def render():
-    """The page as (head, body): head holds the title, the font link and the styles; body the content and the script."""
-    d = load()
-    head = (f"<title>{TITLE}</title>\n<meta name=\"claude:viewport-fit-sides\" content=\"cover\">\n"
-            f"<link rel=\"stylesheet\" href=\"{FONTS}\">\n<style>{CSS}</style>\n")
-    body = f"""
+def pager(prev, nxt, url):
+    a = f'<a class="prev" href="{url(prev)}"><span>Previous</span>{e(prev.get("label", prev["name"]))}</a>' if prev else "<span></span>"
+    b = f'<a class="next" href="{url(nxt)}"><span>Next</span>{e(nxt.get("label", nxt["name"]))}</a>' if nxt else "<span></span>"
+    return f'<nav class="pager" aria-label="Previous and next">{a}{b}</nav>'
+
+
+def metric_page(m, d):
+    """One unique metric: definition, who ships it, the evidence per tool, and what the other tools offer."""
+    root, tools = "../", d["tools"]
+    n_tools = sum(t["group"] != "standard" for t in tools)
+    sup, std = supporters(m, tools, False), supporters(m, tools, True)
+    cls = "obs" if m["type"] == "Observability" else "eval"
+    chips = "".join(f'<a class="chip" href="#t-{t["id"]}">{e(t["short"])}</a>' for t in sup)
+    chips += "".join(f'<a class="chip std" href="#t-{t["id"]}" title="Telemetry conventions">{e(t["short"])}</a>' for t in std)
+    if m["standards_only"]:
+        count = (f"Documented only by telemetry conventions ({len(std)} of {len(tools) - n_tools}). None of the "
+                 f"{n_tools} tools ships it, so it is not one of the {len(d['metrics'])} unique metrics.")
+    else:
+        count = f"Shipped by {len(sup)} of {n_tools} tools"
+        count += f", and documented by {len(std)} of the {len(tools) - n_tools} sets of telemetry conventions." if std else "."
+    order = d["metrics"] + d["extra"]
+    i = order.index(m)
+    same = [x for x in d["metrics"] if (x["type"], x["category"]) == (m["type"], m["category"]) and x is not m]
+    related = ""
+    if same:
+        related = (f'<section class="related"><h2>Other {e(m["type"].lower())} metrics in {e(m["category"].lower())}</h2><ul>'
+                   + "".join(f'<li><a href="{murl(x, root)}">{e(x["name"])}</a><span>{e(x["definition"])}</span></li>' for x in same)
+                   + "</ul></section>")
+    catq = quote(m["type"] + "|" + m["category"])
+    n_rows = sum(len(v) for v in m["evidence"].values())
+    return f"""
+<article class="detail {cls}"><div class="wrap">
+  <p class="crumbs"><a href="{root}metrics.html">Catalogue</a><span>/</span><a href="{root}metrics.html?type={m['type']}">{m['type']}</a><span>/</span><a href="{root}metrics.html?cat={catq}">{e(m['category'])}</a></p>
+  <h1><span class="sw"></span>{e(m['name'])}</h1>
+  <p class="lede">{e(m['definition'])}</p>
+  <p class="shipped">{count}</p>
+  <p class="chips">{chips}</p>
+  <section class="evidence"><h2>What each tool ships</h2>
+    <p class="gloss">{n_rows} documented metric{'s' if n_rows != 1 else ''}, under the tool's own name, with the sentence of the documentation we rely on.
+    The definition above is ours; tools that share this metric may compute it differently.</p>
+    {evidence_block(m, tools, root)}
+  </section>
+  {related}
+  {pager(order[i - 1] if i else None, order[i + 1] if i + 1 < len(order) else None, lambda x: murl(x, root))}
+</div></article>"""
+
+
+def tool_page(t, d):
+    """One tool: what it is, how it was selected, the unique metrics it ships and what it offers for the others."""
+    root, tools = "../", d["tools"]
+    metrics = d["metrics"] + d["extra"]
+    n_obs = sum(m["type"] == "Observability" for m in d["metrics"])
+    n_eval = len(d["metrics"]) - n_obs
+    obs = sum(m["type"] == "Observability" and m["status"][t["name"]] == "built-in" for m in d["metrics"])
+    ev = sum(m["type"] == "Evaluation" and m["status"][t["name"]] == "built-in" for m in d["metrics"])
+    facts = [("Group", dict((k, lab) for _, k, lab in GROUPS)[t["group"]])]
+    if t["stars"]:
+        facts.append(("GitHub stars", f'{t["stars"]:,}'))
+    if t["downloads"]:
+        facts.append(("Downloads, 30 days", fmt_dl(t["downloads"])))
+    facts.append(("Independent sources", str(t["sources"])))
+    facts.append(("OpenTelemetry", OTEL_TEXT[t["otel"]]))
+    links = [f'<a href="{e(t["docs"])}" target="_blank" rel="noopener">Documentation</a>']
+    if t["repo"]:
+        links.append(f'<a href="https://github.com/{e(t["repo"])}" target="_blank" rel="noopener">GitHub</a>')
+    links.append(f'<a href="{root}metrics.html?tool={quote(t["name"])}">Filter the catalogue by this tool</a>')
+
+    shipped = []
+    for typ, cats in by_type_and_category([m for m in metrics if m["status"][t["name"]] == "built-in"]).items():
+        cls = "obs" if typ == "Observability" else "eval"
+        n = sum(len(v) for v in cats.values())
+        shipped.append(f'<div class="{cls}"><h3><span class="sw"></span>{typ} <span class="count">{n} metrics</span></h3>')
+        for cat, ms in cats.items():
+            shipped.append(f'<h4>{e(cat)}</h4><ul class="ships">')
+            for m in ms:
+                names = "".join(f'<code>{e(r["metric_name"])}</code>' for r in m["evidence"][t["name"]])
+                shipped.append(f'<li><a href="{murl(m, root)}#t-{t["id"]}">{e(m["name"])}</a><span class="names">{names}</span></li>')
+            shipped.append("</ul>")
+        shipped.append("</div>")
+    if not shipped:
+        shipped.append('<p class="gloss">No built-in metric recorded.</p>')
+
+    other = {}
+    for m in d["metrics"]:
+        st = m["status"][t["name"]]
+        if st != "built-in":
+            other.setdefault(st, []).append(m)
+    rest = "".join(
+        f'<li><span class="st">{e(STATUS_TEXT[st])}</span> '
+        + ", ".join(f'<a href="{murl(m, root)}">{e(m["name"])}</a>' for m in other[st]) + "</li>"
+        for st in ("integration", "community", "template", "generic custom", "records scores", "not documented") if st in other)
+    i = tools.index(t)
+    return f"""
+<article class="detail"><div class="wrap">
+  <p class="crumbs"><a href="{root}tools.html">Tools</a><span>/</span>{e(dict((k, lab) for _, k, lab in GROUPS)[t['group']])}</p>
+  <h1>{e(t['label'])}</h1>
+  <p class="lede">{e(ROLE[t['role']])}.</p>
+  <p class="gloss">{GROUP_NOTE[t['group']]} Stars and downloads were read on {ADOPTION_READ}.</p>
+  <div class="tool-facts">
+    <dl>{"".join(f"<dt>{e(k)}</dt><dd>{e(v)}</dd>" for k, v in facts)}</dl>
+    <div class="cov">
+      <span>Observability</span><span class="bar obs" role="img" aria-label="{obs} of {n_obs}"><i style="width:{100 * obs / n_obs:.1f}%"></i></span><span class="num">{obs} of {n_obs}</span>
+      <span>Evaluation</span><span class="bar eval" role="img" aria-label="{ev} of {n_eval}"><i style="width:{100 * ev / n_eval:.1f}%"></i></span><span class="num">{ev} of {n_eval}</span>
+    </div>
+  </div>
+  <p class="acts">{"".join(links)}</p>
+  <section><h2>Metrics it ships</h2>
+    <p class="gloss">The unique metrics this tool documents as built-in, with the names it gives them. Select a metric for the
+    quotation and the page. The number of metrics is not a quality score.</p>
+    <div class="ship-cols">{"".join(shipped)}</div>
+  </section>
+  {f'<section class="others"><h2>The other metrics</h2><ul>{rest}</ul></section>' if rest else ''}
+  {pager(tools[i - 1] if i else None, tools[i + 1] if i + 1 < len(tools) else None, lambda x: turl(x, root))}
+</div></article>"""
+
+
+NAV = [("Taxonomy", "index.html"), ("Catalogue", "metrics.html"), ("Coverage", "coverage.html"), ("Tools", "tools.html"),
+       ("Method", "method.html")]
+
+
+def write_page(path, title, body, active, description):
+    """Wrap a page body in the shared shell (header, navigation, footer) and write it under site/."""
+    root = "../" * path.count("/")
+    nav = "".join(f'<a href="{root}{href}"{" aria-current=\"page\"" if href == active else ""}>{label}</a>' for label, href in NAV)
+    full = TITLE if title is None else f"{title} · {TITLE}"
+    page = f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="{e(description)}">
+<title>{e(full)}</title>
+<link rel="stylesheet" href="{FONTS}">
+<link rel="stylesheet" href="{root}assets/style.css">
+</head>
+<body>
 <header class="top"><div class="wrap">
-  <a class="brand" href="#intro">{TITLE}</a>
-  <nav aria-label="Sections"><a href="#taxonomy">Taxonomy</a><a href="#catalogue">Catalogue</a><a href="#matrix">Coverage</a><a href="#tools">Tools</a><a href="#method">Method</a></nav>
+  <a class="brand" href="{root}index.html">{TITLE}</a>
+  <nav aria-label="Sections">{nav}</nav>
 </div></header>
 <main>
-{hero(d)}
-{taxonomy(d)}
-{catalogue(d)}
-{matrix(d)}
-{tools_section(d)}
-{method(d)}
+{body}
 </main>
 <footer><div class="wrap">
   <p>Companion to the paper “{e(PAPER_TITLE)}” (in preparation). The data, the scripts and a saved copy of every cited
@@ -733,20 +906,41 @@ def render():
   <p>Generated from the data on {nice_date(date.today().isoformat())}.</p>
 </div></footer>
 <div id="tip" role="tooltip" hidden></div>
-<script>{JS}</script>
+<script src="{root}assets/site.js"></script>
+</body>
+</html>
 """
-    return head, body
+    out = OUT / path
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(page, encoding="utf-8")
+
+
+def as_page(section):
+    """A section written for the one-page layout becomes a page of its own: its h2 is the page title."""
+    return section.replace("<h2>", "<h1>", 1).replace("</h2>", "</h1>", 1)
 
 
 def main():
-    head, body = render()
-    page = ("<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
-            "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n"
-            f"<meta name=\"description\" content=\"{e(PAPER_TITLE)}: taxonomy, definitions and the tools that ship each metric.\">\n"
-            f"{head}</head>\n<body>{body}</body>\n</html>\n")
-    OUT.parent.mkdir(exist_ok=True)
-    OUT.write_text(page, encoding="utf-8")
-    print(f"wrote {OUT.relative_to(ROOT)} ({len(page) / 1024:.0f} KB)")
+    d = load()
+    for sub in ("metrics", "tools", "assets"):  # generated folders: start clean so renamed metrics leave no stale page
+        shutil.rmtree(OUT / sub, ignore_errors=True)
+    (OUT / "assets").mkdir(parents=True)
+    (OUT / "assets" / "style.css").write_text(CSS.lstrip(), encoding="utf-8")
+    (OUT / "assets" / "site.js").write_text(JS.lstrip(), encoding="utf-8")
+    about = f"{PAPER_TITLE}: taxonomy, definitions and the tools that ship each metric."
+    write_page("index.html", None, hero(d) + taxonomy(d), "index.html", about)
+    write_page("metrics.html", "Catalogue", as_page(catalogue(d)), "metrics.html",
+               f"The {len(d['metrics'])} unique metrics, with definitions and the tools that ship each one.")
+    write_page("coverage.html", "Coverage", as_page(matrix(d)), "coverage.html", "Every metric against every tool.")
+    write_page("tools.html", "Tools", as_page(tools_section(d)), "tools.html", "The tools whose documentation was read.")
+    write_page("method.html", "Method", as_page(method(d)), "method.html", "How the tools were chosen and the metrics collected.")
+    for m in d["metrics"] + d["extra"]:
+        write_page(f"metrics/{m['id']}.html", m["name"], metric_page(m, d), "metrics.html", f"{m['name']}: {m['definition']}")
+    for t in d["tools"]:
+        write_page(f"tools/{t['id']}.html", t["label"], tool_page(t, d), "tools.html",
+                   f"{t['label']}: the agent metrics it ships out of the box.")
+    n = sum(1 for _ in OUT.rglob("*.html"))
+    print(f"wrote {OUT.relative_to(ROOT)}/: {n} pages ({len(d['metrics']) + len(d['extra'])} metrics, {len(d['tools'])} tools)")
 
 
 if __name__ == "__main__":

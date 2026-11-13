@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Tool execution errors: Count, rate or detection of failed tool executions.">
+<title>Tool execution errors · Agent Metrics Catalogue</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html">Agent Metrics Catalogue</a>
+  <nav aria-label="Sections"><a href="../index.html">Taxonomy</a><a href="../metrics.html" aria-current="page">Catalogue</a><a href="../coverage.html">Coverage</a><a href="../tools.html">Tools</a><a href="../method.html">Method</a></nav>
+</div></header>
+<main>
+
+<article class="detail obs"><div class="wrap">
+  <p class="crumbs"><a href="../metrics.html">Catalogue</a><span>/</span><a href="../metrics.html?type=Observability">Observability</a><span>/</span><a href="../metrics.html?cat=Observability%7CTool%20use">Tool use</a></p>
+  <h1><span class="sw"></span>Tool execution errors</h1>
+  <p class="lede">Count, rate or detection of failed tool executions.</p>
+  <p class="shipped">Shipped by 5 of 13 tools.</p>
+  <p class="chips"><a class="chip" href="#t-deepeval">DeepEval</a><a class="chip" href="#t-arize-phoenix">Arize Phoenix</a><a class="chip" href="#t-langsmith">LangSmith</a><a class="chip" href="#t-braintrust">Braintrust</a><a class="chip" href="#t-galileo">Galileo</a></p>
+  <section class="evidence"><h2>What each tool ships</h2>
+    <p class="gloss">5 documented metrics, under the tool's own name, with the sentence of the documentation we rely on.
+    The definition above is ours; tools that share this metric may compute it differently.</p>
+    <div class="ev-tool" id="t-deepeval"><h5><a href="../tools/deepeval.html">DeepEval (with Confident AI)</a></h5><div class="ev"><div class="ev-name">Tool Failure Analytics (Confident AI)</div><p class="ev-desc">Shows which tool fails most often and which arguments get called most frequently.</p><blockquote>See which tool fails most often, which arguments get called most frequently, and which agent is most likely to pick the wrong tool.</blockquote><p class="ev-meta">dashboard or query · <a href="https://www.confident-ai.com/docs/changelog/2026/10/9" target="_blank" rel="noopener">confident-ai.com</a>, read 11 Nov 2026 · <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop/blob/master/data/raw/doc_snapshots/confidentai__changelog-confidentai.txt" target="_blank" rel="noopener">saved copy</a></p></div></div><div class="ev-tool" id="t-arize-phoenix"><h5><a href="../tools/arize-phoenix.html">Arize Phoenix</a></h5><div class="ev"><div class="ev-name">Tool spans with errors</div><p class="ev-desc">Tool spans with errors over time.</p><blockquote>Tool spans with errors over time</blockquote><p class="ev-meta">automatic telemetry · <a href="https://arize.com/docs/phoenix/tracing/llm-traces/metrics" target="_blank" rel="noopener">arize.com</a>, read 25 Oct 2026 · <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop/blob/master/data/raw/doc_snapshots/arize-phoenix__metrics-dashboard.txt" target="_blank" rel="noopener">saved copy</a></p></div></div><div class="ev-tool" id="t-langsmith"><h5><a href="../tools/langsmith.html">LangSmith</a></h5><div class="ev"><div class="ev-name">Tool run counts, error rates and latency (prebuilt dashboard)</div><p class="ev-desc">Per-tool run counts, error rates and latency.</p><blockquote>Run counts, error rates, and latency stats for tool runs broken down by tool name.</blockquote><p class="ev-meta">dashboard or query · <a href="https://docs.langchain.com/langsmith/dashboards.md" target="_blank" rel="noopener">docs.langchain.com</a>, read 25 Oct 2026 · <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop/blob/master/data/raw/doc_snapshots/langsmith__dashboards.txt" target="_blank" rel="noopener">saved copy</a></p></div></div><div class="ev-tool" id="t-braintrust"><h5><a href="../tools/braintrust.html">Braintrust</a></h5><div class="ev"><div class="ev-name">metrics.tool_errors</div><p class="ev-desc">Total number of tool errors.</p><blockquote>`metrics.tool_errors`: total number of tool errors.</blockquote><p class="ev-meta">dashboard or query · <a href="https://www.braintrust.dev/docs/reference/sql/query-structure.md" target="_blank" rel="noopener">braintrust.dev</a>, read 26 Oct 2026 · <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop/blob/master/data/raw/doc_snapshots/braintrust__sql_query_structure.txt" target="_blank" rel="noopener">saved copy</a></p></div></div><div class="ev-tool" id="t-galileo"><h5><a href="../tools/galileo.html">Galileo</a></h5><div class="ev"><div class="ev-name">Tool Errors</div><p class="ev-desc">Detects errors or failures during the execution of tools.</p><blockquote>Detects errors or failures during the execution of tools.</blockquote><p class="ev-meta">built-in evaluator · <a href="https://docs.galileo.ai/concepts/metrics/metric-comparison" target="_blank" rel="noopener">docs.galileo.ai</a>, read 25 Oct 2026 · <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop/blob/master/data/raw/doc_snapshots/galileo_metrics.txt" target="_blank" rel="noopener">saved copy</a></p></div></div><div class="others"><h5>The other tools</h5><ul><li><span class="st">Nothing found in the pages read.</span> <a href="../tools/langfuse.html">Langfuse</a>, <a href="../tools/mlflow.html">MLflow</a>, <a href="../tools/laminar.html">Laminar</a>, <a href="../tools/promptfoo.html">promptfoo</a>, <a href="../tools/opik.html">Opik</a>, <a href="../tools/langwatch.html">LangWatch</a>, <a href="../tools/helicone.html">Helicone</a>, <a href="../tools/weights-biases-weave.html">W&amp;B Weave</a>, <a href="../tools/opentelemetry.html">OpenTelemetry</a>, <a href="../tools/openllmetry.html">OpenLLMetry</a>, <a href="../tools/openinference.html">OpenInference</a></li></ul></div>
+  </section>
+  <section class="related"><h2>Other observability metrics in tool use</h2><ul><li><a href="../metrics/tool-call-count.html">Tool call count</a><span>Number of tool calls made by an agent run.</span></li><li><a href="../metrics/tool-execution-latency.html">Tool execution latency</a><span>Time taken by tool executions.</span></li></ul></section>
+  <nav class="pager" aria-label="Previous and next"><span></span><a class="next" href="../metrics/tool-call-count.html"><span>Next</span>Tool call count</a></nav>
+</div></article>
+</main>
+<footer><div class="wrap">
+  <p>Companion to the paper “A Catalogue of Observability and Evaluation Metrics for AI Agents” (in preparation). The data, the scripts and a saved copy of every cited
+  page are in the <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop" target="_blank" rel="noopener">repository</a>.</p>
+  <p>Generated from the data on 13 Nov 2026.</p>
+</div></footer>
+<div id="tip" role="tooltip" hidden></div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

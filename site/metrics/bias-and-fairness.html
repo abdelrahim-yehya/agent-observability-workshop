@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Bias and fairness: Whether the output contains bias, stereotyping or discrimination against a person or group.">
+<title>Bias and fairness · Agent Metrics Catalogue</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html">Agent Metrics Catalogue</a>
+  <nav aria-label="Sections"><a href="../index.html">Taxonomy</a><a href="../metrics.html" aria-current="page">Catalogue</a><a href="../coverage.html">Coverage</a><a href="../tools.html">Tools</a><a href="../method.html">Method</a></nav>
+</div></header>
+<main>
+
+<article class="detail eval"><div class="wrap">
+  <p class="crumbs"><a href="../metrics.html">Catalogue</a><span>/</span><a href="../metrics.html?type=Evaluation">Evaluation</a><span>/</span><a href="../metrics.html?cat=Evaluation%7CSafety%20and%20policy">Safety and policy</a></p>
+  <h1><span class="sw"></span>Bias and fairness</h1>
+  <p class="lede">Whether the output contains bias, stereotyping or discrimination against a person or group.</p>
+  <p class="shipped">Shipped by 4 of 13 tools.</p>
+  <p class="chips"><a class="chip" href="#t-deepeval">DeepEval</a><a class="chip" href="#t-opik">Opik</a><a class="chip" href="#t-langsmith">LangSmith</a><a class="chip" href="#t-galileo">Galileo</a></p>
+  <section class="evidence"><h2>What each tool ships</h2>
+    <p class="gloss">4 documented metrics, under the tool's own name, with the sentence of the documentation we rely on.
+    The definition above is ours; tools that share this metric may compute it differently.</p>
+    <div class="ev-tool" id="t-deepeval"><h5><a href="../tools/deepeval.html">DeepEval (with Confident AI)</a></h5><div class="ev"><div class="ev-name">Bias</div><p class="ev-desc">The bias metric uses LLM-as-a-judge to determine whether your LLM output contains gender, racial, or political bias</p><blockquote>The bias metric uses LLM-as-a-judge to determine whether your LLM output contains gender, racial, or political bias</blockquote><p class="ev-meta">built-in evaluator · measured by model judge · <a href="https://deepeval.com/docs/metrics-bias" target="_blank" rel="noopener">deepeval.com</a>, read 25 Oct 2026 · <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop/blob/master/data/raw/doc_snapshots/deepeval__metrics-bias.txt" target="_blank" rel="noopener">saved copy</a></p></div></div><div class="ev-tool" id="t-opik"><h5><a href="../tools/opik.html">Opik</a></h5><div class="ev"><div class="ev-name">Bias detection</div><p class="ev-desc">Built-in heuristic metric listed among 37 new built-in metrics.</p><blockquote>BERTScore, Sentiment analysis, Bias detection, Conversation drift, and more</blockquote><p class="ev-meta">built-in evaluator · <a href="https://www.comet.com/docs/opik/changelog/2025/11/18" target="_blank" rel="noopener">comet.com</a>, read 11 Nov 2026 · <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop/blob/master/data/raw/doc_snapshots/opik__changelog-opik.txt" target="_blank" rel="noopener">saved copy</a></p></div></div><div class="ev-tool" id="t-langsmith"><h5><a href="../tools/langsmith.html">LangSmith</a></h5><div class="ev"><div class="ev-name">Bias &amp; Fairness</div><p class="ev-desc">Whether the content contains stereotyping, exclusionary language, or discriminatory framing.</p><blockquote>Bias &amp; Fairness | Whether the content contains stereotyping, exclusionary language, or discriminatory framing.</blockquote><p class="ev-meta">built-in evaluator · <a href="https://docs.langchain.com/langsmith/prebuilt-evaluators.md" target="_blank" rel="noopener">docs.langchain.com</a>, read 25 Oct 2026 · <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop/blob/master/data/raw/doc_snapshots/langsmith__prebuilt_evaluators.txt" target="_blank" rel="noopener">saved copy</a></p></div></div><div class="ev-tool" id="t-galileo"><h5><a href="../tools/galileo.html">Galileo</a></h5><div class="ev"><div class="ev-name">Sexism / Bias</div><p class="ev-desc"></p><blockquote>Sexism / Bias Safety and Compliance Trace (root input/output only) Detects gender-based bias or discriminatory content. When ensuring AI outputs are free from bias and discrimination. A resume screening assistant that must evaluate job candidates without gender or demographic bias.</blockquote><p class="ev-meta">built-in evaluator · <a href="https://docs.galileo.ai/concepts/metrics/metric-comparison" target="_blank" rel="noopener">docs.galileo.ai</a>, read 25 Oct 2026 · <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop/blob/master/data/raw/doc_snapshots/galileo_metrics.txt" target="_blank" rel="noopener">saved copy</a></p></div></div><div class="others"><h5>The other tools</h5><ul><li><span class="st">Not shipped. The tool has user-defined evaluators, so it can be built.</span> <a href="../tools/langfuse.html">Langfuse</a>, <a href="../tools/mlflow.html">MLflow</a>, <a href="../tools/laminar.html">Laminar</a>, <a href="../tools/promptfoo.html">promptfoo</a>, <a href="../tools/arize-phoenix.html">Arize Phoenix</a>, <a href="../tools/langwatch.html">LangWatch</a>, <a href="../tools/braintrust.html">Braintrust</a>, <a href="../tools/weights-biases-weave.html">W&amp;B Weave</a></li><li><span class="st">Not shipped. The tool stores scores computed elsewhere.</span> <a href="../tools/helicone.html">Helicone</a>, <a href="../tools/opentelemetry.html">OpenTelemetry</a>, <a href="../tools/openinference.html">OpenInference</a></li><li><span class="st">Nothing found in the pages read.</span> <a href="../tools/openllmetry.html">OpenLLMetry</a></li></ul></div>
+  </section>
+  <section class="related"><h2>Other evaluation metrics in safety and policy</h2><ul><li><a href="../metrics/toxicity.html">Toxicity</a><span>Whether the output contains toxic, abusive, hateful or profane language.</span></li><li><a href="../metrics/sensitive-data-leakage.html">Sensitive data leakage</a><span>Whether the input or output exposes personal data or secrets (for example PII, credentials).</span></li><li><a href="../metrics/injection-detection.html">Injection detection</a><span>Whether an input contains an injection attempt (prompt, code or SQL injection) aimed at the agent.</span></li><li><a href="../metrics/refusal-detection.html">Refusal detection</a><span>Whether the model refuses, declines or avoids answering a request.</span></li><li><a href="../metrics/policy-and-moderation-violations.html">Policy and moderation violations</a><span>Whether the output breaks a safety, moderation, compliance or content policy.</span></li></ul></section>
+  <nav class="pager" aria-label="Previous and next"><a class="prev" href="../metrics/toxicity.html"><span>Previous</span>Toxicity</a><a class="next" href="../metrics/sensitive-data-leakage.html"><span>Next</span>Sensitive data leakage</a></nav>
+</div></article>
+</main>
+<footer><div class="wrap">
+  <p>Companion to the paper “A Catalogue of Observability and Evaluation Metrics for AI Agents” (in preparation). The data, the scripts and a saved copy of every cited
+  page are in the <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop" target="_blank" rel="noopener">repository</a>.</p>
+  <p>Generated from the data on 13 Nov 2026.</p>
+</div></footer>
+<div id="tip" role="tooltip" hidden></div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

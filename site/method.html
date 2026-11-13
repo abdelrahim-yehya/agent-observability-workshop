@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="How the tools were chosen and the metrics collected.">
+<title>Method · Agent Metrics Catalogue</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="index.html">Agent Metrics Catalogue</a>
+  <nav aria-label="Sections"><a href="index.html">Taxonomy</a><a href="metrics.html">Catalogue</a><a href="coverage.html">Coverage</a><a href="tools.html">Tools</a><a href="method.html" aria-current="page">Method</a></nav>
+</div></header>
+<main>
+
+<section id="method"><div class="wrap">
+  <h1>Method</h1>
+  <div class="cols">
+    <div>
+      <h3>Choosing the tools</h3>
+      <p>Most tools are documented in repositories, vendor pages and blogs, so we searched GitHub and Google with fixed
+      queries on 22 Oct 2026 and screened the results by hand against written inclusion and exclusion rules. The
+      OpenTelemetry conventions for generative AI were added by hand, since a specification has no product page for such
+      queries to rank.</p>
+      <table class="funnel"><tbody><tr><td>GitHub repositories returned by 17 queries</td><td class='num'>182</td></tr><tr><td>Tools named in the first 30 results of 6 Google queries</td><td class='num'>68</td></tr><tr><td>Candidates after screening and merging both lists</td><td class='num'>42</td></tr><tr><td>Primary purpose is observability or evaluation of LLM applications or agents</td><td class='num'>31</td></tr><tr><td>Documentation explicitly covers agents, tool calls or multi-step traces</td><td class='num'>30</td></tr><tr><td>Selected by adoption (open source) or corroboration (closed source)</td><td class='num'>13 tools, 3 sets of conventions</td></tr></tbody></table>
+    </div>
+    <div>
+      <h3>Collecting the metrics</h3>
+      <p>For each tool we read the official documentation and recorded every built-in metric: one the tool itself
+      ships, as opposed to a metric the user writes, a community contribution or one reached through an integration.
+      We kept the metrics that describe how an agent run executes or how good its output is. Each of the
+      297 rows stores the page, a verbatim quote, a saved copy of the page and the date, and a script checks
+      that every quote appears word for word in the saved copy.</p>
+      <h3>Merging them</h3>
+      <p>Two metrics from different tools become one unique metric when they measure the same thing about the same
+      object, whatever the tools call them. The mapping (376 pairs) is made by hand. The definitions on this
+      site are ours, not quotations.</p>
+    </div>
+    <div>
+      <h3>Reading the catalogue with care</h3>
+      <ul class="care">
+        <li>Tools that share a unique metric may compute it differently, and can disagree on the same run.</li>
+        <li>An empty cell means we found nothing in the pages we read. It does not prove the tool lacks the metric.</li>
+        <li>Documentation changes. Every quote carries the date its page was read.</li>
+        <li>Text-match and format checks, retrieval scores, audio, voice and image metrics and task-specific metrics
+        are out of scope.</li>
+        <li>Closed-source tools that the search results did not name are absent.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+</main>
+<footer><div class="wrap">
+  <p>Companion to the paper “A Catalogue of Observability and Evaluation Metrics for AI Agents” (in preparation). The data, the scripts and a saved copy of every cited
+  page are in the <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop" target="_blank" rel="noopener">repository</a>.</p>
+  <p>Generated from the data on 13 Nov 2026.</p>
+</div></footer>
+<div id="tip" role="tooltip" hidden></div>
+<script src="assets/site.js"></script>
+</body>
+</html>

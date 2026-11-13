@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Braintrust: the agent metrics it ships out of the box.">
+<title>Braintrust · Agent Metrics Catalogue</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html">Agent Metrics Catalogue</a>
+  <nav aria-label="Sections"><a href="../index.html">Taxonomy</a><a href="../metrics.html">Catalogue</a><a href="../coverage.html">Coverage</a><a href="../tools.html" aria-current="page">Tools</a><a href="../method.html">Method</a></nav>
+</div></header>
+<main>
+
+<article class="detail"><div class="wrap">
+  <p class="crumbs"><a href="../tools.html">Tools</a><span>/</span>Closed source</p>
+  <h1>Braintrust</h1>
+  <p class="lede">Platform: stores and shows traces, with evaluation or monitoring on top.</p>
+  <p class="gloss">Selected by corroboration: named by at least two independent sources in the search results. Listed by number of sources. Stars and downloads were read on 6 Nov 2026.</p>
+  <div class="tool-facts">
+    <dl><dt>Group</dt><dd>Closed source</dd><dt>Independent sources</dt><dd>5</dd><dt>OpenTelemetry</dt><dd>accepts its traces</dd></dl>
+    <div class="cov">
+      <span>Observability</span><span class="bar obs" role="img" aria-label="14 of 18"><i style="width:77.8%"></i></span><span class="num">14 of 18</span>
+      <span>Evaluation</span><span class="bar eval" role="img" aria-label="4 of 28"><i style="width:14.3%"></i></span><span class="num">4 of 28</span>
+    </div>
+  </div>
+  <p class="acts"><a href="https://www.braintrust.dev/docs" target="_blank" rel="noopener">Documentation</a><a href="../metrics.html?tool=Braintrust">Filter the catalogue by this tool</a></p>
+  <section><h2>Metrics it ships</h2>
+    <p class="gloss">The unique metrics this tool documents as built-in, with the names it gives them. Select a metric for the
+    quotation and the page. The number of metrics is not a quality score.</p>
+    <div class="ship-cols"><div class="obs"><h3><span class="sw"></span>Observability <span class="count">14 metrics</span></h3><h4>Tool use</h4><ul class="ships"><li><a href="../metrics/tool-execution-errors.html#t-braintrust">Tool execution errors</a><span class="names"><code>metrics.tool_errors</code></span></li><li><a href="../metrics/tool-call-count.html#t-braintrust">Tool call count</a><span class="names"><code>metrics.tool_calls</code></span></li></ul><h4>Token usage</h4><ul class="ships"><li><a href="../metrics/input-tokens.html#t-braintrust">Input tokens</a><span class="names"><code>metrics.prompt_tokens</code></span></li><li><a href="../metrics/output-tokens.html#t-braintrust">Output tokens</a><span class="names"><code>metrics.completion_tokens</code></span></li><li><a href="../metrics/total-tokens.html#t-braintrust">Total tokens</a><span class="names"><code>metrics.total_tokens</code></span></li><li><a href="../metrics/cached-tokens.html#t-braintrust">Cached tokens</a><span class="names"><code>metrics.prompt_cached_tokens</code><code>metrics.prompt_cache_creation_tokens</code><code>Cache hit rate per span</code></span></li></ul><h4>Cost</h4><ul class="ships"><li><a href="../metrics/estimated-cost.html#t-braintrust">Estimated cost</a><span class="names"><code>estimated_cost</code></span></li><li><a href="../metrics/cost-breakdown-by-token-type.html#t-braintrust">Cost breakdown by token type</a><span class="names"><code>estimated_cost_breakdown</code></span></li></ul><h4>Latency</h4><ul class="ships"><li><a href="../metrics/trace-run-latency.html#t-braintrust">Trace / run latency</a><span class="names"><code>metrics.duration</code></span></li><li><a href="../metrics/llm-call-latency.html#t-braintrust">LLM call latency</a><span class="names"><code>metrics.llm_duration</code></span></li><li><a href="../metrics/span-duration.html#t-braintrust">Span duration</a><span class="names"><code>metrics.latency</code></span></li><li><a href="../metrics/time-to-first-token.html#t-braintrust">Time to first token</a><span class="names"><code>Time to first token</code></span></li></ul><h4>Errors and volume</h4><ul class="ships"><li><a href="../metrics/error-count-rate.html#t-braintrust">Error count / rate</a><span class="names"><code>metrics.errors</code><code>metrics.llm_errors</code></span></li><li><a href="../metrics/llm-call-count.html#t-braintrust">LLM call count</a><span class="names"><code>metrics.llm_calls</code></span></li></ul></div><div class="eval"><h3><span class="sw"></span>Evaluation <span class="count">4 metrics</span></h3><h4>Answer quality</h4><ul class="ships"><li><a href="../metrics/answer-correctness.html#t-braintrust">Answer correctness</a><span class="names"><code>AnswerCorrectness</code><code>ClosedQA</code><code>Factuality</code></span></li><li><a href="../metrics/answer-relevance.html#t-braintrust">Answer relevance</a><span class="names"><code>AnswerRelevancy</code></span></li></ul><h4>Grounding</h4><ul class="ships"><li><a href="../metrics/faithfulness-to-context.html#t-braintrust">Faithfulness to context</a><span class="names"><code>Faithfulness</code></span></li></ul><h4>Safety and policy</h4><ul class="ships"><li><a href="../metrics/policy-and-moderation-violations.html#t-braintrust">Policy and moderation violations</a><span class="names"><code>Moderation</code><code>Security</code></span></li></ul></div></div>
+  </section>
+  <section class="others"><h2>The other metrics</h2><ul><li><span class="st">Not shipped. The tool has user-defined evaluators, so it can be built.</span> <a href="../metrics/tool-selection.html">Tool selection</a>, <a href="../metrics/tool-argument-validity.html">Tool argument validity</a>, <a href="../metrics/tool-call-correctness.html">Tool call correctness</a>, <a href="../metrics/tool-call-efficiency.html">Tool call efficiency</a>, <a href="../metrics/tool-response-handling.html">Tool response handling</a>, <a href="../metrics/task-goal-completion.html">Task / goal completion</a>, <a href="../metrics/plan-quality.html">Plan quality</a>, <a href="../metrics/plan-adherence.html">Plan adherence</a>, <a href="../metrics/trajectory-accuracy.html">Trajectory accuracy</a>, <a href="../metrics/step-action-efficiency.html">Step / action efficiency</a>, <a href="../metrics/action-progress-toward-goal.html">Action progress toward goal</a>, <a href="../metrics/flow-and-reasoning-coherence.html">Flow and reasoning coherence</a>, <a href="../metrics/helpfulness.html">Helpfulness</a>, <a href="../metrics/conciseness.html">Conciseness</a>, <a href="../metrics/tone-appropriateness.html">Tone appropriateness</a>, <a href="../metrics/fluency.html">Fluency</a>, <a href="../metrics/toxicity.html">Toxicity</a>, <a href="../metrics/bias-and-fairness.html">Bias and fairness</a>, <a href="../metrics/sensitive-data-leakage.html">Sensitive data leakage</a>, <a href="../metrics/injection-detection.html">Injection detection</a>, <a href="../metrics/refusal-detection.html">Refusal detection</a>, <a href="../metrics/knowledge-retention.html">Knowledge retention</a>, <a href="../metrics/user-satisfaction-or-frustration.html">User satisfaction or frustration</a>, <a href="../metrics/conversation-coherence.html">Conversation coherence</a></li><li><span class="st">Nothing found in the pages read.</span> <a href="../metrics/tool-execution-latency.html">Tool execution latency</a>, <a href="../metrics/step-count.html">Step count</a>, <a href="../metrics/reasoning-tokens.html">Reasoning tokens</a>, <a href="../metrics/trace-span-count.html">Trace / span count</a></li></ul></section>
+  <nav class="pager" aria-label="Previous and next"><a class="prev" href="../tools/langsmith.html"><span>Previous</span>LangSmith</a><a class="next" href="../tools/galileo.html"><span>Next</span>Galileo</a></nav>
+</div></article>
+</main>
+<footer><div class="wrap">
+  <p>Companion to the paper “A Catalogue of Observability and Evaluation Metrics for AI Agents” (in preparation). The data, the scripts and a saved copy of every cited
+  page are in the <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop" target="_blank" rel="noopener">repository</a>.</p>
+  <p>Generated from the data on 13 Nov 2026.</p>
+</div></footer>
+<div id="tip" role="tooltip" hidden></div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

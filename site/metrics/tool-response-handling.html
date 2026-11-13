@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Tool response handling: Whether the agent correctly processed what a tool returned, including errors.">
+<title>Tool response handling · Agent Metrics Catalogue</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html">Agent Metrics Catalogue</a>
+  <nav aria-label="Sections"><a href="../index.html">Taxonomy</a><a href="../metrics.html" aria-current="page">Catalogue</a><a href="../coverage.html">Coverage</a><a href="../tools.html">Tools</a><a href="../method.html">Method</a></nav>
+</div></header>
+<main>
+
+<article class="detail eval"><div class="wrap">
+  <p class="crumbs"><a href="../metrics.html">Catalogue</a><span>/</span><a href="../metrics.html?type=Evaluation">Evaluation</a><span>/</span><a href="../metrics.html?cat=Evaluation%7CTool%20use">Tool use</a></p>
+  <h1><span class="sw"></span>Tool response handling</h1>
+  <p class="lede">Whether the agent correctly processed what a tool returned, including errors.</p>
+  <p class="shipped">Shipped by 1 of 13 tools.</p>
+  <p class="chips"><a class="chip" href="#t-arize-phoenix">Arize Phoenix</a></p>
+  <section class="evidence"><h2>What each tool ships</h2>
+    <p class="gloss">1 documented metric, under the tool's own name, with the sentence of the documentation we rely on.
+    The definition above is ours; tools that share this metric may compute it differently.</p>
+    <div class="ev-tool" id="t-arize-phoenix"><h5><a href="../tools/arize-phoenix.html">Arize Phoenix</a></h5><div class="ev"><div class="ev-name">Tool Response Handling</div><p class="ev-desc">Evaluates whether an agent correctly processed a tool&#x27;s result, including error handling, data extraction, and safe information disclosure</p><blockquote>Tool Response Handling Evaluates whether an agent correctly processed a tool&#x27;s result, including error handling, data extraction, and safe information disclosure.</blockquote><p class="ev-meta">built-in evaluator · <a href="https://arize.com/docs/phoenix/evaluation/pre-built-metrics" target="_blank" rel="noopener">arize.com</a>, read 25 Oct 2026 · <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop/blob/master/data/raw/doc_snapshots/arize-phoenix__pre-built.txt" target="_blank" rel="noopener">saved copy</a></p></div></div><div class="others"><h5>The other tools</h5><ul><li><span class="st">Not shipped. The tool has user-defined evaluators, so it can be built.</span> <a href="../tools/langfuse.html">Langfuse</a>, <a href="../tools/mlflow.html">MLflow</a>, <a href="../tools/laminar.html">Laminar</a>, <a href="../tools/promptfoo.html">promptfoo</a>, <a href="../tools/deepeval.html">DeepEval</a>, <a href="../tools/opik.html">Opik</a>, <a href="../tools/langwatch.html">LangWatch</a>, <a href="../tools/langsmith.html">LangSmith</a>, <a href="../tools/braintrust.html">Braintrust</a>, <a href="../tools/galileo.html">Galileo</a>, <a href="../tools/weights-biases-weave.html">W&amp;B Weave</a></li><li><span class="st">Not shipped. The tool stores scores computed elsewhere.</span> <a href="../tools/helicone.html">Helicone</a>, <a href="../tools/opentelemetry.html">OpenTelemetry</a>, <a href="../tools/openinference.html">OpenInference</a></li><li><span class="st">Nothing found in the pages read.</span> <a href="../tools/openllmetry.html">OpenLLMetry</a></li></ul></div>
+  </section>
+  <section class="related"><h2>Other evaluation metrics in tool use</h2><ul><li><a href="../metrics/tool-selection.html">Tool selection</a><span>Whether the agent chose the appropriate tool for the task.</span></li><li><a href="../metrics/tool-argument-validity.html">Tool argument validity</a><span>Whether the arguments of a tool call are correct and well-formed (for example against the tool&#x27;s schema or expected values).</span></li><li><a href="../metrics/tool-call-correctness.html">Tool call correctness</a><span>Whether the tool calls the agent made match the calls expected or appropriate for the task.</span></li><li><a href="../metrics/tool-call-efficiency.html">Tool call efficiency</a><span>Whether the agent called tools without redundant or unnecessary calls.</span></li></ul></section>
+  <nav class="pager" aria-label="Previous and next"><a class="prev" href="../metrics/tool-call-efficiency.html"><span>Previous</span>Tool call efficiency</a><a class="next" href="../metrics/task-goal-completion.html"><span>Next</span>Task / goal completion</a></nav>
+</div></article>
+</main>
+<footer><div class="wrap">
+  <p>Companion to the paper “A Catalogue of Observability and Evaluation Metrics for AI Agents” (in preparation). The data, the scripts and a saved copy of every cited
+  page are in the <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop" target="_blank" rel="noopener">repository</a>.</p>
+  <p>Generated from the data on 13 Nov 2026.</p>
+</div></footer>
+<div id="tip" role="tooltip" hidden></div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

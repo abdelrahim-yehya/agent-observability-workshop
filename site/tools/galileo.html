@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Galileo: the agent metrics it ships out of the box.">
+<title>Galileo · Agent Metrics Catalogue</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html">Agent Metrics Catalogue</a>
+  <nav aria-label="Sections"><a href="../index.html">Taxonomy</a><a href="../metrics.html">Catalogue</a><a href="../coverage.html">Coverage</a><a href="../tools.html" aria-current="page">Tools</a><a href="../method.html">Method</a></nav>
+</div></header>
+<main>
+
+<article class="detail"><div class="wrap">
+  <p class="crumbs"><a href="../tools.html">Tools</a><span>/</span>Closed source</p>
+  <h1>Galileo</h1>
+  <p class="lede">Platform: stores and shows traces, with evaluation or monitoring on top.</p>
+  <p class="gloss">Selected by corroboration: named by at least two independent sources in the search results. Listed by number of sources. Stars and downloads were read on 6 Nov 2026.</p>
+  <div class="tool-facts">
+    <dl><dt>Group</dt><dd>Closed source</dd><dt>Independent sources</dt><dd>3</dd><dt>OpenTelemetry</dt><dd>accepts its traces</dd></dl>
+    <div class="cov">
+      <span>Observability</span><span class="bar obs" role="img" aria-label="7 of 18"><i style="width:38.9%"></i></span><span class="num">7 of 18</span>
+      <span>Evaluation</span><span class="bar eval" role="img" aria-label="14 of 28"><i style="width:50.0%"></i></span><span class="num">14 of 28</span>
+    </div>
+  </div>
+  <p class="acts"><a href="https://docs.galileo.ai/" target="_blank" rel="noopener">Documentation</a><a href="../metrics.html?tool=Galileo">Filter the catalogue by this tool</a></p>
+  <section><h2>Metrics it ships</h2>
+    <p class="gloss">The unique metrics this tool documents as built-in, with the names it gives them. Select a metric for the
+    quotation and the page. The number of metrics is not a quality score.</p>
+    <div class="ship-cols"><div class="obs"><h3><span class="sw"></span>Observability <span class="count">7 metrics</span></h3><h4>Tool use</h4><ul class="ships"><li><a href="../metrics/tool-execution-errors.html#t-galileo">Tool execution errors</a><span class="names"><code>Tool Errors</code></span></li></ul><h4>Token usage</h4><ul class="ships"><li><a href="../metrics/input-tokens.html#t-galileo">Input tokens</a><span class="names"><code>System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens</code></span></li><li><a href="../metrics/output-tokens.html#t-galileo">Output tokens</a><span class="names"><code>System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens</code></span></li><li><a href="../metrics/total-tokens.html#t-galileo">Total tokens</a><span class="names"><code>System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens</code></span></li></ul><h4>Cost</h4><ul class="ships"><li><a href="../metrics/estimated-cost.html#t-galileo">Estimated cost</a><span class="names"><code>System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens</code></span></li></ul><h4>Latency</h4><ul class="ships"><li><a href="../metrics/trace-run-latency.html#t-galileo">Trace / run latency</a><span class="names"><code>System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens</code></span></li></ul><h4>Errors and volume</h4><ul class="ships"><li><a href="../metrics/trace-span-count.html#t-galileo">Trace / span count</a><span class="names"><code>Trace Count (system metric)</code></span></li></ul></div><div class="eval"><h3><span class="sw"></span>Evaluation <span class="count">14 metrics</span></h3><h4>Tool use</h4><ul class="ships"><li><a href="../metrics/tool-selection.html#t-galileo">Tool selection</a><span class="names"><code>Tool Selection Quality</code></span></li></ul><h4>Task and goal</h4><ul class="ships"><li><a href="../metrics/task-goal-completion.html#t-galileo">Task / goal completion</a><span class="names"><code>Action Completion</code><code>Completeness</code></span></li></ul><h4>Plan and trajectory</h4><ul class="ships"><li><a href="../metrics/step-action-efficiency.html#t-galileo">Step / action efficiency</a><span class="names"><code>Agent Efficiency</code></span></li><li><a href="../metrics/action-progress-toward-goal.html#t-galileo">Action progress toward goal</a><span class="names"><code>Action Advancement</code></span></li><li><a href="../metrics/flow-and-reasoning-coherence.html#t-galileo">Flow and reasoning coherence</a><span class="names"><code>Agent Flow</code><code>Reasoning Coherence</code></span></li></ul><h4>Answer quality</h4><ul class="ships"><li><a href="../metrics/answer-correctness.html#t-galileo">Answer correctness</a><span class="names"><code>Correctness (factuality)</code><code>Ground Truth Adherence</code></span></li><li><a href="../metrics/tone-appropriateness.html#t-galileo">Tone appropriateness</a><span class="names"><code>Tone</code></span></li></ul><h4>Grounding</h4><ul class="ships"><li><a href="../metrics/faithfulness-to-context.html#t-galileo">Faithfulness to context</a><span class="names"><code>Context Adherence</code></span></li></ul><h4>Safety and policy</h4><ul class="ships"><li><a href="../metrics/toxicity.html#t-galileo">Toxicity</a><span class="names"><code>Toxicity</code></span></li><li><a href="../metrics/bias-and-fairness.html#t-galileo">Bias and fairness</a><span class="names"><code>Sexism / Bias</code></span></li><li><a href="../metrics/sensitive-data-leakage.html#t-galileo">Sensitive data leakage</a><span class="names"><code>PII / CPNI / PHI</code></span></li><li><a href="../metrics/injection-detection.html#t-galileo">Injection detection</a><span class="names"><code>Prompt Injection</code><code>SQL Injection</code></span></li><li><a href="../metrics/policy-and-moderation-violations.html#t-galileo">Policy and moderation violations</a><span class="names"><code>Unsafe Output</code></span></li></ul><h4>Conversation</h4><ul class="ships"><li><a href="../metrics/conversation-coherence.html#t-galileo">Conversation coherence</a><span class="names"><code>Conversation Quality</code></span></li></ul></div></div>
+  </section>
+  <section class="others"><h2>The other metrics</h2><ul><li><span class="st">Not shipped. The tool has user-defined evaluators, so it can be built.</span> <a href="../metrics/tool-argument-validity.html">Tool argument validity</a>, <a href="../metrics/tool-call-correctness.html">Tool call correctness</a>, <a href="../metrics/tool-call-efficiency.html">Tool call efficiency</a>, <a href="../metrics/tool-response-handling.html">Tool response handling</a>, <a href="../metrics/plan-quality.html">Plan quality</a>, <a href="../metrics/plan-adherence.html">Plan adherence</a>, <a href="../metrics/trajectory-accuracy.html">Trajectory accuracy</a>, <a href="../metrics/answer-relevance.html">Answer relevance</a>, <a href="../metrics/helpfulness.html">Helpfulness</a>, <a href="../metrics/conciseness.html">Conciseness</a>, <a href="../metrics/fluency.html">Fluency</a>, <a href="../metrics/refusal-detection.html">Refusal detection</a>, <a href="../metrics/knowledge-retention.html">Knowledge retention</a>, <a href="../metrics/user-satisfaction-or-frustration.html">User satisfaction or frustration</a></li><li><span class="st">Nothing found in the pages read.</span> <a href="../metrics/tool-call-count.html">Tool call count</a>, <a href="../metrics/tool-execution-latency.html">Tool execution latency</a>, <a href="../metrics/step-count.html">Step count</a>, <a href="../metrics/cached-tokens.html">Cached tokens</a>, <a href="../metrics/reasoning-tokens.html">Reasoning tokens</a>, <a href="../metrics/cost-breakdown-by-token-type.html">Cost breakdown by token type</a>, <a href="../metrics/llm-call-latency.html">LLM call latency</a>, <a href="../metrics/span-duration.html">Span duration</a>, <a href="../metrics/time-to-first-token.html">Time to first token</a>, <a href="../metrics/error-count-rate.html">Error count / rate</a>, <a href="../metrics/llm-call-count.html">LLM call count</a></li></ul></section>
+  <nav class="pager" aria-label="Previous and next"><a class="prev" href="../tools/braintrust.html"><span>Previous</span>Braintrust</a><a class="next" href="../tools/weights-biases-weave.html"><span>Next</span>Weights &amp; Biases Weave</a></nav>
+</div></article>
+</main>
+<footer><div class="wrap">
+  <p>Companion to the paper “A Catalogue of Observability and Evaluation Metrics for AI Agents” (in preparation). The data, the scripts and a saved copy of every cited
+  page are in the <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop" target="_blank" rel="noopener">repository</a>.</p>
+  <p>Generated from the data on 13 Nov 2026.</p>
+</div></footer>
+<div id="tip" role="tooltip" hidden></div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

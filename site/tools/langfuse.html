@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Langfuse: the agent metrics it ships out of the box.">
+<title>Langfuse · Agent Metrics Catalogue</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html">Agent Metrics Catalogue</a>
+  <nav aria-label="Sections"><a href="../index.html">Taxonomy</a><a href="../metrics.html">Catalogue</a><a href="../coverage.html">Coverage</a><a href="../tools.html" aria-current="page">Tools</a><a href="../method.html">Method</a></nav>
+</div></header>
+<main>
+
+<article class="detail"><div class="wrap">
+  <p class="crumbs"><a href="../tools.html">Tools</a><span>/</span>Open source</p>
+  <h1>Langfuse</h1>
+  <p class="lede">Platform: stores and shows traces, with evaluation or monitoring on top.</p>
+  <p class="gloss">Selected by adoption: at least 5,000 GitHub stars or one million downloads in 30 days. Listed by downloads. Stars and downloads were read on 6 Nov 2026.</p>
+  <div class="tool-facts">
+    <dl><dt>Group</dt><dd>Open source</dd><dt>GitHub stars</dt><dd>37,092</dd><dt>Downloads, 30 days</dt><dd>23.6M</dd><dt>Independent sources</dt><dd>15</dd><dt>OpenTelemetry</dt><dd>built on it</dd></dl>
+    <div class="cov">
+      <span>Observability</span><span class="bar obs" role="img" aria-label="10 of 18"><i style="width:55.6%"></i></span><span class="num">10 of 18</span>
+      <span>Evaluation</span><span class="bar eval" role="img" aria-label="3 of 28"><i style="width:10.7%"></i></span><span class="num">3 of 28</span>
+    </div>
+  </div>
+  <p class="acts"><a href="https://langfuse.com/docs/observability/features/agent-graphs" target="_blank" rel="noopener">Documentation</a><a href="https://github.com/langfuse/langfuse" target="_blank" rel="noopener">GitHub</a><a href="../metrics.html?tool=Langfuse">Filter the catalogue by this tool</a></p>
+  <section><h2>Metrics it ships</h2>
+    <p class="gloss">The unique metrics this tool documents as built-in, with the names it gives them. Select a metric for the
+    quotation and the page. The number of metrics is not a quality score.</p>
+    <div class="ship-cols"><div class="obs"><h3><span class="sw"></span>Observability <span class="count">10 metrics</span></h3><h4>Tool use</h4><ul class="ships"><li><a href="../metrics/tool-call-count.html#t-langfuse">Tool call count</a><span class="names"><code>Tool Calls (toolCalls)</code></span></li></ul><h4>Token usage</h4><ul class="ships"><li><a href="../metrics/input-tokens.html#t-langfuse">Input tokens</a><span class="names"><code>Usage details</code></span></li><li><a href="../metrics/output-tokens.html#t-langfuse">Output tokens</a><span class="names"><code>Usage details</code></span></li><li><a href="../metrics/total-tokens.html#t-langfuse">Total tokens</a><span class="names"><code>Observations chart metrics: Count, Latency, Cost, Tokens</code></span></li></ul><h4>Cost</h4><ul class="ships"><li><a href="../metrics/estimated-cost.html#t-langfuse">Estimated cost</a><span class="names"><code>Cost details</code><code>Inferred cost</code><code>totalCost</code><code>Observations chart metrics: Count, Latency, Cost, Tokens</code><code>Aggregated latency and cost on spans</code></span></li><li><a href="../metrics/cost-breakdown-by-token-type.html#t-langfuse">Cost breakdown by token type</a><span class="names"><code>Cost details</code></span></li></ul><h4>Latency</h4><ul class="ships"><li><a href="../metrics/trace-run-latency.html#t-langfuse">Trace / run latency</a><span class="names"><code>latency</code></span></li><li><a href="../metrics/span-duration.html#t-langfuse">Span duration</a><span class="names"><code>Observations chart metrics: Count, Latency, Cost, Tokens</code><code>Aggregated latency and cost on spans</code></span></li><li><a href="../metrics/time-to-first-token.html#t-langfuse">Time to first token</a><span class="names"><code>completion_start_time (time to first token)</code></span></li></ul><h4>Errors and volume</h4><ul class="ships"><li><a href="../metrics/trace-span-count.html#t-langfuse">Trace / span count</a><span class="names"><code>Observations chart metrics: Count, Latency, Cost, Tokens</code><code>Home dashboard: traces over time</code></span></li></ul></div><div class="eval"><h3><span class="sw"></span>Evaluation <span class="count">3 metrics</span></h3><h4>Answer quality</h4><ul class="ships"><li><a href="../metrics/helpfulness.html#t-langfuse">Helpfulness</a><span class="names"><code>Managed evaluator catalog</code></span></li></ul><h4>Grounding</h4><ul class="ships"><li><a href="../metrics/faithfulness-to-context.html#t-langfuse">Faithfulness to context</a><span class="names"><code>Managed evaluator catalog</code></span></li></ul><h4>Safety and policy</h4><ul class="ships"><li><a href="../metrics/toxicity.html#t-langfuse">Toxicity</a><span class="names"><code>Managed evaluator catalog</code></span></li></ul></div></div>
+  </section>
+  <section class="others"><h2>The other metrics</h2><ul><li><span class="st">Through an integration</span> <a href="../metrics/answer-relevance.html">Answer relevance</a></li><li><span class="st">Documented as a template to copy</span> <a href="../metrics/trajectory-accuracy.html">Trajectory accuracy</a></li><li><span class="st">Not shipped. The tool has user-defined evaluators, so it can be built.</span> <a href="../metrics/tool-selection.html">Tool selection</a>, <a href="../metrics/tool-argument-validity.html">Tool argument validity</a>, <a href="../metrics/tool-call-correctness.html">Tool call correctness</a>, <a href="../metrics/tool-call-efficiency.html">Tool call efficiency</a>, <a href="../metrics/tool-response-handling.html">Tool response handling</a>, <a href="../metrics/task-goal-completion.html">Task / goal completion</a>, <a href="../metrics/plan-quality.html">Plan quality</a>, <a href="../metrics/plan-adherence.html">Plan adherence</a>, <a href="../metrics/step-action-efficiency.html">Step / action efficiency</a>, <a href="../metrics/action-progress-toward-goal.html">Action progress toward goal</a>, <a href="../metrics/flow-and-reasoning-coherence.html">Flow and reasoning coherence</a>, <a href="../metrics/answer-correctness.html">Answer correctness</a>, <a href="../metrics/conciseness.html">Conciseness</a>, <a href="../metrics/tone-appropriateness.html">Tone appropriateness</a>, <a href="../metrics/fluency.html">Fluency</a>, <a href="../metrics/bias-and-fairness.html">Bias and fairness</a>, <a href="../metrics/sensitive-data-leakage.html">Sensitive data leakage</a>, <a href="../metrics/injection-detection.html">Injection detection</a>, <a href="../metrics/refusal-detection.html">Refusal detection</a>, <a href="../metrics/policy-and-moderation-violations.html">Policy and moderation violations</a>, <a href="../metrics/knowledge-retention.html">Knowledge retention</a>, <a href="../metrics/user-satisfaction-or-frustration.html">User satisfaction or frustration</a>, <a href="../metrics/conversation-coherence.html">Conversation coherence</a></li><li><span class="st">Nothing found in the pages read.</span> <a href="../metrics/tool-execution-errors.html">Tool execution errors</a>, <a href="../metrics/tool-execution-latency.html">Tool execution latency</a>, <a href="../metrics/step-count.html">Step count</a>, <a href="../metrics/cached-tokens.html">Cached tokens</a>, <a href="../metrics/reasoning-tokens.html">Reasoning tokens</a>, <a href="../metrics/llm-call-latency.html">LLM call latency</a>, <a href="../metrics/error-count-rate.html">Error count / rate</a>, <a href="../metrics/llm-call-count.html">LLM call count</a></li></ul></section>
+  <nav class="pager" aria-label="Previous and next"><span></span><a class="next" href="../tools/mlflow.html"><span>Next</span>MLflow</a></nav>
+</div></article>
+</main>
+<footer><div class="wrap">
+  <p>Companion to the paper “A Catalogue of Observability and Evaluation Metrics for AI Agents” (in preparation). The data, the scripts and a saved copy of every cited
+  page are in the <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop" target="_blank" rel="noopener">repository</a>.</p>
+  <p>Generated from the data on 13 Nov 2026.</p>
+</div></footer>
+<div id="tip" role="tooltip" hidden></div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

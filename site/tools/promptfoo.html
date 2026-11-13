@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="promptfoo: the agent metrics it ships out of the box.">
+<title>promptfoo · Agent Metrics Catalogue</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html">Agent Metrics Catalogue</a>
+  <nav aria-label="Sections"><a href="../index.html">Taxonomy</a><a href="../metrics.html">Catalogue</a><a href="../coverage.html">Coverage</a><a href="../tools.html" aria-current="page">Tools</a><a href="../method.html">Method</a></nav>
+</div></header>
+<main>
+
+<article class="detail"><div class="wrap">
+  <p class="crumbs"><a href="../tools.html">Tools</a><span>/</span>Open source</p>
+  <h1>promptfoo</h1>
+  <p class="lede">Framework: runs evaluations, with no trace storage of its own.</p>
+  <p class="gloss">Selected by adoption: at least 5,000 GitHub stars or one million downloads in 30 days. Listed by downloads. Stars and downloads were read on 6 Nov 2026.</p>
+  <div class="tool-facts">
+    <dl><dt>Group</dt><dd>Open source</dd><dt>GitHub stars</dt><dd>26,896</dd><dt>Downloads, 30 days</dt><dd>3.8M</dd><dt>Independent sources</dt><dd>4</dd><dt>OpenTelemetry</dt><dd>optional tracing with it</dd></dl>
+    <div class="cov">
+      <span>Observability</span><span class="bar obs" role="img" aria-label="12 of 18"><i style="width:66.7%"></i></span><span class="num">12 of 18</span>
+      <span>Evaluation</span><span class="bar eval" role="img" aria-label="8 of 28"><i style="width:28.6%"></i></span><span class="num">8 of 28</span>
+    </div>
+  </div>
+  <p class="acts"><a href="https://www.promptfoo.dev/docs/providers/openai-agents/" target="_blank" rel="noopener">Documentation</a><a href="https://github.com/promptfoo/promptfoo" target="_blank" rel="noopener">GitHub</a><a href="../metrics.html?tool=promptfoo">Filter the catalogue by this tool</a></p>
+  <section><h2>Metrics it ships</h2>
+    <p class="gloss">The unique metrics this tool documents as built-in, with the names it gives them. Select a metric for the
+    quotation and the page. The number of metrics is not a quality score.</p>
+    <div class="ship-cols"><div class="obs"><h3><span class="sw"></span>Observability <span class="count">12 metrics</span></h3><h4>Plan and trajectory</h4><ul class="ships"><li><a href="../metrics/step-count.html#t-promptfoo">Step count</a><span class="names"><code>trajectory:step-count</code></span></li></ul><h4>Token usage</h4><ul class="ships"><li><a href="../metrics/input-tokens.html#t-promptfoo">Input tokens</a><span class="names"><code>TokenUsage</code></span></li><li><a href="../metrics/output-tokens.html#t-promptfoo">Output tokens</a><span class="names"><code>TokenUsage</code></span></li><li><a href="../metrics/total-tokens.html#t-promptfoo">Total tokens</a><span class="names"><code>TokenUsage</code></span></li><li><a href="../metrics/cached-tokens.html#t-promptfoo">Cached tokens</a><span class="names"><code>TokenUsage</code></span></li><li><a href="../metrics/reasoning-tokens.html#t-promptfoo">Reasoning tokens</a><span class="names"><code>TokenUsage thinking (reasoning) tokens</code></span></li></ul><h4>Cost</h4><ul class="ships"><li><a href="../metrics/estimated-cost.html#t-promptfoo">Estimated cost</a><span class="names"><code>PromptMetrics.cost</code><code>cost</code></span></li></ul><h4>Latency</h4><ul class="ships"><li><a href="../metrics/llm-call-latency.html#t-promptfoo">LLM call latency</a><span class="names"><code>PromptMetrics.totalLatencyMs</code><code>latency</code></span></li><li><a href="../metrics/span-duration.html#t-promptfoo">Span duration</a><span class="names"><code>trace-span-duration</code></span></li></ul><h4>Errors and volume</h4><ul class="ships"><li><a href="../metrics/error-count-rate.html#t-promptfoo">Error count / rate</a><span class="names"><code>trace-error-spans</code></span></li><li><a href="../metrics/trace-span-count.html#t-promptfoo">Trace / span count</a><span class="names"><code>trace-span-count</code></span></li><li><a href="../metrics/llm-call-count.html#t-promptfoo">LLM call count</a><span class="names"><code>TokenUsage.numRequests</code></span></li></ul></div><div class="eval"><h3><span class="sw"></span>Evaluation <span class="count">8 metrics</span></h3><h4>Tool use</h4><ul class="ships"><li><a href="../metrics/tool-argument-validity.html#t-promptfoo">Tool argument validity</a><span class="names"><code>is-valid-function-call</code><code>is-valid-openai-tools-call</code><code>trajectory:tool-args-match</code></span></li><li><a href="../metrics/tool-call-correctness.html#t-promptfoo">Tool call correctness</a><span class="names"><code>skill-used</code><code>tool-call-f1</code><code>trajectory:tool-used</code></span></li></ul><h4>Task and goal</h4><ul class="ships"><li><a href="../metrics/task-goal-completion.html#t-promptfoo">Task / goal completion</a><span class="names"><code>trajectory:goal-success</code></span></li></ul><h4>Plan and trajectory</h4><ul class="ships"><li><a href="../metrics/trajectory-accuracy.html#t-promptfoo">Trajectory accuracy</a><span class="names"><code>trajectory:tool-sequence</code></span></li></ul><h4>Answer quality</h4><ul class="ships"><li><a href="../metrics/answer-correctness.html#t-promptfoo">Answer correctness</a><span class="names"><code>factuality</code></span></li><li><a href="../metrics/answer-relevance.html#t-promptfoo">Answer relevance</a><span class="names"><code>answer-relevance</code><code>conversation-relevance</code></span></li></ul><h4>Grounding</h4><ul class="ships"><li><a href="../metrics/faithfulness-to-context.html#t-promptfoo">Faithfulness to context</a><span class="names"><code>context-faithfulness</code></span></li></ul><h4>Safety and policy</h4><ul class="ships"><li><a href="../metrics/refusal-detection.html#t-promptfoo">Refusal detection</a><span class="names"><code>is-refusal</code></span></li></ul></div></div>
+  </section>
+  <section class="others"><h2>The other metrics</h2><ul><li><span class="st">Through an integration</span> <a href="../metrics/policy-and-moderation-violations.html">Policy and moderation violations</a></li><li><span class="st">Not shipped. The tool has user-defined evaluators, so it can be built.</span> <a href="../metrics/tool-selection.html">Tool selection</a>, <a href="../metrics/tool-call-efficiency.html">Tool call efficiency</a>, <a href="../metrics/tool-response-handling.html">Tool response handling</a>, <a href="../metrics/plan-quality.html">Plan quality</a>, <a href="../metrics/plan-adherence.html">Plan adherence</a>, <a href="../metrics/step-action-efficiency.html">Step / action efficiency</a>, <a href="../metrics/action-progress-toward-goal.html">Action progress toward goal</a>, <a href="../metrics/flow-and-reasoning-coherence.html">Flow and reasoning coherence</a>, <a href="../metrics/helpfulness.html">Helpfulness</a>, <a href="../metrics/conciseness.html">Conciseness</a>, <a href="../metrics/tone-appropriateness.html">Tone appropriateness</a>, <a href="../metrics/fluency.html">Fluency</a>, <a href="../metrics/toxicity.html">Toxicity</a>, <a href="../metrics/bias-and-fairness.html">Bias and fairness</a>, <a href="../metrics/sensitive-data-leakage.html">Sensitive data leakage</a>, <a href="../metrics/injection-detection.html">Injection detection</a>, <a href="../metrics/knowledge-retention.html">Knowledge retention</a>, <a href="../metrics/user-satisfaction-or-frustration.html">User satisfaction or frustration</a>, <a href="../metrics/conversation-coherence.html">Conversation coherence</a></li><li><span class="st">Nothing found in the pages read.</span> <a href="../metrics/tool-execution-errors.html">Tool execution errors</a>, <a href="../metrics/tool-call-count.html">Tool call count</a>, <a href="../metrics/tool-execution-latency.html">Tool execution latency</a>, <a href="../metrics/cost-breakdown-by-token-type.html">Cost breakdown by token type</a>, <a href="../metrics/trace-run-latency.html">Trace / run latency</a>, <a href="../metrics/time-to-first-token.html">Time to first token</a></li></ul></section>
+  <nav class="pager" aria-label="Previous and next"><a class="prev" href="../tools/laminar.html"><span>Previous</span>Laminar</a><a class="next" href="../tools/deepeval.html"><span>Next</span>DeepEval (with Confident AI)</a></nav>
+</div></article>
+</main>
+<footer><div class="wrap">
+  <p>Companion to the paper “A Catalogue of Observability and Evaluation Metrics for AI Agents” (in preparation). The data, the scripts and a saved copy of every cited
+  page are in the <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop" target="_blank" rel="noopener">repository</a>.</p>
+  <p>Generated from the data on 13 Nov 2026.</p>
+</div></footer>
+<div id="tip" role="tooltip" hidden></div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

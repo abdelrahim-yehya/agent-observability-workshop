@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Arize Phoenix: the agent metrics it ships out of the box.">
+<title>Arize Phoenix · Agent Metrics Catalogue</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html">Agent Metrics Catalogue</a>
+  <nav aria-label="Sections"><a href="../index.html">Taxonomy</a><a href="../metrics.html">Catalogue</a><a href="../coverage.html">Coverage</a><a href="../tools.html" aria-current="page">Tools</a><a href="../method.html">Method</a></nav>
+</div></header>
+<main>
+
+<article class="detail"><div class="wrap">
+  <p class="crumbs"><a href="../tools.html">Tools</a><span>/</span>Open source</p>
+  <h1>Arize Phoenix</h1>
+  <p class="lede">Platform: stores and shows traces, with evaluation or monitoring on top.</p>
+  <p class="gloss">Selected by adoption: at least 5,000 GitHub stars or one million downloads in 30 days. Listed by downloads. Stars and downloads were read on 6 Nov 2026.</p>
+  <div class="tool-facts">
+    <dl><dt>Group</dt><dd>Open source</dd><dt>GitHub stars</dt><dd>12,171</dd><dt>Downloads, 30 days</dt><dd>626k</dd><dt>Independent sources</dt><dd>16</dd><dt>OpenTelemetry</dt><dd>built on it</dd></dl>
+    <div class="cov">
+      <span>Observability</span><span class="bar obs" role="img" aria-label="14 of 18"><i style="width:77.8%"></i></span><span class="num">14 of 18</span>
+      <span>Evaluation</span><span class="bar eval" role="img" aria-label="11 of 28"><i style="width:39.3%"></i></span><span class="num">11 of 28</span>
+    </div>
+  </div>
+  <p class="acts"><a href="https://arize.com/docs/phoenix" target="_blank" rel="noopener">Documentation</a><a href="https://github.com/Arize-ai/phoenix" target="_blank" rel="noopener">GitHub</a><a href="../metrics.html?tool=Arize%20Phoenix">Filter the catalogue by this tool</a></p>
+  <section><h2>Metrics it ships</h2>
+    <p class="gloss">The unique metrics this tool documents as built-in, with the names it gives them. Select a metric for the
+    quotation and the page. The number of metrics is not a quality score.</p>
+    <div class="ship-cols"><div class="obs"><h3><span class="sw"></span>Observability <span class="count">14 metrics</span></h3><h4>Tool use</h4><ul class="ships"><li><a href="../metrics/tool-execution-errors.html#t-arize-phoenix">Tool execution errors</a><span class="names"><code>Tool spans with errors</code></span></li><li><a href="../metrics/tool-call-count.html#t-arize-phoenix">Tool call count</a><span class="names"><code>Tool span counts</code></span></li></ul><h4>Token usage</h4><ul class="ships"><li><a href="../metrics/input-tokens.html#t-arize-phoenix">Input tokens</a><span class="names"><code>Prompt token details</code><code>Token usage</code></span></li><li><a href="../metrics/output-tokens.html#t-arize-phoenix">Output tokens</a><span class="names"><code>Completion token details</code><code>Token usage</code></span></li><li><a href="../metrics/total-tokens.html#t-arize-phoenix">Total tokens</a><span class="names"><code>Top models by tokens</code><code>llm.token_count.total</code></span></li><li><a href="../metrics/cached-tokens.html#t-arize-phoenix">Cached tokens</a><span class="names"><code>Prompt token details</code></span></li><li><a href="../metrics/reasoning-tokens.html#t-arize-phoenix">Reasoning tokens</a><span class="names"><code>Completion token details</code></span></li></ul><h4>Cost</h4><ul class="ships"><li><a href="../metrics/estimated-cost.html#t-arize-phoenix">Estimated cost</a><span class="names"><code>Cost</code><code>Token-based cost tracking</code><code>Top models by cost</code><code>Trace tree row metrics (latency, tokens, cost)</code></span></li><li><a href="../metrics/cost-breakdown-by-token-type.html#t-arize-phoenix">Cost breakdown by token type</a><span class="names"><code>Token and cost charts by token type</code></span></li></ul><h4>Latency</h4><ul class="ships"><li><a href="../metrics/trace-run-latency.html#t-arize-phoenix">Trace / run latency</a><span class="names"><code>Trace Latency</code></span></li><li><a href="../metrics/span-duration.html#t-arize-phoenix">Span duration</a><span class="names"><code>Trace tree row metrics (latency, tokens, cost)</code></span></li></ul><h4>Errors and volume</h4><ul class="ships"><li><a href="../metrics/error-count-rate.html#t-arize-phoenix">Error count / rate</a><span class="names"><code>LLM spans with errors</code><code>Tool spans with errors</code></span></li><li><a href="../metrics/trace-span-count.html#t-arize-phoenix">Trace / span count</a><span class="names"><code>Traces over time</code></span></li><li><a href="../metrics/llm-call-count.html#t-arize-phoenix">LLM call count</a><span class="names"><code>LLM span counts</code></span></li></ul></div><div class="eval"><h3><span class="sw"></span>Evaluation <span class="count">11 metrics</span></h3><h4>Tool use</h4><ul class="ships"><li><a href="../metrics/tool-selection.html#t-arize-phoenix">Tool selection</a><span class="names"><code>Tool Selection</code></span></li><li><a href="../metrics/tool-argument-validity.html#t-arize-phoenix">Tool argument validity</a><span class="names"><code>Tool Invocation</code></span></li><li><a href="../metrics/tool-response-handling.html#t-arize-phoenix">Tool response handling</a><span class="names"><code>Tool Response Handling</code></span></li></ul><h4>Task and goal</h4><ul class="ships"><li><a href="../metrics/task-goal-completion.html#t-arize-phoenix">Task / goal completion</a><span class="names"><code>Completeness</code></span></li></ul><h4>Answer quality</h4><ul class="ships"><li><a href="../metrics/answer-correctness.html#t-arize-phoenix">Answer correctness</a><span class="names"><code>Correctness</code></span></li><li><a href="../metrics/conciseness.html#t-arize-phoenix">Conciseness</a><span class="names"><code>Conciseness</code></span></li></ul><h4>Grounding</h4><ul class="ships"><li><a href="../metrics/faithfulness-to-context.html#t-arize-phoenix">Faithfulness to context</a><span class="names"><code>Faithfulness</code><code>Hallucination</code></span></li></ul><h4>Safety and policy</h4><ul class="ships"><li><a href="../metrics/toxicity.html#t-arize-phoenix">Toxicity</a><span class="names"><code>Toxicity</code></span></li><li><a href="../metrics/sensitive-data-leakage.html#t-arize-phoenix">Sensitive data leakage</a><span class="names"><code>PII Detection</code></span></li><li><a href="../metrics/refusal-detection.html#t-arize-phoenix">Refusal detection</a><span class="names"><code>Refusal</code></span></li></ul><h4>Conversation</h4><ul class="ships"><li><a href="../metrics/user-satisfaction-or-frustration.html#t-arize-phoenix">User satisfaction or frustration</a><span class="names"><code>User Friction</code></span></li></ul></div></div>
+  </section>
+  <section class="others"><h2>The other metrics</h2><ul><li><span class="st">Not shipped. The tool has user-defined evaluators, so it can be built.</span> <a href="../metrics/tool-call-correctness.html">Tool call correctness</a>, <a href="../metrics/tool-call-efficiency.html">Tool call efficiency</a>, <a href="../metrics/plan-quality.html">Plan quality</a>, <a href="../metrics/plan-adherence.html">Plan adherence</a>, <a href="../metrics/trajectory-accuracy.html">Trajectory accuracy</a>, <a href="../metrics/step-action-efficiency.html">Step / action efficiency</a>, <a href="../metrics/action-progress-toward-goal.html">Action progress toward goal</a>, <a href="../metrics/flow-and-reasoning-coherence.html">Flow and reasoning coherence</a>, <a href="../metrics/answer-relevance.html">Answer relevance</a>, <a href="../metrics/helpfulness.html">Helpfulness</a>, <a href="../metrics/tone-appropriateness.html">Tone appropriateness</a>, <a href="../metrics/fluency.html">Fluency</a>, <a href="../metrics/bias-and-fairness.html">Bias and fairness</a>, <a href="../metrics/injection-detection.html">Injection detection</a>, <a href="../metrics/policy-and-moderation-violations.html">Policy and moderation violations</a>, <a href="../metrics/knowledge-retention.html">Knowledge retention</a>, <a href="../metrics/conversation-coherence.html">Conversation coherence</a></li><li><span class="st">Nothing found in the pages read.</span> <a href="../metrics/tool-execution-latency.html">Tool execution latency</a>, <a href="../metrics/step-count.html">Step count</a>, <a href="../metrics/llm-call-latency.html">LLM call latency</a>, <a href="../metrics/time-to-first-token.html">Time to first token</a></li></ul></section>
+  <nav class="pager" aria-label="Previous and next"><a class="prev" href="../tools/opik.html"><span>Previous</span>Opik</a><a class="next" href="../tools/langwatch.html"><span>Next</span>LangWatch</a></nav>
+</div></article>
+</main>
+<footer><div class="wrap">
+  <p>Companion to the paper “A Catalogue of Observability and Evaluation Metrics for AI Agents” (in preparation). The data, the scripts and a saved copy of every cited
+  page are in the <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop" target="_blank" rel="noopener">repository</a>.</p>
+  <p>Generated from the data on 13 Nov 2026.</p>
+</div></footer>
+<div id="tip" role="tooltip" hidden></div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

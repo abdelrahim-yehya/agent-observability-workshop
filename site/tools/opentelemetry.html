@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="OpenTelemetry: the agent metrics it ships out of the box.">
+<title>OpenTelemetry · Agent Metrics Catalogue</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html">Agent Metrics Catalogue</a>
+  <nav aria-label="Sections"><a href="../index.html">Taxonomy</a><a href="../metrics.html">Catalogue</a><a href="../coverage.html">Coverage</a><a href="../tools.html" aria-current="page">Tools</a><a href="../method.html">Method</a></nav>
+</div></header>
+<main>
+
+<article class="detail"><div class="wrap">
+  <p class="crumbs"><a href="../tools.html">Tools</a><span>/</span>Telemetry conventions</p>
+  <h1>OpenTelemetry</h1>
+  <p class="lede">Conventions: telemetry conventions or a library that emits them.</p>
+  <p class="gloss">Telemetry conventions and instrumentation libraries. They name what a trace contains; the tools above are built on them or accept their traces. Stars and downloads were read on 6 Nov 2026.</p>
+  <div class="tool-facts">
+    <dl><dt>Group</dt><dd>Telemetry conventions</dd><dt>Independent sources</dt><dd>10</dd><dt>OpenTelemetry</dt><dd>defines the conventions</dd></dl>
+    <div class="cov">
+      <span>Observability</span><span class="bar obs" role="img" aria-label="10 of 18"><i style="width:55.6%"></i></span><span class="num">10 of 18</span>
+      <span>Evaluation</span><span class="bar eval" role="img" aria-label="0 of 28"><i style="width:0.0%"></i></span><span class="num">0 of 28</span>
+    </div>
+  </div>
+  <p class="acts"><a href="https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-agent-spans.md" target="_blank" rel="noopener">Documentation</a><a href="../metrics.html?tool=OpenTelemetry">Filter the catalogue by this tool</a></p>
+  <section><h2>Metrics it ships</h2>
+    <p class="gloss">The unique metrics this tool documents as built-in, with the names it gives them. Select a metric for the
+    quotation and the page. The number of metrics is not a quality score.</p>
+    <div class="ship-cols"><div class="obs"><h3><span class="sw"></span>Observability <span class="count">11 metrics</span></h3><h4>Tool use</h4><ul class="ships"><li><a href="../metrics/tool-call-count.html#t-opentelemetry">Tool call count</a><span class="names"><code>gen_ai.invoke_agent.tool_calls</code></span></li><li><a href="../metrics/tool-execution-latency.html#t-opentelemetry">Tool execution latency</a><span class="names"><code>gen_ai.execute_tool.duration</code></span></li></ul><h4>Token usage</h4><ul class="ships"><li><a href="../metrics/input-tokens.html#t-opentelemetry">Input tokens</a><span class="names"><code>gen_ai.client.inference.operation.input_tokens</code><code>gen_ai.client.inference.usage.input_tokens</code></span></li><li><a href="../metrics/output-tokens.html#t-opentelemetry">Output tokens</a><span class="names"><code>gen_ai.client.inference.operation.output_tokens</code><code>gen_ai.client.inference.usage.output_tokens</code></span></li><li><a href="../metrics/cached-tokens.html#t-opentelemetry">Cached tokens</a><span class="names"><code>gen_ai.client.inference.usage.cache_read.input_tokens</code><code>gen_ai.client.inference.usage.cache_write.input_tokens</code></span></li><li><a href="../metrics/reasoning-tokens.html#t-opentelemetry">Reasoning tokens</a><span class="names"><code>gen_ai.client.inference.usage.reasoning.output_tokens</code></span></li></ul><h4>Latency</h4><ul class="ships"><li><a href="../metrics/trace-run-latency.html#t-opentelemetry">Trace / run latency</a><span class="names"><code>gen_ai.invoke_agent.duration</code><code>gen_ai.invoke_workflow.duration</code><code>gen_ai.client.invoke_agent.duration</code></span></li><li><a href="../metrics/llm-call-latency.html#t-opentelemetry">LLM call latency</a><span class="names"><code>gen_ai.client.operation.duration</code><code>gen_ai.server.request.duration</code><code>gen_ai.client.inference.duration</code></span></li><li><a href="../metrics/time-to-first-token.html#t-opentelemetry">Time to first token</a><span class="names"><code>gen_ai.server.time_to_first_token</code><code>gen_ai.client.inference.time_to_first_chunk</code></span></li><li><a href="../metrics/time-per-output-token-generation-time.html#t-opentelemetry">Time per output token / generation time</a><span class="names"><code>gen_ai.server.time_per_output_token</code><code>gen_ai.client.inference.time_per_output_chunk</code></span></li></ul><h4>Errors and volume</h4><ul class="ships"><li><a href="../metrics/llm-call-count.html#t-opentelemetry">LLM call count</a><span class="names"><code>gen_ai.invoke_agent.inference_calls</code></span></li></ul></div></div>
+  </section>
+  <section class="others"><h2>The other metrics</h2><ul><li><span class="st">Not shipped. The tool stores scores computed elsewhere.</span> <a href="../metrics/tool-selection.html">Tool selection</a>, <a href="../metrics/tool-argument-validity.html">Tool argument validity</a>, <a href="../metrics/tool-call-correctness.html">Tool call correctness</a>, <a href="../metrics/tool-call-efficiency.html">Tool call efficiency</a>, <a href="../metrics/tool-response-handling.html">Tool response handling</a>, <a href="../metrics/task-goal-completion.html">Task / goal completion</a>, <a href="../metrics/plan-quality.html">Plan quality</a>, <a href="../metrics/plan-adherence.html">Plan adherence</a>, <a href="../metrics/trajectory-accuracy.html">Trajectory accuracy</a>, <a href="../metrics/step-action-efficiency.html">Step / action efficiency</a>, <a href="../metrics/action-progress-toward-goal.html">Action progress toward goal</a>, <a href="../metrics/flow-and-reasoning-coherence.html">Flow and reasoning coherence</a>, <a href="../metrics/answer-correctness.html">Answer correctness</a>, <a href="../metrics/answer-relevance.html">Answer relevance</a>, <a href="../metrics/helpfulness.html">Helpfulness</a>, <a href="../metrics/conciseness.html">Conciseness</a>, <a href="../metrics/tone-appropriateness.html">Tone appropriateness</a>, <a href="../metrics/fluency.html">Fluency</a>, <a href="../metrics/faithfulness-to-context.html">Faithfulness to context</a>, <a href="../metrics/toxicity.html">Toxicity</a>, <a href="../metrics/bias-and-fairness.html">Bias and fairness</a>, <a href="../metrics/sensitive-data-leakage.html">Sensitive data leakage</a>, <a href="../metrics/injection-detection.html">Injection detection</a>, <a href="../metrics/refusal-detection.html">Refusal detection</a>, <a href="../metrics/policy-and-moderation-violations.html">Policy and moderation violations</a>, <a href="../metrics/knowledge-retention.html">Knowledge retention</a>, <a href="../metrics/user-satisfaction-or-frustration.html">User satisfaction or frustration</a>, <a href="../metrics/conversation-coherence.html">Conversation coherence</a></li><li><span class="st">Nothing found in the pages read.</span> <a href="../metrics/tool-execution-errors.html">Tool execution errors</a>, <a href="../metrics/step-count.html">Step count</a>, <a href="../metrics/total-tokens.html">Total tokens</a>, <a href="../metrics/estimated-cost.html">Estimated cost</a>, <a href="../metrics/cost-breakdown-by-token-type.html">Cost breakdown by token type</a>, <a href="../metrics/span-duration.html">Span duration</a>, <a href="../metrics/error-count-rate.html">Error count / rate</a>, <a href="../metrics/trace-span-count.html">Trace / span count</a></li></ul></section>
+  <nav class="pager" aria-label="Previous and next"><a class="prev" href="../tools/weights-biases-weave.html"><span>Previous</span>Weights &amp; Biases Weave</a><a class="next" href="../tools/openllmetry.html"><span>Next</span>OpenLLMetry</a></nav>
+</div></article>
+</main>
+<footer><div class="wrap">
+  <p>Companion to the paper “A Catalogue of Observability and Evaluation Metrics for AI Agents” (in preparation). The data, the scripts and a saved copy of every cited
+  page are in the <a href="https://github.com/abdelrahim-yehya/agent-observability-workshop" target="_blank" rel="noopener">repository</a>.</p>
+  <p>Generated from the data on 13 Nov 2026.</p>
+</div></footer>
+<div id="tip" role="tooltip" hidden></div>
+<script src="../assets/site.js"></script>
+</body>
+</html>
