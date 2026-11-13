@@ -4,7 +4,7 @@
     python3 export_measured_table.py results/turns_<tag>.json
 
 Same rows and cells as plot_measured.py (only the metrics the three tools actually reported, grouped by who
-produced the value), written as a booktabs tabular to ../paper/tables/example_metrics.tex. The paper wraps it in
+produced the value), written as two booktabs tabulars side by side (tracer, evaluators) to ../paper/tables/example_metrics.tex. The paper wraps it in
 a table* environment and adds the caption.
 """
 import csv
@@ -49,17 +49,21 @@ def main(turns_path):
             rows.append(("Recorded by the tracer", m, cells) if "Langfuse" in cells else ("Scored by the evaluators", m, cells))
     rows.sort(key=lambda x: x[0] != "Recorded by the tracer")
 
-    o = [r"\begin{tabular}{@{}lp{1.9in}p{1.55in}p{1.55in}@{}}", r"\toprule",
-         "Metric & " + " & ".join(COLS) + r" \\", r"\midrule"]
-    last = None
-    for g, m, cells in rows:
-        if g != last:
-            if last is not None:
-                o.append(r"\addlinespace[2pt]")
-            o.append(r"\multicolumn{4}{@{}l}{\textit{" + g + r"}} \\")
-            last = g
-        o.append(r"\quad " + tex(m) + " & " + " & ".join(tex(cells.get(c, "--")) for c in COLS) + r" \\")
-    o += [r"\bottomrule", r"\end{tabular}"]
+    # Two tabulars side by side: the tracer's measurements (Langfuse), then the evaluators' scores.
+    # Only the columns that have values are printed in each.
+    parts = [("Recorded by the tracer", ["Langfuse"], r"@{}lp{1.3in}@{}"),
+             ("Scored by the evaluators", ["Phoenix evals", "DeepEval"], r"@{}lll@{}")]
+    o = []
+    for g, cols, spec in parts:
+        if o:
+            o.append(r"\hfill")
+        o += [r"\begin{tabular}[t]{" + spec + "}", r"\toprule",
+              r"\multicolumn{" + str(len(cols) + 1) + r"}{@{}l}{\textit{" + g + r"}} \\", r"\midrule",
+              "Metric & " + " & ".join(cols) + r" \\", r"\midrule"]
+        for gg, m, cells in rows:
+            if gg == g:
+                o.append(tex(m) + " & " + " & ".join(tex(cells.get(c, "--")) for c in cols) + r" \\")
+        o += [r"\bottomrule", r"\end{tabular}"]
     open(OUT, "w", encoding="utf-8").write("\n".join(o) + "\n")
     print(f"{OUT}: {len(rows)} rows")
 

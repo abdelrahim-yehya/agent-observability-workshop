@@ -1,39 +1,47 @@
-\begin{tabular}{@{}lp{1.9in}p{1.55in}p{1.55in}@{}}
+\begin{tabular}[t]{@{}lp{1.3in}@{}}
 \toprule
-Metric & Langfuse & Phoenix evals & DeepEval \\
+\multicolumn{2}{@{}l}{\textit{Recorded by the tracer}} \\
 \midrule
-\multicolumn{4}{@{}l}{\textit{Recorded by the tracer}} \\
-\quad Tool execution errors & 0 of 10 tool calls & -- & -- \\
-\quad Tool call count & 10 in 12 turns & -- & -- \\
-\quad Tool execution latency & median 18 ms & -- & -- \\
-\quad Input tokens & 19,684 & -- & -- \\
-\quad Output tokens & 2,598 & -- & -- \\
-\quad Total tokens & 27,914 & -- & -- \\
-\quad Cached tokens & 0 & -- & -- \\
-\quad Reasoning tokens & 5,632 & -- & -- \\
-\quad Estimated cost & \$0.0214 & -- & -- \\
-\quad Cost breakdown by token type & in \$0.0049; out \$0.0052; reasoning \$0.0113 & -- & -- \\
-\quad Trace / run latency & median 8.8 s per turn & -- & -- \\
-\quad LLM call latency & median 3.0 s & -- & -- \\
-\quad Span duration & on every observation & -- & -- \\
-\quad Error count / rate & 0 error observations & -- & -- \\
-\quad Trace / span count & 12 traces, 44 observations & -- & -- \\
-\quad LLM call count & 22 & -- & -- \\
-\addlinespace[2pt]
-\multicolumn{4}{@{}l}{\textit{Scored by the evaluators}} \\
-\quad Tool selection & -- & 8/10 calls correct & -- \\
-\quad Tool argument validity & -- & 10/10 calls valid & mean 1.00 (n=8) \\
-\quad Tool call correctness & -- & -- & mean 0.88 (n=8) \\
-\quad Tool response handling & -- & 8/8 turns correct & -- \\
-\quad Task / goal completion & -- & 10/12 turns complete & mean 0.71 (n=12) \\
-\quad Answer relevance & -- & -- & mean 0.92 (n=12) \\
-\quad Conciseness & -- & 1/12 turns concise & -- \\
-\quad Faithfulness to context & -- & 7/8 turns faithful & mean 1.00 (n=8) \\
-\quad Toxicity & -- & 0/12 turns toxic & -- \\
-\quad Bias and fairness & -- & -- & mean 1.00 (n=12) \\
-\quad Sensitive data leakage & -- & 0/12 turns flagged & mean 0.99 (n=12) \\
-\quad Refusal detection & -- & 1/11 turns refused & -- \\
-\quad Knowledge retention & -- & -- & mean 1.00 (n=1) \\
-\quad User satisfaction or frustration & -- & 1/12 turns with friction & -- \\
+Metric & Langfuse \\
+\midrule
+Tool execution errors & 0 of 10 tool calls \\
+Tool call count & 10 in 12 turns \\
+Tool execution latency & median 18 ms \\
+Input tokens & 19,684 \\
+Output tokens & 2,598 \\
+Total tokens & 27,914 \\
+Cached tokens & 0 \\
+Reasoning tokens & 5,632 \\
+Estimated cost & \$0.0214 \\
+Cost breakdown by token type & in \$0.0049; out \$0.0052; reasoning \$0.0113 \\
+Trace / run latency & median 8.8 s per turn \\
+LLM call latency & median 3.0 s \\
+Span duration & on every observation \\
+Error count / rate & 0 error observations \\
+Trace / span count & 12 traces, 44 observations \\
+LLM call count & 22 \\
+\bottomrule
+\end{tabular}
+\hfill
+\begin{tabular}[t]{@{}lll@{}}
+\toprule
+\multicolumn{3}{@{}l}{\textit{Scored by the evaluators}} \\
+\midrule
+Metric & Phoenix evals & DeepEval \\
+\midrule
+Tool selection & 8/10 calls correct & -- \\
+Tool argument validity & 10/10 calls valid & mean 1.00 (n=8) \\
+Tool call correctness & -- & mean 0.88 (n=8) \\
+Tool response handling & 8/8 turns correct & -- \\
+Task / goal completion & 10/12 turns complete & mean 0.71 (n=12) \\
+Answer relevance & -- & mean 0.92 (n=12) \\
+Conciseness & 1/12 turns concise & -- \\
+Faithfulness to context & 7/8 turns faithful & mean 1.00 (n=8) \\
+Toxicity & 0/12 turns toxic & -- \\
+Bias and fairness & -- & mean 1.00 (n=12) \\
+Sensitive data leakage & 0/12 turns flagged & mean 0.99 (n=12) \\
+Refusal detection & 1/11 turns refused & -- \\
+Knowledge retention & -- & mean 1.00 (n=1) \\
+User satisfaction or frustration & 1/12 turns with friction & -- \\
 \bottomrule
 \end{tabular}

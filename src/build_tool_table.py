@@ -66,15 +66,19 @@ def grouped():
     return groups
 
 
+# Wording used in the paper; the data keeps the role key "standard".
+LABEL = {"Standards": "Telemetry conventions", "standard": "conventions"}
+
+
 def main():
     groups = grouped()
     out = [r"\begin{tabular}{rlllrrrl}", r"\toprule", r"\# & Tool & Role & Found via & Stars & Downloads & Indep.\ sources & OTel link \\", r"\midrule"]
     for gi, (g, items) in enumerate(groups.items()):
         if gi:
             out.append(r"\midrule")
-        out.append(rf"\multicolumn{{8}}{{@{{}}l}}{{\textit{{{g} ({len(items)})}}}} \\")
+        out.append(rf"\multicolumn{{8}}{{@{{}}l}}{{\textit{{{LABEL.get(g, g)} ({len(items)})}}}} \\")
         for i, (t, b, stars, dl, src) in enumerate(items, 1):
-            out.append(f"{i} & {NAME.get(t, t)}~\\cite{{{CITE[t]}}} & {b['role']} & {FOUND[b['found_via']]} & {fmt_stars(stars)} & {fmt_dl(dl)} & {src} & {OTEL[t]} \\\\")
+            out.append(f"{i} & {NAME.get(t, t)}~\\cite{{{CITE[t]}}} & {LABEL.get(b['role'], b['role'])} & {FOUND[b['found_via']]} & {fmt_stars(stars)} & {fmt_dl(dl)} & {src} & {OTEL[t]} \\\\")
     out += [r"\bottomrule", r"\end{tabular}", ""]
     (ROOT / "paper/tables/tool_table.tex").write_text("\n".join(out), encoding="utf-8")
     print("wrote paper/tables/tool_table.tex:", {g: len(v) for g, v in groups.items()})
