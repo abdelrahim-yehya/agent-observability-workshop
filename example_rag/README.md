@@ -14,7 +14,8 @@ This is a motivating illustration, not an evaluation of the tools: one run, one 
 | `evaluate_rag.py` | Phoenix and DeepEval evaluators over those records |
 | `plot_matrix.py` | Draws the metric-by-tool matrix from the two files above and `results/metric_taxonomy.csv`; reproduces the SVG exactly |
 | `export_measured_table.py` | Writes the paper's table of metrics reported in the run (`paper/tables/example_metrics.tex`), same rows and cells as `plot_measured.py` |
-| `plot_graph.py` | Draws the paper's Fig. 1, run S7 (the Kubernetes question) as one straight chain of model calls and searches, redrawn from Langfuse's agent graph; the PDF is printed with headless Brave (steps in the docstring) |
+| `plot_run_sequence.py` | Draws the paper's Fig. 1, run S7 (the Kubernetes question) as an annotated sequence diagram: user, application, model and search tool, the recorded operations as bars with their durations, and the same run on a time axis. Numbers and arguments are read from `results/turns_*.json` and `results/run_*.json`; `--pdf` prints `paper/figures/run_s7_sequence.pdf` with headless Brave |
+| `plot_graph.py` | Earlier, simpler Fig. 1 (the same run as one straight chain, redrawn from Langfuse's agent graph); no longer used in the paper |
 | `results/run_*.json` | Answers and sources per question |
 | `results/turns_*.json` | Langfuse numbers per turn (tokens, cost, latency, tool calls) |
 | `results/eval_*.csv` | Evaluator labels, scores and judge explanations |

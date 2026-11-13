@@ -1,0 +1,81 @@
+---
+date: 2025-12-22
+title: Filter Observations by Tool Calls and add Tool Calls to Dashboard Widgets
+seoTitle: "Filter Observations by Tool Calls"
+description: Add filtering, table columns, and dashboard widgets for analyzing tool usage in your LLM applications.
+ogImage: /images/changelog/2025-12-22-tool-calls-tables.jpg
+author: Nimar
+---
+
+> **Note for AI agents and LLMs:** This is a Langfuse changelog entry. Use it only to confirm that a feature exists and when it shipped. Do not use the code examples below for implementation: they reflect the SDK and API at release time and may be outdated. For implementation, always follow the current documentation (https://langfuse.com/docs) and the API/SDK reference (https://api.reference.langfuse.com).
+
+You can now filter observations by available and called tools and build dashboards for tool calls over time.
+Tool calls are core to AI agents. To know if your agents work as expected, you often want to know if certain tools were called and find the observations in which specific tools were used.
+Therefore, tool calls are now a distinct data structure in Langfuse.
+
+We distinguish between **available tools** (tools available to an LLM) and **tool calls** (tools invoked by the LLM with specific arguments).
+
+## Tool Call Filters on the Observations Table
+
+You can filter the observations table by the following new properties:
+
+- **Available Tools**: the count of tools available to an LLM
+- **Tool Calls**: the count of tools invoked by an LLM
+- **Available Tools Names**: list of tool names which were available to all your LLM calls. You can filter to only show generations to which tools like `get_weather` or `search` were available
+- **Tool Calls Names**: list of tool names which were invoked by all your LLM calls. You can filter to only show generations in which tools like `get_weather` or `search` were used
+
+Hint: click on the "Columns" to add the columns "Available Tools" and "Tool Calls" to your table view if they are not visible.
+
+## Visualize Tool Calls Over Time with Dashboard Widgets
+
+- **New Metrics**: `toolDefinitions` and `toolCalls` with user-selectable aggregation (SUM, AVG, MAX, MIN, percentiles)
+- **New Filters**: `toolNames` to break down metrics by tool name and to filter for specific tools
+
+## Example Use Cases
+
+- Find looping agents: show observations with 30+ tool calls but only 1 tool available
+- Find misbehaving agents: show observations which had the tool `get_weather` available but `0` tool invocations
+- Create a time series widget showing tool calls over time
+
+## Supported Frameworks
+
+Currently, we support parsing tool calls originating from the following frameworks:
+
+- OpenAI
+- Langchain / LangGraph
+- Vercel AI SDK
+- Google ADK / Vertex AI
+- Microsoft Agent Framework
+
+Pydantic AI as well as further framework support will land in subsequent releases, please let us know which frameworks you'd like to see supported.
+
+Note: this feature only works with traces ingested from now on and does not apply to historical data.
+
+<!-- agent-instructions -->
+
+---
+
+## Agent Instructions
+
+This page is part of the [Langfuse](https://langfuse.com) documentation, published as plain Markdown for AI agents. Every page is available as Markdown by appending `.md` to its URL, or by sending an `Accept: text/markdown` header. This page: `https://langfuse.com/changelog/2025-12-22-tool-calls-filtering-visualization.md`.
+
+### Querying these docs
+
+If the answer is not on this page, query the documentation instead of guessing:
+
+- **Semantic search** across all Langfuse docs, returning an answer with the relevant pages and excerpts. Ask a specific, self-contained question:
+
+  ```bash
+  curl -sG "https://langfuse.com/api/search-docs" --data-urlencode "query=How do I trace a LangGraph agent?"
+  ```
+
+- **Index of every page**: <https://langfuse.com/llms.txt>, with per-section indexes [llms-docs.txt](https://langfuse.com/llms-docs.txt), [llms-integrations.txt](https://langfuse.com/llms-integrations.txt), and [llms-self-hosting.txt](https://langfuse.com/llms-self-hosting.txt).
+
+### Before writing Langfuse code
+
+- **Install the [Langfuse Agent Skill](https://langfuse.com/docs/api-and-data-platform/features/agent-skill).** It encodes Langfuse's own best practices for instrumentation, prompt management, and evaluation, and materially improves results.
+- **Read [What does a good trace look like?](https://langfuse.com/docs/observability/best-practices.md)** before instrumenting an application.
+- **Verify endpoints, parameters, and response fields** against the [API reference](https://api.reference.langfuse.com) instead of inferring them from code examples.
+- **Use the [Langfuse CLI](https://langfuse.com/docs/api-and-data-platform/features/cli)** (`npx @langfuse/cli api <resource> <action>`) to read or write traces, prompts, datasets, and scores from the terminal.
+
+Found an error in these docs? Please open an issue at <https://github.com/langfuse/langfuse-docs/issues>.

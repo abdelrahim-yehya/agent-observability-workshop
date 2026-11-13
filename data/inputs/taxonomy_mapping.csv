@@ -325,3 +325,53 @@ MLflow,RelevanceToQuery,Answer relevance
 MLflow,RetrievalGroundedness,Faithfulness to context
 MLflow,Safety,Toxicity
 MLflow,UserFrustration,User satisfaction or frustration
+Arize Phoenix,"Trace tree row metrics (latency, tokens, cost)",Span duration
+Arize Phoenix,"Trace tree row metrics (latency, tokens, cost)",Estimated cost
+Arize Phoenix,Token and cost charts by token type,Cost breakdown by token type
+Braintrust,Cache hit rate per span,Cached tokens
+DeepEval,"LLM span attributes: cache tokens, reasoning tokens, time to first token (Confident AI)",Cached tokens
+DeepEval,"LLM span attributes: cache tokens, reasoning tokens, time to first token (Confident AI)",Reasoning tokens
+DeepEval,"LLM span attributes: cache tokens, reasoning tokens, time to first token (Confident AI)",Time to first token
+DeepEval,"LLM Analytics: cost, calls, latency and tokens of LLM spans (Confident AI)",Estimated cost
+DeepEval,"LLM Analytics: cost, calls, latency and tokens of LLM spans (Confident AI)",LLM call count
+DeepEval,"LLM Analytics: cost, calls, latency and tokens of LLM spans (Confident AI)",LLM call latency
+DeepEval,"LLM Analytics: cost, calls, latency and tokens of LLM spans (Confident AI)",Total tokens
+DeepEval,Tool Failure Analytics (Confident AI),Tool execution errors
+Galileo,Trace Count (system metric),Trace / span count
+Galileo,"System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens",Estimated cost
+Galileo,"System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens",Trace / run latency
+Galileo,"System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens",Input tokens
+Galileo,"System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens",Output tokens
+Galileo,"System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens",Total tokens
+Helicone,Time-to-First-Token metric,Time to first token
+Langfuse,Tool Calls (toolCalls),Tool call count
+Langfuse,"Observations chart metrics: Count, Latency, Cost, Tokens",Trace / span count
+Langfuse,"Observations chart metrics: Count, Latency, Cost, Tokens",Span duration
+Langfuse,"Observations chart metrics: Count, Latency, Cost, Tokens",Estimated cost
+Langfuse,"Observations chart metrics: Count, Latency, Cost, Tokens",Total tokens
+Langfuse,Home dashboard: traces over time,Trace / span count
+Langfuse,Aggregated latency and cost on spans,Span duration
+Langfuse,Aggregated latency and cost on spans,Estimated cost
+LangSmith,Cache hit rate,Cached tokens
+LangSmith,Cached and reasoning tokens in token and cost tracking,Reasoning tokens
+LangSmith,Cached and reasoning tokens in token and cost tracking,Cached tokens
+MLflow,"Trace Overview dashboard: latency, request count",Trace / span count
+MLflow,"Trace Overview dashboard: latency, request count",Trace / run latency
+MLflow,PIIDetection,Sensitive data leakage
+OpenLLMetry,cache_read.input_tokens and reasoning_tokens (openai-agents instrumentation),Cached tokens
+OpenLLMetry,cache_read.input_tokens and reasoning_tokens (openai-agents instrumentation),Reasoning tokens
+Opik,Time-to-First-Token (TTFT) in ADK integration,Time to first token
+Opik,Bias detection,Bias and fairness
+Opik,PromptInjection metric,Injection detection
+OpenTelemetry,gen_ai.client.inference.duration,LLM call latency
+OpenTelemetry,gen_ai.client.inference.time_to_first_chunk,Time to first token
+OpenTelemetry,gen_ai.client.inference.time_per_output_chunk,Time per output token / generation time
+OpenTelemetry,gen_ai.client.invoke_agent.duration,Trace / run latency
+promptfoo,TokenUsage.numRequests,LLM call count
+promptfoo,TokenUsage thinking (reasoning) tokens,Reasoning tokens
+Weights & Biases Weave,Time to first token (OpenAI streaming),Time to first token
+Weights & Biases Weave,Cache creation and cache read input tokens,Cached tokens
+Weights & Biases Weave,WeaveHallucinationScorer,Faithfulness to context
+Weights & Biases Weave,PresidioEntityRecognitionGuardrail (PII),Sensitive data leakage
+Weights & Biases Weave,PromptInjectionLLMGuardrail,Injection detection
+Weights & Biases Weave,Reasoning output tokens,Reasoning tokens

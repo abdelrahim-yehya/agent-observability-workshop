@@ -2,7 +2,7 @@ type,category,metric,tool,status,tool_specific_names,delivery,doc_url
 Observability,Tool use,Tool execution errors,Arize Phoenix,built-in,Tool spans with errors,automatic telemetry,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Tool use,Tool execution errors,Langfuse,not documented,,,
 Observability,Tool use,Tool execution errors,LangSmith,built-in,"Tool run counts, error rates and latency (prebuilt dashboard)",dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
-Observability,Tool use,Tool execution errors,DeepEval,not documented,,,
+Observability,Tool use,Tool execution errors,DeepEval,built-in,Tool Failure Analytics (Confident AI),dashboard or query,https://www.confident-ai.com/docs/changelog/2026/10/9
 Observability,Tool use,Tool execution errors,OpenTelemetry,not documented,,,
 Observability,Tool use,Tool execution errors,Helicone,not documented,,,
 Observability,Tool use,Tool execution errors,Braintrust,built-in,metrics.tool_errors,dashboard or query,https://www.braintrust.dev/docs/reference/sql/query-structure.md
@@ -16,7 +16,7 @@ Observability,Tool use,Tool execution errors,MLflow,not documented,,,
 Observability,Tool use,Tool execution errors,Laminar,not documented,,,
 Observability,Tool use,Tool execution errors,LangWatch,not documented,,,
 Observability,Tool use,Tool call count,Arize Phoenix,built-in,Tool span counts,automatic telemetry,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
-Observability,Tool use,Tool call count,Langfuse,not documented,,,
+Observability,Tool use,Tool call count,Langfuse,built-in,Tool Calls (toolCalls),dashboard or query,https://langfuse.com/changelog/2025-12-22-tool-calls-filtering-visualization
 Observability,Tool use,Tool call count,LangSmith,built-in,"Tool run counts, error rates and latency (prebuilt dashboard)",dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
 Observability,Tool use,Tool call count,DeepEval,not documented,,,
 Observability,Tool use,Tool call count,OpenTelemetry,built-in,gen_ai.invoke_agent.tool_calls,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-metrics.md
@@ -73,7 +73,7 @@ Observability,Token usage,Input tokens,Braintrust,built-in,metrics.prompt_tokens
 Observability,Token usage,Input tokens,promptfoo,built-in,TokenUsage,automatic telemetry,https://www.promptfoo.dev/docs/configuration/reference/
 Observability,Token usage,Input tokens,OpenLLMetry,built-in,gen_ai.client.token.usage,automatic telemetry,https://raw.githubusercontent.com/traceloop/openllmetry/main/packages/opentelemetry-semantic-conventions-ai/opentelemetry/semconv_ai/__init__.py
 Observability,Token usage,Input tokens,Opik,built-in,Token usage (input/output/total tokens),dashboard or query,https://www.comet.com/docs/opik/tracing/dashboards/dashboards
-Observability,Token usage,Input tokens,Galileo,not documented,,,
+Observability,Token usage,Input tokens,Galileo,built-in,"System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens",dashboard or query,https://docs.galileo.ai/release-notes
 Observability,Token usage,Input tokens,OpenInference,built-in,llm.token_count.prompt,convention,https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md
 Observability,Token usage,Input tokens,Weights & Biases Weave,not documented,,,
 Observability,Token usage,Input tokens,MLflow,built-in,Token usage,automatic telemetry,https://mlflow.org/docs/latest/genai/tracing/token-usage-cost
@@ -89,23 +89,23 @@ Observability,Token usage,Output tokens,Braintrust,built-in,metrics.completion_t
 Observability,Token usage,Output tokens,promptfoo,built-in,TokenUsage,automatic telemetry,https://www.promptfoo.dev/docs/configuration/reference/
 Observability,Token usage,Output tokens,OpenLLMetry,built-in,gen_ai.client.token.usage,automatic telemetry,https://raw.githubusercontent.com/traceloop/openllmetry/main/packages/opentelemetry-semantic-conventions-ai/opentelemetry/semconv_ai/__init__.py
 Observability,Token usage,Output tokens,Opik,built-in,Token usage (input/output/total tokens),dashboard or query,https://www.comet.com/docs/opik/tracing/dashboards/dashboards
-Observability,Token usage,Output tokens,Galileo,not documented,,,
+Observability,Token usage,Output tokens,Galileo,built-in,"System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens",dashboard or query,https://docs.galileo.ai/release-notes
 Observability,Token usage,Output tokens,OpenInference,built-in,llm.token_count.completion,convention,https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md
 Observability,Token usage,Output tokens,Weights & Biases Weave,not documented,,,
 Observability,Token usage,Output tokens,MLflow,built-in,Token usage,automatic telemetry,https://mlflow.org/docs/latest/genai/tracing/token-usage-cost
 Observability,Token usage,Output tokens,Laminar,built-in,LLM span token usage and cost,automatic telemetry,https://laminar.sh/docs/tracing/cost-tracking
 Observability,Token usage,Output tokens,LangWatch,built-in,"Token usage (input, output, cached, reasoning)",automatic telemetry,https://langwatch.ai/docs/integration/python/tutorials/tracking-llm-costs
 Observability,Token usage,Total tokens,Arize Phoenix,built-in,Top models by tokens | llm.token_count.total,automatic telemetry; dashboard or query,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
-Observability,Token usage,Total tokens,Langfuse,not documented,,,
+Observability,Token usage,Total tokens,Langfuse,built-in,"Observations chart metrics: Count, Latency, Cost, Tokens",dashboard or query,https://langfuse.com/docs/observability/features/events-table-charts
 Observability,Token usage,Total tokens,LangSmith,built-in,Automatic token and cost recording | Tokens (dashboard metric),automatic telemetry; dashboard or query,https://docs.langchain.com/langsmith/cost-tracking.md
-Observability,Token usage,Total tokens,DeepEval,built-in,"Widget aggregation measures (API): count, latency, error, cost and token measures",dashboard or query,https://www.confident-ai.com/docs/reference/api/v2/dashboards/widgets/create-widget
+Observability,Token usage,Total tokens,DeepEval,built-in,"Widget aggregation measures (API): count, latency, error, cost and token measures | LLM Analytics: cost, calls, latency and tokens of LLM spans (Confident AI)",dashboard or query,https://www.confident-ai.com/docs/reference/api/v2/dashboards/widgets/create-widget
 Observability,Token usage,Total tokens,OpenTelemetry,not documented,,,
 Observability,Token usage,Total tokens,Helicone,built-in,"prompt_tokens, completion_tokens, total_tokens",dashboard or query,https://docs.helicone.ai/features/hql
 Observability,Token usage,Total tokens,Braintrust,built-in,metrics.total_tokens,dashboard or query,https://www.braintrust.dev/docs/reference/sql/examples.md
 Observability,Token usage,Total tokens,promptfoo,built-in,TokenUsage,automatic telemetry,https://www.promptfoo.dev/docs/configuration/reference/
 Observability,Token usage,Total tokens,OpenLLMetry,built-in,llm.watsonx.completions.tokens,automatic telemetry,https://raw.githubusercontent.com/traceloop/openllmetry/main/packages/opentelemetry-semantic-conventions-ai/opentelemetry/semconv_ai/__init__.py
 Observability,Token usage,Total tokens,Opik,built-in,Token usage (input/output/total tokens),dashboard or query,https://www.comet.com/docs/opik/tracing/dashboards/dashboards
-Observability,Token usage,Total tokens,Galileo,not documented,,,
+Observability,Token usage,Total tokens,Galileo,built-in,"System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens",dashboard or query,https://docs.galileo.ai/release-notes
 Observability,Token usage,Total tokens,OpenInference,built-in,llm.token_count.total,convention,https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md
 Observability,Token usage,Total tokens,Weights & Biases Weave,built-in,Token usage and cost (automatic),automatic telemetry,https://docs.coreweave.com/products/wandb/weave/guides/tracking/costs
 Observability,Token usage,Total tokens,MLflow,built-in,Token usage,automatic telemetry,https://mlflow.org/docs/latest/genai/tracing/token-usage-cost
@@ -113,53 +113,53 @@ Observability,Token usage,Total tokens,Laminar,built-in,Dashboard preset: Spans,
 Observability,Token usage,Total tokens,LangWatch,not documented,,,
 Observability,Token usage,Cached tokens,Arize Phoenix,built-in,Prompt token details,automatic telemetry,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Token usage,Cached tokens,Langfuse,not documented,,,
-Observability,Token usage,Cached tokens,LangSmith,not documented,,,
-Observability,Token usage,Cached tokens,DeepEval,not documented,,,
+Observability,Token usage,Cached tokens,LangSmith,built-in,Cache hit rate | Cached and reasoning tokens in token and cost tracking,automatic telemetry; dashboard or query,https://docs.langchain.com/langsmith/changelog
+Observability,Token usage,Cached tokens,DeepEval,built-in,"LLM span attributes: cache tokens, reasoning tokens, time to first token (Confident AI)",automatic telemetry,https://www.confident-ai.com/docs/changelog/2026/11/6
 Observability,Token usage,Cached tokens,OpenTelemetry,built-in,gen_ai.client.inference.usage.cache_read.input_tokens | gen_ai.client.inference.usage.cache_write.input_tokens,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-token-metrics.md
 Observability,Token usage,Cached tokens,Helicone,built-in,Alert metrics: Prompt Cache Read / Write,dashboard or query,https://docs.helicone.ai/features/alerts
-Observability,Token usage,Cached tokens,Braintrust,built-in,metrics.prompt_cached_tokens | metrics.prompt_cache_creation_tokens,dashboard or query,https://www.braintrust.dev/docs/reference/sql/query-structure.md
+Observability,Token usage,Cached tokens,Braintrust,built-in,metrics.prompt_cached_tokens | metrics.prompt_cache_creation_tokens | Cache hit rate per span,dashboard or query,https://www.braintrust.dev/docs/reference/sql/query-structure.md
 Observability,Token usage,Cached tokens,promptfoo,built-in,TokenUsage,automatic telemetry,https://www.promptfoo.dev/docs/configuration/reference/
-Observability,Token usage,Cached tokens,OpenLLMetry,not documented,,,
+Observability,Token usage,Cached tokens,OpenLLMetry,built-in,cache_read.input_tokens and reasoning_tokens (openai-agents instrumentation),automatic telemetry,https://github.com/traceloop/openllmetry/blob/main/CHANGELOG.md
 Observability,Token usage,Cached tokens,Opik,not documented,,,
 Observability,Token usage,Cached tokens,Galileo,not documented,,,
 Observability,Token usage,Cached tokens,OpenInference,built-in,llm.token_count.prompt_details.cache_read | llm.token_count.prompt_details.cache_write,convention,https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md
-Observability,Token usage,Cached tokens,Weights & Biases Weave,not documented,,,
+Observability,Token usage,Cached tokens,Weights & Biases Weave,built-in,Cache creation and cache read input tokens,automatic telemetry,https://github.com/wandb/weave/releases/tag/v0.52.42
 Observability,Token usage,Cached tokens,MLflow,not documented,,,
 Observability,Token usage,Cached tokens,Laminar,built-in,"Per-kind token pricing (input, output, cache read, cache write, reasoning)",automatic telemetry,https://laminar.sh/docs/tracing/cost-tracking
 Observability,Token usage,Cached tokens,LangWatch,built-in,"Token usage (input, output, cached, reasoning)",automatic telemetry,https://langwatch.ai/docs/integration/python/tutorials/tracking-llm-costs
 Observability,Token usage,Reasoning tokens,Arize Phoenix,built-in,Completion token details,automatic telemetry,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Token usage,Reasoning tokens,Langfuse,not documented,,,
-Observability,Token usage,Reasoning tokens,LangSmith,not documented,,,
-Observability,Token usage,Reasoning tokens,DeepEval,not documented,,,
+Observability,Token usage,Reasoning tokens,LangSmith,built-in,Cached and reasoning tokens in token and cost tracking,automatic telemetry,https://docs.langchain.com/langsmith/changelog
+Observability,Token usage,Reasoning tokens,DeepEval,built-in,"LLM span attributes: cache tokens, reasoning tokens, time to first token (Confident AI)",automatic telemetry,https://www.confident-ai.com/docs/changelog/2026/11/6
 Observability,Token usage,Reasoning tokens,OpenTelemetry,built-in,gen_ai.client.inference.usage.reasoning.output_tokens,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-token-metrics.md
 Observability,Token usage,Reasoning tokens,Helicone,not documented,,,
 Observability,Token usage,Reasoning tokens,Braintrust,not documented,,,
-Observability,Token usage,Reasoning tokens,promptfoo,not documented,,,
-Observability,Token usage,Reasoning tokens,OpenLLMetry,not documented,,,
+Observability,Token usage,Reasoning tokens,promptfoo,built-in,TokenUsage thinking (reasoning) tokens,automatic telemetry,https://github.com/promptfoo/promptfoo/blob/main/CHANGELOG.md
+Observability,Token usage,Reasoning tokens,OpenLLMetry,built-in,cache_read.input_tokens and reasoning_tokens (openai-agents instrumentation),automatic telemetry,https://github.com/traceloop/openllmetry/blob/main/CHANGELOG.md
 Observability,Token usage,Reasoning tokens,Opik,not documented,,,
 Observability,Token usage,Reasoning tokens,Galileo,not documented,,,
 Observability,Token usage,Reasoning tokens,OpenInference,built-in,llm.token_count.completion_details.reasoning,convention,https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md
-Observability,Token usage,Reasoning tokens,Weights & Biases Weave,not documented,,,
+Observability,Token usage,Reasoning tokens,Weights & Biases Weave,built-in,Reasoning output tokens,automatic telemetry,https://github.com/wandb/weave/releases/tag/v0.52.42
 Observability,Token usage,Reasoning tokens,MLflow,not documented,,,
 Observability,Token usage,Reasoning tokens,Laminar,built-in,"Per-kind token pricing (input, output, cache read, cache write, reasoning)",automatic telemetry,https://laminar.sh/docs/tracing/cost-tracking
 Observability,Token usage,Reasoning tokens,LangWatch,built-in,"Token usage (input, output, cached, reasoning)",automatic telemetry,https://langwatch.ai/docs/integration/python/tutorials/tracking-llm-costs
-Observability,Cost,Estimated cost,Arize Phoenix,built-in,Cost | Token-based cost tracking | Top models by cost,automatic telemetry; dashboard or query,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
-Observability,Cost,Estimated cost,Langfuse,built-in,Cost details | Inferred cost | totalCost,automatic telemetry; dashboard or query,https://langfuse.com/docs/observability/features/token-and-cost-tracking
+Observability,Cost,Estimated cost,Arize Phoenix,built-in,"Cost | Token-based cost tracking | Top models by cost | Trace tree row metrics (latency, tokens, cost)",automatic telemetry; dashboard or query,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
+Observability,Cost,Estimated cost,Langfuse,built-in,"Cost details | Inferred cost | totalCost | Observations chart metrics: Count, Latency, Cost, Tokens | Aggregated latency and cost on spans",automatic telemetry; dashboard or query,https://langfuse.com/docs/observability/features/token-and-cost-tracking
 Observability,Cost,Estimated cost,LangSmith,built-in,Automatic token and cost recording | Cost & Tokens (prebuilt dashboard) | Cost (dashboard metric),automatic telemetry; dashboard or query,https://docs.langchain.com/langsmith/cost-tracking.md
-Observability,Cost,Estimated cost,DeepEval,built-in,"Drift overlay: Cost | Alert aggregations: trace count, error rate, average latency, token cost | LLM span cost: per-token, model and inferred cost | Widget aggregation measures (API): count, latency, error, cost and token measures",automatic telemetry; dashboard or query,https://www.confident-ai.com/docs/llm-tracing/features/monitors
+Observability,Cost,Estimated cost,DeepEval,built-in,"Drift overlay: Cost | Alert aggregations: trace count, error rate, average latency, token cost | LLM span cost: per-token, model and inferred cost | Widget aggregation measures (API): count, latency, error, cost and token measures | LLM Analytics: cost, calls, latency and tokens of LLM spans (Confident AI)",automatic telemetry; dashboard or query,https://www.confident-ai.com/docs/llm-tracing/features/monitors
 Observability,Cost,Estimated cost,OpenTelemetry,not documented,,,
 Observability,Cost,Estimated cost,Helicone,built-in,cost / provider_total_cost,dashboard or query,https://docs.helicone.ai/features/hql
 Observability,Cost,Estimated cost,Braintrust,built-in,estimated_cost,dashboard or query,https://www.braintrust.dev/docs/reference/sql/functions.md
 Observability,Cost,Estimated cost,promptfoo,built-in,PromptMetrics.cost | cost,automatic telemetry,https://www.promptfoo.dev/docs/configuration/reference/
 Observability,Cost,Estimated cost,OpenLLMetry,not documented,,,
 Observability,Cost,Estimated cost,Opik,built-in,Estimated cost,automatic telemetry,https://www.comet.com/docs/opik/tracing/advanced/cost_tracking
-Observability,Cost,Estimated cost,Galileo,not documented,,,
+Observability,Cost,Estimated cost,Galileo,built-in,"System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens",dashboard or query,https://docs.galileo.ai/release-notes
 Observability,Cost,Estimated cost,OpenInference,built-in,llm.cost.total,convention,https://github.com/Arize-ai/openinference/blob/main/spec/semantic_conventions.md
 Observability,Cost,Estimated cost,Weights & Biases Weave,built-in,Token usage and cost (automatic),automatic telemetry,https://docs.coreweave.com/products/wandb/weave/guides/tracking/costs
 Observability,Cost,Estimated cost,MLflow,built-in,Cost,automatic telemetry,https://mlflow.org/docs/latest/genai/tracing/token-usage-cost
 Observability,Cost,Estimated cost,Laminar,built-in,LLM span token usage and cost | Dashboard preset: Traces | Dashboard preset: Spans,automatic telemetry; dashboard or query,https://laminar.sh/docs/tracing/cost-tracking
 Observability,Cost,Estimated cost,LangWatch,built-in,LLM cost from the model price registry,automatic telemetry,https://langwatch.ai/docs/integration/python/tutorials/tracking-llm-costs
-Observability,Cost,Cost breakdown by token type,Arize Phoenix,not documented,,,
+Observability,Cost,Cost breakdown by token type,Arize Phoenix,built-in,Token and cost charts by token type,dashboard or query,https://arize.com/docs/phoenix/release-notes/07-2026/07-28-2026-experiment-charts-span-downloads-and-root-span-filters
 Observability,Cost,Cost breakdown by token type,Langfuse,built-in,Cost details,automatic telemetry,https://langfuse.com/docs/observability/features/token-and-cost-tracking
 Observability,Cost,Cost breakdown by token type,LangSmith,built-in,Cost & Tokens (prebuilt dashboard) | Cost (dashboard metric),dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
 Observability,Cost,Cost breakdown by token type,DeepEval,built-in,"LLM span cost: per-token, model and inferred cost | Widget aggregation measures (API): count, latency, error, cost and token measures",automatic telemetry; dashboard or query,https://www.confident-ai.com/docs/llm-tracing/features/token-usage-cost
@@ -179,23 +179,23 @@ Observability,Latency,Trace / run latency,Arize Phoenix,built-in,Trace Latency,d
 Observability,Latency,Trace / run latency,Langfuse,built-in,latency,automatic telemetry,https://langfuse.com/docs/observability/overview
 Observability,Latency,Trace / run latency,LangSmith,built-in,"Latency (dashboard metric) | Trace count, latency and error rates (prebuilt dashboard)",dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
 Observability,Latency,Trace / run latency,DeepEval,built-in,"Drift overlay: Latency | Dashboard aggregations: Count, Average latency, P95 latency | Alert aggregations: trace count, error rate, average latency, token cost | Widget aggregation measures (API): count, latency, error, cost and token measures",dashboard or query,https://www.confident-ai.com/docs/llm-tracing/features/monitors
-Observability,Latency,Trace / run latency,OpenTelemetry,built-in,gen_ai.invoke_agent.duration | gen_ai.invoke_workflow.duration,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-metrics.md
+Observability,Latency,Trace / run latency,OpenTelemetry,built-in,gen_ai.invoke_agent.duration | gen_ai.invoke_workflow.duration | gen_ai.client.invoke_agent.duration,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-metrics.md
 Observability,Latency,Trace / run latency,Helicone,not documented,,,
 Observability,Latency,Trace / run latency,Braintrust,built-in,metrics.duration,dashboard or query,https://www.braintrust.dev/docs/reference/sql/query-structure.md
 Observability,Latency,Trace / run latency,promptfoo,not documented,,,
 Observability,Latency,Trace / run latency,OpenLLMetry,not documented,,,
 Observability,Latency,Trace / run latency,Opik,built-in,"Latency (trace duration, span duration, p50/p90/p99)",dashboard or query,https://www.comet.com/docs/opik/tracing/dashboards/dashboards
-Observability,Latency,Trace / run latency,Galileo,not documented,,,
+Observability,Latency,Trace / run latency,Galileo,built-in,"System metrics on the Trends page: Cost, Latency, Input Tokens, Output Tokens, Total Tokens",dashboard or query,https://docs.galileo.ai/release-notes
 Observability,Latency,Trace / run latency,OpenInference,not documented,,,
 Observability,Latency,Trace / run latency,Weights & Biases Weave,not documented,,,
-Observability,Latency,Trace / run latency,MLflow,not documented,,,
+Observability,Latency,Trace / run latency,MLflow,built-in,"Trace Overview dashboard: latency, request count",dashboard or query,https://github.com/mlflow/mlflow/releases/tag/v3.9.0
 Observability,Latency,Trace / run latency,Laminar,built-in,Dashboard preset: Traces,dashboard or query,https://laminar.sh/docs/platform/dashboards
 Observability,Latency,Trace / run latency,LangWatch,not documented,,,
 Observability,Latency,LLM call latency,Arize Phoenix,not documented,,,
 Observability,Latency,LLM call latency,Langfuse,not documented,,,
 Observability,Latency,LLM call latency,LangSmith,built-in,LLM call count and latency (prebuilt dashboard),dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
-Observability,Latency,LLM call latency,DeepEval,not documented,,,
-Observability,Latency,LLM call latency,OpenTelemetry,built-in,gen_ai.client.operation.duration | gen_ai.server.request.duration,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-metrics.md
+Observability,Latency,LLM call latency,DeepEval,built-in,"LLM Analytics: cost, calls, latency and tokens of LLM spans (Confident AI)",dashboard or query,https://www.confident-ai.com/docs/changelog/2026/10/30
+Observability,Latency,LLM call latency,OpenTelemetry,built-in,gen_ai.client.operation.duration | gen_ai.server.request.duration | gen_ai.client.inference.duration,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-metrics.md
 Observability,Latency,LLM call latency,Helicone,built-in,Alert metric: Latency,dashboard or query,https://docs.helicone.ai/features/alerts
 Observability,Latency,LLM call latency,Braintrust,built-in,metrics.llm_duration,dashboard or query,https://www.braintrust.dev/docs/reference/sql/query-structure.md
 Observability,Latency,LLM call latency,promptfoo,built-in,PromptMetrics.totalLatencyMs | latency,automatic telemetry,https://www.promptfoo.dev/docs/configuration/reference/
@@ -207,8 +207,8 @@ Observability,Latency,LLM call latency,Weights & Biases Weave,not documented,,,
 Observability,Latency,LLM call latency,MLflow,not documented,,,
 Observability,Latency,LLM call latency,Laminar,not documented,,,
 Observability,Latency,LLM call latency,LangWatch,not documented,,,
-Observability,Latency,Span duration,Arize Phoenix,not documented,,,
-Observability,Latency,Span duration,Langfuse,not documented,,,
+Observability,Latency,Span duration,Arize Phoenix,built-in,"Trace tree row metrics (latency, tokens, cost)",dashboard or query,https://arize.com/docs/phoenix/release-notes/09-2026/09-29-2026-editable-dataset-examples-and-trace-metrics
+Observability,Latency,Span duration,Langfuse,built-in,"Observations chart metrics: Count, Latency, Cost, Tokens | Aggregated latency and cost on spans",automatic telemetry; dashboard or query,https://langfuse.com/docs/observability/features/events-table-charts
 Observability,Latency,Span duration,LangSmith,not documented,,,
 Observability,Latency,Span duration,DeepEval,not documented,,,
 Observability,Latency,Span duration,OpenTelemetry,not documented,,,
@@ -226,16 +226,16 @@ Observability,Latency,Span duration,LangWatch,not documented,,,
 Observability,Latency,Time to first token,Arize Phoenix,not documented,,,
 Observability,Latency,Time to first token,Langfuse,built-in,completion_start_time (time to first token),automatic telemetry,https://langfuse.com/docs/observability/sdk/advanced-features
 Observability,Latency,Time to first token,LangSmith,built-in,Time to first token (dashboard metric),dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
-Observability,Latency,Time to first token,DeepEval,not documented,,,
-Observability,Latency,Time to first token,OpenTelemetry,built-in,gen_ai.server.time_to_first_token,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-metrics.md
-Observability,Latency,Time to first token,Helicone,not documented,,,
+Observability,Latency,Time to first token,DeepEval,built-in,"LLM span attributes: cache tokens, reasoning tokens, time to first token (Confident AI)",automatic telemetry,https://www.confident-ai.com/docs/changelog/2026/11/6
+Observability,Latency,Time to first token,OpenTelemetry,built-in,gen_ai.server.time_to_first_token | gen_ai.client.inference.time_to_first_chunk,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-metrics.md
+Observability,Latency,Time to first token,Helicone,built-in,Time-to-First-Token metric,dashboard or query,https://helicone.ai/changelog/20250305-helicone-log-builder
 Observability,Latency,Time to first token,Braintrust,built-in,Time to first token,dashboard or query,https://www.braintrust.dev/docs/observe/dashboards/build-charts.md
 Observability,Latency,Time to first token,promptfoo,not documented,,,
 Observability,Latency,Time to first token,OpenLLMetry,not documented,,,
-Observability,Latency,Time to first token,Opik,not documented,,,
+Observability,Latency,Time to first token,Opik,built-in,Time-to-First-Token (TTFT) in ADK integration,automatic telemetry,https://www.comet.com/docs/opik/changelog/2026/1/27
 Observability,Latency,Time to first token,Galileo,not documented,,,
 Observability,Latency,Time to first token,OpenInference,not documented,,,
-Observability,Latency,Time to first token,Weights & Biases Weave,not documented,,,
+Observability,Latency,Time to first token,Weights & Biases Weave,built-in,Time to first token (OpenAI streaming),automatic telemetry,https://github.com/wandb/weave/releases/tag/v0.52.4
 Observability,Latency,Time to first token,MLflow,not documented,,,
 Observability,Latency,Time to first token,Laminar,not documented,,,
 Observability,Latency,Time to first token,LangWatch,built-in,Time to first token (TTFT),automatic telemetry,https://langwatch.ai/docs/integration/python/tutorials/tracking-time-to-first-token
@@ -256,7 +256,7 @@ Observability,Errors and volume,Error count / rate,MLflow,not documented,,,
 Observability,Errors and volume,Error count / rate,Laminar,not documented,,,
 Observability,Errors and volume,Error count / rate,LangWatch,not documented,,,
 Observability,Errors and volume,Trace / span count,Arize Phoenix,built-in,Traces over time,dashboard or query,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
-Observability,Errors and volume,Trace / span count,Langfuse,not documented,,,
+Observability,Errors and volume,Trace / span count,Langfuse,built-in,"Observations chart metrics: Count, Latency, Cost, Tokens | Home dashboard: traces over time",dashboard or query,https://langfuse.com/docs/observability/features/events-table-charts
 Observability,Errors and volume,Trace / span count,LangSmith,built-in,"Trace count, latency and error rates (prebuilt dashboard)",dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
 Observability,Errors and volume,Trace / span count,DeepEval,built-in,"Dashboard aggregations: Count, Average latency, P95 latency | Alert aggregations: trace count, error rate, average latency, token cost | Widget aggregation measures (API): count, latency, error, cost and token measures",dashboard or query,https://www.confident-ai.com/docs/customizations/dashboards
 Observability,Errors and volume,Trace / span count,OpenTelemetry,not documented,,,
@@ -265,20 +265,20 @@ Observability,Errors and volume,Trace / span count,Braintrust,not documented,,,
 Observability,Errors and volume,Trace / span count,promptfoo,built-in,trace-span-count,built-in evaluator,https://www.promptfoo.dev/docs/configuration/expected-outputs/deterministic/
 Observability,Errors and volume,Trace / span count,OpenLLMetry,not documented,,,
 Observability,Errors and volume,Trace / span count,Opik,built-in,Trace count / error count,dashboard or query,https://www.comet.com/docs/opik/tracing/dashboards/dashboards
-Observability,Errors and volume,Trace / span count,Galileo,not documented,,,
+Observability,Errors and volume,Trace / span count,Galileo,built-in,Trace Count (system metric),automatic telemetry,https://docs.galileo.ai/release-notes
 Observability,Errors and volume,Trace / span count,OpenInference,not documented,,,
 Observability,Errors and volume,Trace / span count,Weights & Biases Weave,not documented,,,
-Observability,Errors and volume,Trace / span count,MLflow,not documented,,,
+Observability,Errors and volume,Trace / span count,MLflow,built-in,"Trace Overview dashboard: latency, request count",dashboard or query,https://github.com/mlflow/mlflow/releases/tag/v3.9.0
 Observability,Errors and volume,Trace / span count,Laminar,built-in,Dashboard preset: Traces,dashboard or query,https://laminar.sh/docs/platform/dashboards
 Observability,Errors and volume,Trace / span count,LangWatch,not documented,,,
 Observability,Errors and volume,LLM call count,Arize Phoenix,built-in,LLM span counts,automatic telemetry,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
 Observability,Errors and volume,LLM call count,Langfuse,not documented,,,
 Observability,Errors and volume,LLM call count,LangSmith,built-in,LLM call count and latency (prebuilt dashboard),dashboard or query,https://docs.langchain.com/langsmith/dashboards.md
-Observability,Errors and volume,LLM call count,DeepEval,not documented,,,
+Observability,Errors and volume,LLM call count,DeepEval,built-in,"LLM Analytics: cost, calls, latency and tokens of LLM spans (Confident AI)",dashboard or query,https://www.confident-ai.com/docs/changelog/2026/10/30
 Observability,Errors and volume,LLM call count,OpenTelemetry,built-in,gen_ai.invoke_agent.inference_calls,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-metrics.md
 Observability,Errors and volume,LLM call count,Helicone,built-in,Alert metric: Count,dashboard or query,https://docs.helicone.ai/features/alerts
 Observability,Errors and volume,LLM call count,Braintrust,built-in,metrics.llm_calls,dashboard or query,https://www.braintrust.dev/docs/reference/sql/query-structure.md
-Observability,Errors and volume,LLM call count,promptfoo,not documented,,,
+Observability,Errors and volume,LLM call count,promptfoo,built-in,TokenUsage.numRequests,automatic telemetry,https://github.com/promptfoo/promptfoo/blob/main/CHANGELOG.md
 Observability,Errors and volume,LLM call count,OpenLLMetry,not documented,,,
 Observability,Errors and volume,LLM call count,Opik,not documented,,,
 Observability,Errors and volume,LLM call count,Galileo,not documented,,,
@@ -587,7 +587,7 @@ Evaluation,Grounding,Faithfulness to context,OpenLLMetry,not documented,,,
 Evaluation,Grounding,Faithfulness to context,Opik,built-in,Hallucination,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/overview
 Evaluation,Grounding,Faithfulness to context,Galileo,built-in,Context Adherence,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Grounding,Faithfulness to context,OpenInference,records scores,,,
-Evaluation,Grounding,Faithfulness to context,Weights & Biases Weave,built-in,HallucinationFreeScorer,built-in evaluator,https://docs.coreweave.com/products/wandb/weave/guides/evaluation/builtin_scorers
+Evaluation,Grounding,Faithfulness to context,Weights & Biases Weave,built-in,HallucinationFreeScorer | WeaveHallucinationScorer,built-in evaluator,https://docs.coreweave.com/products/wandb/weave/guides/evaluation/builtin_scorers
 Evaluation,Grounding,Faithfulness to context,MLflow,built-in,RetrievalGroundedness,built-in evaluator,https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/predefined
 Evaluation,Grounding,Faithfulness to context,Laminar,generic custom,,,
 Evaluation,Grounding,Faithfulness to context,LangWatch,built-in,Ragas Faithfulness,built-in evaluator,https://langwatch.ai/docs/evaluations/evaluators/list
@@ -616,7 +616,7 @@ Evaluation,Safety and policy,Bias and fairness,Helicone,records scores,,,
 Evaluation,Safety and policy,Bias and fairness,Braintrust,generic custom,,,
 Evaluation,Safety and policy,Bias and fairness,promptfoo,generic custom,,,
 Evaluation,Safety and policy,Bias and fairness,OpenLLMetry,not documented,,,
-Evaluation,Safety and policy,Bias and fairness,Opik,generic custom,,,
+Evaluation,Safety and policy,Bias and fairness,Opik,built-in,Bias detection,built-in evaluator,https://www.comet.com/docs/opik/changelog/2025/11/18
 Evaluation,Safety and policy,Bias and fairness,Galileo,built-in,Sexism / Bias,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Safety and policy,Bias and fairness,OpenInference,records scores,,,
 Evaluation,Safety and policy,Bias and fairness,Weights & Biases Weave,generic custom,,,
@@ -635,8 +635,8 @@ Evaluation,Safety and policy,Sensitive data leakage,OpenLLMetry,not documented,,
 Evaluation,Safety and policy,Sensitive data leakage,Opik,generic custom,,,
 Evaluation,Safety and policy,Sensitive data leakage,Galileo,built-in,PII / CPNI / PHI,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Safety and policy,Sensitive data leakage,OpenInference,records scores,,,
-Evaluation,Safety and policy,Sensitive data leakage,Weights & Biases Weave,generic custom,,,
-Evaluation,Safety and policy,Sensitive data leakage,MLflow,generic custom,,,
+Evaluation,Safety and policy,Sensitive data leakage,Weights & Biases Weave,built-in,PresidioEntityRecognitionGuardrail (PII),built-in evaluator,https://github.com/wandb/weave/releases/tag/v0.51.34
+Evaluation,Safety and policy,Sensitive data leakage,MLflow,built-in,PIIDetection,built-in evaluator,https://github.com/mlflow/mlflow/releases/tag/v3.14.0
 Evaluation,Safety and policy,Sensitive data leakage,Laminar,generic custom,,,
 Evaluation,Safety and policy,Sensitive data leakage,LangWatch,built-in,PII Detection,built-in evaluator,https://langwatch.ai/docs/evaluations/evaluators/list
 Evaluation,Safety and policy,Injection detection,Arize Phoenix,generic custom,,,
@@ -648,10 +648,10 @@ Evaluation,Safety and policy,Injection detection,Helicone,records scores,,,
 Evaluation,Safety and policy,Injection detection,Braintrust,generic custom,,,
 Evaluation,Safety and policy,Injection detection,promptfoo,generic custom,,,
 Evaluation,Safety and policy,Injection detection,OpenLLMetry,not documented,,,
-Evaluation,Safety and policy,Injection detection,Opik,generic custom,,,
+Evaluation,Safety and policy,Injection detection,Opik,built-in,PromptInjection metric,built-in evaluator,https://www.comet.com/docs/opik/changelog/2026/10/5
 Evaluation,Safety and policy,Injection detection,Galileo,built-in,Prompt Injection | SQL Injection,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Safety and policy,Injection detection,OpenInference,records scores,,,
-Evaluation,Safety and policy,Injection detection,Weights & Biases Weave,generic custom,,,
+Evaluation,Safety and policy,Injection detection,Weights & Biases Weave,built-in,PromptInjectionLLMGuardrail,built-in evaluator,https://github.com/wandb/weave/releases/tag/v0.51.33
 Evaluation,Safety and policy,Injection detection,MLflow,generic custom,,,
 Evaluation,Safety and policy,Injection detection,Laminar,generic custom,,,
 Evaluation,Safety and policy,Injection detection,LangWatch,built-in,Prompt Injection Detection | Jailbreak Detection,built-in evaluator,https://langwatch.ai/docs/evaluations/evaluators/list

@@ -96,6 +96,20 @@ and A1 are unchanged.
   Google sources; the paper reports the two groups apart. `results/best_tools.csv` keeps the earlier key until the new
   tools' metrics are collected.
 
+## Amendment 2026-11-11: changelogs count as official documentation (metric collection)
+Made after the first collection, when the author saw a tool-call count in the Langfuse product that no documentation page read
+described; it is announced only in a changelog entry (2025-12-22). User's decision: changelog and release-notes pages published by
+the vendor (site changelog, GitHub Releases, CHANGELOG.md) are official documentation for metric collection, for all 16 entries.
+- Procedure, per-entry reading logs, all 103 candidate rows with a decision and reason, and the saved pages:
+  `data/interim/changelog_review/` (start with its README.md and BRIEF.md). Read 2026-11-11 and 2026-11-12.
+- Result: 33 rows added to `results/built_in_metrics.csv` (264 -> 297), 50 mapping pairs (326 -> 376), 36 cells became built-in,
+  no new unique metric. Each added row's `note` starts with "changelog channel".
+- A changelog entry describes the product on its release date: rows removed by a later entry were not added.
+- Not added (author's decision, 2026-11-12: the taxonomy stays as it is): session count and duration, automatic issue detection,
+  sycophancy, response trust. They are in `review_decisions.csv` with the reason "would need a new unique metric".
+- Limits to report: see "Coverage limits" in the staging README (LangSmith changelog starts 2025-01, Weave release titles only,
+  older Phoenix and LangWatch history keyword-searched, OpenTelemetry GenAI fragments unreleased).
+
 ## Related-work search (not a tool channel; run 2026-10-30)
 Finds prior work to cite and compare against; it does not add tools. 8 queries through a web-search tool, restricted to
 arxiv.org (7 queries) or dl.acm.org / ieeexplore.ieee.org / aclanthology.org (2 queries), first ~10 results each.

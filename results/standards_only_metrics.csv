@@ -1,2 +1,2 @@
 type,category,metric,definition,n_tools,tools,tool_specific_names,how_measured,delivery
-Observability,Latency,Time per output token / generation time,Time spent generating tokens after the first one.,2,OpenTelemetry; OpenLLMetry,OpenTelemetry: gen_ai.server.time_per_output_token | OpenLLMetry: llm.chat_completions.streaming_time_to_generate,telemetry (2),automatic telemetry (1); convention (1)
+Observability,Latency,Time per output token / generation time,Time spent generating tokens after the first one.,2,OpenTelemetry; OpenLLMetry,OpenTelemetry: gen_ai.server.time_per_output_token | OpenLLMetry: llm.chat_completions.streaming_time_to_generate | OpenTelemetry: gen_ai.client.inference.time_per_output_chunk,telemetry (3),automatic telemetry (1); convention (2)
