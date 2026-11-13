@@ -112,7 +112,7 @@ Observability,Token usage,Total tokens,MLflow,built-in,Token usage,automatic tel
 Observability,Token usage,Total tokens,Laminar,built-in,Dashboard preset: Spans,dashboard or query,https://laminar.sh/docs/platform/dashboards
 Observability,Token usage,Total tokens,LangWatch,not documented,,,
 Observability,Token usage,Cached tokens,Arize Phoenix,built-in,Prompt token details,automatic telemetry,https://arize.com/docs/phoenix/tracing/llm-traces/metrics
-Observability,Token usage,Cached tokens,Langfuse,not documented,,,
+Observability,Token usage,Cached tokens,Langfuse,built-in,"Usage details: cached tokens (cached_tokens, input_cached_tokens)",automatic telemetry,https://langfuse.com/docs/observability/features/token-and-cost-tracking
 Observability,Token usage,Cached tokens,LangSmith,built-in,Cache hit rate | Cached and reasoning tokens in token and cost tracking,automatic telemetry; dashboard or query,https://docs.langchain.com/langsmith/changelog
 Observability,Token usage,Cached tokens,DeepEval,built-in,"LLM span attributes: cache tokens, reasoning tokens, time to first token (Confident AI)",automatic telemetry,https://www.confident-ai.com/docs/changelog/2026/11/6
 Observability,Token usage,Cached tokens,OpenTelemetry,built-in,gen_ai.client.inference.usage.cache_read.input_tokens | gen_ai.client.inference.usage.cache_write.input_tokens,convention,https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-token-metrics.md

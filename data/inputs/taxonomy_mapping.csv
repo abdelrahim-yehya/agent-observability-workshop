@@ -24,6 +24,7 @@ Langfuse,Cost details,Cost breakdown by token type
 Langfuse,Inferred cost,Estimated cost
 Langfuse,Usage details,Input tokens
 Langfuse,Usage details,Output tokens
+Langfuse,"Usage details: cached tokens (cached_tokens, input_cached_tokens)",Cached tokens
 Langfuse,latency,Trace / run latency
 Langfuse,totalCost,Estimated cost
 LangSmith,Plan Adherence,Plan adherence

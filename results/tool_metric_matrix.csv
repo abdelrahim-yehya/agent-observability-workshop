@@ -6,7 +6,7 @@ Observability,Plan and trajectory,Step count,not documented,not documented,not d
 Observability,Token usage,Input tokens,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,not documented,built-in,built-in,built-in,15
 Observability,Token usage,Output tokens,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,not documented,built-in,built-in,built-in,15
 Observability,Token usage,Total tokens,built-in,built-in,built-in,built-in,not documented,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,not documented,14
-Observability,Token usage,Cached tokens,built-in,not documented,built-in,built-in,built-in,built-in,built-in,built-in,built-in,not documented,not documented,built-in,built-in,not documented,built-in,built-in,12
+Observability,Token usage,Cached tokens,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,built-in,not documented,not documented,built-in,built-in,not documented,built-in,built-in,13
 Observability,Token usage,Reasoning tokens,built-in,not documented,built-in,built-in,built-in,not documented,not documented,built-in,built-in,not documented,not documented,built-in,built-in,not documented,built-in,built-in,10
 Observability,Cost,Estimated cost,built-in,built-in,built-in,built-in,not documented,built-in,built-in,built-in,not documented,built-in,built-in,built-in,built-in,built-in,built-in,built-in,14
 Observability,Cost,Cost breakdown by token type,built-in,built-in,built-in,built-in,not documented,not documented,built-in,not documented,not documented,not documented,not documented,built-in,not documented,not documented,built-in,built-in,8
